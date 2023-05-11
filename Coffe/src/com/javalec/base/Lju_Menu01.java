@@ -73,6 +73,11 @@ public class Lju_Menu01 extends JFrame {
 	private JButton btnNewButton_3_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_3_1_1;
+	private JLabel lblNewLabel_3_1_2;
+	private JButton btnNewButton_1_2;
+	private JPanel panel_2;
 	
 	
 	
@@ -120,6 +125,7 @@ public class Lju_Menu01 extends JFrame {
 		contentPane.add(getBtnNewButton_2_1());
 		contentPane.add(getBtnNewButton_2_2());
 		contentPane.add(getLblNewLabel_4());
+		contentPane.add(getPanel_2());
 
 	}
 	
@@ -333,6 +339,16 @@ public class Lju_Menu01 extends JFrame {
 			gbc_btnNewButton_3_1.gridx = 1;
 			gbc_btnNewButton_3_1.gridy = 2;
 			panel_1.add(getBtnNewButton_3_1(), gbc_btnNewButton_3_1);
+			GridBagConstraints gbc_lblNewLabel_3_1_1 = new GridBagConstraints();
+			gbc_lblNewLabel_3_1_1.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_3_1_1.gridx = 2;
+			gbc_lblNewLabel_3_1_1.gridy = 2;
+			panel_1.add(getLblNewLabel_3_1_1(), gbc_lblNewLabel_3_1_1);
+			GridBagConstraints gbc_btnNewButton_1_2 = new GridBagConstraints();
+			gbc_btnNewButton_1_2.insets = new Insets(0, 0, 5, 0);
+			gbc_btnNewButton_1_2.gridx = 5;
+			gbc_btnNewButton_1_2.gridy = 2;
+			panel_1.add(getBtnNewButton_1_2(), gbc_btnNewButton_1_2);
 			GridBagConstraints gbc_lblNewLabel_2_1 = new GridBagConstraints();
 			gbc_lblNewLabel_2_1.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel_2_1.gridx = 1;
@@ -348,6 +364,16 @@ public class Lju_Menu01 extends JFrame {
 			gbc_btnNewButton_1_1.gridx = 5;
 			gbc_btnNewButton_1_1.gridy = 3;
 			panel_1.add(getBtnNewButton_1_1_1(), gbc_btnNewButton_1_1);
+			GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
+			gbc_lblNewLabel_6.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_6.gridx = 1;
+			gbc_lblNewLabel_6.gridy = 4;
+			panel_1.add(getLblNewLabel_6(), gbc_lblNewLabel_6);
+			GridBagConstraints gbc_lblNewLabel_3_1_2 = new GridBagConstraints();
+			gbc_lblNewLabel_3_1_2.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_3_1_2.gridx = 2;
+			gbc_lblNewLabel_3_1_2.gridy = 4;
+			panel_1.add(getLblNewLabel_3_1_2(), gbc_lblNewLabel_3_1_2);
 			GridBagConstraints gbc_lblNewLabel_2_1_1 = new GridBagConstraints();
 			gbc_lblNewLabel_2_1_1.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel_2_1_1.gridx = 1;
@@ -369,6 +395,7 @@ public class Lju_Menu01 extends JFrame {
 			gbc_lblNewLabel_3_3.gridx = 2;
 			gbc_lblNewLabel_3_3.gridy = 7;
 			panel_1.add(getLblNewLabel_3_3(), gbc_lblNewLabel_3_3);
+			
 		}
 		return panel_1;
 	}
@@ -505,8 +532,12 @@ public class Lju_Menu01 extends JFrame {
 	private JButton getBtnNewButton_3_1() {
 		if (btnNewButton_3_1 == null) {
 			btnNewButton_3_1 = new JButton("");
+			btnNewButton_3_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
 			btnNewButton_3_1.setFocusable(false);
-			btnNewButton_3_1.setIcon(new ImageIcon(Lju_Menu01.class.getResource("/com/javalec/image/Rectangle.png")));
+			btnNewButton_3_1.setIcon(new ImageIcon(Lju_Menu01.class.getResource("/com/javalec/image/icela.png")));
 			btnNewButton_3_1.setBorderPainted(false);
 		}
 		return btnNewButton_3_1;
@@ -522,5 +553,43 @@ public class Lju_Menu01 extends JFrame {
 			lblNewLabel_5 = new JLabel("                  ");
 		}
 		return lblNewLabel_5;
+	}
+	private JLabel getLblNewLabel_6() {
+		if (lblNewLabel_6 == null) {
+			lblNewLabel_6 = new JLabel("");
+			lblNewLabel_6.setIcon(new ImageIcon(Lju_Menu01.class.getResource("/com/javalec/image/Rectangle (1).png")));
+		}
+		return lblNewLabel_6;
+	}
+	private JLabel getLblNewLabel_3_1_1() {
+		if (lblNewLabel_3_1_1 == null) {
+			lblNewLabel_3_1_1 = new JLabel("<html>아이스 카푸치노<br><br>입니다<p>허허허<p><p>3000원</html>");
+			lblNewLabel_3_1_1.setForeground(new Color(131, 77, 30));
+			lblNewLabel_3_1_1.setFont(new Font("Lao Sangam MN", Font.PLAIN, 16));
+		}
+		return lblNewLabel_3_1_1;
+	}
+	private JLabel getLblNewLabel_3_1_2() {
+		if (lblNewLabel_3_1_2 == null) {
+			lblNewLabel_3_1_2 = new JLabel("<html>아이스 카페라떼<br><br>입니다<p>허허허<p><p>3000원</html>");
+			lblNewLabel_3_1_2.setForeground(new Color(131, 77, 30));
+			lblNewLabel_3_1_2.setFont(new Font("Lao Sangam MN", Font.PLAIN, 16));
+		}
+		return lblNewLabel_3_1_2;
+	}
+	private JButton getBtnNewButton_1_2() {
+		if (btnNewButton_1_2 == null) {
+			btnNewButton_1_2 = new JButton("");
+			btnNewButton_1_2.setFocusPainted(false);
+			btnNewButton_1_2.setBorderPainted(false);
+		}
+		return btnNewButton_1_2;
+	}
+	private JPanel getPanel_2() {
+		if (panel_2 == null) {
+			panel_2 = new JPanel();
+			panel_2.setBounds(45, 129, 75, 108);
+		}
+		return panel_2;
 	}
 }
