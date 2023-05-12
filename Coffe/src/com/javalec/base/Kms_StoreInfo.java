@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Kms_StoreInfo extends JFrame {
 	
@@ -36,6 +38,7 @@ public class Kms_StoreInfo extends JFrame {
 	private JLabel lblStoreTel;
 	private JLabel lblStoreAddress;
 	private JButton btnUpdateStore;
+	private JButton btnBack;
 	/**
 	 * Launch the application.
 	 */
@@ -64,6 +67,7 @@ public class Kms_StoreInfo extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getBtnBack());
 		contentPane.add(getStoreInfo());
 		contentPane.add(getPanel());
 		contentPane.add(getChoc());
@@ -259,5 +263,28 @@ public class Kms_StoreInfo extends JFrame {
 			btnUpdateStore.setIcon(new ImageIcon(Kms_StoreInfo.class.getResource("/com/javalec/image/update.png")));
 		}
 		return btnUpdateStore;
+	}
+	private JButton getBtnBack() {
+		if (btnBack == null) {
+			btnBack = new JButton("");
+			btnBack.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					backAction();
+				}
+			});
+			btnBack.setBounds(31, 54, 18, 24);
+			btnBack.setIcon(new ImageIcon(Kms_StoreInfo.class.getResource("/com/javalec/image/backbtn.png")));
+			btnBack.setFocusPainted(false);
+			btnBack.setBorderPainted(false);
+		}
+		return btnBack;
+	}
+	
+	// ----- function ----
+	
+	private void backAction() {
+		Kms_AdminMain adminMain = new Kms_AdminMain();
+		adminMain.setVisible(true);
+		dispose();
 	}
 }

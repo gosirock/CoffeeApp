@@ -25,6 +25,7 @@ public class Kms_StoreSales extends JFrame {
 	private JButton btnDaysSales;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -59,6 +60,7 @@ public class Kms_StoreSales extends JFrame {
 		contentPane.add(getBtnDaySales());
 		contentPane.add(getBtnDaysSales());
 		contentPane.add(getScrollPane());
+		contentPane.add(getBtnBack());
 	}
 	
 	private JLabel getWifi() {
@@ -108,4 +110,28 @@ public class Kms_StoreSales extends JFrame {
 		}
 		return table;
 	}
+	private JButton getBtnBack() {
+		if (btnBack == null) {
+			btnBack = new JButton("");
+			btnBack.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					backAction();
+				}
+			});
+			btnBack.setBounds(31, 54, 18, 24);
+			btnBack.setIcon(new ImageIcon(Kms_StoreSales.class.getResource("/com/javalec/image/backbtn.png")));
+			btnBack.setFocusPainted(false);
+			btnBack.setBorderPainted(false);
+		}
+		return btnBack;
+	}
+	
+	
+	// ----- function ----
+	
+		private void backAction() {
+			Kms_AdminMain adminMain = new Kms_AdminMain();
+			adminMain.setVisible(true);
+			dispose();
+		}
 }
