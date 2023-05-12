@@ -32,6 +32,35 @@ public class Lju_dto {
 
 
 
+	public Lju_dto(String idescription, String iname, int iprice, String iimagename, String iid) {
+		super();
+		this.iid = iid;
+		this.iname = iname;
+		this.iprice = iprice;
+		this.iimagename = iimagename;
+		this.idescription = idescription;
+	}
+
+
+
+
+
+	public String getIid() {
+		return iid;
+	}
+
+
+
+
+
+	public void setIid(String iid) {
+		this.iid = iid;
+	}
+
+
+
+
+
 	public String getIdescription() {
 		return idescription;
 	}
