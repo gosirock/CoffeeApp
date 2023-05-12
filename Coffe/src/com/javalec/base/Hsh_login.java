@@ -7,7 +7,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.javalec.dao.Dao;
+import com.javalec.dao.Hsh_logindao;
+import com.javalec.util.ShareVar;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -27,13 +34,12 @@ public class Hsh_login extends JFrame {
 	private JButton btnJoin;
 	private JLabel lblTime;
 	private JLabel lblba;
-	private JToggleButton tglbtnNewToggleButton;
 	private JLabel lblkong;
 	private JLabel lblCho;
 	private JLabel lblCid;
 	private JTextField tfCid;
 	private JLabel lblCpw;
-	private JTextField textField;
+	private JTextField tfCpw;
 	private JButton btnGomenu;
 	private JLabel lblCochoc;
 
@@ -79,7 +85,7 @@ public class Hsh_login extends JFrame {
 		contentPane.add(getLblCid());
 		contentPane.add(getTfCid());
 		contentPane.add(getLblCpw());
-		contentPane.add(getTextField());
+		contentPane.add(getTfCpw());
 		contentPane.add(getBtnGomenu());
 	}
 	private JLabel getLblNewLabel() {
@@ -183,17 +189,22 @@ public class Hsh_login extends JFrame {
 		}
 		return lblCpw;
 	}
-	private JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setBounds(122, 318, 208, 26);
-			textField.setColumns(10);
+	private JTextField getTfCpw() {
+		if (tfCpw == null) {
+			tfCpw = new JTextField();
+			tfCpw.setBounds(122, 318, 208, 26);
+			tfCpw.setColumns(10);
 		}
-		return textField;
+		return tfCpw;
 	}
 	private JButton getBtnGomenu() {
 		if (btnGomenu == null) {
 			btnGomenu = new JButton("");
+			btnGomenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					login();
+				}
+			});
 			btnGomenu.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/menu.png")));
 			btnGomenu.setFocusPainted(false);
 			btnGomenu.setBorderPainted(false);
@@ -214,5 +225,32 @@ public class Hsh_login extends JFrame {
 		hsh_join.setVisible(true);
 		setVisible(false);
 	}	
+	private void login() {
+		String uid = tfCid.getText();
+		String upassword = tfCpw.getText();
+		
+		if(uid.equals("admin") && upassword.equals("1234")) {
+			ShareVar.loginUserId = uid;
+			Kms_AdminMain ksm_adminmain = new Kms_AdminMain();
+			ksm_adminmain.setVisible(true);
+			dispose();
+		}else {
+
+			Hsh_logindao hsh_logindao = new Hsh_logindao(uid, upassword);
+			
+			boolean result = hsh_logindao.logincheck();
+			
+			if(result == true) {
+				ShareVar.loginUserId = uid;
+				JOptionPane.showMessageDialog(this, uid+"님 환영합니다");
+//				buy  = new Buy();
+//				buy.setVisible(true);											ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ메인화면으로 연결
+//				dispose();
+				
+			}else {
+				JOptionPane.showMessageDialog(this, "ID, PassWord를 확인하세요");
+			}
 	}
+	}
+}
 	

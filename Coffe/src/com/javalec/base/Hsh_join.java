@@ -5,9 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.javalec.dao.Dao;
+import com.javalec.dao.Hsh_joindao;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -43,7 +49,7 @@ public class Hsh_join extends JFrame {
 	private JTextField tfAddress;
 	private JTextField tfPpw;
 	private JLabel lblNewLabel;
-	private JComboBox comboBox;
+	private JComboBox cbEmail;
 	private JButton btnCheck;
 	private JButton btnPaycheck;
 	private JButton btnBack;
@@ -102,7 +108,7 @@ public class Hsh_join extends JFrame {
 		contentPane.add(getTfAddress());
 		contentPane.add(getTfPpw());
 		contentPane.add(getLblNewLabel());
-		contentPane.add(getComboBox());
+		contentPane.add(getCbEmail());
 		contentPane.add(getBtnCheck());
 		contentPane.add(getBtnPaycheck());
 		contentPane.add(getBtnBack());
@@ -201,7 +207,7 @@ public class Hsh_join extends JFrame {
 		if (lblCpw == null) {
 			lblCpw = new JLabel("");
 			lblCpw.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/userpw.png")));
-			lblCpw.setBounds(60, 340, 270, 21);
+			lblCpw.setBounds(60, 328, 270, 21);
 		}
 		return lblCpw;
 	}
@@ -209,7 +215,7 @@ public class Hsh_join extends JFrame {
 		if (lblCcpw == null) {
 			lblCcpw = new JLabel("");
 			lblCcpw.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/ccpw.png")));
-			lblCcpw.setBounds(60, 370, 270, 21);
+			lblCcpw.setBounds(60, 361, 270, 21);
 		}
 		return lblCcpw;
 	}
@@ -217,7 +223,7 @@ public class Hsh_join extends JFrame {
 		if (lbltelno == null) {
 			lbltelno = new JLabel("");
 			lbltelno.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/telno.png")));
-			lbltelno.setBounds(60, 405, 270, 28);
+			lbltelno.setBounds(60, 399, 270, 28);
 		}
 		return lbltelno;
 	}
@@ -225,7 +231,7 @@ public class Hsh_join extends JFrame {
 		if (lblEmail == null) {
 			lblEmail = new JLabel("");
 			lblEmail.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/email.png")));
-			lblEmail.setBounds(60, 440, 270, 21);
+			lblEmail.setBounds(60, 437, 270, 21);
 		}
 		return lblEmail;
 	}
@@ -233,7 +239,7 @@ public class Hsh_join extends JFrame {
 		if (lblAddress == null) {
 			lblAddress = new JLabel("");
 			lblAddress.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/address2.png")));
-			lblAddress.setBounds(60, 480, 270, 28);
+			lblAddress.setBounds(60, 475, 270, 28);
 		}
 		return lblAddress;
 	}
@@ -241,7 +247,7 @@ public class Hsh_join extends JFrame {
 		if (lblPPw == null) {
 			lblPPw = new JLabel("");
 			lblPPw.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/ppw.png")));
-			lblPPw.setBounds(60, 520, 270, 21);
+			lblPPw.setBounds(60, 513, 270, 21);
 		}
 		return lblPPw;
 	}
@@ -265,7 +271,7 @@ public class Hsh_join extends JFrame {
 		if (tfCpw == null) {
 			tfCpw = new JTextField();
 			tfCpw.setColumns(10);
-			tfCpw.setBounds(125, 335, 205, 26);
+			tfCpw.setBounds(125, 323, 205, 26);
 		}
 		return tfCpw;
 	}
@@ -273,7 +279,7 @@ public class Hsh_join extends JFrame {
 		if (tfCcpw == null) {
 			tfCcpw = new JTextField();
 			tfCcpw.setColumns(10);
-			tfCcpw.setBounds(135, 365, 195, 26);
+			tfCcpw.setBounds(135, 356, 195, 26);
 		}
 		return tfCcpw;
 	}
@@ -281,7 +287,7 @@ public class Hsh_join extends JFrame {
 		if (tfTelno == null) {
 			tfTelno = new JTextField();
 			tfTelno.setColumns(10);
-			tfTelno.setBounds(110, 403, 220, 26);
+			tfTelno.setBounds(110, 394, 220, 26);
 		}
 		return tfTelno;
 	}
@@ -289,7 +295,7 @@ public class Hsh_join extends JFrame {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
 			tfEmail.setColumns(10);
-			tfEmail.setBounds(105, 435, 95, 26);
+			tfEmail.setBounds(105, 432, 95, 26);
 		}
 		return tfEmail;
 	}
@@ -297,7 +303,7 @@ public class Hsh_join extends JFrame {
 		if (tfAddress == null) {
 			tfAddress = new JTextField();
 			tfAddress.setColumns(10);
-			tfAddress.setBounds(90, 478, 240, 26);
+			tfAddress.setBounds(90, 470, 240, 26);
 		}
 		return tfAddress;
 	}
@@ -305,7 +311,7 @@ public class Hsh_join extends JFrame {
 		if (tfPpw == null) {
 			tfPpw = new JTextField();
 			tfPpw.setColumns(10);
-			tfPpw.setBounds(135, 511, 130, 26);
+			tfPpw.setBounds(135, 508, 130, 26);
 		}
 		return tfPpw;
 	}
@@ -316,13 +322,18 @@ public class Hsh_join extends JFrame {
 		}
 		return lblNewLabel;
 	}
-	private JComboBox getComboBox() {
-		if (comboBox == null) {
-			comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "daum.net", "nate.com", "gmail.com", "직접입력"}));
-			comboBox.setBounds(227, 434, 136, 27);
+	private JComboBox getCbEmail() {
+		if (cbEmail == null) {
+			cbEmail = new JComboBox();
+			cbEmail.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					emailAction();
+				}
+			});
+			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "daum.net", "nate.com", "gmail.com", "직접입력"}));
+			cbEmail.setBounds(227, 432, 136, 27);
 		}
-		return comboBox;
+		return cbEmail;
 	}
 	private JButton getBtnCheck() {
 		if (btnCheck == null) {
@@ -331,7 +342,7 @@ public class Hsh_join extends JFrame {
 			btnCheck.setFocusPainted(false);
 			btnCheck.setBorderPainted(false);
 			
-			btnCheck.setBounds(265, 315, 60, 15);
+			btnCheck.setBounds(280, 292, 60, 15);
 		}
 		return btnCheck;
 	}
@@ -341,7 +352,7 @@ public class Hsh_join extends JFrame {
 			btnPaycheck.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/paycheck.png")));
 			btnPaycheck.setFocusPainted(false);
 			btnPaycheck.setBorderPainted(false);
-			btnPaycheck.setBounds(265, 544, 60, 15);
+			btnPaycheck.setBounds(270, 513, 60, 15);
 		}
 		return btnPaycheck;
 	}
@@ -366,9 +377,72 @@ public class Hsh_join extends JFrame {
 		dispose();
 	}
 	private void back() {
+		String uid = tfCid.getText();
+		String upassword = tfCpw.getText();
+		String uname = tfName.getText();
+		String uphone = tfTelno.getText();
+		String uemail = tfEmail.getText();
+		String uemailcb = cbEmail.getSelectedItem().toString();
+		String uaddress = tfAddress.getText();
+		
+		if( uname.isEmpty() || uid.isEmpty() || upassword.isEmpty() || uphone.isEmpty() || uemail.isEmpty() || uemailcb.isEmpty()
+				|| uaddress.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "회원정보를 입력해주세요");
+		}else {
+			Hsh_joindao hsh_joindao = new Hsh_joindao(uid, upassword, uname, uphone, uemail+"@"+uemailcb, uaddress);
+			boolean result = hsh_joindao.joinAction();
+			if(result) {
+				JOptionPane.showMessageDialog(this, "회원가입이 완료되었습니다!");
+			}else {
+				JOptionPane.showMessageDialog(this, "정보를 확인하세요!");
+			}
+			
 		Hsh_login hsh_login = new Hsh_login();
 		hsh_login.setVisible(true);
 		dispose();
 	}
+	}
+		private void dupCheck() {
+			String uid = tfCid.getText();
+			if(uid.isEmpty()) {
+				JOptionPane.showMessageDialog(this,"아이디를 입력해주세요.");
+			}else {
+				Hsh_joindao hsh_joindao = new Hsh_joindao();
+				boolean result = hsh_joindao.dupCheck();
+					if(result) {
+						JOptionPane.showMessageDialog(this, "중복된 아이디 입니다.");
+					}else {
+						JOptionPane.showMessageDialog(this, "사용가능한 아이디 입니다.");
+						tfName.setEditable(true);
+						tfCpw.setEditable(true);
+						tfEmail.setEditable(true);
+						tfTelno.setEditable(true);
+						tfAddress.setEditable(true);
+						btnJoin.setEnabled(true);
+						cbEmail.setEnabled(true);
+					}
+			}
 	
 }
+
+			private void emailAction() {
+				int i = cbEmail.getSelectedIndex();
+				String emailselect = "";
+				switch(i) {
+				case 0:
+					cbEmail.setEditable(false);
+					break;
+				case 1:
+					cbEmail.setEditable(false);
+					break;
+				case 2:
+					cbEmail.setEditable(false);
+					break;
+				case 3:
+					cbEmail.setEditable(true);
+					break;
+				default:
+					break;
+}
+	}
+		}
