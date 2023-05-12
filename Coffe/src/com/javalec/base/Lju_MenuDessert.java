@@ -512,6 +512,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 	private JButton getBtnPlus() {
 		if (btnPlus == null) {
 			btnPlus = new JButton("");
+			btnPlus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnPlus.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -549,6 +550,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 	private JButton getBtnMinus() {
 		if (btnMinus == null) {
 			btnMinus = new JButton("");
+			btnMinus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnMinus.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -583,17 +585,18 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 	private JLabel getLblclickimg_1() {
 		if (lblclickimg_1 == null) {
 			lblclickimg_1 = new JLabel("");
-			lblclickimg_1.setIcon(new ImageIcon(Lju_MenuDessert.class.getResource("/com/javalec/image/Group 53.png")));
-			lblclickimg_1.setBounds(0, 0, 410, 680);
+			lblclickimg_1.setIcon(new ImageIcon(Lju_MenuDessert.class.getResource("/com/javalec/image/Group 53 (1).png")));
+			lblclickimg_1.setBounds(0, 0, 390, 680);
 		}
 		return lblclickimg_1;
 	}
 	private JButton getBtnExit() {
 		if (btnExit == null) {
 			btnExit = new JButton("");
+			btnExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnExit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					closeingAction();
 					scrollPane.setVisible(true);
 					panel_1.setVisible(false);
 				}
@@ -619,6 +622,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("");
+			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				
 				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ

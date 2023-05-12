@@ -513,6 +513,7 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 	private JButton getBtnPlus() {
 		if (btnPlus == null) {
 			btnPlus = new JButton("");
+			btnPlus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnPlus.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -550,6 +551,7 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 	private JButton getBtnMinus() {
 		if (btnMinus == null) {
 			btnMinus = new JButton("");
+			btnMinus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnMinus.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -592,9 +594,10 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 	private JButton getBtnExit() {
 		if (btnExit == null) {
 			btnExit = new JButton("");
+			btnExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnExit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					closeingAction();
 					scrollPane.setVisible(true);
 					panel_1.setVisible(false);
 				}
@@ -832,6 +835,7 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("");
+			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				
 				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
