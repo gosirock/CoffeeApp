@@ -121,15 +121,22 @@ public class DaoReview_kwh {
 			
 			public ArrayList<DtoReview_kwh> selectList(){
 				ArrayList<DtoReview_kwh> dtoList = new ArrayList<DtoReview_kwh>(); 
+					
 					String whereDefault = "select r.crid, i.iname , i.iprice, r.title, r.reply,r.rimagename,r.rimage,r.rinsertdate from item i , review as r, customer c ";    // select from 은 이렇게하기
-					String whereDefault1 = " where i.iid = r.irid and c.cid = r.crid";    // select from 은 이렇게하기
+					String whereDefault1 = " where i.idescription = r.irid and c.cid = r.crid";    // select from 은 이렇게하기
+					
 					try {  // java가 db에 접근했다.
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 						Statement stmt_mysql = conn_mysql.createStatement();
 
+						
+						
 						ResultSet rs = stmt_mysql.executeQuery(whereDefault+whereDefault1);
 						
+						
+						 
+						 
 						while(rs.next()) { // rs.next는 다음이있으면 1 . 없으면 0;
 							String wkID = rs.getString(1);
 							String wkItem = rs.getString(2);
@@ -142,24 +149,33 @@ public class DaoReview_kwh {
 							FileOutputStream output = new FileOutputStream(file);     //outputstream 은 select
 							
 							InputStream input = rs.getBinaryStream(7);
+							Date wkDate = rs.getDate(8);
 							
 							byte[] buffer = new byte[1024];
-							while(input.read(buffer) > 0) {
-								output.write(buffer);
+							int len;
+//							while(input.read(buffer) > 0) {
+//								output.write(buffer);
+							 while ((len = input.read(buffer)) > 0) {
+					                output.write(buffer, 0, len);
+					            }
+					            output.close();
+					            input.close();
 							
-							Date wkDate = rs.getDate(8);
 							
 							// 위에 8개를 한번에 넣기  -> Dto 에서 8개의 데이터 생성자를 만들어놓음
 							DtoReview_kwh dto = new DtoReview_kwh(wkID, wkItem, wkPrice, wkTitle, wkReply, wkImagename, input, wkDate);
 							dtoList.add(dto);
-							
-						}
+							}	
 						
 						conn_mysql.close();
-						
-						}}catch(Exception e) {
+						rs.close();
+					    stmt_mysql.close();
+					    
+					    
+						}catch(Exception e) {
 						e.printStackTrace();
 					}
+					
 					
 					return dtoList;
 				
