@@ -139,6 +139,7 @@ public class Kms_AdminMain extends JFrame {
 			btnQtyPrice.setBorderPainted(false);
 			btnQtyPrice.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					productAction();
 				}
 			});
 		}
@@ -147,6 +148,11 @@ public class Kms_AdminMain extends JFrame {
 	private JButton getBtnReview() {
 		if (btnReview == null) {
 			btnReview = new JButton("");
+			btnReview.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					reviewAction();
+				}
+			});
 			btnReview.setBounds(14, 225, 300, 40);
 			btnReview.setIcon(new ImageIcon(Kms_AdminMain.class.getResource("/com/javalec/image/review.png")));
 			btnReview.setFocusPainted(false);
@@ -201,6 +207,19 @@ public class Kms_AdminMain extends JFrame {
 		return btnBack;
 	}
 	// ----- function -----
+	
+	private void productAction() {
+		Kms_AdminProduct product = new Kms_AdminProduct();
+		product.setVisible(true);
+		dispose();
+	}
+	
+	private void reviewAction() { // 리뷰게시판 관리 눌렀때(Review2_kwh가 데이터베이스와 연결되었을때 아래 바 지우고 새로운class만들어서 연결할 예정)
+		Review2_kwh review = new Review2_kwh();
+		review.setVisible(true);
+		dispose();
+	}
+	
 	private void storeAction() { // 가게정보 눌렀을때
 		Kms_StoreInfo storeInfo = new Kms_StoreInfo();
 		storeInfo.setVisible(true);
