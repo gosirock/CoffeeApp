@@ -2,6 +2,7 @@ package com.javalec.base;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,7 +19,7 @@ public class Kms_Base extends JFrame {
 	private JLabel chocolate;
 	private JLabel coffeeBean;
 	private JLabel choc;
-	private JLabel kmsRectangle;
+	private JPanel panel;
 	/**
 	 * Launch the application.
 	 */
@@ -47,7 +48,7 @@ public class Kms_Base extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		contentPane.add(getKmsRectangle());
+		contentPane.add(getPanel());
 		contentPane.add(getChoc());
 		contentPane.add(getWifi());
 		contentPane.add(getUp());
@@ -97,12 +98,17 @@ public class Kms_Base extends JFrame {
 		}
 		return choc;
 	}
-	private JLabel getKmsRectangle() {
-		if (kmsRectangle == null) {
-			kmsRectangle = new JLabel("");
-			kmsRectangle.setBounds(35, 161, 320, 481);
-			kmsRectangle.setIcon(new ImageIcon(Kms_Base.class.getResource("/com/javalec/image/KmsRectangle.png")));
+	
+	
+	
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setBackground(new Color(252, 242, 217));		// 하단 버튼바 패널 색상
+			panel.setBounds(35, 161, 320, 481);					// 하단 버튼바 패널 위치,사이즈
+			panel.setLayout(new GridLayout(1, 0, 0, 0));
+			
 		}
-		return kmsRectangle;
-	}
+		return panel;
+}
 }
