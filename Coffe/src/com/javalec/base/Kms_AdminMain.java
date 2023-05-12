@@ -28,6 +28,7 @@ public class Kms_AdminMain extends JFrame {
 	private JButton btnReview;
 	private JButton btnStore;
 	private JButton btnSales;
+	private JButton btnBack;
 	/**
 	 * Launch the application.
 	 */
@@ -56,6 +57,7 @@ public class Kms_AdminMain extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getBtnBack());
 		contentPane.add(getAdmin());
 		contentPane.add(getPanel());
 		contentPane.add(getChoc());
@@ -155,6 +157,11 @@ public class Kms_AdminMain extends JFrame {
 	private JButton getBtnStore() {
 		if (btnStore == null) {
 			btnStore = new JButton("");
+			btnStore.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					storeAction();
+				}
+			});
 			btnStore.setBounds(14, 300, 300, 40);
 			btnStore.setIcon(new ImageIcon(Kms_AdminMain.class.getResource("/com/javalec/image/store.png")));
 			btnStore.setFocusPainted(false);
@@ -165,6 +172,11 @@ public class Kms_AdminMain extends JFrame {
 	private JButton getBtnSales() {
 		if (btnSales == null) {
 			btnSales = new JButton("");
+			btnSales.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					salesAction();
+				}
+			});
 			btnSales.setBounds(14, 375, 300, 40);
 			btnSales.setIcon(new ImageIcon(Kms_AdminMain.class.getResource("/com/javalec/image/sales.png")));
 			btnSales.setFocusPainted(false);
@@ -173,5 +185,37 @@ public class Kms_AdminMain extends JFrame {
 		return btnSales;
 	}
 	
+	private JButton getBtnBack() {
+		if (btnBack == null) {
+			btnBack = new JButton("");
+			btnBack.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					backAction();
+				}
+			});
+			btnBack.setBounds(31, 54, 18, 24);
+			btnBack.setIcon(new ImageIcon(Kms_AdminMain.class.getResource("/com/javalec/image/backbtn.png")));
+			btnBack.setFocusPainted(false);
+			btnBack.setBorderPainted(false);
+		}
+		return btnBack;
+	}
+	// ----- function -----
+	private void storeAction() { // 가게정보 눌렀을때
+		Kms_StoreInfo storeInfo = new Kms_StoreInfo();
+		storeInfo.setVisible(true);
+		dispose();
+	}
 	
+	private void salesAction() { // 매출정보 눌렀을때
+		Kms_StoreSales storeSales = new Kms_StoreSales();
+		storeSales.setVisible(true);
+		dispose();
+	}
+	
+	private void backAction() { // 뒤로가기 눌렀을때 (로그인 화면 완성되면 바꿀예정 -------------------------)
+		Kms_StoreSales storeSales = new Kms_StoreSales();
+		storeSales.setVisible(true);
+		dispose();
+	}
 }
