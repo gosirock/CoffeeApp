@@ -142,6 +142,7 @@ public class DaoReview_kwh {
 				
 			}
 			
+			//데이터들 불러와서 한줄에넣기
 			
 			public ArrayList<DtoReview_kwh> selectList(){
 				ArrayList<DtoReview_kwh> dtoList = new ArrayList<DtoReview_kwh>(); 
@@ -152,7 +153,7 @@ public class DaoReview_kwh {
 						Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 						Statement stmt_mysql = conn_mysql.createStatement();
 
-						ResultSet rs = stmt_mysql.executeQuery(whereDefault);
+						ResultSet rs = stmt_mysql.executeQuery(whereDefault+whereDefault1);
 						
 						while(rs.next()) { // rs.next는 다음이있으면 1 . 없으면 0;
 							String wkID = rs.getString(1);
@@ -166,9 +167,13 @@ public class DaoReview_kwh {
 							FileOutputStream output = new FileOutputStream(file);
 							InputStream input = rs.getBinaryStream(7);
 							
+							byte[] buffer = new byte[1024];
+							while(input.read(buffer) > 0) {
+								output.write(buffer);
+							
 							Date wkDate = rs.getDate(8);
 							
-							// 위에 5개를 한번에 넣기  -> Dto 에서 4개의 데이터 생성자를 만들어놓음
+							// 위에 8개를 한번에 넣기  -> Dto 에서 8개의 데이터 생성자를 만들어놓음
 							DtoReview_kwh dto = new DtoReview_kwh(wkID, wkItem, wkPrice, wkTitle, wkReply, wkImagename, input, wkDate);
 							dtoList.add(dto);
 							
@@ -176,13 +181,14 @@ public class DaoReview_kwh {
 						
 						conn_mysql.close();
 						
-					}catch(Exception e) {
+						}}catch(Exception e) {
 						e.printStackTrace();
 					}
 					
 					return dtoList;
 				
 				
+			
 			}
 }
 

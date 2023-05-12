@@ -178,7 +178,7 @@ public class Review2_kwh extends JFrame {
 			scrollPane.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					tableClick();
+				
 				}
 			});
 			scrollPane.setBounds(0, 163, 390, 594);
