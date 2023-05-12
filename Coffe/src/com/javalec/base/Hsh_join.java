@@ -1,0 +1,374 @@
+package com.javalec.base;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Hsh_join extends JFrame {
+
+	private JPanel contentPane;
+	private JButton btnLogin;
+	private JButton btnJoin;
+	private JLabel lblTime;
+	private JLabel lblWifi;
+	private JLabel lblCochoc;
+	private JLabel lblBa;
+	private JLabel lblKong;
+	private JLabel lblCho;
+	private JLabel lblCid;
+	private JLabel lblName;
+	private JLabel lblCpw;
+	private JLabel lblCcpw;
+	private JLabel lbltelno;
+	private JLabel lblEmail;
+	private JLabel lblAddress;
+	private JLabel lblPPw;
+	private JTextField tfName;
+	private JTextField tfCid;
+	private JTextField tfCpw;
+	private JTextField tfCcpw;
+	private JTextField tfTelno;
+	private JTextField tfEmail;
+	private JTextField tfAddress;
+	private JTextField tfPpw;
+	private JLabel lblNewLabel;
+	private JComboBox comboBox;
+	private JButton btnCheck;
+	private JButton btnPaycheck;
+	private JButton btnBack;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Hsh_join frame = new Hsh_join();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Hsh_join() {
+		setTitle("회원가입");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 390, 844);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(248, 227, 182));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(getBtnJoin());
+		contentPane.add(getBtnLogin());
+		contentPane.add(getLblTime());
+		contentPane.add(getLblWifi());
+		contentPane.add(getLblCochoc());
+		contentPane.add(getLblBa());
+		contentPane.add(getLblKong());
+		contentPane.add(getLblCho());
+		contentPane.add(getLblCid());
+		contentPane.add(getLblName());
+		contentPane.add(getLblCpw());
+		contentPane.add(getLblCcpw());
+		contentPane.add(getLbltelno());
+		contentPane.add(getLblEmail());
+		contentPane.add(getLblAddress());
+		contentPane.add(getLblPPw());
+		contentPane.add(getTfName());
+		contentPane.add(getTfCid());
+		contentPane.add(getTfCpw());
+		contentPane.add(getTfCcpw());
+		contentPane.add(getTfTelno());
+		contentPane.add(getTfEmail());
+		contentPane.add(getTfAddress());
+		contentPane.add(getTfPpw());
+		contentPane.add(getLblNewLabel());
+		contentPane.add(getComboBox());
+		contentPane.add(getBtnCheck());
+		contentPane.add(getBtnPaycheck());
+		contentPane.add(getBtnBack());
+	}
+
+	private JButton getBtnLogin() {
+		if (btnLogin == null) {
+			btnLogin = new JButton("");
+			btnLogin.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					login();
+				}
+			});
+			btnLogin.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/joinlog.png")));
+			btnLogin.setFocusPainted(false);
+			btnLogin.setBorderPainted(false);
+			btnLogin.setBounds(60, 187, 270, 36);
+		}
+		return btnLogin;
+	}
+	private JButton getBtnJoin() {
+		if (btnJoin == null) {
+			btnJoin = new JButton("");
+			btnJoin.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/logjoin.png")));
+			btnJoin.setFocusPainted(false);
+			btnJoin.setBorderPainted(false);
+			btnJoin.setBounds(195, 187, 135, 36);
+		}
+		return btnJoin;
+	}
+	private JLabel getLblTime() {
+		if (lblTime == null) {
+			lblTime = new JLabel("");
+			lblTime.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/time.png")));
+			lblTime.setBounds(32, 13, 32, 21);
+		}
+		return lblTime;
+	}
+	private JLabel getLblWifi() {
+		if (lblWifi == null) {
+			lblWifi = new JLabel("");
+			lblWifi.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/wifi.png")));
+			lblWifi.setBounds(295, 15, 65, 16);
+		}
+		return lblWifi;
+	}
+	private JLabel getLblCochoc() {
+		if (lblCochoc == null) {
+			lblCochoc = new JLabel("");
+			lblCochoc.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/cochok.png")));
+			lblCochoc.setBounds(105, 73, 181, 38);
+		}
+		return lblCochoc;
+	}
+	private JLabel getLblBa() {
+		if (lblBa == null) {
+			lblBa = new JLabel("");
+			lblBa.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/배경화면.png")));
+			lblBa.setBounds(0, 0, 390, 223);
+		}
+		return lblBa;
+	}
+	private JLabel getLblKong() {
+		if (lblKong == null) {
+			lblKong = new JLabel("");
+			lblKong.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/kong.png")));
+			lblKong.setBounds(0, 648, 234, 203);
+		}
+		return lblKong;
+	}
+	private JLabel getLblCho() {
+		if (lblCho == null) {
+			lblCho = new JLabel("");
+			lblCho.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/cho.png")));
+			lblCho.setBounds(173, 630, 217, 186);
+		}
+		return lblCho;
+	}
+	private JLabel getLblCid() {
+		if (lblCid == null) {
+			lblCid = new JLabel("");
+			lblCid.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/userid.png")));
+			lblCid.setBounds(61, 291, 270, 21);
+		}
+		return lblCid;
+	}
+	private JLabel getLblName() {
+		if (lblName == null) {
+			lblName = new JLabel("");
+			lblName.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/name.png")));
+			lblName.setBounds(61, 253, 270, 21);
+		}
+		return lblName;
+	}
+	private JLabel getLblCpw() {
+		if (lblCpw == null) {
+			lblCpw = new JLabel("");
+			lblCpw.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/userpw.png")));
+			lblCpw.setBounds(60, 340, 270, 21);
+		}
+		return lblCpw;
+	}
+	private JLabel getLblCcpw() {
+		if (lblCcpw == null) {
+			lblCcpw = new JLabel("");
+			lblCcpw.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/ccpw.png")));
+			lblCcpw.setBounds(60, 370, 270, 21);
+		}
+		return lblCcpw;
+	}
+	private JLabel getLbltelno() {
+		if (lbltelno == null) {
+			lbltelno = new JLabel("");
+			lbltelno.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/telno.png")));
+			lbltelno.setBounds(60, 405, 270, 28);
+		}
+		return lbltelno;
+	}
+	private JLabel getLblEmail() {
+		if (lblEmail == null) {
+			lblEmail = new JLabel("");
+			lblEmail.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/email.png")));
+			lblEmail.setBounds(60, 440, 270, 21);
+		}
+		return lblEmail;
+	}
+	private JLabel getLblAddress() {
+		if (lblAddress == null) {
+			lblAddress = new JLabel("");
+			lblAddress.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/address2.png")));
+			lblAddress.setBounds(60, 480, 270, 28);
+		}
+		return lblAddress;
+	}
+	private JLabel getLblPPw() {
+		if (lblPPw == null) {
+			lblPPw = new JLabel("");
+			lblPPw.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/ppw.png")));
+			lblPPw.setBounds(60, 520, 270, 21);
+		}
+		return lblPPw;
+	}
+	private JTextField getTfName() {
+		if (tfName == null) {
+			tfName = new JTextField();
+			tfName.setBounds(105, 244, 130, 26);
+			tfName.setColumns(10);
+		}
+		return tfName;
+	}
+	private JTextField getTfCid() {
+		if (tfCid == null) {
+			tfCid = new JTextField();
+			tfCid.setColumns(10);
+			tfCid.setBounds(104, 286, 169, 26);
+		}
+		return tfCid;
+	}
+	private JTextField getTfCpw() {
+		if (tfCpw == null) {
+			tfCpw = new JTextField();
+			tfCpw.setColumns(10);
+			tfCpw.setBounds(125, 335, 205, 26);
+		}
+		return tfCpw;
+	}
+	private JTextField getTfCcpw() {
+		if (tfCcpw == null) {
+			tfCcpw = new JTextField();
+			tfCcpw.setColumns(10);
+			tfCcpw.setBounds(135, 365, 195, 26);
+		}
+		return tfCcpw;
+	}
+	private JTextField getTfTelno() {
+		if (tfTelno == null) {
+			tfTelno = new JTextField();
+			tfTelno.setColumns(10);
+			tfTelno.setBounds(110, 403, 220, 26);
+		}
+		return tfTelno;
+	}
+	private JTextField getTfEmail() {
+		if (tfEmail == null) {
+			tfEmail = new JTextField();
+			tfEmail.setColumns(10);
+			tfEmail.setBounds(105, 435, 95, 26);
+		}
+		return tfEmail;
+	}
+	private JTextField getTfAddress() {
+		if (tfAddress == null) {
+			tfAddress = new JTextField();
+			tfAddress.setColumns(10);
+			tfAddress.setBounds(90, 478, 240, 26);
+		}
+		return tfAddress;
+	}
+	private JTextField getTfPpw() {
+		if (tfPpw == null) {
+			tfPpw = new JTextField();
+			tfPpw.setColumns(10);
+			tfPpw.setBounds(135, 511, 130, 26);
+		}
+		return tfPpw;
+	}
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("@");
+			lblNewLabel.setBounds(210, 440, 21, 16);
+		}
+		return lblNewLabel;
+	}
+	private JComboBox getComboBox() {
+		if (comboBox == null) {
+			comboBox = new JComboBox();
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "daum.net", "nate.com", "gmail.com", "직접입력"}));
+			comboBox.setBounds(227, 434, 136, 27);
+		}
+		return comboBox;
+	}
+	private JButton getBtnCheck() {
+		if (btnCheck == null) {
+			btnCheck = new JButton("");
+			btnCheck.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/check.png")));
+			btnCheck.setFocusPainted(false);
+			btnCheck.setBorderPainted(false);
+			
+			btnCheck.setBounds(265, 315, 60, 15);
+		}
+		return btnCheck;
+	}
+	private JButton getBtnPaycheck() {
+		if (btnPaycheck == null) {
+			btnPaycheck = new JButton("");
+			btnPaycheck.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/paycheck.png")));
+			btnPaycheck.setFocusPainted(false);
+			btnPaycheck.setBorderPainted(false);
+			btnPaycheck.setBounds(265, 544, 60, 15);
+		}
+		return btnPaycheck;
+	}
+	private JButton getBtnBack() {
+		if (btnBack == null) {
+			btnBack = new JButton("");
+			btnBack.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					back();
+				}
+			});
+			btnBack.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/가입완료.png")));
+			btnBack.setFocusPainted(false);
+			btnBack.setBorderPainted(false);
+			btnBack.setBounds(60, 594, 270, 41);
+		}
+		return btnBack;
+	}
+	private void login() {
+		Hsh_login hsh_login = new Hsh_login();
+		hsh_login.setVisible(true);
+		dispose();
+	}
+	private void back() {
+		Hsh_login hsh_login = new Hsh_login();
+		hsh_login.setVisible(true);
+		dispose();
+	}
+	
+}
