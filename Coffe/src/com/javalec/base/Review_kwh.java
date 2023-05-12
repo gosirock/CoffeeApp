@@ -31,7 +31,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Date;
+import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDateTime;  // java.time 패키지의 LocalDateTime 클래스 임포트
 
 public class Review_kwh extends JFrame {
@@ -50,6 +51,7 @@ public class Review_kwh extends JFrame {
 	private JButton btnPost;
 	private JButton btnCancel;
 	private JLabel lblImage;
+	private JTextField tfFilePath;
 
 	/**
 	 * Launch the application.
@@ -90,6 +92,7 @@ public class Review_kwh extends JFrame {
 		contentPane.add(getBtnPost());
 		contentPane.add(getBtnCancel());
 		contentPane.add(getLblImage());
+		contentPane.add(getTfFilePath());
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -263,21 +266,24 @@ public class Review_kwh extends JFrame {
 
 	// postAction  리뷰등록
 	private void postAction() {   // insert 
-		String item_iid  = ShareVar();/// sharevar에서 넘어와야함
-		String customer_cid = ShareVar(loginUserId);
+		String item_iid  = ShareVar.testitem;/// sharevar에서 넘어와야함
+		String customer_cid = ShareVar.testid;
 		String title = tfTitle.getText();
 		String comment = tfComment.getText();
 		String imagename = "image";
 		
-
-		LocalDateTime rinsertdate = LocalDateTime.now();  // 현재 시간을 LocalDateTime 객체로 가져오기
+		
+		// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
+		java.util.Date now = new java.util.Date();
+		java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
 		
 
 		
 		// Image File
-		FileInputStream rimage = null;
+		FileInputStream rimage = null;    // inputstream 은 insert 
 		
-		File file = new File(btnPlus.getText());
+		 
+		File file = new File(imagename);   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
 		try {
 			rimage = new FileInputStream(file);
 		}catch(Exception e){
@@ -287,7 +293,8 @@ public class Review_kwh extends JFrame {
 		}
 		
 		
-		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename,rinsertdate, rimage);
+		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, rimage);
+				
 		boolean result = dao.postAction(); 
 		
 		if (result) {
@@ -304,7 +311,17 @@ public class Review_kwh extends JFrame {
 		}
 		return lblImage;
 	}
+
+	
+	private JTextField getTfFilePath() {
+		if (tfFilePath == null) {
+			tfFilePath = new JTextField();
+			tfFilePath.setBounds(238, 562, 130, 26);
+			tfFilePath.setColumns(10);
+		}
+		return tfFilePath;
 	}
+}
 	
 
 
