@@ -9,9 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 import java.sql.Date;
-import java.time.LocalDateTime;  // java.time 패키지의 LocalDateTime 클래스 임포트
 import java.util.ArrayList;
 
 import com.javalec.dto.DtoReview_kwh;
@@ -29,9 +27,8 @@ public class DaoReview_kwh {
 			String crid;
 			String title;
 			String comment;
-			String rimagename="";
-			LocalDateTime rinsertdate = LocalDateTime.now();  // 현재 시간을 LocalDateTime 객체로 가져오기
-			Date rinsertdates;
+			String rimagename= "image.png";
+			Date rinsertdate;
 			
 			String iname;
 			int iprice;
@@ -48,23 +45,11 @@ public class DaoReview_kwh {
 			
 			
 			
-			
-			public DaoReview_kwh(String irid, String crid, String title, String comment, String rimagename, LocalDateTime rinsertdate,
-					FileInputStream rimage) {
-				super();
-				
-				this.irid = irid;
-				this.crid=crid;
-				this.title = title;
-				this.comment = comment;
-				this.rimagename = rimagename;
-				this.rinsertdate = rinsertdate;
-				this.rimage = rimage;
-			}
+		
 			
 			
 			
-			public DaoReview_kwh(String irid, String crid, String title, String comment, String rimagename, Date rinsertdates,
+			public DaoReview_kwh(String irid, String crid, String title, String comment, String rimagename, Date rinsertdate,
 					FileInputStream rimage) {
 				super();
 				this.irid = irid;
@@ -84,18 +69,6 @@ public class DaoReview_kwh {
 			
 			
 			
-			public DaoReview_kwh(String crid, String iname, int iprice, String title, String comment, String rimagename,
-					  FileInputStream rimage,LocalDateTime rinsertdate) {
-				super();
-				this.crid = crid;
-				this.title = title;
-				this.comment = comment;
-				this.rimagename = rimagename;
-				this.rinsertdate = rinsertdate;
-				this.iname = iname;
-				this.iprice = iprice;
-				this.rimage = rimage;
-			}
 
 
 
@@ -112,21 +85,23 @@ public class DaoReview_kwh {
 					Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 					Statement stmt_mysql = conn_mysql.createStatement();
 
-					String query = "insert into review (irid,crid,title,comment,rinsertdate,rimagename,rimage)";
+					String query = "insert into review (irid,crid,title,reply,rinsertdate,rimagename,rimage)";
 					String query1 = " values (?,?,?,?,?,?,?)";
+				
 						
 					
 					ps = conn_mysql.prepareStatement(query + query1);
 					ps.setString(1, irid.trim());
 					ps.setString(2, crid.trim());
-					ps.setString(3, title.trim());
-					ps.setString(4, comment.trim());
-					ps.setDate(5, rinsertdates);
+					ps.setString(3, title);
+					ps.setString(4, comment);
+					ps.setDate(5, rinsertdate);
 					ps.setString(6, rimagename);
-					
+				
 					// File 추가
 					ps.setBinaryStream(7, rimage);
 			
+					
 					
 					
 					ps.executeUpdate();
@@ -164,7 +139,8 @@ public class DaoReview_kwh {
 							String wkImagename = rs.getString(6);
 							
 							File file = new File("./" + rimagename);
-							FileOutputStream output = new FileOutputStream(file);
+							FileOutputStream output = new FileOutputStream(file);     //outputstream 은 select
+							
 							InputStream input = rs.getBinaryStream(7);
 							
 							byte[] buffer = new byte[1024];

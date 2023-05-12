@@ -12,6 +12,12 @@ public class ShareVar {
 	
 	
 	public static String loginUserId = "";
+	public static String ItemId = "";
+	
+	
+	public static String testid = "wook";
+	public static String testitem = "i-01";
+	
 	
 	
 }
