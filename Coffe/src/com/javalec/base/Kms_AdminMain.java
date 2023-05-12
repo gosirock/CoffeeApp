@@ -213,7 +213,7 @@ public class Kms_AdminMain extends JFrame {
 		dispose();
 	}
 	
-	private void backAction() {
+	private void backAction() { // 뒤로가기 눌렀을때 (로그인 화면 완성되면 바꿀예정 -------------------------)
 		Kms_StoreSales storeSales = new Kms_StoreSales();
 		storeSales.setVisible(true);
 		dispose();
