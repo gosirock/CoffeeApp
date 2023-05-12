@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -14,7 +17,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;;
+import javax.swing.JTable;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;;
 
 public class Kms_StoreSales extends JFrame {
 
@@ -24,8 +29,9 @@ public class Kms_StoreSales extends JFrame {
 	private JButton btnDaySales;
 	private JButton btnDaysSales;
 	private JScrollPane scrollPane;
-	private JTable table;
+	private JTable innerTable;
 	private JButton btnBack;
+	private final DefaultTableModel outerTable = new DefaultTableModel();
 
 	/**
 	 * Launch the application.
@@ -47,6 +53,13 @@ public class Kms_StoreSales extends JFrame {
 	 * Create the frame.
 	 */
 	public Kms_StoreSales() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+//				tableInit();  // 테이블초기화
+//				searchAction();  // 데이터불러오기
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);							// 백그라운드 프레임 패널 사이즈
 		contentPane = new JPanel();
@@ -100,15 +113,15 @@ public class Kms_StoreSales extends JFrame {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
 			scrollPane.setBounds(6, 169, 378, 559);
-			scrollPane.setViewportView(getTable());
+			scrollPane.setViewportView(getInnerTable());
 		}
 		return scrollPane;
 	}
-	private JTable getTable() {
-		if (table == null) {
-			table = new JTable();
+	private JTable getInnerTable() {
+		if (innerTable == null) {
+			innerTable = new JTable();
 		}
-		return table;
+		return innerTable;
 	}
 	private JButton getBtnBack() {
 		if (btnBack == null) {
@@ -129,6 +142,54 @@ public class Kms_StoreSales extends JFrame {
 	
 	// ----- function ----
 	
+//	private void tableInit() {
+//		outerTable.addColumn("날짜");
+//		outerTable.addColumn("주문번호");
+//		outerTable.addColumn("상품");
+//		outerTable.addColumn("수량");
+//		outerTable.addColumn("판매가격");
+//		
+//		outerTable.setColumnCount(5);
+//		
+//		int i = outerTable.getRowCount();
+//		for(int j = 0 ; j < i ; j++) {
+//			outerTable.removeRow(0);
+//		}
+//		
+//		innerTable.setAutoResizeMode(innerTable.AUTO_RESIZE_OFF);
+//		
+//		int vColIndex = 0;
+//		TableColumn col = innerTable.getColumnModel().getColumn(vColIndex);
+//		int width = 30;
+//		col.setPreferredWidth(width);
+//		
+//		vColIndex = 1;
+//		col = innerTable.getColumnMoel()).getColumn(vColIndex);
+//		width = 40;
+//		col.setPreferredWidth(width);
+//		
+//		vColIndex = 2;
+//		col = innerTable.getColumnModel().getColumn(vColIndex);
+//		width = 30;
+//		col.setPreferredWidth(width);
+//		
+//		vColIndex = 3;
+//		col = innerTable.getColumnModel().getColumn(vColIndex);
+//		width = 30;
+//		col.setPreferredWidth(width);
+//		
+//		vColIndex = 4;
+//		col = innerTable.getColumnModel().getColumn(vColIndex);
+//		width = 100;
+//		col.setPreferredWidth(width);
+//		
+//
+//	
+//	
+//	
+//	
+//	}
+
 		private void backAction() {
 			Kms_AdminMain adminMain = new Kms_AdminMain();
 			adminMain.setVisible(true);
