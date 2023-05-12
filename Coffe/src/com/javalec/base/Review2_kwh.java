@@ -5,13 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import com.javalec.dao.DaoReview_kwh;
 import com.javalec.dto.DtoReview_kwh;
+import com.javalec.dto.Lju_dto;
 
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -27,9 +31,12 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.ImageConsumer;
 import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
@@ -46,11 +53,15 @@ public class Review2_kwh extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel;
 	private JScrollPane scrollPane;
-	private JTable innerTable;
+	private JTable innerTable2;
 	private JRadioButton rbRecent_1;
 	private JRadioButton rbRecommendation_1;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final DefaultTableModel outerTable = new DefaultTableModel();
+	
+	
+	
+	DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
 	/**
 	 * Launch the application.
 	 */
@@ -182,18 +193,38 @@ public class Review2_kwh extends JFrame {
 				}
 			});
 			scrollPane.setBounds(0, 163, 390, 594);
-			scrollPane.setViewportView(getInnerTable());
-			innerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			innerTable.setModel(outerTable);
+			scrollPane.setViewportView(getinnerTable2());
+			innerTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			innerTable2.setModel(outerTable);
 		}
 		return scrollPane;
 	}
-	private JTable getInnerTable() {
-		if (innerTable == null) {
-			innerTable = new JTable();
+	private JTable getinnerTable2() {
+		if (innerTable2 == null) {
+			innerTable2 = new JTable() {
+				public Class getColumnClass(int Column) {					// 컬럼에 오브젝트 이미지 넣을거야
+					return (Column == 0) ? Icon.class : Object.class;
+				}
+			};
+			innerTable2.setOpaque(false);
+			innerTable2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			innerTable2.setGridColor(new Color(252, 242, 217));
+			innerTable2.setSelectionForeground(new Color(248, 227, 182));
+			innerTable2.setSelectionBackground(new Color(130, 77, 30));
+			innerTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			innerTable2.setRequestFocusEnabled(false);
+			innerTable2.setFocusTraversalKeysEnabled(false);
+			innerTable2.setForeground(new Color(131, 77, 30));
+			innerTable2.setFont(new Font("Nanum Myeongjo", Font.PLAIN, 15));
+			innerTable2.setBackground(new Color(252, 242, 217));
+			innerTable2.setModel(outerTable); 	//<<<<< 추가
+			innerTable2.setRowHeight(300);  		//<<<<< 높이조절
+			tableInit();
+			searchAction();
+			
 		}
-		return innerTable;
-	}
+		return innerTable2;
+}
 	private JRadioButton getRbRecent_1() {
 		if (rbRecent_1 == null) {
 			rbRecent_1 = new JRadioButton("최신순");
@@ -222,58 +253,35 @@ public class Review2_kwh extends JFrame {
 	
 	
 	private void tableInit() {
-		outerTable.addColumn("ID");
-		outerTable.addColumn("상품명");
-		outerTable.addColumn("가격");
-		outerTable.addColumn("제목");
-		outerTable.addColumn("내용");
-		outerTable.addColumn("사진");
-		outerTable.addColumn("작성날짜");
-		
-		outerTable.setColumnCount(7);
+//		outerTable.addColumn("ID");
+//		outerTable.addColumn("상품명");
+//		outerTable.addColumn("가격");
+//		outerTable.addColumn("제목");
+//		outerTable.addColumn("내용");
+//		outerTable.addColumn("사진");
+//		outerTable.addColumn("작성날짜");
+		outerTable.addColumn("");
+		//outerTable.addColumn("");
+		outerTable.setColumnCount(1);
+//		outerTable.setColumnCount(7);
 		
 		int i = outerTable.getRowCount();
 		for(int j = 0 ; j < i ; j++) {
 			outerTable.removeRow(0);
 		}
 		
-		innerTable.setAutoResizeMode(innerTable.AUTO_RESIZE_OFF);
+		innerTable2.setAutoResizeMode(innerTable2.AUTO_RESIZE_OFF);
 		
 		int vColIndex = 0;
-		TableColumn col = innerTable.getColumnModel().getColumn(vColIndex);
-		int width = 30;
+		TableColumn col = innerTable2.getColumnModel().getColumn(vColIndex);
+		int width = 400;
 		col.setPreferredWidth(width);
 		
-		vColIndex = 1;
-		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 40;
-		col.setPreferredWidth(width);
-		
-		vColIndex = 2;
-		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 30;
-		col.setPreferredWidth(width);
-		
-		vColIndex = 3;
-		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 30;
-		col.setPreferredWidth(width);
-		
-		vColIndex = 4;
-		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 100;
-		col.setPreferredWidth(width);
-		
-		vColIndex = 5;
-		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 100;
-		col.setPreferredWidth(width);
-		
-		vColIndex = 6;
-		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 50;
-		col.setPreferredWidth(width);
-	
+//		vColIndex = 1;
+//		col = innerTable2.getColumnModel().getColumn(vColIndex);
+//		width = 200;
+//		col.setPreferredWidth(width);
+
 	
 	
 	
@@ -295,14 +303,18 @@ public class Review2_kwh extends JFrame {
 		ArrayList<DtoReview_kwh> dtoList = dao.selectList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
 		int listCount = dtoList.size();
 		
+		
 		for( int i = 0; i < listCount ; i++) {
 			String temp = dtoList.get(i).getCid();
 			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getRimagename());
+			String im=imgicon.toString();  // imgicon 이 오브젝트 배열에 들어가려면 string이 되어야함
 			
-			Object[] qTxt = {temp, dtoList.get(i).getIname(), Integer.toString(dtoList.get(i).getPprice()),dtoList.get(i).getTitle(),dtoList.get(i).getComment(),imgicon};
+			
+			Object[] qTxt = {"<html>"+temp+"<br>"+dtoList.get(i).getIname()+"<p>"+ Integer.toString(dtoList.get(i).getPprice())+"<p>"+dtoList.get(i).getTitle()+"<p>"+dtoList.get(i).getComment()+"<p>"+ im+"</html>"};
 			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
 			
 		}
+		System.out.println(listCount);
 		//tfCount.setText(Integer.toString(listCount));
 		
 	}

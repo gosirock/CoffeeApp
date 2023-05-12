@@ -33,7 +33,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Date;
 import java.time.Instant;
-import java.time.LocalDateTime;  // java.time 패키지의 LocalDateTime 클래스 임포트
+import java.time.LocalDateTime;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;  // java.time 패키지의 LocalDateTime 클래스 임포트
 
 public class Review_kwh extends JFrame {
 
@@ -74,6 +76,12 @@ public class Review_kwh extends JFrame {
 	 * Create the frame.
 	 */
 	public Review_kwh() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				tfFilePath.setVisible(false);
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);							// 백그라운드 프레임 패널 사이즈
 
@@ -205,7 +213,9 @@ public class Review_kwh extends JFrame {
 			btnPlus = new JButton("+");
 			btnPlus.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					filePath();
+					
 				}
 			});
 			btnPlus.setBackground(new Color(248, 227, 182));
@@ -236,32 +246,29 @@ public class Review_kwh extends JFrame {
 		}
 		return btnCancel;
 	}
+	private JLabel getLblImage() {
+		if (lblImage == null) {
+			lblImage = new JLabel("New label");
+			lblImage.setBounds(18, 540, 105, 94);
+		}
+		return lblImage;
+	}
+
+	
+	private JTextField getTfFilePath() {
+		if (tfFilePath == null) {
+			tfFilePath = new JTextField();
+			tfFilePath.setBounds(238, 562, 130, 26);
+			tfFilePath.setColumns(10);
+		}
+		return tfFilePath;
+	}
+	
 
 
 
 	// function
 	
-
-	private void filePath() {   // file loading method
-		
-		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, BMP", "jpg","png","bmp");
-		chooser.setFileFilter(filter);
-		
-		int ret = chooser.showOpenDialog(null);
-		if(ret != JFileChooser.APPROVE_OPTION) {
-			JOptionPane.showMessageDialog(this, "파일을 선택하지 않았습니다.", "경고",JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-		String filePath = chooser.getSelectedFile().getPath();
-	
-		
-		lblImage.setIcon(new ImageIcon(filePath));
-		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		
-	}
 
 
 	// postAction  리뷰등록
@@ -280,12 +287,12 @@ public class Review_kwh extends JFrame {
 
 		
 		// Image File
-		FileInputStream rimage = null;    // inputstream 은 insert 
+		FileInputStream input = null;    // inputstream 은 insert 
 		
 		 
-		File file = new File(imagename);   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
+		File file = new File(tfFilePath.getText());   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
 		try {
-			rimage = new FileInputStream(file);
+			input = new FileInputStream(file);
 		}catch(Exception e){
 			e.printStackTrace();
 			
@@ -293,7 +300,7 @@ public class Review_kwh extends JFrame {
 		}
 		
 		
-		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, rimage);
+		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
 				
 		boolean result = dao.postAction(); 
 		
@@ -304,23 +311,32 @@ public class Review_kwh extends JFrame {
 		}
 		
 	}
-	private JLabel getLblImage() {
-		if (lblImage == null) {
-			lblImage = new JLabel("New label");
-			lblImage.setBounds(18, 540, 105, 94);
+	
+	
+	
+
+	private void filePath() {   // file loading method
+		
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, BMP", "jpg","png","bmp");
+		chooser.setFileFilter(filter);
+		
+		int ret = chooser.showOpenDialog(null);
+		if(ret != JFileChooser.APPROVE_OPTION) {
+			JOptionPane.showMessageDialog(this, "파일을 선택하지 않았습니다.", "경고",JOptionPane.ERROR_MESSAGE);
+			return;
 		}
-		return lblImage;
+		
+		String filePath = chooser.getSelectedFile().getPath();
+		tfFilePath.setText(filePath);
+		
+		
+		lblImage.setIcon(new ImageIcon(filePath));
+		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
 	}
 
-	
-	private JTextField getTfFilePath() {
-		if (tfFilePath == null) {
-			tfFilePath = new JTextField();
-			tfFilePath.setBounds(238, 562, 130, 26);
-			tfFilePath.setColumns(10);
-		}
-		return tfFilePath;
-	}
 }
 	
 
