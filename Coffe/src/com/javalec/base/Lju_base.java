@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;;
+import javax.swing.JLabel;
 
 public class Lju_base extends JFrame {
 
