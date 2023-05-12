@@ -11,6 +11,7 @@ import javax.swing.table.TableColumn;
 
 import com.javalec.dao.Lju_Dao_BasketAction;
 import com.javalec.dao.Lju_Dao_Menu_Coffee;
+import com.javalec.dao.Lju_Dao_Menu_Drink;
 import com.javalec.dao.Lju_Dao_selectTable;
 import com.javalec.dto.Lju_dto;
 import com.mysql.cj.x.protobuf.MysqlxCrud.Column;
@@ -66,7 +67,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
-public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터키 액션넣기
+public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터키 액션넣기
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -115,7 +116,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Lju_MenuCoffee frame = new Lju_MenuCoffee();
+					Lju_MenuDrink frame = new Lju_MenuDrink();
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -130,7 +131,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	 */
 	
 	
-	public Lju_MenuCoffee() {
+	public Lju_MenuDrink() {
 		setTitle("커피메뉴");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -181,7 +182,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		if (btnHome == null) {
 			btnHome = new JButton("");
 			btnHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnHome.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/btnHome.png")));
+			btnHome.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/btnHome.png")));
 			btnHome.setFocusPainted(false);					// 버튼 포커스라인 없애기
 			btnHome.setBorderPainted(false);
 			btnHome.addActionListener(new ActionListener() {
@@ -199,7 +200,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnMenu.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/btnMenu.png")));
+			btnMenu.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/btnMenu.png")));
 			btnMenu.setFocusPainted(false);
 			btnMenu.setBorderPainted(false);
 		}
@@ -209,7 +210,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
 			btnOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnOrder.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/btnOrder.png")));
+			btnOrder.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
 			btnOrder.setBorderPainted(false);
 		}
@@ -223,7 +224,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 				}
 			});
 			btnReview.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnReview.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/btnReview.png")));
+			btnReview.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/btnReview.png")));
 			btnReview.setFocusPainted(false);
 			btnReview.setBorderPainted(false);
 		}
@@ -261,7 +262,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/wifi.png")));
+			lblNewLabel_1.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/wifi.png")));
 			lblNewLabel_1.setBounds(303, 15, 65, 18);
 		}
 		return lblNewLabel_1;
@@ -321,10 +322,14 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 			btnCoffe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnCoffe.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					Lju_MenuCoffee lju_MenuCoffee = new Lju_MenuCoffee();
+					lju_MenuCoffee.setVisible(true);
+					dispose();
 				}
 			});
 			btnCoffe.setBorderPainted(false);
-			btnCoffe.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/opt 1.png")));
+			btnCoffe.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/opt 1 (1).png")));
 			btnCoffe.setBounds(36, 187, 106, 32);
 		}
 		return btnCoffe;
@@ -336,14 +341,11 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					
-					Lju_MenuDrink lju_MenuDrink = new Lju_MenuDrink();
-					lju_MenuDrink.setVisible(true);
-					dispose();
 				}
 			});
 			btnDrink.setFocusPainted(false);
 			btnDrink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnDrink.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/opt 2.png")));
+			btnDrink.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/opt 2 (2).png")));
 			btnDrink.setBorderPainted(false);
 			btnDrink.setBounds(141, 187, 113, 32);
 		}
@@ -352,8 +354,9 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	private JButton getBtnDessert() {
 		if (btnDessert == null) {
 			btnDessert = new JButton("");
-			btnDessert.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+			btnDessert.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
 					
 					Lju_MenuDessert lju_MenuDessert = new Lju_MenuDessert();
 					
@@ -361,16 +364,9 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 					dispose();
 				}
 			});
-			btnDessert.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-					
-				}
-			});
 			btnDessert.setFocusPainted(false);
 			btnDessert.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnDessert.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/opt 3.png")));
+			btnDessert.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/opt 3.png")));
 			btnDessert.setBorderPainted(false);
 			btnDessert.setBounds(250, 187, 106, 32);
 		}
@@ -379,7 +375,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("");
-			lblNewLabel_4.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/options.png")));
+			lblNewLabel_4.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/options.png")));
 			lblNewLabel_4.setBounds(35, 187, 321, 32);
 		}
 		return lblNewLabel_4;
@@ -422,7 +418,205 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		return innerTable;
 	}
 	
+	private JPanel getPanel_1() {
+		if (panel_1 == null) {
+			panel_1 = new JPanel();
+			panel_1.setBackground(new Color(252, 242, 217));
+			panel_1.setBounds(0, 88, 390, 672);
+			panel_1.setLayout(null);
+			panel_1.add(getLblBasket());
+			panel_1.add(getLblBuy());
+			panel_1.add(getBtnMinus());
+			panel_1.add(getBtnExit());
+			panel_1.add(getBtnPlus());
+			panel_1.add(getLblQty());
+			panel_1.add(getLblNewLabel_2());
+			panel_1.add(getLblName());
+			panel_1.add(getLblgra());
+			panel_1.add(getLblclickimg());
+			panel_1.add(getLblclickimg_1());
+			panel_1.add(getLblIid());
+		}
+		return panel_1;
+	}
+	private JLabel getLblclickimg() {
+		if (lblclickimg == null) {
+			lblclickimg = new JLabel("");
+			lblclickimg.setBounds(6, 6, 380, 680);
+			
+			
+			
+			
+			
+		}
+		return lblclickimg;
+	}
+	private JLabel getLblName() {
+		if (lblName == null) {
+			lblName = new JLabel();
+			lblName.setForeground(new Color(124, 79, 40));
+			lblName.setFont(new Font("Lucida Grande", Font.BOLD, 30));
+			lblName.setBounds(31, 306, 313, 257);
+		}
+		return lblName;
+	}
+	private JLabel getLblBasket() {
+		if (lblBasket == null) {
+			lblBasket = new JLabel("");
+			lblBasket.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					basketAction();
+				}
+			});
+			lblBasket.addAncestorListener(new AncestorListener() {
+				public void ancestorAdded(AncestorEvent event) {
+				
+					
+				}
+				public void ancestorMoved(AncestorEvent event) {
+				}
+				public void ancestorRemoved(AncestorEvent event) {
+				}
+			});
+			lblBasket.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			lblBasket.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/selectjang.png")));
+			lblBasket.setBounds(48, 568, 120, 30);
+		}
+		return lblBasket;
+	}
+	private JLabel getLblgra() {
+		if (lblgra == null) {
+			lblgra = new JLabel("");
+			lblgra.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/layer.png")));
+			lblgra.setBounds(0, 55, 386, 690);
+		}
+		return lblgra;
+	}
+	private JLabel getLblBuy() {
+		if (lblBuy == null) {
+			lblBuy = new JLabel("");
+			lblBuy.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					//결제페이지로 이동하기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+					
+				}
+			});
+			lblBuy.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/selectbaro.png")));
+			lblBuy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			lblBuy.setBounds(214, 568, 120, 30);
+		}
+		return lblBuy;
+	}
 	
+	private JButton getBtnPlus() {
+		if (btnPlus == null) {
+			btnPlus = new JButton("");
+			btnPlus.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+					String i = lblQty.getText();
+					int j = Integer.parseInt(i);
+					if(j<99) {
+						j++;
+						String k = Integer.toString(j);
+						lblQty.setText(k);
+					}
+					
+					
+				}
+			});
+			btnPlus.setFocusPainted(false);
+			btnPlus.setBorderPainted(false);
+			btnPlus.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/select.png")));
+			btnPlus.setBounds(320, 457, 30, 40);
+		}
+		return btnPlus;
+	}
+	private JLabel getLblQty() {
+		if (lblQty == null) {
+			int i = 0;
+			lblQty = new JLabel("1");
+			lblQty.setHorizontalAlignment(SwingConstants.CENTER);
+			lblQty.setFont(new Font("Lucida Grande", Font.BOLD, 25));
+			lblQty.setForeground(new Color(124, 79, 40));
+			lblQty.setBounds(264, 453, 50, 40);
+		}
+		return lblQty;
+	}
+
+	private JButton getBtnMinus() {
+		if (btnMinus == null) {
+			btnMinus = new JButton("");
+			btnMinus.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					String i = lblQty.getText();
+					int j = Integer.parseInt(i);
+					if(j>1) {
+						j--;
+						String k = Integer.toString(j);
+						lblQty.setText(k);
+					}
+					
+				}
+			});
+			btnMinus.setFocusPainted(false);
+			btnMinus.setBorderPainted(false);
+			btnMinus.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/selectami.png")));
+			btnMinus.setBounds(230, 457, 30, 40);
+		}
+		return btnMinus;
+	}
+	
+
+	private JLabel getLblNewLabel_2() {
+		if (lblNewLabel_2 == null) {
+			lblNewLabel_2 = new JLabel("원");
+			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 30));
+			lblNewLabel_2.setForeground(new Color(124, 79, 40));
+			lblNewLabel_2.setBounds(126, 455, 61, 30);
+		}
+		return lblNewLabel_2;
+	}
+	private JLabel getLblclickimg_1() {
+		if (lblclickimg_1 == null) {
+			lblclickimg_1 = new JLabel("");
+			lblclickimg_1.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/Group 52.png")));
+			lblclickimg_1.setBounds(0, 0, 400, 680);
+		}
+		return lblclickimg_1;
+	}
+	private JButton getBtnExit() {
+		if (btnExit == null) {
+			btnExit = new JButton("");
+			btnExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					scrollPane.setVisible(true);
+					panel_1.setVisible(false);
+				}
+			});
+			btnExit.setContentAreaFilled(false);
+			btnExit.setRequestFocusEnabled(false);
+			btnExit.setDefaultCapable(false);
+			btnExit.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/akar-icons_cross.png")));
+			btnExit.setFocusPainted(false);
+			btnExit.setBorderPainted(false);
+			btnExit.setBounds(17, 19, 40, 40);
+		}
+		return btnExit;
+	}
+	private JLabel getLblIid() {
+		if (lblIid == null) {
+			lblIid = new JLabel("");
+			lblIid.setBounds(145, 625, 61, 16);
+		}
+		return lblIid;
+	}
+
 	
 	
 	
@@ -469,11 +663,11 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		col.setPreferredWidth(width);
 
 	}
-	// 커피메뉴 테이블 채우기 iid가 a인것만
+	// 음료메뉴 테이블 채우기 iid가 b인것만
 	private void searchAction() {
 		
 		dtoList = new ArrayList<Lju_dto>();
-		Lju_Dao_Menu_Coffee daoLju_dao = new Lju_Dao_Menu_Coffee();
+		Lju_Dao_Menu_Drink daoLju_dao = new Lju_Dao_Menu_Drink();
 		dtoList = daoLju_dao.Linst();
 		
 		int listCount = dtoList.size();
@@ -528,12 +722,13 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	    }
 	
 	 
-	 // 검색기능 커피매뉴만 iid 가 a 들어간것
+	 // 검색기능 음료매뉴만 iid 가 b들어간것
 	 private void SearchAction() {
 		 tableInit();
-		 Lju_Dao_Menu_Coffee dao = new Lju_Dao_Menu_Coffee(txtSearch.getText());
+		 Lju_Dao_Menu_Drink dao = new Lju_Dao_Menu_Drink(txtSearch.getText());
 		 ArrayList<Lju_dto> dtoList = dao.SearchAction();
 		 int listCount = dtoList.size();
+			
 			
 			
 			for(int i = 0; i< listCount; i++) {
@@ -583,48 +778,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 			});	 
 		    timer.start();
 		}
-	private JPanel getPanel_1() {
-		if (panel_1 == null) {
-			panel_1 = new JPanel();
-			panel_1.setBackground(new Color(252, 242, 217));
-			panel_1.setBounds(0, 88, 390, 672);
-			panel_1.setLayout(null);
-			panel_1.add(getLblBasket());
-			panel_1.add(getLblBuy());
-			panel_1.add(getBtnMinus());
-			panel_1.add(getBtnExit());
-			panel_1.add(getBtnPlus());
-			panel_1.add(getLblQty());
-			panel_1.add(getLblNewLabel_2());
-			panel_1.add(getLblName());
-			panel_1.add(getLblgra());
-			panel_1.add(getLblclickimg());
-			panel_1.add(getLblclickimg_1());
-			panel_1.add(getLblIid());
-		}
-		return panel_1;
-	}
-	private JLabel getLblclickimg() {
-		if (lblclickimg == null) {
-			lblclickimg = new JLabel("");
-			lblclickimg.setBounds(6, 6, 380, 680);
-			
-			
-			
-			
-			
-		}
-		return lblclickimg;
-	}
-	private JLabel getLblName() {
-		if (lblName == null) {
-			lblName = new JLabel();
-			lblName.setForeground(new Color(124, 79, 40));
-			lblName.setFont(new Font("Lucida Grande", Font.BOLD, 30));
-			lblName.setBounds(31, 306, 313, 257);
-		}
-		return lblName;
-	}
+
 // 테이블 선택시 
 	
 	private void tableClick() {
@@ -653,155 +807,6 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	}
 
 
-	private JLabel getLblBasket() {
-		if (lblBasket == null) {
-			lblBasket = new JLabel("");
-			lblBasket.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					basketAction();
-				}
-			});
-			lblBasket.addAncestorListener(new AncestorListener() {
-				public void ancestorAdded(AncestorEvent event) {
-				
-					
-				}
-				public void ancestorMoved(AncestorEvent event) {
-				}
-				public void ancestorRemoved(AncestorEvent event) {
-				}
-			});
-			lblBasket.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblBasket.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/selectjang.png")));
-			lblBasket.setBounds(48, 568, 120, 30);
-		}
-		return lblBasket;
-	}
-	private JLabel getLblgra() {
-		if (lblgra == null) {
-			lblgra = new JLabel("");
-			lblgra.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/layer.png")));
-			lblgra.setBounds(0, 55, 386, 690);
-		}
-		return lblgra;
-	}
-	private JLabel getLblBuy() {
-		if (lblBuy == null) {
-			lblBuy = new JLabel("");
-			lblBuy.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					//결제페이지로 이동하기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-					
-				}
-			});
-			lblBuy.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/selectbaro.png")));
-			lblBuy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			lblBuy.setBounds(214, 568, 120, 30);
-		}
-		return lblBuy;
-	}
-	
-	private JButton getBtnPlus() {
-		if (btnPlus == null) {
-			btnPlus = new JButton("");
-			btnPlus.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-					String i = lblQty.getText();
-					int j = Integer.parseInt(i);
-					if(j<99) {
-						j++;
-						String k = Integer.toString(j);
-						lblQty.setText(k);
-					}
-					
-					
-				}
-			});
-			btnPlus.setFocusPainted(false);
-			btnPlus.setBorderPainted(false);
-			btnPlus.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/select.png")));
-			btnPlus.setBounds(320, 457, 30, 40);
-		}
-		return btnPlus;
-	}
-	private JLabel getLblQty() {
-		if (lblQty == null) {
-			int i = 0;
-			lblQty = new JLabel("1");
-			lblQty.setHorizontalAlignment(SwingConstants.CENTER);
-			lblQty.setFont(new Font("Lucida Grande", Font.BOLD, 25));
-			lblQty.setForeground(new Color(124, 79, 40));
-			lblQty.setBounds(264, 453, 50, 40);
-		}
-		return lblQty;
-	}
-
-	private JButton getBtnMinus() {
-		if (btnMinus == null) {
-			btnMinus = new JButton("");
-			btnMinus.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					String i = lblQty.getText();
-					int j = Integer.parseInt(i);
-					if(j>1) {
-						j--;
-						String k = Integer.toString(j);
-						lblQty.setText(k);
-					}
-					
-				}
-			});
-			btnMinus.setFocusPainted(false);
-			btnMinus.setBorderPainted(false);
-			btnMinus.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/selectami.png")));
-			btnMinus.setBounds(230, 457, 30, 40);
-		}
-		return btnMinus;
-	}
-	
-
-	private JLabel getLblNewLabel_2() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("원");
-			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 30));
-			lblNewLabel_2.setForeground(new Color(124, 79, 40));
-			lblNewLabel_2.setBounds(126, 455, 61, 30);
-		}
-		return lblNewLabel_2;
-	}
-	private JLabel getLblclickimg_1() {
-		if (lblclickimg_1 == null) {
-			lblclickimg_1 = new JLabel("");
-			lblclickimg_1.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/Group 49.png")));
-			lblclickimg_1.setBounds(0, 0, 410, 680);
-		}
-		return lblclickimg_1;
-	}
-	private JButton getBtnExit() {
-		if (btnExit == null) {
-			btnExit = new JButton("");
-			btnExit.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					scrollPane.setVisible(true);
-					panel_1.setVisible(false);
-				}
-			});
-			btnExit.setContentAreaFilled(false);
-			btnExit.setRequestFocusEnabled(false);
-			btnExit.setDefaultCapable(false);
-			btnExit.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/akar-icons_cross.png")));
-			btnExit.setFocusPainted(false);
-			btnExit.setBorderPainted(false);
-			btnExit.setBounds(17, 19, 40, 40);
-		}
-		return btnExit;
-	}
 	
 	
 	private void basketAction(){
@@ -823,13 +828,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	
 	
 	
-	private JLabel getLblIid() {
-		if (lblIid == null) {
-			lblIid = new JLabel("");
-			lblIid.setBounds(145, 625, 61, 16);
-		}
-		return lblIid;
-	}
+
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("");
@@ -840,7 +839,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 				public void mouseClicked(MouseEvent e) {
 				}
 			});
-			btnNewButton.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/icon _cart_.png")));
+			btnNewButton.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/icon _cart_.png")));
 			btnNewButton.setFocusPainted(false);
 			btnNewButton.setBorderPainted(false);
 			btnNewButton.setBounds(303, 50, 70, 40);
