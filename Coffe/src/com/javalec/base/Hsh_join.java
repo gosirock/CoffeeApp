@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.javalec.dao.Dao;
 import com.javalec.dao.Hsh_joindao;
 
 import javax.swing.ImageIcon;

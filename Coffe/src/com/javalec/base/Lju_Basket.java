@@ -95,9 +95,6 @@ public class Lju_Basket extends JFrame {
 	private JLabel lblCountNum;
 	private JButton btnPay;
 	private JButton btnBasketAlldel;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_2_1;
-	private JCheckBox chckbxNewCheckBox;
 	
 //	"<html>안녕<br>안녀엉<p>세번</html>" 라벨 줄바꾸기
 	/**
@@ -108,6 +105,7 @@ public class Lju_Basket extends JFrame {
 			public void run() {
 				try {
 					Lju_Basket frame = new Lju_Basket();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -132,7 +130,6 @@ public class Lju_Basket extends JFrame {
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);							// 백그라운드 프레임 패널 사이즈
-		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(248, 227, 182));
 
@@ -148,9 +145,6 @@ public class Lju_Basket extends JFrame {
 		contentPane.add(getBtnNewButton());
 		contentPane.add(getBtnPay());
 		contentPane.add(getBtnBasketAlldel());
-		contentPane.add(getLblNewLabel_2());
-		contentPane.add(getLblNewLabel_2_1());
-		contentPane.add(getChckbxNewCheckBox());
 	}
 	
 	
@@ -189,6 +183,7 @@ public class Lju_Basket extends JFrame {
 			btnMenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Lju_MenuCoffee lju_MenuCoffee = new Lju_MenuCoffee();
+					lju_MenuCoffee.setLocationRelativeTo(null);
 					lju_MenuCoffee.setVisible(true);
 					dispose();
 
@@ -261,7 +256,7 @@ public class Lju_Basket extends JFrame {
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setAutoscrolls(true);
 			scrollPane.setBackground(new Color(252, 242, 217));
-			scrollPane.setBounds(0, 100, 400, 400);
+			scrollPane.setBounds(0, 100, 400, 468);
 			scrollPane.setViewportView(getInnerTable());
 		}
 		return scrollPane;
@@ -297,7 +292,7 @@ public class Lju_Basket extends JFrame {
 			innerTable.setRequestFocusEnabled(false);
 			innerTable.setFocusTraversalKeysEnabled(false);
 			innerTable.setForeground(new Color(131, 77, 30));
-			innerTable.setFont(new Font("Nanum Gothic", Font.PLAIN, 20));
+			innerTable.setFont(new Font("Nanum Gothic", Font.PLAIN, 17));
 			innerTable.setBackground(new Color(252, 242, 217));
 			innerTable.setModel(outerTable); 	//<<<<< 추가
 			innerTable.setRowHeight(130);  		//<<<<< 높이조절
@@ -521,9 +516,20 @@ public class Lju_Basket extends JFrame {
 	private JButton getBtnPay() {
 		if (btnPay == null) {
 			btnPay = new JButton("");
+			btnPay.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+					Lju_Payment lju_payment = new Lju_Payment();
+					lju_payment.setLocationRelativeTo(null);
+					lju_payment.setVisible(true);
+					
+					dispose();
+				}
+			});
 			btnPay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnPay.setHorizontalTextPosition(SwingConstants.CENTER);
-			btnPay.setIcon(new ImageIcon(Lju_Basket.class.getResource("/com/javalec/image/buttons (1).png")));
+			btnPay.setIcon(new ImageIcon(Lju_Basket.class.getResource("/com/javalec/image/Grou 55.png")));
 			btnPay.setFocusPainted(false);
 			btnPay.setBorderPainted(false);
 			btnPay.setBounds(60, 680, 270, 50);
@@ -543,7 +549,7 @@ public class Lju_Basket extends JFrame {
 			btnBasketAlldel.setHorizontalTextPosition(SwingConstants.CENTER);
 			btnBasketAlldel.setFocusPainted(false);
 			btnBasketAlldel.setBorderPainted(false);
-			btnBasketAlldel.setBounds(248, 510, 120, 40);
+			btnBasketAlldel.setBounds(248, 585, 120, 40);
 		}
 		return btnBasketAlldel;
 	}
@@ -556,36 +562,5 @@ public class Lju_Basket extends JFrame {
 		lju_BasketEmpty.AllEmpty();
 		tableInit();
 		searchAction();
-	}
-	
-	
-	
-	
-	private JLabel getLblNewLabel_2() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("쿠폰할인 :");
-			lblNewLabel_2.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2.setBounds(10, 600, 80, 20);
-		}
-		return lblNewLabel_2;
-	}
-	private JLabel getLblNewLabel_2_1() {
-		if (lblNewLabel_2_1 == null) {
-			lblNewLabel_2_1 = new JLabel("합 계 :");
-			lblNewLabel_2_1.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2_1.setBounds(10, 630, 61, 20);
-		}
-		return lblNewLabel_2_1;
-	}
-	private JCheckBox getChckbxNewCheckBox() {
-		if (chckbxNewCheckBox == null) {
-			chckbxNewCheckBox = new JCheckBox("사용 가능한 쿠폰이 없습니다.");
-			chckbxNewCheckBox.setForeground(new Color(130, 77, 30));
-			chckbxNewCheckBox.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			chckbxNewCheckBox.setBounds(5, 550, 218, 40);
-		}
-		return chckbxNewCheckBox;
 	}
 	}
