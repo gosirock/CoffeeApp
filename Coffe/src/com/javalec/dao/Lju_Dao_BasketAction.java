@@ -60,7 +60,25 @@ public class Lju_Dao_BasketAction {
 	}
 	
 	
-	
+	public int basketCount() {
+		
+		String query = "select count(*) from basket where customer_cid = '"+ ShareVar.loginUserId + "'";
+		int count = 0;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(query);
+			rs.next();
+			count = rs.getInt(1);
+			conn_mysql.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 	
 	
 	

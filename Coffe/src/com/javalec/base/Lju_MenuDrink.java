@@ -107,6 +107,8 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 	private JButton btnExit;
 	private JLabel lblIid;
 	private JButton btnNewButton;
+	private JLabel lblCount;
+	private JLabel lblCountNum;
 	
 //	"<html>안녕<br>안녀엉<p>세번</html>" 라벨 줄바꾸기
 	/**
@@ -159,8 +161,9 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 		contentPane.add(getBtnDessert());
 		contentPane.add(getLblNewLabel_4());
 		contentPane.add(getLblClock());
+		contentPane.add(getLblCountNum());
+		contentPane.add(getLblCount());
 		contentPane.add(getBtnNewButton());
-
 	}
 	
 	
@@ -692,7 +695,7 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 			outerTable.addRow(qTxt);
 			
 			}
-			
+		closeingAction();
 		}
 	
 	
@@ -786,6 +789,7 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 	
 	private void tableClick() {
 		
+		lblQty.setText("1");
 		panel_1.setVisible(true);
 		scrollPane.setVisible(false);
 		int i = innerTable.getSelectedRow();
@@ -835,8 +839,13 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
 			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnNewButton.addMouseListener(new MouseAdapter() {
+			
 				
 				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 				@Override
@@ -847,7 +856,52 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 			btnNewButton.setFocusPainted(false);
 			btnNewButton.setBorderPainted(false);
 			btnNewButton.setBounds(303, 50, 70, 40);
+			basketCount();
 		}
 		return btnNewButton;
 	}
+	
+	private JLabel getLblCount() {
+		if (lblCount == null) {
+			lblCount = new JLabel("");
+			lblCount.setForeground(new Color(255, 255, 255));
+			lblCount.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/Ellipse 7.png")));
+			lblCount.setBounds(345, 40, 25, 22);
+			lblCount.setVisible(false);
+		}
+		return lblCount;
+	}
+	private JLabel getLblCountNum() {
+		if (lblCountNum == null) {
+			lblCountNum = new JLabel("1");
+			lblCountNum.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCountNum.setForeground(new Color(255, 255, 255));
+			lblCountNum.setBounds(345, 43, 24, 16);
+			lblCountNum.setVisible(false);
+		}
+		return lblCountNum;
+ 	}
+	
+	private void basketCount() {
+		
+		Lju_Dao_BasketAction lju_Dao_BasketAction = new Lju_Dao_BasketAction();
+		int count = lju_Dao_BasketAction.basketCount();
+		
+		if(count>0) {
+			lblCount.setVisible(true);
+			lblCountNum.setVisible(true);
+			lblCountNum.setText(Integer.toString(count));
+		}
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}
