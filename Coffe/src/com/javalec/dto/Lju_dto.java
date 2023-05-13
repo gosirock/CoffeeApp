@@ -10,8 +10,13 @@ public class Lju_dto {
 	int iprice;
 	String iimagename;
 	String idescription;
+	int bqty;
 	
 	
+
+
+
+
 	public Lju_dto() {
 		// TODO Auto-generated constructor stub
 	}
@@ -39,6 +44,17 @@ public class Lju_dto {
 		this.iprice = iprice;
 		this.iimagename = iimagename;
 		this.idescription = idescription;
+	}
+
+
+
+	public Lju_dto(String iname, int iprice, String iimagename, String iid, int bqty) {
+		super();
+		this.iid = iid;
+		this.iname = iname;
+		this.iprice = iprice;
+		this.iimagename = iimagename;
+		this.bqty = bqty;
 	}
 
 
@@ -115,6 +131,17 @@ public class Lju_dto {
 	}
 
 
+	public int getBqty() {
+		return bqty;
+	}
+
+
+
+
+
+	public void setBqty(int bqty) {
+		this.bqty = bqty;
+	}
 
 
 	

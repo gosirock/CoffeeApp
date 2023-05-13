@@ -646,6 +646,10 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					
+					Lju_Basket lju_Payment = new Lju_Basket();
+					lju_Payment.setVisible(true);
+					dispose();
 				}
 			});
 			btnNewButton.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/icon _cart_.png")));
@@ -726,7 +730,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
 			Image img = imgicon.getImage();
 			
-			Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+			Image updateImg = img.getScaledInstance(100, 130, Image.SCALE_SMOOTH);
 			ImageIcon upImg = new ImageIcon(updateImg);
 			
 			Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+"</html>",dtoList.get(i).getIid()};
@@ -783,7 +787,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 				ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
 				Image img = imgicon.getImage();
 				
-				Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+				Image updateImg = img.getScaledInstance(100, 130, Image.SCALE_SMOOTH);
 				ImageIcon upImg = new ImageIcon(updateImg);
 				
 				Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+"</html>", dtoList.get(i).getIid()};
