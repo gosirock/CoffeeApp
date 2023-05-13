@@ -23,8 +23,8 @@ public class DaoReview_kwh {
 			private final String pw_mysql = ShareVar.DBPass;
 			
 			
-			String irid;
-			String crid;
+			String item_iid;
+			String customer_cid;
 			String title;
 			String comment;
 			String rimagename= "image.png";
@@ -49,11 +49,11 @@ public class DaoReview_kwh {
 			
 			
 			
-			public DaoReview_kwh(String irid, String crid, String title, String comment, String rimagename, Date rinsertdate,
+			public DaoReview_kwh(String item_iid, String customer_cid, String title, String comment, String rimagename, Date rinsertdate,
 					FileInputStream rimage) {
 				super();
-				this.irid = irid;
-				this.crid=crid;
+				this.item_iid = item_iid;
+				this.customer_cid=customer_cid;
 				this.title = title;
 				this.comment = comment;
 				this.rimagename = rimagename;
@@ -85,14 +85,14 @@ public class DaoReview_kwh {
 					Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 					Statement stmt_mysql = conn_mysql.createStatement();
 
-					String query = "insert into review (irid,crid,title,reply,rinsertdate,rimagename,rimage)";
+					String query = "insert into review (item_iid,customer_cid,title,reply,rinsertdate,rimagename,rimage)";
 					String query1 = " values (?,?,?,?,?,?,?)";
 				
 						
 					
 					ps = conn_mysql.prepareStatement(query + query1);
-					ps.setString(1, irid.trim());
-					ps.setString(2, crid.trim());
+					ps.setString(1, item_iid.trim());
+					ps.setString(2, customer_cid.trim());
 					ps.setString(3, title);
 					ps.setString(4, comment);
 					ps.setDate(5, rinsertdate);
@@ -122,8 +122,8 @@ public class DaoReview_kwh {
 			public ArrayList<DtoReview_kwh> selectList(){
 				ArrayList<DtoReview_kwh> dtoList = new ArrayList<DtoReview_kwh>(); 
 					
-					String whereDefault = "select r.crid, i.iname , i.iprice, r.title, r.reply,r.rimagename,r.rimage,r.rinsertdate from item i , review as r, customer c ";    // select from 은 이렇게하기
-					String whereDefault1 = " where i.idescription = r.irid and c.cid = r.crid";    // select from 은 이렇게하기
+					String whereDefault = "select r.customer_cid, i.iname , i.iprice, r.title, r.reply,r.rimagename,r.rimage,r.rinsertdate from item i , review as r, customer c ";    // select from 은 이렇게하기
+					String whereDefault1 = " where i.iid = r.item_iid and c.cid = r.customer_cid";    // select from 은 이렇게하기
 					
 					try {  // java가 db에 접근했다.
 						Class.forName("com.mysql.cj.jdbc.Driver");
@@ -153,23 +153,22 @@ public class DaoReview_kwh {
 							
 							byte[] buffer = new byte[1024];
 							int len;
-//							while(input.read(buffer) > 0) {
-//								output.write(buffer);
+
 							 while ((len = input.read(buffer)) > 0) {
 					                output.write(buffer, 0, len);
 					            }
 					            output.close();
-					            input.close();
+					            input.close();   
 							
 							
 							// 위에 8개를 한번에 넣기  -> Dto 에서 8개의 데이터 생성자를 만들어놓음
-							DtoReview_kwh dto = new DtoReview_kwh(wkID, wkItem, wkPrice, wkTitle, wkReply, wkImagename, input, wkDate);
+							DtoReview_kwh dto = new DtoReview_kwh(wkID, wkItem, wkPrice, wkTitle, wkReply, wkImagename, wkDate);
 							dtoList.add(dto);
 							}	
 						
 						conn_mysql.close();
 						rs.close();
-					    stmt_mysql.close();
+					    stmt_mysql.close();    // 닫아줘야 계속실행안함
 					    
 					    
 						}catch(Exception e) {

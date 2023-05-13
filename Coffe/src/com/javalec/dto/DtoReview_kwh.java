@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class DtoReview_kwh {
 
-	String iid;
-	String cid;
+	String item_iid;
+	String customer_cid;
 	String title;
 	String comment;
 	String rimagename="";
@@ -37,16 +37,13 @@ public class DtoReview_kwh {
 	
 	
 
-	public String getIid() {
-		return iid;
-	}
-
+	
 
 
 	//리뷰확인란 데이터넣기위한 생성자
-	public DtoReview_kwh(String cid, String iname, int iprice, String title, String comment, String rimagename,  InputStream image, Date rinsertdate	) {
+	public DtoReview_kwh(String customer_cid, String iname, int iprice, String title, String comment, String rimagename,  InputStream image, Date rinsertdate	) {
 		super();
-		this.cid = cid;
+		this.customer_cid = customer_cid;
 		this.title = title;
 		this.comment = comment;
 		this.rimagename = rimagename;
@@ -56,31 +53,122 @@ public class DtoReview_kwh {
 		this.rimage = rimage;
 	}
 
-
-	public void setIid(String iid) {
-		this.iid = iid;
-	}
-
-
-
-	public String getCid() {
-		return cid;
-	}
-
-
-
-	public void setCid(String cid) {
-		this.cid = cid;
-	}
-	public String getIname() {
-		return iname;
-	}
 	
 	
-	
-	public void getIname(String iname) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public DtoReview_kwh(String customer_cid, String iname, int iprice,String title, String comment, String rimagename, Date rinsertdate) {
+		super();
+		this.customer_cid = customer_cid;
+		this.title = title;
+		this.comment = comment;
+		this.rimagename = rimagename;
+		this.rinsertdate = rinsertdate;
 		this.iname = iname;
+		this.iprice = iprice;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public String getItem_iid() {
+		return item_iid;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setItem_iid(String item_iid) {
+		this.item_iid = item_iid;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public String getCustomer_cid() {
+		return customer_cid;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setCustomer_cid(String customer_cid) {
+		this.customer_cid = customer_cid;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -90,9 +178,35 @@ public class DtoReview_kwh {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -102,18 +216,35 @@ public class DtoReview_kwh {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public int getPprice() {
-		return iprice;
-	}
-	
-	
-	
-	public void getPprice(int pprice) {
-		this.iprice = iprice;
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -123,9 +254,35 @@ public class DtoReview_kwh {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public void setRimagename(String rimagename) {
 		this.rimagename = rimagename;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -135,9 +292,177 @@ public class DtoReview_kwh {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public void setRinsertdate(Date rinsertdate) {
 		this.rinsertdate = rinsertdate;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public String getIname() {
+		return iname;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setIname(String iname) {
+		this.iname = iname;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public int getIprice() {
+		return iprice;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setIprice(int iprice) {
+		this.iprice = iprice;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public FileInputStream getRimage() {
+		return rimage;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setRimage(FileInputStream rimage) {
+		this.rimage = rimage;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public InputStream getImage() {
+		return image;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setImage(InputStream image) {
+		this.image = image;
+	}
+
+
+	
 	
 	
 	

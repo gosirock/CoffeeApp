@@ -15,7 +15,7 @@ public class ShareVar {
 	
 	
 	public static String testid = "wook";
-	public static String testitem = "i-01";
+	public static String testitem = "a001";
 	
 	
 	
