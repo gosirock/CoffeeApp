@@ -119,6 +119,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 			public void run() {
 				try {
 					Lju_MenuDessert frame = new Lju_MenuDessert();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -326,6 +327,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 			btnCoffe.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Lju_MenuCoffee lju_MenuCoffee = new Lju_MenuCoffee();
+					lju_MenuCoffee.setLocationRelativeTo(null);
 					lju_MenuCoffee.setVisible(true);
 					dispose();
 					
@@ -344,6 +346,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					Lju_MenuDrink lju_MenuDrink = new Lju_MenuDrink();
+					lju_MenuDrink.setLocationRelativeTo(null);
 					lju_MenuDrink.setVisible(true);
 					dispose();
 				}
@@ -503,10 +506,14 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					//결제페이지로 이동하기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+					Lju_Payment lju_payment = new Lju_Payment();
+					lju_payment.setLocationRelativeTo(null);
+					lju_payment.setVisible(true);
 					
+					dispose();
 				}
 			});
-			lblBuy.setIcon(new ImageIcon(Lju_MenuDessert.class.getResource("/com/javalec/image/selectbaro.png")));
+			lblBuy.setIcon(new ImageIcon(Lju_MenuDessert.class.getResource("/com/javalec/image/selectbar.png")));
 			lblBuy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			lblBuy.setBounds(214, 568, 120, 30);
 		}
@@ -637,6 +644,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					Lju_Basket lju_Payment = new Lju_Basket();
+					lju_Payment.setLocationRelativeTo(null);
 					lju_Payment.setVisible(true);
 					dispose();
 				}
@@ -719,7 +727,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 			Image updateImg = img.getScaledInstance(100, 130, Image.SCALE_SMOOTH);
 			ImageIcon upImg = new ImageIcon(updateImg);
 			
-			Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+"</html>",dtoList.get(i).getIid()};
+			Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+" 원</html>",dtoList.get(i).getIid()};
 			outerTable.addRow(qTxt);
 			
 			}
@@ -776,7 +784,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 				Image updateImg = img.getScaledInstance(100, 130, Image.SCALE_SMOOTH);
 				ImageIcon upImg = new ImageIcon(updateImg);
 				
-				Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+"</html>", dtoList.get(i).getIid()};
+				Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+" 원</html>", dtoList.get(i).getIid()};
 				outerTable.addRow(qTxt);
 				
 		
@@ -853,6 +861,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 		
 		if(result) {
 			Lju_Basket_Dialog basket_Dialog = new Lju_Basket_Dialog();
+			basket_Dialog.setLocationRelativeTo(null);
 			basket_Dialog.setVisible(true);
 			
 		}else {
