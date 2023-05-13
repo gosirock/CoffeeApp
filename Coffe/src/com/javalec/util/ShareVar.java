@@ -10,7 +10,7 @@ public class ShareVar {
 	public static int filename = 0;  // dB에서의 blob을 file로 바꾸기 위해 해주는 작업
 	
 	
-	public static String loginUserId = "";
+	public static String loginUserId = "gosi";
 	public static String ItemId = "";
 	
 	

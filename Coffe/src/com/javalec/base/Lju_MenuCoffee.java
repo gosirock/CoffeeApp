@@ -106,6 +106,8 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	private JButton btnExit;
 	private JLabel lblIid;
 	private JButton btnNewButton;
+	private JLabel lblCount;				/// 바스켓 카운터 추가ㅡㅡㅡㅡ
+	private JLabel lblCountNum;				/// 바스켓 카운터 추가ㅡㅡㅡ
 	
 //	"<html>안녕<br>안녀엉<p>세번</html>" 라벨 줄바꾸기
 	/**
@@ -150,6 +152,8 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		contentPane.add(getPanel_1());
 		contentPane.add(getLblNewLabel());
 		contentPane.add(getLblLikeToDrink());
+		contentPane.add(getLblCountNum());
+		contentPane.add(getLblCount());
 		contentPane.add(getLblNewLabel_1());
 		contentPane.add(getTxtSearch());
 		contentPane.add(getScrollPane());
@@ -159,7 +163,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		contentPane.add(getLblNewLabel_4());
 		contentPane.add(getLblClock());
 		contentPane.add(getBtnNewButton());
-
+	
 	}
 	
 	
@@ -421,168 +425,6 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		}
 		return innerTable;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	////////////////////////////////////////////////////////////////////
-	private void tableInit() {    // <<<<<<<테이블 설정
-		outerTable.addColumn("");
-		outerTable.addColumn("");
-		outerTable.addColumn("");
-		outerTable.setColumnCount(3);
-		
-		int i = outerTable.getRowCount(); //기존데이터있을까봐 지우기
-		
-		for(int j=0; j < i; j++) {		// 데이터지우는 for문
-			outerTable.removeRow(0);
-		}
-		
-		innerTable.setAutoResizeMode(innerTable.AUTO_RESIZE_OFF); //사이즈 자동조절 안하겠다ㅣ
-		
-		// 컬럼크기 정하기
-		
-		int vColIndex = 0;		// 첫번째 컬럼 번호
-		TableColumn col = innerTable.getColumnModel().getColumn(vColIndex);
-		int width = 150;	// 첫번째 컬럼 폭
-		col.setPreferredWidth(width);
-		vColIndex = 1;		// 첫번째 컬럼 번호
-		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 230;	// 첫번째 컬럼 폭
-		col.setPreferredWidth(width);
-		vColIndex = 2;	// 세번째 컬럼번호
-		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 1;		// 세번째 컬럼 폭정하기
-		col.setPreferredWidth(width);
-
-	}
-	// 커피메뉴 테이블 채우기 iid가 a인것만
-	private void searchAction() {
-		
-		dtoList = new ArrayList<Lju_dto>();
-		Lju_Dao_Menu_Coffee daoLju_dao = new Lju_Dao_Menu_Coffee();
-		dtoList = daoLju_dao.Linst();
-		
-		int listCount = dtoList.size();
-		
-		
-		
-		for(int i = 0; i< listCount; i++) {
-			
-			String price = Integer.toString(dtoList.get(i).getIprice());
-			
-			
-			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
-			Image img = imgicon.getImage();
-			
-			Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
-			ImageIcon upImg = new ImageIcon(updateImg);
-			
-			Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+"</html>",dtoList.get(i).getIid()};
-			outerTable.addRow(qTxt);
-			
-			}
-			
-		}
-	
-	
-	
-	
-	// 불러온 사진 지우기
-	private void closeingAction() {	//사진지우기
-		for(int i=0; i <dtoList.size(); i++) {
-			File file = new File(dtoList.get(i).getIimagename());
-			file.delete();	
-		}
-				
-	}
-	
-	
-	// 텍스트 필드 엔터누르면 액션 
-	 public void actionPerformed(ActionEvent e) {	
-	        if (e.getSource() == txtSearch) {
-	            // 텍스트 필드에서 엔터키 누름
-	            String text = txtSearch.getText();
-	            int i = outerTable.getRowCount(); //기존데이터있을까봐 지우기
-	    		
-	    		for(int j=0; j < i; j++) {		// 데이터지우는 for문
-	    			outerTable.removeRow(0);
-	    		}
-	            SearchAction();
-	            // 여기에 필요한 액션을 추가
-	            
-	        }
-	    }
-	
-	 
-	 // 검색기능 커피매뉴만 iid 가 a 들어간것
-	 private void SearchAction() {
-		 tableInit();
-		 Lju_Dao_Menu_Coffee dao = new Lju_Dao_Menu_Coffee(txtSearch.getText());
-		 ArrayList<Lju_dto> dtoList = dao.SearchAction();
-		 int listCount = dtoList.size();
-			
-			
-			for(int i = 0; i< listCount; i++) {
-				
-				String price = Integer.toString(dtoList.get(i).getIprice());
-				
-				
-				ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
-				Image img = imgicon.getImage();
-				
-				Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
-				ImageIcon upImg = new ImageIcon(updateImg);
-				
-				Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+"</html>", dtoList.get(i).getIid()};
-				outerTable.addRow(qTxt);
-				
-		
-				}
-		 
-	 }
-
-	 
-	 // 시계라벨 ( 시계라벨이랑 시계랑 같이 붙여넣으세요)
-	 private JLabel getLblClock() {
-			if (lblClock == null) {
-				lblClock = new JLabel();
-				lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
-				lblClock.setBounds(36, 15, 61, 16);
-				clockRun();
-				
-			}
-			return lblClock;
-		}
-	 
-	 // 시간표시 메소드
-	 private void clockRun() {
-		    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Calendar t = Calendar.getInstance();
-		            int hour = t.get(Calendar.HOUR);
-		            int min = t.get(Calendar.MINUTE);
-		            String clock = String.format("%02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
-		            lblClock.setText(clock);
-				}
-			});	 
-		    timer.start();
-		}
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
@@ -625,32 +467,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		}
 		return lblName;
 	}
-// 테이블 선택시 
-	
-	private void tableClick() {
-		
-		panel_1.setVisible(true);
-		scrollPane.setVisible(false);
-		int i = innerTable.getSelectedRow();
-		String wkpid = (String) innerTable.getValueAt(i, 2);
-		
-		Lju_Dao_selectTable dao = new Lju_Dao_selectTable(wkpid);
-		Lju_dto dto = dao.tableClick();
-		lblIid.setText(dto.getIid());
-		lblName.setText("<html>"+dto.getIname()+"<br><br>"+dto.getIprice()+"</html>");
-		lblclickimg.setIcon(null);
-		ImageIcon imgicon = new ImageIcon("./" + dto.getIimagename());
-//		Image img = imgicon.getImage();
-		
-//		Image updateImg = img.getScaledInstance(380, 710, Image.SCALE_SMOOTH);
-//		ImageIcon upImg = new ImageIcon(updateImg);
-		
-		lblclickimg.setIcon(imgicon);
-		lblclickimg.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		
-		
-	}
+
 
 
 	private JLabel getLblBasket() {
@@ -793,6 +610,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 					closeingAction();
 					scrollPane.setVisible(true);
 					panel_1.setVisible(false);
+					
 				}
 			});
 			btnExit.setContentAreaFilled(false);
@@ -806,6 +624,234 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 		return btnExit;
 	}
 	
+	
+	
+	private JLabel getLblIid() {
+		if (lblIid == null) {
+			lblIid = new JLabel("");
+			lblIid.setBounds(145, 625, 61, 16);
+		}
+		return lblIid;
+	}
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnNewButton.addMouseListener(new MouseAdapter() {
+				
+				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+			});
+			btnNewButton.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/icon _cart_.png")));
+			btnNewButton.setFocusPainted(false);
+			btnNewButton.setBorderPainted(false);
+			btnNewButton.setBounds(303, 50, 70, 40);
+			basketCount();					//mㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ바스켓카운터
+		}
+		return btnNewButton;
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	////////////////////////////////////////////////////////////////////
+	private void tableInit() {    // <<<<<<<테이블 설정
+		outerTable.addColumn("");
+		outerTable.addColumn("");
+		outerTable.addColumn("");
+		outerTable.setColumnCount(3);
+		
+		int i = outerTable.getRowCount(); //기존데이터있을까봐 지우기
+		
+		for(int j=0; j < i; j++) {		// 데이터지우는 for문
+			outerTable.removeRow(0);
+		}
+		
+		innerTable.setAutoResizeMode(innerTable.AUTO_RESIZE_OFF); //사이즈 자동조절 안하겠다ㅣ
+		
+		// 컬럼크기 정하기
+		
+		int vColIndex = 0;		// 첫번째 컬럼 번호
+		TableColumn col = innerTable.getColumnModel().getColumn(vColIndex);
+		int width = 150;	// 첫번째 컬럼 폭
+		col.setPreferredWidth(width);
+		vColIndex = 1;		// 첫번째 컬럼 번호
+		col = innerTable.getColumnModel().getColumn(vColIndex);
+		width = 230;	// 첫번째 컬럼 폭
+		col.setPreferredWidth(width);
+		vColIndex = 2;	// 세번째 컬럼번호
+		col = innerTable.getColumnModel().getColumn(vColIndex);
+		width = 1;		// 세번째 컬럼 폭정하기
+		col.setPreferredWidth(width);
+
+	}
+	// 커피메뉴 테이블 채우기 iid가 a인것만
+	private void searchAction() {
+		
+		dtoList = new ArrayList<Lju_dto>();
+		Lju_Dao_Menu_Coffee daoLju_dao = new Lju_Dao_Menu_Coffee();
+		dtoList = daoLju_dao.Linst();
+		
+		int listCount = dtoList.size();
+		
+		
+		
+		for(int i = 0; i< listCount; i++) {
+			
+			String price = Integer.toString(dtoList.get(i).getIprice());
+			
+			
+			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
+			Image img = imgicon.getImage();
+			
+			Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+			ImageIcon upImg = new ImageIcon(updateImg);
+			
+			Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+"</html>",dtoList.get(i).getIid()};
+			outerTable.addRow(qTxt);
+			
+			}
+		closeingAction();
+			
+		}
+	
+	
+	
+	
+	// 불러온 사진 지우기
+	private void closeingAction() {	//사진지우기
+		for(int i=0; i <dtoList.size(); i++) {
+			File file = new File(dtoList.get(i).getIimagename());
+			file.delete();	
+		}
+				
+	}
+	
+	
+	// 텍스트 필드 엔터누르면 액션 
+	 public void actionPerformed(ActionEvent e) {	
+	        if (e.getSource() == txtSearch) {
+	            // 텍스트 필드에서 엔터키 누름
+	            String text = txtSearch.getText();
+	            int i = outerTable.getRowCount(); //기존데이터있을까봐 지우기
+	    		
+	    		for(int j=0; j < i; j++) {		// 데이터지우는 for문
+	    			outerTable.removeRow(0);
+	    		}
+	            SearchAction();
+	            // 여기에 필요한 액션을 추가
+	            
+	        }
+	    }
+	
+	 
+	 // 검색기능 커피매뉴만 iid 가 a 들어간것
+	 private void SearchAction() {
+		 tableInit();
+		 Lju_Dao_Menu_Coffee dao = new Lju_Dao_Menu_Coffee(txtSearch.getText());
+		 ArrayList<Lju_dto> dtoList = dao.SearchAction();
+		 int listCount = dtoList.size();
+			
+			
+			for(int i = 0; i< listCount; i++) {
+				
+				String price = Integer.toString(dtoList.get(i).getIprice());
+				
+				
+				ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
+				Image img = imgicon.getImage();
+				
+				Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+				ImageIcon upImg = new ImageIcon(updateImg);
+				
+				Object[] qTxt = {upImg, "<html>"+dtoList.get(i).getIname()+"<br><br>" + dtoList.get(i).getIdescription()+"<p><p>" + price+"</html>", dtoList.get(i).getIid()};
+				outerTable.addRow(qTxt);
+				
+		
+				}
+		 
+	 }
+
+	 
+	 // 시계라벨 ( 시계라벨이랑 시계랑 같이 붙여넣으세요)
+	 private JLabel getLblClock() {
+			if (lblClock == null) {
+				lblClock = new JLabel();
+				lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+				lblClock.setBounds(36, 15, 61, 16);
+				clockRun();
+				
+			}
+			return lblClock;
+		}
+	 
+	 // 시간표시 메소드
+	 private void clockRun() {
+		    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Calendar t = Calendar.getInstance();
+		            int hour = t.get(Calendar.HOUR);
+		            int min = t.get(Calendar.MINUTE);
+		            String clock = String.format("%02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
+		            lblClock.setText(clock);
+				}
+			});	 
+		    timer.start();
+		}
+	
+	
+	
+// 테이블 선택시 
+	
+	private void tableClick() {
+		
+		lblQty.setText("1");// 테이블클릭시 상품 - + 사이숫자 1만들기
+		panel_1.setVisible(true);
+		scrollPane.setVisible(false);
+		int i = innerTable.getSelectedRow();
+		String wkpid = (String) innerTable.getValueAt(i, 2);
+		
+		Lju_Dao_selectTable dao = new Lju_Dao_selectTable(wkpid);
+		Lju_dto dto = dao.tableClick();
+		lblIid.setText(dto.getIid());
+		lblName.setText("<html>"+dto.getIname()+"<br><br>"+dto.getIprice()+"</html>");
+		lblclickimg.setIcon(null);
+		ImageIcon imgicon = new ImageIcon("./" + dto.getIimagename());
+//		Image img = imgicon.getImage();
+		
+//		Image updateImg = img.getScaledInstance(380, 710, Image.SCALE_SMOOTH);
+//		ImageIcon upImg = new ImageIcon(updateImg);
+		
+		lblclickimg.setIcon(imgicon);
+		lblclickimg.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		
+	}
 	
 	private void basketAction(){
 		
@@ -826,29 +872,43 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 	
 	
 	
-	private JLabel getLblIid() {
-		if (lblIid == null) {
-			lblIid = new JLabel("");
-			lblIid.setBounds(145, 625, 61, 16);
+
+
+
+
+	private JLabel getLblCount() {
+		if (lblCount == null) {
+			lblCount = new JLabel("");
+			lblCount.setForeground(new Color(255, 255, 255));
+			lblCount.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/Ellipse 7.png")));
+			lblCount.setBounds(345, 40, 25, 22);
+			lblCount.setVisible(false);
 		}
-		return lblIid;
+		return lblCount;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("");
-			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnNewButton.addMouseListener(new MouseAdapter() {
-				
-				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-				@Override
-				public void mouseClicked(MouseEvent e) {
-				}
-			});
-			btnNewButton.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/icon _cart_.png")));
-			btnNewButton.setFocusPainted(false);
-			btnNewButton.setBorderPainted(false);
-			btnNewButton.setBounds(303, 50, 70, 40);
+	private JLabel getLblCountNum() {
+		if (lblCountNum == null) {
+			lblCountNum = new JLabel("");
+			lblCountNum.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCountNum.setForeground(new Color(255, 255, 255));
+			lblCountNum.setBounds(345, 43, 24, 16);
+			lblCountNum.setVisible(false);
 		}
-		return btnNewButton;
+		return lblCountNum;
+ 	}
+	
+	private void basketCount() {		//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  바스켓 카운터
+		
+		Lju_Dao_BasketAction lju_Dao_BasketAction = new Lju_Dao_BasketAction();
+		int count = lju_Dao_BasketAction.basketCount();
+		
+		if(count>0) {
+			lblCount.setVisible(true);
+			lblCountNum.setVisible(true);
+			lblCountNum.setText(Integer.toString(count));
+		}
+		
 	}
-	}
+	
+	
+}
