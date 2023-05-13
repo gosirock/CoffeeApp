@@ -111,7 +111,7 @@ public class Lju_Dao_BasketAction {
 			
 			while(rs.next()) {
 				String iname = rs.getString(1);
-				int ipri = rs.getInt(2);
+				int iprice = rs.getInt(2);
 				String iimagename = rs.getString(3);
 				
 				File file = new File("./" + iimagename);
@@ -120,7 +120,6 @@ public class Lju_Dao_BasketAction {
 				String iid = rs.getString(5);
 				int bqty = rs.getInt(6);
 				
-				int iprice = ipri*bqty;
 				byte[] buffer = new byte[1024];
 				while(input.read(buffer) > 0) {
 					output.write(buffer);

@@ -69,8 +69,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
-import javax.swing.JCheckBox;
-public class Lju_Basket extends JFrame {	
+public class Lju_Payment extends JFrame {	
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -95,9 +94,6 @@ public class Lju_Basket extends JFrame {
 	private JLabel lblCountNum;
 	private JButton btnPay;
 	private JButton btnBasketAlldel;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_2_1;
-	private JCheckBox chckbxNewCheckBox;
 	
 //	"<html>안녕<br>안녀엉<p>세번</html>" 라벨 줄바꾸기
 	/**
@@ -107,7 +103,7 @@ public class Lju_Basket extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Lju_Basket frame = new Lju_Basket();
+					Lju_Payment frame = new Lju_Payment();
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -122,7 +118,7 @@ public class Lju_Basket extends JFrame {
 	 */
 	
 	
-	public Lju_Basket() {
+	public Lju_Payment() {
 		setTitle("커피메뉴");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -148,9 +144,6 @@ public class Lju_Basket extends JFrame {
 		contentPane.add(getBtnNewButton());
 		contentPane.add(getBtnPay());
 		contentPane.add(getBtnBasketAlldel());
-		contentPane.add(getLblNewLabel_2());
-		contentPane.add(getLblNewLabel_2_1());
-		contentPane.add(getChckbxNewCheckBox());
 	}
 	
 	
@@ -194,7 +187,7 @@ public class Lju_Basket extends JFrame {
 
 				}
 			});
-			btnMenu.setIcon(new ImageIcon(Lju_Basket.class.getResource("/com/javalec/image/Group 7.png")));
+			btnMenu.setIcon(new ImageIcon(Lju_Payment.class.getResource("/com/javalec/image/Group 7.png")));
 			btnMenu.setFocusPainted(false);
 			btnMenu.setBorderPainted(false);
 		}
@@ -237,7 +230,7 @@ public class Lju_Basket extends JFrame {
 	
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("장바구니");
+			lblNewLabel = new JLabel("결 제");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 			lblNewLabel.setForeground(new Color(131, 77, 30));
 			lblNewLabel.setFont(new Font("Kailasa", Font.BOLD, 30));
@@ -261,7 +254,7 @@ public class Lju_Basket extends JFrame {
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setAutoscrolls(true);
 			scrollPane.setBackground(new Color(252, 242, 217));
-			scrollPane.setBounds(0, 100, 400, 400);
+			scrollPane.setBounds(0, 100, 400, 453);
 			scrollPane.setViewportView(getInnerTable());
 		}
 		return scrollPane;
@@ -348,11 +341,11 @@ public class Lju_Basket extends JFrame {
 		col.setPreferredWidth(width);
 		vColIndex = 1;		// 첫번째 컬럼 번호
 		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 130;	// 첫번째 컬럼 폭
+		width = 140;	// 첫번째 컬럼 폭
 		col.setPreferredWidth(width);
 		vColIndex = 2;	// 세번째 컬럼번호
 		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 90;		// 세번째 컬럼 폭정하기
+		width = 80;		// 세번째 컬럼 폭정하기
 		col.setPreferredWidth(width);
 		vColIndex = 3;	// 세번째 컬럼번호
 		col = innerTable.getColumnModel().getColumn(vColIndex);
@@ -377,7 +370,7 @@ public class Lju_Basket extends JFrame {
 		
 		for(int i = 0; i< listCount; i++) {
 			
-			int price = dtoList.get(i).getIprice();
+			String price = Integer.toString(dtoList.get(i).getIprice());
 			int bqty = dtoList.get(i).getBqty();
 			
 			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
@@ -386,9 +379,9 @@ public class Lju_Basket extends JFrame {
 			Image updateImg = img.getScaledInstance(100, 130, Image.SCALE_SMOOTH);
 			ImageIcon upImg = new ImageIcon(updateImg);
 			
-			ImageIcon selectEmpty = new ImageIcon(Lju_Basket.class.getResource("/com/javalec/image/cross.png"));
+			ImageIcon selectEmpty = new ImageIcon(Lju_Payment.class.getResource("/com/javalec/image/cross.png"));
 			
-			Object[] qTxt = {upImg, dtoList.get(i).getIname() , "<html><br>x " + bqty+ "<br>"+(price*bqty)+" 원", selectEmpty ,dtoList.get(i).getIid()};
+			Object[] qTxt = {upImg, dtoList.get(i).getIname() , " x "+ bqty, selectEmpty ,dtoList.get(i).getIid()};
 			outerTable.addRow(qTxt);
 			
 			}
@@ -523,10 +516,10 @@ public class Lju_Basket extends JFrame {
 			btnPay = new JButton("");
 			btnPay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnPay.setHorizontalTextPosition(SwingConstants.CENTER);
-			btnPay.setIcon(new ImageIcon(Lju_Basket.class.getResource("/com/javalec/image/buttons (1).png")));
+			btnPay.setIcon(new ImageIcon(Lju_Payment.class.getResource("/com/javalec/image/buttons (1).png")));
 			btnPay.setFocusPainted(false);
 			btnPay.setBorderPainted(false);
-			btnPay.setBounds(60, 680, 270, 50);
+			btnPay.setBounds(60, 644, 270, 50);
 		}
 		return btnPay;
 	}
@@ -539,11 +532,11 @@ public class Lju_Basket extends JFrame {
 					 basketAllEmpty();
 				}
 			});
-			btnBasketAlldel.setIcon(new ImageIcon(Lju_Basket.class.getResource("/com/javalec/image/cancel.png")));
+			btnBasketAlldel.setIcon(new ImageIcon(Lju_Payment.class.getResource("/com/javalec/image/cancel.png")));
 			btnBasketAlldel.setHorizontalTextPosition(SwingConstants.CENTER);
 			btnBasketAlldel.setFocusPainted(false);
 			btnBasketAlldel.setBorderPainted(false);
-			btnBasketAlldel.setBounds(248, 510, 120, 40);
+			btnBasketAlldel.setBounds(248, 565, 120, 40);
 		}
 		return btnBasketAlldel;
 	}
@@ -561,31 +554,4 @@ public class Lju_Basket extends JFrame {
 	
 	
 	
-	private JLabel getLblNewLabel_2() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("쿠폰할인 :");
-			lblNewLabel_2.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2.setBounds(10, 600, 80, 20);
-		}
-		return lblNewLabel_2;
-	}
-	private JLabel getLblNewLabel_2_1() {
-		if (lblNewLabel_2_1 == null) {
-			lblNewLabel_2_1 = new JLabel("합 계 :");
-			lblNewLabel_2_1.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2_1.setBounds(10, 630, 61, 20);
-		}
-		return lblNewLabel_2_1;
-	}
-	private JCheckBox getChckbxNewCheckBox() {
-		if (chckbxNewCheckBox == null) {
-			chckbxNewCheckBox = new JCheckBox("사용 가능한 쿠폰이 없습니다.");
-			chckbxNewCheckBox.setForeground(new Color(130, 77, 30));
-			chckbxNewCheckBox.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			chckbxNewCheckBox.setBounds(5, 550, 218, 40);
-		}
-		return chckbxNewCheckBox;
-	}
 	}

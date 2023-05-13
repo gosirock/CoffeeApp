@@ -469,6 +469,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// ì—”í„
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					basketAction();
+					basketCount();
 				}
 			});
 			lblBasket.addAncestorListener(new AncestorListener() {

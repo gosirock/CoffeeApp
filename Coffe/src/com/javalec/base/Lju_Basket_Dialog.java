@@ -33,7 +33,7 @@ public class Lju_Basket_Dialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public Lju_Basket_Dialog() {
-		setBounds(100, 100, 352, 279);
+		setBounds(120, 500, 352, 279);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
