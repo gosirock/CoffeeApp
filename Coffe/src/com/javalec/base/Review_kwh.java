@@ -32,8 +32,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Date;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;  // java.time 패키지의 LocalDateTime 클래스 임포트
 
@@ -118,6 +116,7 @@ public class Review_kwh extends JFrame {
 	private JButton getBtnHome() {
 		if (btnHome == null) {
 			btnHome = new JButton("");
+			btnHome.setBackground(new Color(131, 77, 30));
 			btnHome.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/btnHome.png")));
 			btnHome.setFocusPainted(false);					// 버튼 포커스라인 없애기
 			btnHome.setBorderPainted(false);
@@ -131,6 +130,7 @@ public class Review_kwh extends JFrame {
 	private JButton getBtnMenu() {
 		if (btnMenu == null) {
 			btnMenu = new JButton("");
+			btnMenu.setBackground(new Color(131, 77, 30));
 			btnMenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
@@ -144,6 +144,7 @@ public class Review_kwh extends JFrame {
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
+			btnOrder.setBackground(new Color(131, 77, 30));
 			btnOrder.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
 			btnOrder.setBorderPainted(false);
@@ -153,6 +154,7 @@ public class Review_kwh extends JFrame {
 	private JButton getBtnReview() {
 		if (btnReview == null) {
 			btnReview = new JButton("");
+			btnReview.setBackground(new Color(131, 77, 30));
 			btnReview.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/btnReview.png")));
 			btnReview.setFocusPainted(false);
 			btnReview.setBorderPainted(false);
@@ -163,7 +165,7 @@ public class Review_kwh extends JFrame {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setIcon(new ImageIcon(Lju_Menu01.class.getResource("/com/javalec/image/wifi.png")));
+			lblNewLabel_1.setIcon(new ImageIcon(Lju_base.class.getResource("/com/javalec/image/wifi.png")));
 			lblNewLabel_1.setBounds(303, 15, 65, 18);
 		}
 		return lblNewLabel_1;
@@ -241,6 +243,11 @@ public class Review_kwh extends JFrame {
 	private JButton getBtnCancel() {
 		if (btnCancel == null) {
 			btnCancel = new JButton("cancel");
+			btnCancel.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cancelAction();
+				}
+			});
 			btnCancel.setBackground(Color.YELLOW);
 			btnCancel.setBounds(6, 671, 117, 29);
 		}
@@ -248,7 +255,7 @@ public class Review_kwh extends JFrame {
 	}
 	private JLabel getLblImage() {
 		if (lblImage == null) {
-			lblImage = new JLabel("New label");
+			lblImage = new JLabel("");
 			lblImage.setBounds(18, 540, 105, 94);
 		}
 		return lblImage;
@@ -313,6 +320,11 @@ public class Review_kwh extends JFrame {
 	}
 	
 	
+	
+	// 등록취소
+	private void cancelAction() {
+		//전페이지로 돌아가기
+	}
 	
 
 	private void filePath() {   // file loading method

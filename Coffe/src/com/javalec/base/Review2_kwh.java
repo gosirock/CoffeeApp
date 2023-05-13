@@ -11,7 +11,6 @@ import javax.swing.table.TableColumn;
 
 import com.javalec.dao.DaoReview_kwh;
 import com.javalec.dto.DtoReview_kwh;
-import com.javalec.dto.Lju_dto;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -19,6 +18,7 @@ import java.awt.Cursor;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.Image;
+
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -41,6 +41,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JEditorPane;
 
 public class Review2_kwh extends JFrame {
 
@@ -124,6 +125,7 @@ public class Review2_kwh extends JFrame {
 			btnHome.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/btnHome.png")));
 			btnHome.setFocusPainted(false);					// 버튼 포커스라인 없애기
 			btnHome.setBorderPainted(false);
+			btnHome.setBackground(new Color(131, 77, 30));
 			btnHome.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
@@ -134,6 +136,7 @@ public class Review2_kwh extends JFrame {
 	private JButton getBtnMenu() {
 		if (btnMenu == null) {
 			btnMenu = new JButton("");
+			btnMenu.setBackground(new Color(131, 77, 30));
 			btnMenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
@@ -147,6 +150,7 @@ public class Review2_kwh extends JFrame {
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
+			btnOrder.setBackground(new Color(131, 77, 30));
 			btnOrder.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
 			btnOrder.setBorderPainted(false);
@@ -156,6 +160,7 @@ public class Review2_kwh extends JFrame {
 	private JButton getBtnReview() {
 		if (btnReview == null) {
 			btnReview = new JButton("");
+			btnReview.setBackground(new Color(131, 77, 30));
 			btnReview.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/btnReview.png")));
 			btnReview.setFocusPainted(false);
 			btnReview.setBorderPainted(false);
@@ -167,7 +172,7 @@ public class Review2_kwh extends JFrame {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setBounds(303, 15, 65, 18);
-			lblNewLabel_1.setIcon(new ImageIcon(Lju_Menu01.class.getResource("/com/javalec/image/wifi.png")));
+			lblNewLabel_1.setIcon(new ImageIcon(Lju_base.class.getResource("/com/javalec/image/wifi.png")));
 		}
 		return lblNewLabel_1;
 	}
@@ -253,17 +258,10 @@ public class Review2_kwh extends JFrame {
 	
 	
 	private void tableInit() {
-//		outerTable.addColumn("ID");
-//		outerTable.addColumn("상품명");
-//		outerTable.addColumn("가격");
-//		outerTable.addColumn("제목");
-//		outerTable.addColumn("내용");
-//		outerTable.addColumn("사진");
-//		outerTable.addColumn("작성날짜");
+
 		outerTable.addColumn("");
-		//outerTable.addColumn("");
-		outerTable.setColumnCount(1);
-//		outerTable.setColumnCount(7);
+		outerTable.addColumn("");
+		outerTable.setColumnCount(2);
 		
 		int i = outerTable.getRowCount();
 		for(int j = 0 ; j < i ; j++) {
@@ -274,15 +272,13 @@ public class Review2_kwh extends JFrame {
 		
 		int vColIndex = 0;
 		TableColumn col = innerTable2.getColumnModel().getColumn(vColIndex);
-		int width = 400;
+		int width = 130;
+		col.setPreferredWidth(width);
+		 vColIndex = 1;
+		col = innerTable2.getColumnModel().getColumn(vColIndex);
+		 width = 260;
 		col.setPreferredWidth(width);
 		
-//		vColIndex = 1;
-//		col = innerTable2.getColumnModel().getColumn(vColIndex);
-//		width = 200;
-//		col.setPreferredWidth(width);
-
-	
 	
 	
 	}
@@ -302,18 +298,27 @@ public class Review2_kwh extends JFrame {
 //		dao.selectList();   // Dao 에서 return 을 준다  받아야함
 		ArrayList<DtoReview_kwh> dtoList = dao.selectList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
 		int listCount = dtoList.size();
-		
+		System.out.println("@@@@");
 		
 		for( int i = 0; i < listCount ; i++) {
-			String temp = dtoList.get(i).getCid();
+			String temp = dtoList.get(i).getCustomer_cid();
 			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getRimagename());
-			String im=imgicon.toString();  // imgicon 이 오브젝트 배열에 들어가려면 string이 되어야함
+			
+			Image img = imgicon.getImage();  // 이미지 크기조절
+			Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+			ImageIcon upImg = new ImageIcon(updateImg);
 			
 			
-			Object[] qTxt = {"<html>"+temp+"<br>"+dtoList.get(i).getIname()+"<p>"+ Integer.toString(dtoList.get(i).getPprice())+"<p>"+dtoList.get(i).getTitle()+"<p>"+dtoList.get(i).getComment()+"<p>"+ im+"</html>"};
+			// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
+			java.util.Date now = new java.util.Date();
+			java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
+			
+			Object[] qTxt = {upImg,"<html>"+temp+"<br><br>"+dtoList.get(i).getIname()+"<p><p>"+ Integer.toString(dtoList.get(i).getIprice())+"<p><p>"+dtoList.get(i).getTitle()+"<p><p>"+dtoList.get(i).getComment()+"<p><p>"+dtoList.get(i).getRinsertdate()+"<p></html>"};
 			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
 			
 		}
+	
+		System.out.println();
 		System.out.println(listCount);
 		//tfCount.setText(Integer.toString(listCount));
 		
@@ -335,15 +340,8 @@ public class Review2_kwh extends JFrame {
 		
 		// 최신순버튼
 		if (rbRecent_1.isSelected()) {//날짜별로 정렬
-//			tfName.setEditable(false);
-//			tfBrand.setEditable(false);
-//			tfID.setEditable(false);
-//			tfStock.setEditable(false);
-//			tfPrice.setEditable(false);
-//			tfFilePath.setEditable(false);
-//			btnOK.setVisible(false);
-//			btnOK.setEnabled(false);
-//			btnFilePath.setVisible(false);
+			 tableInit();
+			searchAction();  // 하면 최신순으로 돌아옴
 		}
 
 		// 추천순버튼
