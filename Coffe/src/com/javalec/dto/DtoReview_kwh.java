@@ -15,6 +15,7 @@ public class DtoReview_kwh {
 	
 	String iname;
 	int iprice;
+	int iCount;
 	
 	// File
 	FileInputStream rimage;
@@ -70,6 +71,27 @@ public class DtoReview_kwh {
 
 
 
+	public DtoReview_kwh(String iname, int iCount) {
+		super();
+		this.iname = iname;
+		this.iCount = iCount;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public DtoReview_kwh(String customer_cid, String iname, int iprice,String title, String comment, String rimagename, Date rinsertdate) {
 		super();
 		this.customer_cid = customer_cid;
@@ -79,6 +101,44 @@ public class DtoReview_kwh {
 		this.rinsertdate = rinsertdate;
 		this.iname = iname;
 		this.iprice = iprice;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public int getiCount() {
+		return iCount;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setiCount(int iCount) {
+		this.iCount = iCount;
 	}
 
 

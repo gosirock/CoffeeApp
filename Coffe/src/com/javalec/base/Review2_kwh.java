@@ -71,6 +71,7 @@ public class Review2_kwh extends JFrame {
 			public void run() {
 				try {
 					Review2_kwh frame = new Review2_kwh();
+					frame.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -225,7 +226,7 @@ public class Review2_kwh extends JFrame {
 			innerTable2.setModel(outerTable); 	//<<<<< 추가
 			innerTable2.setRowHeight(300);  		//<<<<< 높이조절
 			tableInit();
-			searchAction();
+			
 			
 		}
 		return innerTable2;
@@ -298,7 +299,6 @@ public class Review2_kwh extends JFrame {
 //		dao.selectList();   // Dao 에서 return 을 준다  받아야함
 		ArrayList<DtoReview_kwh> dtoList = dao.selectList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
 		int listCount = dtoList.size();
-		System.out.println("@@@@");
 		
 		for( int i = 0; i < listCount ; i++) {
 			String temp = dtoList.get(i).getCustomer_cid();
@@ -318,14 +318,38 @@ public class Review2_kwh extends JFrame {
 			
 		}
 	
-		System.out.println();
-		System.out.println(listCount);
 		//tfCount.setText(Integer.toString(listCount));
 		
 	}
 
 
 
+	private void checkAction() {
+		DaoReview_kwh dao = new DaoReview_kwh();
+		
+		ArrayList<DtoReview_kwh> dtoList = dao.checkList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
+		int listCount = dtoList.size();
+		
+		for( int i = 0; i < listCount ; i++) {
+			String temp = dtoList.get(i).getCustomer_cid();
+			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getRimagename());
+			
+			Image img = imgicon.getImage();  // 이미지 크기조절
+			Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+			ImageIcon upImg = new ImageIcon(updateImg);
+			
+			
+			// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
+			java.util.Date now = new java.util.Date();
+			java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
+			
+			Object[] qTxt = {upImg,"<html>"+temp+"<br><br>"+dtoList.get(i).getIname()+"<p><p>"+ Integer.toString(dtoList.get(i).getIprice())+"<p><p>"+dtoList.get(i).getTitle()+"<p><p>"+dtoList.get(i).getComment()+"<p><p>"+dtoList.get(i).getRinsertdate()+"<p></html>"};
+			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
+		
+		}
+		//tfCount.setText(Integer.toString(listCount));
+		
+	}
 
 
 
@@ -340,29 +364,28 @@ public class Review2_kwh extends JFrame {
 		
 		// 최신순버튼
 		if (rbRecent_1.isSelected()) {//날짜별로 정렬
-			 tableInit();
+			System.out.println("@@");
+			
+			tableInit();
 			searchAction();  // 하면 최신순으로 돌아옴
+			
 		}
 
 		// 추천순버튼
 		
 		if (rbRecommendation_1.isSelected()) {// count정렬
-//			tfName.setEditable(true);
-//			tfBrand.setEditable(true);
-//			tfID.setEditable(true);
-//			tfStock.setEditable(true);
-//			tfPrice.setEditable(true);
-//			tfFilePath.setEditable(true);
-//			btnOK.setVisible(true);
-//			btnOK.setEnabled(true);
-//			btnFilePath.setVisible(true);
-//			
+			//System.out.println("@@");
+			tableInit();
+			checkAction();  // 추천순 상품명 중 리뷰가 많이 작성된 순으로
+			
+		
 		}
 		
 		
 		
 
 	}
+	
 	
 	
 
