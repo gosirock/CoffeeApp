@@ -850,6 +850,9 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					Lju_Basket lju_Payment = new Lju_Basket();
+					lju_Payment.setVisible(true);
+					dispose();
 				}
 			});
 			btnNewButton.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/icon _cart_.png")));
