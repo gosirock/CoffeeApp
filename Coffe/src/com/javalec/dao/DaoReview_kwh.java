@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.javalec.dto.DtoReview_kwh;
 import com.javalec.util.ShareVar;
 
@@ -47,7 +49,7 @@ public class DaoReview_kwh {
 			
 		
 			
-			
+			//리뷰등록생성자
 			
 			public DaoReview_kwh(String item_iid, String customer_cid, String title, String comment, String rimagename, Date rinsertdate,
 					FileInputStream rimage) {
@@ -88,7 +90,7 @@ public class DaoReview_kwh {
 					String query = "insert into review (item_iid,customer_cid,title,reply,rinsertdate,rimagename,rimage)";
 					String query1 = " values (?,?,?,?,?,?,?)";
 				
-						
+					
 					
 					ps = conn_mysql.prepareStatement(query + query1);
 					ps.setString(1, item_iid.trim());
@@ -124,6 +126,75 @@ public class DaoReview_kwh {
 					
 					String whereDefault = "select r.customer_cid, i.iname , i.iprice, r.title, r.reply,r.rimagename,r.rimage,r.rinsertdate from item i , review as r, customer c ";    // select from 은 이렇게하기
 					String whereDefault1 = " where i.iid = r.item_iid and c.cid = r.customer_cid";    // select from 은 이렇게하기
+					String whereDefault2 = " order by rSeq desc";    // 최신순으로 정렬
+					
+					try {  // java가 db에 접근했다.
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+						Statement stmt_mysql = conn_mysql.createStatement();
+
+						
+						
+						ResultSet rs = stmt_mysql.executeQuery(whereDefault+whereDefault1+whereDefault2);
+						
+						
+						 
+						 
+						while(rs.next()) { // rs.next는 다음이있으면 1 . 없으면 0;
+							String wkID = rs.getString(1);
+							String wkItem = rs.getString(2);
+							int wkPrice = rs.getInt(3);
+							String wkTitle = rs.getString(4);
+							String wkReply = rs.getString(5);
+							String wkImagename = rs.getString(6);
+							
+							File file = new File("./" + rimagename);
+							FileOutputStream output = new FileOutputStream(file);     //outputstream 은 select
+							
+							InputStream input = rs.getBinaryStream(7);
+							Date wkDate = rs.getDate(8);
+							
+							byte[] buffer = new byte[1024];
+							int len;
+
+							 while ((len = input.read(buffer)) > 0) {
+					                output.write(buffer, 0, len);
+					            }
+					            output.close();
+					            input.close();   
+							
+							
+							// 위에 8개를 한번에 넣기  -> Dto 에서 8개의 데이터 생성자를 만들어놓음
+							DtoReview_kwh dto = new DtoReview_kwh(wkID, wkItem, wkPrice, wkTitle, wkReply, wkImagename, wkDate);
+							dtoList.add(dto);
+							}	
+						
+						conn_mysql.close();
+						rs.close();
+					    stmt_mysql.close();    // 닫아줘야 계속실행안함
+					    
+					    
+						}catch(Exception e) {
+						e.printStackTrace();
+					}
+					
+					
+					return dtoList;
+				
+				
+			
+			}
+			
+			
+			
+			
+			// 추천순 체크될 시 액션
+			public ArrayList<DtoReview_kwh> checkList(){
+				System.out.println("***"); 
+				ArrayList<DtoReview_kwh> dtoList = new ArrayList<DtoReview_kwh>(); 
+					String whereDefault = "select iname, count(*) from review, item";    // select from 은 이렇게하기
+					String whereDefault1 = " where item.iid= review.item_iid";    // select from 은 이렇게하기
+					String whereDefalut2 = " group by iname";
 					
 					try {  // java가 db에 접근했다.
 						Class.forName("com.mysql.cj.jdbc.Driver");
@@ -177,9 +248,14 @@ public class DaoReview_kwh {
 					
 					
 					return dtoList;
-				
-				
 			
-			}
+			
+			
+			
+			
+			
+			
+			}		
+			
 }
 

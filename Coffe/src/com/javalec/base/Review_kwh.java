@@ -21,9 +21,11 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -33,7 +35,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Date;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;  // java.time 패키지의 LocalDateTime 클래스 임포트
+import java.awt.event.WindowEvent;
 
 public class Review_kwh extends JFrame {
 
@@ -310,12 +312,15 @@ public class Review_kwh extends JFrame {
 		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
 				
 		boolean result = dao.postAction(); 
+			//if(input == null)
+			//JOptionPane.showMessageDialog(this,"사진이 등록되지 않았습니다.","ERROR",JOptionPane.ERROR_MESSAGE);
+			if (result) {
+				JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}else {
+				JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}
 		
-		if (result) {
-			JOptionPane.showMessageDialog(this, "정보 입력\n"+ "정보가 입력되었습니다.", "입력",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-		}else {
-			JOptionPane.showMessageDialog(this, "정보 입력\n"+ "입력 중 문제가 발생했습니다.", "입력",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-		}
+		
 		
 	}
 	
@@ -349,6 +354,12 @@ public class Review_kwh extends JFrame {
 		
 	}
 
+	
+	
+		
+	
+	
+	
 }
 	
 
