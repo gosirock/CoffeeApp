@@ -61,6 +61,26 @@ public class Lju_BasketEmpty {
 	}
 	
 	
+	public void AllEmpty() {
+		PreparedStatement ps = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			String cidd = cid;
+			String query = "delete from basket where customer_cid = '" + ShareVar.loginUserId + "'";
+			
+			ps = conn_mysql.prepareStatement(query);
+			ps.executeUpdate();
+			conn_mysql.close();
+			
+		
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+
+	}
+	
 	
 	
 }

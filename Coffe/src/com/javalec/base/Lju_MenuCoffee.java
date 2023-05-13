@@ -477,6 +477,7 @@ public class Lju_MenuCoffee extends JFrame implements ActionListener {	// 엔터
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					basketAction();
+					basketCount();
 				}
 			});
 			lblBasket.addAncestorListener(new AncestorListener() {

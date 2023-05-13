@@ -470,6 +470,7 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					basketAction();
+					basketCount();
 				}
 			});
 			lblBasket.addAncestorListener(new AncestorListener() {
