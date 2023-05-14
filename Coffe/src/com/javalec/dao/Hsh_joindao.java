@@ -21,9 +21,14 @@ public class Hsh_joindao {
 	String uphone;
 	String uemail;
 	String uaddress;
+	String secondpassword;
+	
 	public Hsh_joindao() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 //	회원가입
 	public Hsh_joindao(String uid, String upassword, String uname, String uphone, String uemail, String uaddress) {
 		super();
@@ -34,6 +39,18 @@ public class Hsh_joindao {
 		this.uemail = uemail;
 		this.uaddress = uaddress;
 	}
+	
+	
+	
+
+
+	// 중복체크   ,, 결제비밀번호 생성자
+	public Hsh_joindao(String uid) {
+		super();
+		this.uid = uid;
+	}
+
+
 	public boolean joinAction() {
 		PreparedStatement ps = null;
 		try {
@@ -64,7 +81,7 @@ public class Hsh_joindao {
 	}
 	public boolean dupCheck() {
 		boolean check = false;
-		String query = "select count(*) from customer where cid = '" + uid + "'";
+		String query = "select count(cid) from customer where cid = '" + uid + "'";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
@@ -87,4 +104,12 @@ public class Hsh_joindao {
 			return check;
 		
 	}
+	
+	
+	public void payRegist() {
+		
+	
+		
+	}
+	
 }

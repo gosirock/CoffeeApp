@@ -80,6 +80,7 @@ public class Review_kwh extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				tfFilePath.setVisible(false);
+				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
