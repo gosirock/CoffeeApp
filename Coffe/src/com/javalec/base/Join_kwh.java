@@ -377,6 +377,18 @@ public class Join_kwh extends JFrame {
 	private JPasswordField getPfPassword() {
 		if (pfPassword == null) {
 			pfPassword = new JPasswordField();
+			pfPassword.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(KeyEvent e) {
+			        String pass1 = new String(pfPassword.getPassword());
+			        String pass2 = new String(pfPassword2.getPassword());
+			        if (pass1.equals(pass2)) {
+			            lblPassCheck.setText("일치");
+			        } else {
+			            lblPassCheck.setText("불일치");
+			        }
+			    }
+			});
+			
 			pfPassword.setEditable(false);
 			pfPassword.setBounds(154, 320, 116, 21);
 		}
@@ -385,6 +397,20 @@ public class Join_kwh extends JFrame {
 	private JPasswordField getPfPassword2() {
 		if (pfPassword2 == null) {
 			pfPassword2 = new JPasswordField();
+			pfPassword2.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(KeyEvent e) {
+			        String pass1 = new String(pfPassword.getPassword());
+			        String pass2 = new String(pfPassword2.getPassword());
+			        if (pass1.equals(pass2)) {
+			            lblPassCheck.setText("일치");
+			        } else {
+			            lblPassCheck.setText("불일치");
+			        }
+			    }
+			});
+				
+					
+				
 			pfPassword2.setEditable(false);
 			pfPassword2.setBounds(154, 355, 116, 21);
 		}
@@ -517,6 +543,7 @@ public class Join_kwh extends JFrame {
 			boolean isPasswordMatched = true;   // 비밀번호가 맞는지 체크 맞으면 true 틀리면 false
 			if(!cpassword.equals(cpassword2)) { 
 			    isPasswordMatched = false;
+			    
 			}
 	
 			if(isPasswordMatched) {// true일시 다오실행
