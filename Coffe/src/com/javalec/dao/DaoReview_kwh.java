@@ -122,6 +122,8 @@ public class DaoReview_kwh {
 			//데이터들 불러와서 한줄에넣기
 			
 			public ArrayList<DtoReview_kwh> selectList(){
+				System.out.println("최신");
+
 				ArrayList<DtoReview_kwh> dtoList = new ArrayList<DtoReview_kwh>(); 
 					
 					String whereDefault = "select r.customer_cid, i.iname , i.iprice, r.title, r.reply,r.rimagename,r.rimage,r.rinsertdate from item i , review as r, customer c ";    // select from 은 이렇게하기
@@ -190,11 +192,11 @@ public class DaoReview_kwh {
 			
 			// 추천순 체크될 시 액션
 			public ArrayList<DtoReview_kwh> checkList(){
-				System.out.println("***"); 
+				System.out.println("추천");
 				ArrayList<DtoReview_kwh> dtoList = new ArrayList<DtoReview_kwh>(); 
-					String whereDefault = "select iname, count(*) from review, item";    // select from 은 이렇게하기
-					String whereDefault1 = " where item.iid= review.item_iid";    // select from 은 이렇게하기
-					String whereDefalut2 = " group by iname";
+					String whereDefault = "SELECT r.customer_cid, i.iname, i.iprice, r.title, r.reply, r.rimagename, r.rimage, r.rinsertdate FROM item i, review r";    // select from 은 이렇게하기
+					String whereDefault1 = " where iid= item_iid";    // select from 은 이렇게하기
+					String whereDefalut2 = " GROUP BY r.customer_cid, i.iname, i.iprice, r.title, r.reply, r.rimagename, r.rimage, r.rinsertdate order by i.iname";
 					
 					try {  // java가 db에 접근했다.
 						Class.forName("com.mysql.cj.jdbc.Driver");
@@ -203,7 +205,7 @@ public class DaoReview_kwh {
 
 						
 						
-						ResultSet rs = stmt_mysql.executeQuery(whereDefault+whereDefault1);
+						ResultSet rs = stmt_mysql.executeQuery(whereDefault+whereDefault1+whereDefalut2);
 						
 						
 						 
