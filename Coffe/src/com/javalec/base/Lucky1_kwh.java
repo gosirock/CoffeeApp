@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 
 import java.awt.event.ActionEvent;
@@ -21,23 +20,18 @@ public class Lucky1_kwh extends JDialog {
 	
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JTextField textField;
 	private JButton btnGet;
-	 private final String[] couponNames = {
-	            "5% 할인쿠폰", 
-	            "6%할인쿠폰", 
-	            "7%할인쿠폰", 
-	            "8%할인쿠폰", 
-	            "9%할인쿠폰", 
-	            "10%할인쿠폰"
-	    };
-	 private JLabel lblNewLabel_3;
-	 private JLabel lblNewLabel_4;
-	 private JLabel lblNewLabel_5;
-	 private JTextField textField_1;
-	 private JButton btnGet1;
+	 
+	
+	
+	private final int[] couponNames = {5,6,7,8,9};   // 쿠폰할인 퍼센트
+	
+	 
+	 
+	 private JLabel lblDiscount;
+	 private JLabel lblMessage;
+	 private JLabel lblPresent;
+	 private JLabel lblFirecracker;
 
 	/**
 	 * Launch the application.
@@ -72,10 +66,11 @@ public class Lucky1_kwh extends JDialog {
 
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblNewLabel_3());
-		getContentPane().add(getLblNewLabel_4());
-		getContentPane().add(getLblNewLabel_5());
-		getContentPane().add(getTextField_1());
 		getContentPane().add(getBtnGet1());
+		getContentPane().add(getLblDiscount());
+		getContentPane().add(getLblMessage());
+		getContentPane().add(getLblPresent());
+		getContentPane().add(getLblFirecracker());
 
 	}
 	
@@ -88,33 +83,6 @@ public class Lucky1_kwh extends JDialog {
 		}
 		return lblNewLabel;
 	}
-
-	
-	private JLabel getLblNewLabel_4() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setIcon(new ImageIcon("/Volumes/Data/wook/java/Gift/src/com/javalec/images/pok.png"));
-			lblNewLabel_1.setBounds(315, 6, 60, 55);
-		}
-		return lblNewLabel_1;
-	}
-	private JLabel getLblNewLabel_5() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("New label");
-			lblNewLabel_2.setIcon(new ImageIcon("/Volumes/Data/wook/java/Gift/src/com/javalec/images/present.png"));
-			lblNewLabel_2.setBounds(126, 83, 205, 181);
-		}
-		return lblNewLabel_2;
-	}
-	
-	private JTextField getTextField_1() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setBounds(126, 307, 130, 26);
-			textField.setColumns(10);
-		}
-		return textField;
-	}
 	private JButton getBtnGet1() {
 		if (btnGet == null) {
 			btnGet = new JButton("Get");
@@ -126,7 +94,7 @@ public class Lucky1_kwh extends JDialog {
 					btnGet.setText("Get!");
 					
 					if (couponDisplayThread == null || !couponDisplayThread.isAlive()) {
-	                    couponDisplayThread = new CouponDisplayThread(textField, couponNames);
+	                    couponDisplayThread = new CouponDisplayThread(lblDiscount, couponNames);
 	                    couponDisplayThread.start();
 	                } else {
 	                    couponDisplayThread.setStopFlag(true);
@@ -138,22 +106,63 @@ public class Lucky1_kwh extends JDialog {
 	    return btnGet;
 	}
 	
+	private JLabel getLblPresent() {
+		if (lblPresent == null) {
+			lblPresent = new JLabel("");
+			lblPresent.setIcon(new ImageIcon(Lucky1_kwh.class.getResource("/com/javalec/image/present.png")));
+			lblPresent.setBounds(126, 83, 205, 181);
+		}
+		return lblPresent;
+	}
+	private JLabel getLblFirecracker() {
+		if (lblFirecracker == null) {
+			lblFirecracker = new JLabel("");
+			lblFirecracker.setIcon(new ImageIcon(Lucky1_kwh.class.getResource("/com/javalec/image/firecracker.png")));
+			lblFirecracker.setBounds(315, 6, 60, 55);
+		}
+		return lblFirecracker;
+	}
+
+	
+	private JLabel getLblDiscount() {
+		if (lblDiscount == null) {
+			lblDiscount = new JLabel("");
+			lblDiscount.setBounds(170, 314, 57, 15);
+		}
+		return lblDiscount;
+	}
+	private JLabel getLblMessage() {
+		if (lblMessage == null) {
+			lblMessage = new JLabel("% 할인쿠폰!");
+			lblMessage.setBounds(188, 314, 81, 15);
+		}
+		return lblMessage;
+	}
+	
 	private static class CouponDisplayThread extends Thread {
-	    private final JTextField textField;
-	    private final String[] couponNames;
+		private JLabel lblDiscount;
+		private final int[] couponNames;
 	    private boolean stopFlag;
 
-	    public CouponDisplayThread(JTextField textField, String[] couponNames) {
-	        this.textField = textField;
+	    public CouponDisplayThread(JLabel lblDiscount, int[] couponNames) {
+	        this.lblDiscount = lblDiscount;
 	        this.couponNames = couponNames;
 	        this.stopFlag = false;
 	    }
 
+	   
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 	    public void run() {
 	        int i = 0;
 	        while (!stopFlag) {
-	            String couponName = couponNames[i];
-	            textField.setText(couponName);
+	            int couponName = couponNames[i];     // couponName이 int라서 이거 받으시면 될 것 같습니다.
+	            lblDiscount.setText(Integer.toString(couponName));
 	            i = (i + 1) % couponNames.length;
 	            try {
 	                Thread.sleep(100);
@@ -167,5 +176,4 @@ public class Lucky1_kwh extends JDialog {
 	        this.stopFlag = stopFlag;
 	    }
 	}
-	
 }
