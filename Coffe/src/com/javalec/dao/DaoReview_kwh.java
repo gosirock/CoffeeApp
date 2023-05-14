@@ -150,21 +150,18 @@ public class DaoReview_kwh {
 							String wkReply = rs.getString(5);
 							String wkImagename = rs.getString(6);
 							
-							File file = new File("./" + rimagename);
+							File file = new File("./" + wkImagename);
 							FileOutputStream output = new FileOutputStream(file);     //outputstream 은 select
 							
 							InputStream input = rs.getBinaryStream(7);
 							Date wkDate = rs.getDate(8);
 							
 							byte[] buffer = new byte[1024];
-							int len;
-
-							 while ((len = input.read(buffer)) > 0) {
-					                output.write(buffer, 0, len);
-					            }
-					            output.close();
-					            input.close();   
+							while(input.read(buffer) >= 0) {
+								output.write(buffer);
 							
+							
+						}
 							
 							// 위에 8개를 한번에 넣기  -> Dto 에서 8개의 데이터 생성자를 만들어놓음
 							DtoReview_kwh dto = new DtoReview_kwh(wkID, wkItem, wkPrice, wkTitle, wkReply, wkImagename, wkDate);

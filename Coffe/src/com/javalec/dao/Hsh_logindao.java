@@ -28,9 +28,16 @@ public class Hsh_logindao {
 		this.uid = uid;
 		this.upassword = upassword;
 	}
+	
+	
+	
+	
+	
+	
+	
 	public boolean logincheck() {
 		boolean check = false;
-		String query = "select count(*) from customer where cid = '" + uid + "' and upassword = '" + upassword + "'";
+		String query = "select count(*) from customer where cid = '" + uid + "' and cpassword = '" + upassword + "'";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);

@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.javalec.dao.Dao;
 import com.javalec.dao.Hsh_logindao;
 import com.javalec.util.ShareVar;
 
@@ -22,6 +21,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JPasswordField;
 
 public class Hsh_login extends JFrame {
 	private JPanel panel;
@@ -39,9 +41,9 @@ public class Hsh_login extends JFrame {
 	private JLabel lblCid;
 	private JTextField tfCid;
 	private JLabel lblCpw;
-	private JTextField tfCpw;
 	private JButton btnGomenu;
 	private JLabel lblCochoc;
+	private JPasswordField pfCpw;
 
 	/**
 	 * Launch the application.
@@ -63,6 +65,12 @@ public class Hsh_login extends JFrame {
 	 * Create the frame.
 	 */
 	public Hsh_login() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
+			}
+		});
 		setTitle("로그인");
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel_3());
@@ -85,13 +93,13 @@ public class Hsh_login extends JFrame {
 		contentPane.add(getLblCid());
 		contentPane.add(getTfCid());
 		contentPane.add(getLblCpw());
-		contentPane.add(getTfCpw());
 		contentPane.add(getBtnGomenu());
+		contentPane.add(getPfCpw());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("New label");
-			lblNewLabel.setIcon(new ImageIcon(Lju_Menu01.class.getResource("/com/javalec/image/wifi.png")));
+			lblNewLabel.setIcon(new ImageIcon(Lju_base.class.getResource("/com/javalec/image/wifi.png")));
 			lblNewLabel.setBounds(303, 15, 65, 18);
 		}
 		return lblNewLabel;
@@ -176,7 +184,7 @@ public class Hsh_login extends JFrame {
 	private JTextField getTfCid() {
 		if (tfCid == null) {
 			tfCid = new JTextField();
-			tfCid.setBounds(110, 265, 130, 26);
+			tfCid.setBounds(122, 265, 208, 26);
 			tfCid.setColumns(10);
 		}
 		return tfCid;
@@ -188,14 +196,6 @@ public class Hsh_login extends JFrame {
 			lblCpw.setBounds(60, 323, 270, 21);
 		}
 		return lblCpw;
-	}
-	private JTextField getTfCpw() {
-		if (tfCpw == null) {
-			tfCpw = new JTextField();
-			tfCpw.setBounds(122, 318, 208, 26);
-			tfCpw.setColumns(10);
-		}
-		return tfCpw;
 	}
 	private JButton getBtnGomenu() {
 		if (btnGomenu == null) {
@@ -227,7 +227,7 @@ public class Hsh_login extends JFrame {
 	}	
 	private void login() {
 		String uid = tfCid.getText();
-		String upassword = tfCpw.getText();
+		String upassword = pfCpw.getText();
 		
 		if(uid.equals("admin") && upassword.equals("1234")) {
 			ShareVar.loginUserId = uid;
@@ -243,6 +243,7 @@ public class Hsh_login extends JFrame {
 			if(result == true) {
 				ShareVar.loginUserId = uid;
 				JOptionPane.showMessageDialog(this, uid+"님 환영합니다");
+				
 //				buy  = new Buy();
 //				buy.setVisible(true);											ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ메인화면으로 연결
 //				dispose();
@@ -252,5 +253,15 @@ public class Hsh_login extends JFrame {
 			}
 	}
 	}
+	private JPasswordField getPfCpw() {
+		if (pfCpw == null) {
+			pfCpw = new JPasswordField();
+			pfCpw.setBounds(122, 318, 208, 26);
+		}
+		return pfCpw;
+	}
+	
+
+	
 }
 	

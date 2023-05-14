@@ -87,9 +87,14 @@ public class Review2_kwh extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
 				tableInit();  // 테이블초기화
 				searchAction();  // 데이터불러오기
 				screenPartition(); //  radiobtn 이 눌러진 상태로 textfield 화면표시해주기
+			}
+			@Override
+			public void windowClosing(WindowEvent e) {
+				//closingAction();
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -193,10 +198,8 @@ public class Review2_kwh extends JFrame {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
 			scrollPane.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			
 				
-				}
 			});
 			scrollPane.setBounds(0, 163, 390, 594);
 			scrollPane.setViewportView(getinnerTable2());
@@ -212,6 +215,7 @@ public class Review2_kwh extends JFrame {
 					return (Column == 0) ? Icon.class : Object.class;
 				}
 			};
+			innerTable2.setEnabled(false);
 			innerTable2.setOpaque(false);
 			innerTable2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			innerTable2.setGridColor(new Color(252, 242, 217));
@@ -225,7 +229,7 @@ public class Review2_kwh extends JFrame {
 			innerTable2.setBackground(new Color(252, 242, 217));
 			innerTable2.setModel(outerTable); 	//<<<<< 추가
 			innerTable2.setRowHeight(300);  		//<<<<< 높이조절
-			tableInit();
+			//tableInit();
 			
 			
 		}
@@ -244,7 +248,7 @@ public class Review2_kwh extends JFrame {
 	
 	private JRadioButton getRbRecommendation_1() {
 		if (rbRecommendation_1 == null) {
-			rbRecommendation_1 = new JRadioButton("추천순");
+			rbRecommendation_1 = new JRadioButton("인기순");
 			buttonGroup.add(rbRecommendation_1);
 			buttonGroup.add(rbRecommendation_1);
 			rbRecommendation_1.setBounds(77, 111, 65, 23);
@@ -260,8 +264,8 @@ public class Review2_kwh extends JFrame {
 	
 	private void tableInit() {
 
-		outerTable.addColumn("");
-		outerTable.addColumn("");
+		outerTable.addColumn("Picutre");
+		outerTable.addColumn("Contents");
 		outerTable.setColumnCount(2);
 		
 		int i = outerTable.getRowCount();
@@ -302,17 +306,18 @@ public class Review2_kwh extends JFrame {
 		
 		for( int i = 0; i < listCount ; i++) {
 			String temp = dtoList.get(i).getCustomer_cid();
-			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getRimagename());
 			
+			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getRimagename());
 			Image img = imgicon.getImage();  // 이미지 크기조절
-			Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+			Image updateImg = img.getScaledInstance(125, 130, Image.SCALE_SMOOTH);
 			ImageIcon upImg = new ImageIcon(updateImg);
 			
 			
 			// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
 			java.util.Date now = new java.util.Date();
 			java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
-			
+		
+
 			Object[] qTxt = {upImg,"<html>"+temp+"<br><br>"+dtoList.get(i).getIname()+"<p><p>"+ Integer.toString(dtoList.get(i).getIprice())+"<p><p>"+dtoList.get(i).getTitle()+"<p><p>"+dtoList.get(i).getComment()+"<p><p>"+dtoList.get(i).getRinsertdate()+"<p></html>"};
 			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
 			
@@ -335,7 +340,7 @@ public class Review2_kwh extends JFrame {
 			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getRimagename());
 			
 			Image img = imgicon.getImage();  // 이미지 크기조절
-			Image updateImg = img.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+			Image updateImg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 			ImageIcon upImg = new ImageIcon(updateImg);
 			
 			
@@ -343,17 +348,23 @@ public class Review2_kwh extends JFrame {
 			java.util.Date now = new java.util.Date();
 			java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
 			
-			Object[] qTxt = {upImg,"<html>"+temp+"<br><br>"+dtoList.get(i).getIname()+"<p><p>"+ Integer.toString(dtoList.get(i).getIprice())+"<p><p>"+dtoList.get(i).getTitle()+"<p><p>"+dtoList.get(i).getComment()+"<p><p>"+dtoList.get(i).getRinsertdate()+"<p></html>"};
+			JLabel imageLabel = new JLabel(upImg);
+			Object[] qTxt = {imageLabel,"<html>"+temp+"<br><br>"+dtoList.get(i).getIname()+"<p><p>"+ Integer.toString(dtoList.get(i).getIprice())+"<p><p>"+dtoList.get(i).getTitle()+"<p><p>"+dtoList.get(i).getComment()+"<p><p>"+dtoList.get(i).getRinsertdate()+"<p></html>"};
 			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
 		
 		}
-		//tfCount.setText(Integer.toString(listCount));
 		
 	}
 
 
 
-
+	private void closingAction() {
+		ArrayList<DtoReview_kwh> dtoList = null;
+		for (int i = 0 ; i <dtoList.size(); i++) {
+			File file = new File("./"+ dtoList.get(i).getRimagename());
+			file.delete();
+		}
+	}
 
 
 
@@ -364,7 +375,6 @@ public class Review2_kwh extends JFrame {
 		
 		// 최신순버튼
 		if (rbRecent_1.isSelected()) {//날짜별로 정렬
-			System.out.println("@@");
 			
 			tableInit();
 			searchAction();  // 하면 최신순으로 돌아옴
@@ -374,7 +384,6 @@ public class Review2_kwh extends JFrame {
 		// 추천순버튼
 		
 		if (rbRecommendation_1.isSelected()) {// count정렬
-			//System.out.println("@@");
 			tableInit();
 			checkAction();  // 추천순 상품명 중 리뷰가 많이 작성된 순으로
 			
