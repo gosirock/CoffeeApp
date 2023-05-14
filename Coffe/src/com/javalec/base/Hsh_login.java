@@ -221,8 +221,11 @@ public class Hsh_login extends JFrame {
 		return lblCochoc;
 	}
 	private void joinAction() {
-		Hsh_join hsh_join = new Hsh_join();
-		hsh_join.setVisible(true);
+//		Hsh_join hsh_join = new Hsh_join();
+//		hsh_join.setVisible(true);
+//		setVisible(false);
+		Join_kwh hi = new Join_kwh();
+		hi.setVisible(true);
 		setVisible(false);
 	}	
 	private void login() {

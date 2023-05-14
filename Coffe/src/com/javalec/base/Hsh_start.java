@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Hsh_start extends JFrame {
 
@@ -35,6 +37,12 @@ public class Hsh_start extends JFrame {
 	 * Create the frame.
 	 */
 	public Hsh_start() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 393, 880);
 		contentPane = new JPanel();
@@ -54,7 +62,7 @@ public class Hsh_start extends JFrame {
 					click();
 				}
 			});
-			lblNewLabel.setIcon(new ImageIcon("/Users/tj/Downloads/첫화면.png"));
+			lblNewLabel.setIcon(new ImageIcon(Lucky1_kwh.class.getResource("/com/javalec/image/firstscreen.png")));
 			lblNewLabel.setBounds(-2, -10, 393, 880);
 		}
 		return lblNewLabel;

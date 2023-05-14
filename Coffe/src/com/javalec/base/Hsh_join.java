@@ -23,6 +23,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPasswordField;
 
 public class Hsh_join extends JFrame {
 
@@ -50,12 +51,13 @@ public class Hsh_join extends JFrame {
 	private JTextField tfTelno;
 	private JTextField tfEmail;
 	private JTextField tfAddress;
-	private JTextField tfPpw;
 	private JLabel lblNewLabel;
 	private JComboBox cbEmail;
 	private JButton btnCheck;
 	private JButton btnPaycheck;
 	private JButton btnBack;
+	private JPasswordField pfPaypassword;
+	String message = "";
 
 	/**
 	 * Launch the application.
@@ -116,12 +118,12 @@ public class Hsh_join extends JFrame {
 		contentPane.add(getTfTelno());
 		contentPane.add(getTfEmail());
 		contentPane.add(getTfAddress());
-		contentPane.add(getTfPpw());
 		contentPane.add(getLblNewLabel());
 		contentPane.add(getCbEmail());
 		contentPane.add(getBtnCheck());
 		contentPane.add(getBtnPaycheck());
 		contentPane.add(getBtnBack());
+		contentPane.add(getPfPaypassword());
 	}
 
 	private JButton getBtnLogin() {
@@ -200,12 +202,6 @@ public class Hsh_join extends JFrame {
 	private JLabel getLblCid() {
 		if (lblCid == null) {
 			lblCid = new JLabel("");
-			lblCid.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					dupCheck();
-				}
-			});
 			lblCid.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/idbar.png")));
 			lblCid.setBounds(61, 291, 270, 21);
 		}
@@ -276,8 +272,10 @@ public class Hsh_join extends JFrame {
 	private JTextField getTfName() {
 		if (tfName == null) {
 			tfName = new JTextField();
+			tfName.setBackground(new Color(248, 227, 182));
 			tfName.setBounds(135, 244, 143, 26);
 			tfName.setColumns(10);
+			tfName.setEditable(false);
 		}
 		return tfName;
 	}
@@ -285,7 +283,9 @@ public class Hsh_join extends JFrame {
 		if (tfCid == null) {
 			tfCid = new JTextField();
 			tfCid.setColumns(10);
+			tfCid.setBackground(new Color(248, 227, 182));
 			tfCid.setBounds(135, 286, 143, 26);
+			
 		}
 		return tfCid;
 	}
@@ -293,7 +293,9 @@ public class Hsh_join extends JFrame {
 		if (tfCpw == null) {
 			tfCpw = new JTextField();
 			tfCpw.setColumns(10);
+			tfCpw.setBackground(new Color(248, 227, 182));
 			tfCpw.setBounds(135, 323, 195, 26);
+			tfCpw.setEditable(false);
 		}
 		return tfCpw;
 	}
@@ -301,7 +303,9 @@ public class Hsh_join extends JFrame {
 		if (tfCcpw == null) {
 			tfCcpw = new JTextField();
 			tfCcpw.setColumns(10);
+			tfCcpw.setBackground(new Color(248, 227, 182));
 			tfCcpw.setBounds(135, 356, 195, 26);
+			tfCcpw.setEditable(false);
 		}
 		return tfCcpw;
 	}
@@ -309,7 +313,9 @@ public class Hsh_join extends JFrame {
 		if (tfTelno == null) {
 			tfTelno = new JTextField();
 			tfTelno.setColumns(10);
+			tfTelno.setBackground(new Color(248, 227, 182));
 			tfTelno.setBounds(135, 394, 195, 26);
+			tfTelno.setEditable(false);
 		}
 		return tfTelno;
 	}
@@ -317,7 +323,9 @@ public class Hsh_join extends JFrame {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
 			tfEmail.setColumns(10);
+			tfEmail.setBackground(new Color(248, 227, 182));
 			tfEmail.setBounds(135, 432, 73, 26);
+			tfEmail.setEditable(false);
 		}
 		return tfEmail;
 	}
@@ -325,17 +333,11 @@ public class Hsh_join extends JFrame {
 		if (tfAddress == null) {
 			tfAddress = new JTextField();
 			tfAddress.setColumns(10);
+			tfAddress.setBackground(new Color(248, 227, 182));
 			tfAddress.setBounds(135, 470, 195, 26);
+			tfAddress.setEditable(false);
 		}
 		return tfAddress;
-	}
-	private JTextField getTfPpw() {
-		if (tfPpw == null) {
-			tfPpw = new JTextField();
-			tfPpw.setColumns(10);
-			tfPpw.setBounds(135, 508, 130, 26);
-		}
-		return tfPpw;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -358,8 +360,14 @@ public class Hsh_join extends JFrame {
 		return cbEmail;
 	}
 	private JButton getBtnCheck() {
+			
 		if (btnCheck == null) {
 			btnCheck = new JButton("");
+			btnCheck.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dupCheck();
+				}
+			});
 			btnCheck.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/check.png")));
 			btnCheck.setFocusPainted(false);
 			btnCheck.setBorderPainted(false);
@@ -393,43 +401,71 @@ public class Hsh_join extends JFrame {
 		}
 		return btnBack;
 	}
+	
+	
+	
+	private JPasswordField getPfPaypassword() {
+		if (pfPaypassword == null) {
+			pfPaypassword = new JPasswordField();
+			pfPaypassword.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					pfPaypassword.setEditable(true);
+				}
+			});
+			pfPaypassword.setBackground(new Color(248, 227, 182));
+			pfPaypassword.setBounds(135, 508, 130, 26);
+			pfPaypassword.setEditable(false);
+		}
+		return pfPaypassword;
+		
+	}
+	
+	
+	
+	
+	
+	// function
+	
+	
+	
+	
 	private void login() {
 		Hsh_login hsh_login = new Hsh_login();
 		hsh_login.setVisible(true);
 		dispose();
 	}
+	
+	
+	// 정보받아서 다오에 넘겨주기
 	private void back() {
-		String uid = tfCid.getText();
-		String upassword = tfCpw.getText();
-		String upassword2 = tfCcpw.getText();
-		String uname = tfName.getText();
-		String uphone = tfTelno.getText();
-		String uemail = tfEmail.getText();
-		String uemailcb = cbEmail.getSelectedItem().toString();
-		String uaddress = tfAddress.getText();
+		tfAddress.setEditable(true);
+		tfCcpw.setEditable(true);
+		tfCpw.setEditable(true);
+		tfTelno.setEditable(true);
+		pfPaypassword.setEditable(true);
+		tfEmail.setEditable(true);
+		tfName.setEditable(true);
 		
-		//비빌번호 , 비밀번호확인 일치하는지 확인
-		if (upassword != upassword2) {
-			JOptionPane.showMessageDialog(this, "비밀번호와 비밀번호확인이 다릅니다.");
+		
+		
+		int i_chk = insertFieldCheck();
+		if (i_chk == 0) {
+			insertAction();
+			
+		}else {
+			JOptionPane.showMessageDialog(this, message + "입력하세요!","회원가입",JOptionPane.ERROR_MESSAGE);
 		}
 		
-		if( uname.isEmpty() || uid.isEmpty() || upassword.isEmpty() || uphone.isEmpty() || uemail.isEmpty() || uemailcb.isEmpty()
-				|| uaddress.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "회원정보를 입력해주세요");
-		}else {
-			Hsh_joindao hsh_joindao = new Hsh_joindao(uid, upassword, uname, uphone, uemail+"@"+uemailcb, uaddress);
-			boolean result = hsh_joindao.joinAction();
-			if(result) {
-				JOptionPane.showMessageDialog(this, "회원가입이 완료되었습니다!");
-			}else {
-				JOptionPane.showMessageDialog(this, "정보를 확인하세요!");
-			}
-			
-		Hsh_login hsh_login = new Hsh_login();
-		hsh_login.setVisible(true);
-		dispose();
+		
+		
+		
 	}
-	}
+	
+	
+	
+	
+	
 		private void dupCheck() {
 			String uid = tfCid.getText();
 			if(uid.isEmpty()) {
@@ -448,6 +484,8 @@ public class Hsh_join extends JFrame {
 						tfAddress.setEditable(true);
 						btnJoin.setEnabled(true);
 						cbEmail.setEnabled(true);
+						pfPaypassword.setEnabled(true);
+						pfPaypassword.setEditable(true);
 					}
 			}
 	
@@ -471,8 +509,8 @@ public class Hsh_join extends JFrame {
 					break;
 				default:
 					break;
-}
-	}
+				}
+			}
 			
 			
 			
@@ -491,10 +529,102 @@ public class Hsh_join extends JFrame {
 			
 			
 			
+			private int insertFieldCheck() {
+				int i = 0;
+				
+				
+				if(tfName.getText().trim().length() == 0) {
+					i++;
+					message = "이름을 ";
+					tfName.requestFocus();  // 어디 자리가 비었는지 커서로 보여
+				}
+				if(tfCid.getText().trim().length() == 0) {
+					i++;
+					message = "ID를 ";
+					tfCid.requestFocus();
+				}
+				if(tfCpw.getText().trim().length() == 0) {
+					i++;
+					message = "비밀번호를 ";
+					tfCpw.requestFocus();
+				}
+				if(tfTelno.getText().trim().length() == 0) {
+					i++;
+					message = "전화번호를 ";
+					tfTelno.requestFocus();
+				}
+				if(tfEmail.getText().trim().length() == 0) {
+					i++;
+					message = "E-mail을 ";
+					tfEmail.requestFocus();
+				}
+				if(tfAddress.getText().trim().length() == 0) {
+					i++;
+					message = "주소를 ";
+					tfAddress.requestFocus();
+				}
+				if(pfPaypassword.getPassword().length == 0) {
+					i++;
+					message = "결제비밀번호를 ";
+					pfPaypassword.requestFocus();
+				}
+				return i;
+				
+			}
 			
 			
+			private void insertAction() {
+				String uid = tfCid.getText();
+				String upassword = tfCpw.getText();
+				String upassword2 = tfCcpw.getText();
+				
+				//비빌번호 , 비밀번호확인 일치하는지 확인
+				if (upassword != upassword2) {
+					JOptionPane.showMessageDialog(this, "비밀번호가 일치하지 않습니다.");
+					tfCcpw.setText("");
+					tfCpw.setText("");
+					
+				}
+				
+				String uname = tfName.getText();
+				String uphone = tfTelno.getText();
+				String uemail = tfEmail.getText();
+				String uemailcb = cbEmail.getSelectedItem().toString();
+				String uaddress = tfAddress.getText();
+				char[] paypassword = pfPaypassword.getPassword();
+				String passwordStr = new String(paypassword);
+				
+				if (passwordStr.length()>6) {
+					JOptionPane.showMessageDialog(this, "결제비밀번호를 4자리이하로 설정해주세요.");
+					
+				}
+
+				if( uname.isEmpty() || uid.isEmpty() || upassword.isEmpty() || uphone.isEmpty() || uemail.isEmpty() || uemailcb.isEmpty()
+						|| uaddress.isEmpty() || passwordStr.isEmpty() ) {
+					JOptionPane.showMessageDialog(this, "회원정보를 입력해주세요");
+				}
+
+				
+				Hsh_joindao hsh_joindao = new Hsh_joindao(uid, upassword, uname, uphone, uemail+"@"+uemailcb, uaddress, passwordStr);
+				boolean result = hsh_joindao.joinAction();
+				if(result) {
+					JOptionPane.showMessageDialog(this, "회원가입이 완료되었습니다!");
+				}else {
+					//JOptionPane.showMessageDialog(this, "정보를 확인하세요!");
+				}
+				
+				
+			}
 			
-			
-			
-			
-		}
+			private void clearAction() {
+				tfName.setText("");
+				tfAddress.setText("");
+				tfCcpw.setText("");
+				tfCpw.setText("");
+				tfEmail.setText("");
+				tfTelno.setText("");
+				pfPaypassword.setText("");
+				tfTelno.setText("");
+			}
+	
+}
