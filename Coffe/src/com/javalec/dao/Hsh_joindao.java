@@ -21,7 +21,7 @@ public class Hsh_joindao {
 	String uphone;
 	String uemail;
 	String uaddress;
-	String secondpassword;
+	String paypassword;
 	
 	public Hsh_joindao() {
 		// TODO Auto-generated constructor stub
@@ -30,7 +30,7 @@ public class Hsh_joindao {
 	
 	
 //	회원가입
-	public Hsh_joindao(String uid, String upassword, String uname, String uphone, String uemail, String uaddress) {
+	public Hsh_joindao(String uid, String upassword, String uname, String uphone, String uemail, String uaddress, String paypassword) {
 		super();
 		this.uid = uid;
 		this.upassword = upassword;
@@ -38,6 +38,7 @@ public class Hsh_joindao {
 		this.uphone = uphone;
 		this.uemail = uemail;
 		this.uaddress = uaddress;
+		this.paypassword = paypassword;
 	}
 	
 	
@@ -58,8 +59,8 @@ public class Hsh_joindao {
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			String query = "insert into customer (cid, cname , cpassword, cphone, cemail, caddress, cinsertdate)";
-			String query1 = " values (?, ?, ?, ?, ?, ?, now())";
+			String query = "insert into customer (cid, cname , cpassword, cphone, cemail, caddress, cinsertdate,cpayPassword)";
+			String query1 = " values (?, ?, ?, ?, ?, ?, now(),?)";
 			
 			ps = conn_mysql.prepareStatement(query + query1);
 			ps.setString(1, uid.trim());
@@ -68,6 +69,7 @@ public class Hsh_joindao {
 			ps.setString(4, uphone.trim());
 			ps.setString(5, uemail.trim());
 			ps.setString(6, uaddress.trim());
+			ps.setString(7, paypassword.trim());
 			
 			ps.executeUpdate();
 			conn_mysql.close();
@@ -79,6 +81,15 @@ public class Hsh_joindao {
 		}
 		return true;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public boolean dupCheck() {
 		boolean check = false;
 		String query = "select count(cid) from customer where cid = '" + uid + "'";
