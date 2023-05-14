@@ -375,15 +375,17 @@ public class Review2_kwh extends JFrame {
 		
 		// 최신순버튼
 		if (rbRecent_1.isSelected()) {//날짜별로 정렬
+			System.out.println("최신");
 			
 			tableInit();
 			searchAction();  // 하면 최신순으로 돌아옴
-			
+		
 		}
 
-		// 추천순버튼
+		// 인기순버튼
 		
 		if (rbRecommendation_1.isSelected()) {// count정렬
+			System.out.println("인기");
 			tableInit();
 			checkAction();  // 추천순 상품명 중 리뷰가 많이 작성된 순으로
 			
@@ -394,6 +396,10 @@ public class Review2_kwh extends JFrame {
 		
 
 	}
+	
+
+	
+	
 	
 	
 	
