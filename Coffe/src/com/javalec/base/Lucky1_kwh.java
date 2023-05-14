@@ -8,8 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.javalec.dao.DaoCoupon_kwh;
+import com.javalec.util.ShareVar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -92,6 +95,7 @@ public class Lucky1_kwh extends JDialog {
 				
 				public void actionPerformed(ActionEvent e) {
 					btnGet.setText("Get!");
+					insertAction();
 					
 					if (couponDisplayThread == null || !couponDisplayThread.isAlive()) {
 	                    couponDisplayThread = new CouponDisplayThread(lblDiscount, couponNames);
@@ -153,6 +157,10 @@ public class Lucky1_kwh extends JDialog {
 	   
 	    
 	    
+	 // function
+	    
+	    
+	    
 	    
 	    
 	    
@@ -176,4 +184,40 @@ public class Lucky1_kwh extends JDialog {
 	        this.stopFlag = stopFlag;
 	    }
 	}
+
+
+		// 쿠폰등록
+		public void insertAction() {
+			String customer_cid = ShareVar.testid;
+			
+			int discount = 0;
+			try {
+			   discount = Integer.parseInt(lblDiscount.getText());
+			} catch (NumberFormatException ex) {
+			    // 오류 처리
+			}
+			
+			// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
+			java.util.Date now = new java.util.Date();
+			java.sql.Date cpinsertdate = new java.sql.Date(now.getTime());
+			
+			DaoCoupon_kwh dao = new DaoCoupon_kwh(discount, customer_cid, cpinsertdate);
+			boolean result = dao.insertAction(); 
+			
+			if (result) {
+				JOptionPane.showMessageDialog(this,  "쿠폰이 등록되었습니다.", "Congratulation!!",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}else {
+				JOptionPane.showMessageDialog(this,  "쿠폰 등록이 실패했습니다.", "Error",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}
+		}
+
+
+
+
+
+
+
+
+
+
 }
