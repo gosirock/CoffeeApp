@@ -2,6 +2,7 @@ package com.javalec.base;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -10,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import com.javalec.dao.Kms_Dao_StoreInfo;
 import com.javalec.dto.Kms_Dto_StoreInfo;
@@ -20,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Calendar;
 
 public class Kms_StoreInfo extends JFrame {
 	
@@ -47,6 +50,9 @@ public class Kms_StoreInfo extends JFrame {
 	private JButton btnUpdateStore;
 	private JButton btnBack;
 	String message;
+	private JLabel lblClock;
+	
+	DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
 	/**
 	 * Launch the application.
 	 */
@@ -55,6 +61,7 @@ public class Kms_StoreInfo extends JFrame {
 			public void run() {
 				try {
 					Kms_StoreInfo frame = new Kms_StoreInfo();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,6 +88,7 @@ public class Kms_StoreInfo extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getLblClock());
 		contentPane.add(getBtnBack());
 		contentPane.add(getStoreInfo());
 		contentPane.add(getPanel());
@@ -300,6 +308,33 @@ public class Kms_StoreInfo extends JFrame {
 	}
 	
 	// ----- function ----
+	private JLabel getLblClock() {
+		if (lblClock == null) {
+			lblClock = new JLabel();
+			lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+			lblClock.setBounds(36, 15, 61, 16);
+			clockRun();
+			
+		}
+		return lblClock;
+	}
+ 
+ // 시간표시 메소드
+ private void clockRun() {
+	    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Calendar t = Calendar.getInstance();
+	            int hour = t.get(Calendar.HOUR);
+	            int min = t.get(Calendar.MINUTE);
+	            String clock = String.format("%02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            lblClock.setText(clock);
+			}
+		});	 
+	    timer.start();
+	}
+	
 	
 	private void backAction() {
 		Kms_AdminMain adminMain = new Kms_AdminMain();

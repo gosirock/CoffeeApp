@@ -2,6 +2,7 @@ package com.javalec.base;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -9,8 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
 public class Kms_AdminMain extends JFrame {
@@ -29,6 +32,8 @@ public class Kms_AdminMain extends JFrame {
 	private JButton btnStore;
 	private JButton btnSales;
 	private JButton btnBack;
+	private JLabel lblClock;
+	DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
 	/**
 	 * Launch the application.
 	 */
@@ -37,6 +42,7 @@ public class Kms_AdminMain extends JFrame {
 			public void run() {
 				try {
 					Kms_AdminMain frame = new Kms_AdminMain();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,6 +63,7 @@ public class Kms_AdminMain extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getLblClock());
 		contentPane.add(getBtnBack());
 		contentPane.add(getAdmin());
 		contentPane.add(getPanel());
@@ -207,6 +214,32 @@ public class Kms_AdminMain extends JFrame {
 		return btnBack;
 	}
 	// ----- function -----
+	 private JLabel getLblClock() {
+			if (lblClock == null) {
+				lblClock = new JLabel();
+				lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+				lblClock.setBounds(36, 15, 61, 16);
+				clockRun();
+				
+			}
+			return lblClock;
+		}
+	 
+	 // 시간표시 메소드
+	 private void clockRun() {
+		    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Calendar t = Calendar.getInstance();
+		            int hour = t.get(Calendar.HOUR);
+		            int min = t.get(Calendar.MINUTE);
+		            String clock = String.format("%02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
+		            lblClock.setText(clock);
+				}
+			});	 
+		    timer.start();
+		}
 	
 	private void productAction() {
 		Kms_AdminProduct product = new Kms_AdminProduct();
@@ -215,7 +248,7 @@ public class Kms_AdminMain extends JFrame {
 	}
 	
 	private void reviewAction() { // 리뷰게시판 관리 눌렀때(Review2_kwh가 데이터베이스와 연결되었을때 아래 바 지우고 새로운class만들어서 연결할 예정)
-		Review2_kwh review = new Review2_kwh();
+		Kms_AdminReview review = new Kms_AdminReview();
 		review.setVisible(true);
 		dispose();
 	}
