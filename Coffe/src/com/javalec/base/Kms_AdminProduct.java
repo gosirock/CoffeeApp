@@ -56,7 +56,7 @@ public class Kms_AdminProduct extends JFrame {
 	private JRadioButton rbDelete;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField tfSelection;
-	private JButton btnNewButton;
+	private JButton btnQuery;
 	private JComboBox cbSelection;
 	private JScrollPane scrollPane;
 	private JTable innerTable;
@@ -82,6 +82,7 @@ public class Kms_AdminProduct extends JFrame {
 	DefaultTableModel model = new DefaultTableModel();
 	JTable table = new JTable(model);
 	private JButton btnFilePath;
+	private JButton btnBack;
 	/**
 	 * Launch the application.
 	 */
@@ -130,7 +131,7 @@ public class Kms_AdminProduct extends JFrame {
 		contentPane.add(getRbUpdate());
 		contentPane.add(getRbDelete());
 		contentPane.add(getTfSelection());
-		contentPane.add(getBtnNewButton());
+		contentPane.add(getBtnQuery());
 		contentPane.add(getCbSelection());
 //		contentPane.add(getScrollPane());
 		contentPane.add(getLblProductId());
@@ -165,6 +166,7 @@ public class Kms_AdminProduct extends JFrame {
 		innerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		innerTable.setModel(outerTable);
 		contentPane.add(getBtnFilePath());
+		contentPane.add(getBtnBack());
 		
 	}
 	
@@ -248,17 +250,17 @@ public class Kms_AdminProduct extends JFrame {
 		}
 		return tfSelection;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("검색");
-			btnNewButton.addActionListener(new ActionListener() {
+	private JButton getBtnQuery() {
+		if (btnQuery == null) {
+			btnQuery = new JButton("검색");
+			btnQuery.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					conditionQuery();
 				}
 			});
-			btnNewButton.setBounds(280, 101, 88, 29);
+			btnQuery.setBounds(280, 101, 88, 29);
 		}
-		return btnNewButton;
+		return btnQuery;
 	}
 	private JComboBox getCbSelection() {
 		if (cbSelection == null) {
@@ -407,6 +409,21 @@ public class Kms_AdminProduct extends JFrame {
 		return btnFilePath;
 	}
 	
+	private JButton getBtnBack() {
+		if (btnBack == null) {
+			btnBack = new JButton("");
+			btnBack.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					backAction();
+				}
+			});
+			btnBack.setBounds(18, 30, 18, 24);
+			btnBack.setIcon(new ImageIcon(Kms_AdminProduct.class.getResource("/com/javalec/image/backbtn.png")));
+			btnBack.setFocusPainted(false);
+			btnBack.setBorderPainted(false);
+		}
+		return btnBack;
+	}
 	// ----- function ------
 	
 	private JLabel getLblClock() {
@@ -846,5 +863,11 @@ private void filePath() {   // file loading method
 			JOptionPane.showMessageDialog(this, "정보 입력\n"+ "입력 중 문제가 발생했습니다."); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 		}
 		
+	}
+	
+	private void backAction() {
+		Kms_AdminMain adminMain = new Kms_AdminMain();
+		adminMain.setVisible(true);
+		dispose();
 	}
 }

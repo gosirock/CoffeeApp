@@ -22,7 +22,7 @@ public class Kms_AdminMain extends JFrame {
 	private JPanel contentPane;
 	private JLabel wifi;
 	private JLabel up;
-	private JLabel chocolate;
+	private JLabel chocolate; 
 	private JLabel coffeeBean;
 	private JLabel choc;
 	private JPanel panel;
@@ -266,7 +266,7 @@ public class Kms_AdminMain extends JFrame {
 	}
 	
 	private void backAction() { // 뒤로가기 눌렀을때 (로그인 화면 완성되면 바꿀예정 -------------------------)
-		Kms_StoreSales storeSales = new Kms_StoreSales();
+		Hsh_login storeSales = new Hsh_login();
 		storeSales.setVisible(true);
 		dispose();
 	}
