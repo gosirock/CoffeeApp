@@ -91,8 +91,10 @@ public class Jty_Profile_Dialog extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					//Jty_Profile jty_Profile = new Jty_Profile();
 					Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile();
-					dao_Profile.deleteUser();
-					
+					dao_Profile.userDelete();
+					dispose();
+//					Hsh_start hsh_start = new Hsh_start();
+//					hsh_start.setVisible(true);
 				}
 			});
 			btnYes.setBackground(new Color(131, 77, 30));

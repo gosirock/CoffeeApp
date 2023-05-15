@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JOptionPane;
 
@@ -56,40 +58,6 @@ public Jty_Dao_Profile(String cname, String cid, String cpassword, String cphone
 	this.caddress = caddress;
 	this.paymentPassword = paymentPassword;
 }
-
-
-//	public Jty_Dto_Profile openProfile() {
-//		Jty_Dto_Profile Jty_dto_profile = null;
-//		String query = "select cname, cid, cpassword, cphone, cemail, caddress, cpayPassword, cinsertdate ";
-//		String query1 = " from customer where cid = " + "'" + ShareVar.loginUserId+"'";
-//		
-//	try {
-//		//String url_mysql = "jdbc:mysql://localhost:3306/dbname?useSSL=false";
-//		Class.forName("com.mysql.cj.jdbc.Driver");
-//		Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
-//		Statement stmt_mysql = conn_mysql.createStatement();
-//		
-//		ResultSet rs = stmt_mysql.executeQuery(query);
-//
-//		while(rs.next()) {
-//			String wkcname = rs.getString(1);
-//			String wkcid = rs.getString(2);
-//			String wkcpassword = rs.getString(3);
-//			String wkphone = rs.getString(4);
-//			String wkcemail = rs.getString(5);
-//			String wkcaddress = rs.getString(6);
-//			String wkcpayPassword = rs.getString(7);
-//			String wkcinsertdate = rs.getString(8);
-//				
-//			Jty_dto_profile = new Jty_Dto_Profile(wkcname, wkcid, wkcpassword, wkphone, wkcemail, wkcaddress, wkcpayPassword, wkcinsertdate);
-//			}
-//		conn_mysql.close();
-//		
-//	}catch(Exception e) {
-//		e.printStackTrace();
-//	}
-//	return Jty_dto_profile;
-//	}
 	
 
 
@@ -128,16 +96,18 @@ public Jty_Dao_Profile(String cname, String cid, String cpassword, String cphone
 	    return jtyDtoProfile;
 	}
 
-	public boolean deleteUser() {
-		PreparedStatement ps = null ;
+	
+	
+	public boolean userDelete() {
+	    PreparedStatement pstmt = null;
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 
 	        String query = "UPDATE customer SET cdeletedate = NOW() WHERE cid = ?";
-	        PreparedStatement pstmt = conn_mysql.prepareStatement(query);
+	        pstmt = conn_mysql.prepareStatement(query);
 
-	       pstmt.setString(1, cid);
+	        pstmt.setString(1, ShareVar.loginUserId);
 
 	        pstmt.executeUpdate();
 	        conn_mysql.close();
@@ -146,8 +116,10 @@ public Jty_Dao_Profile(String cname, String cid, String cpassword, String cphone
 	        e.printStackTrace();
 	        return false;
 	    }
+
 	    return true;
 	}
+
 //	public void deleteUser() {
 //	    try {
 //	        Class.forName("com.mysql.cj.jdbc.Driver");
@@ -215,7 +187,7 @@ public Jty_Dao_Profile(String cname, String cid, String cpassword, String cphone
 	        ps.setString(4, cphone.trim());
 	        ps.setString(5, cemail.trim());
 	        ps.setString(6, caddress.trim());   // 물음표 6번
-	        ps.setString(7, cid.trim());
+	        ps.setString(7, ShareVar.loginUserId);
 
 	        ps.executeUpdate();
 	        conn_mysql.close();
