@@ -68,6 +68,14 @@ public class Join_kwh extends JFrame {
 	private JPasswordField pfPassword;
 	private JPasswordField pfPassword2;
 	private JLabel lblClock;
+	private JLabel lblNewLabel_9;
+	private JLabel lblNewLabel_9_1;
+	private JLabel lblNewLabel_9_1_1;
+	private JLabel lblNewLabel_9_1_2;
+	private JLabel lblNewLabel_9_1_3;
+	private JLabel lblNewLabel_9_1_4;
+	private JLabel lblNewLabel_9_1_5;
+	private JLabel lblNewLabel_9_1_6;
 
 	/**
 	 * Launch the application.
@@ -135,6 +143,14 @@ public class Join_kwh extends JFrame {
 		contentPane.add(getPfPassword());
 		contentPane.add(getPfPassword2());
 		contentPane.add(getLblClock());
+		contentPane.add(getLblNewLabel_9());
+		contentPane.add(getLblNewLabel_9_1());
+		contentPane.add(getLblNewLabel_9_1_1());
+		contentPane.add(getLblNewLabel_9_1_2());
+		contentPane.add(getLblNewLabel_9_1_3());
+		contentPane.add(getLblNewLabel_9_1_4());
+		contentPane.add(getLblNewLabel_9_1_5());
+		contentPane.add(getLblNewLabel_9_1_6());
 	}
 	
 	private JLabel getLblNewLabel_1() {
@@ -210,62 +226,81 @@ public class Join_kwh extends JFrame {
 	private JLabel getLblName() {
 		if (lblName == null) {
 			lblName = new JLabel("이름 :");
-			lblName.setBounds(61, 290, 40, 15);
+			lblName.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+			lblName.setForeground(new Color(130, 77, 30));
+			lblName.setBounds(45, 300, 40, 15);
 		}
 		return lblName;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("ID :");
-			lblNewLabel.setBounds(61, 255, 40, 15);
+			lblNewLabel = new JLabel("Use ID :");
+			lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+			lblNewLabel.setForeground(new Color(130, 77, 30));
+			lblNewLabel.setBounds(45, 255, 65, 15);
 		}
 		return lblNewLabel;
 	}
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("비밀번호 :");
-			lblNewLabel_2.setBounds(61, 325, 57, 15);
+			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+			lblNewLabel_2.setForeground(new Color(130, 77, 30));
+			lblNewLabel_2.setBounds(45, 345, 81, 15);
 		}
 		return lblNewLabel_2;
 	}
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("비밀번호 확인 :");
-			lblNewLabel_3.setBounds(61, 360, 100, 15);
+			lblNewLabel_3.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+			lblNewLabel_3.setForeground(new Color(130, 77, 30));
+			lblNewLabel_3.setBounds(45, 390, 100, 15);
 		}
 		return lblNewLabel_3;
 	}
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("전화번호 :");
-			lblNewLabel_4.setBounds(61, 395, 57, 15);
+			lblNewLabel_4.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+			lblNewLabel_4.setForeground(new Color(130, 77, 30));
+			lblNewLabel_4.setBounds(45, 435, 81, 15);
 		}
 		return lblNewLabel_4;
 	}
 	private JLabel getLblNewLabel_5() {
 		if (lblNewLabel_5 == null) {
 			lblNewLabel_5 = new JLabel("E-mail :");
-			lblNewLabel_5.setBounds(61, 430, 57, 15);
+			lblNewLabel_5.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+			lblNewLabel_5.setForeground(new Color(130, 77, 30));
+			lblNewLabel_5.setBounds(45, 480, 81, 15);
 		}
 		return lblNewLabel_5;
 	}
 	private JLabel getLblNewLabel_6() {
 		if (lblNewLabel_6 == null) {
 			lblNewLabel_6 = new JLabel("주소 :");
-			lblNewLabel_6.setBounds(61, 465, 57, 15);
+			lblNewLabel_6.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+			lblNewLabel_6.setForeground(new Color(130, 77, 30));
+			lblNewLabel_6.setBounds(45, 525, 57, 15);
 		}
 		return lblNewLabel_6;
 	}
 	private JLabel getLblNewLabel_7() {
 		if (lblNewLabel_7 == null) {
 			lblNewLabel_7 = new JLabel("결제비밀번호 :");
-			lblNewLabel_7.setBounds(61, 500, 100, 15);
+			lblNewLabel_7.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+			lblNewLabel_7.setForeground(new Color(130, 77, 30));
+			lblNewLabel_7.setBounds(45, 570, 100, 15);
 		}
 		return lblNewLabel_7;
 	}
 	private JButton getBtnCheck() {
 		if (btnCheck == null) {
-			btnCheck = new JButton("Check");
+			btnCheck = new JButton("");
+			btnCheck.setFocusPainted(false);
+			btnCheck.setBorderPainted(false);
+			btnCheck.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/check.png")));
 //			ImageIcon icon =new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/btnCheck.png"));
 //			Image img = icon.getImage();  // 이미지 크기조절
 //			Image updateImg = img.getScaledInstance(60, 21, Image.SCALE_SMOOTH);
@@ -277,51 +312,66 @@ public class Join_kwh extends JFrame {
 				}
 			});
 			btnCheck.setFont(new Font("굴림", Font.BOLD, 9));
-			btnCheck.setBounds(289, 255, 60, 21);
+			btnCheck.setBounds(282, 249, 60, 21);
 		}
 		return btnCheck;
 	}
 	private JTextField getTfName() {
 		if (tfName == null) {
 			tfName = new JTextField();
+			tfName.setBackground(new Color(251, 242, 215));
+			tfName.setForeground(new Color(130, 77, 30));
+			tfName.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			tfName.setEditable(false);
 			tfName.setColumns(10);
-			tfName.setBounds(154, 285, 116, 21);
+			tfName.setBounds(138, 294, 132, 21);
 		}
 		return tfName;
 	}
 	private JTextField getTfID() {
 		if (tfID == null) {
 			tfID = new JTextField();
+			tfID.setForeground(new Color(130, 77, 30));
+			tfID.setBackground(new Color(251, 242, 216));
+			tfID.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			tfID.setColumns(10);
-			tfID.setBounds(154, 255, 116, 21);
+			tfID.setBounds(138, 249, 132, 21);
 		}
 		return tfID;
 	}
 	private JTextField getTfPhone() {
 		if (tfPhone == null) {
 			tfPhone = new JTextField();
+			tfPhone.setBackground(new Color(251, 242, 215));
+			tfPhone.setForeground(new Color(130, 77, 30));
+			tfPhone.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			tfPhone.setEditable(false);
 			tfPhone.setColumns(10);
-			tfPhone.setBounds(154, 390, 116, 21);
+			tfPhone.setBounds(138, 429, 132, 21);
 		}
 		return tfPhone;
 	}
 	private JTextField getTfEmail() {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
+			tfEmail.setBackground(new Color(251, 242, 215));
+			tfEmail.setForeground(new Color(130, 77, 30));
+			tfEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			tfEmail.setEditable(false);
 			tfEmail.setColumns(10);
-			tfEmail.setBounds(154, 425, 116, 21);
+			tfEmail.setBounds(138, 474, 132, 21);
 		}
 		return tfEmail;
 	}
 	private JTextField getTfAddress() {
 		if (tfAddress == null) {
 			tfAddress = new JTextField();
+			tfAddress.setBackground(new Color(251, 242, 215));
+			tfAddress.setForeground(new Color(130, 77, 30));
+			tfAddress.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			tfAddress.setEditable(false);
 			tfAddress.setColumns(10);
-			tfAddress.setBounds(154, 460, 116, 21);
+			tfAddress.setBounds(138, 519, 132, 21);
 		}
 		return tfAddress;
 	}
@@ -335,13 +385,18 @@ public class Join_kwh extends JFrame {
 //			btnCheck.setIcon(upImg);
 			btnRegister.setEnabled(false);
 			btnRegister.setFont(new Font("굴림", Font.BOLD, 10));
-			btnRegister.setBounds(289, 495, 60, 21);
+			btnRegister.setBounds(303, 570, 60, 21);
 		}
 		return btnRegister;
 	}
 	private JButton getBtnBack() {
 		if (btnBack == null) {
-			btnBack = new JButton("회원가입");
+			btnBack = new JButton("");
+			btnBack.setBorderPainted(false);
+			btnBack.setDefaultCapable(false);
+			btnBack.setFocusPainted(false);
+			btnBack.setRequestFocusEnabled(false);
+			btnBack.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/buttons (3).png")));
 			btnBack.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					back();
@@ -349,7 +404,7 @@ public class Join_kwh extends JFrame {
 				}
 			});
 			btnBack.setEnabled(false);
-			btnBack.setBounds(60, 594, 270, 41);
+			btnBack.setBounds(60, 606, 270, 54);
 		}
 		return btnBack;
 	}
@@ -357,6 +412,7 @@ public class Join_kwh extends JFrame {
 	private JComboBox getCbEmail() {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
+			cbEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 			cbEmail.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					emailAction();
@@ -365,20 +421,24 @@ public class Join_kwh extends JFrame {
 			});
 			cbEmail.setEnabled(false);
 			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "daum.net", "nate.com", "gmail.com", "직접 입력"}));
-			cbEmail.setBounds(289, 425, 60, 21);
+			cbEmail.setBounds(282, 475, 102, 21);
 		}
 		return cbEmail;
 	}
 	private JLabel getLblNewLabel_8() {
 		if (lblNewLabel_8 == null) {
 			lblNewLabel_8 = new JLabel("@");
-			lblNewLabel_8.setBounds(275, 430, 15, 15);
+			lblNewLabel_8.setForeground(new Color(130, 77, 30));
+			lblNewLabel_8.setBounds(272, 475, 15, 15);
 		}
 		return lblNewLabel_8;
 	}
 	private JPasswordField getPfPayPassword() {
 		if (pfPayPassword == null) {
 			pfPayPassword = new JPasswordField();
+			pfPayPassword.setBackground(new Color(251, 242, 215));
+			pfPayPassword.setForeground(new Color(130, 77, 30));
+			pfPayPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			pfPayPassword.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
@@ -391,7 +451,7 @@ public class Join_kwh extends JFrame {
 				}
 			});
 			pfPayPassword.setEditable(false);
-			pfPayPassword.setBounds(154, 495, 116, 21);
+			pfPayPassword.setBounds(138, 564, 132, 21);
 			
 			
 		}
@@ -410,6 +470,9 @@ public class Join_kwh extends JFrame {
 	private JPasswordField getPfPassword() {
 		if (pfPassword == null) {
 			pfPassword = new JPasswordField();
+			pfPassword.setBackground(new Color(251, 242, 215));
+			pfPassword.setForeground(new Color(130, 77, 30));
+			pfPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			pfPassword.addKeyListener(new KeyAdapter() {
 			    public void keyTyped(KeyEvent e) {
 			        String pass1 = new String(pfPassword.getPassword());
@@ -423,13 +486,16 @@ public class Join_kwh extends JFrame {
 			});
 			
 			pfPassword.setEditable(false);
-			pfPassword.setBounds(154, 320, 116, 21);
+			pfPassword.setBounds(138, 339, 132, 21);
 		}
 		return pfPassword;
 	}
 	private JPasswordField getPfPassword2() {
 		if (pfPassword2 == null) {
 			pfPassword2 = new JPasswordField();
+			pfPassword2.setBackground(new Color(251, 242, 215));
+			pfPassword2.setForeground(new Color(130, 77, 30));
+			pfPassword2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			pfPassword2.addKeyListener(new KeyAdapter() {
 			    public void keyTyped(KeyEvent e) {
 			        String pass1 = new String(pfPassword.getPassword());
@@ -445,7 +511,7 @@ public class Join_kwh extends JFrame {
 					
 				
 			pfPassword2.setEditable(false);
-			pfPassword2.setBounds(154, 355, 116, 21);
+			pfPassword2.setBounds(141, 384, 129, 21);
 		}
 		return pfPassword2;
 	}
@@ -659,5 +725,69 @@ public class Join_kwh extends JFrame {
 	    timer.start();
 	}
 
+	private JLabel getLblNewLabel_9() {
+		if (lblNewLabel_9 == null) {
+			lblNewLabel_9 = new JLabel("");
+			lblNewLabel_9.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+			lblNewLabel_9.setBounds(45, 269, 304, 16);
+		}
+		return lblNewLabel_9;
+	}
+	private JLabel getLblNewLabel_9_1() {
+		if (lblNewLabel_9_1 == null) {
+			lblNewLabel_9_1 = new JLabel("");
+			lblNewLabel_9_1.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+			lblNewLabel_9_1.setBounds(45, 314, 304, 16);
+		}
+		return lblNewLabel_9_1;
+	}
+	private JLabel getLblNewLabel_9_1_1() {
+		if (lblNewLabel_9_1_1 == null) {
+			lblNewLabel_9_1_1 = new JLabel("");
+			lblNewLabel_9_1_1.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+			lblNewLabel_9_1_1.setBounds(45, 359, 304, 16);
+		}
+		return lblNewLabel_9_1_1;
+	}
+	private JLabel getLblNewLabel_9_1_2() {
+		if (lblNewLabel_9_1_2 == null) {
+			lblNewLabel_9_1_2 = new JLabel("");
+			lblNewLabel_9_1_2.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+			lblNewLabel_9_1_2.setBounds(45, 404, 304, 16);
+		}
+		return lblNewLabel_9_1_2;
+	}
+	private JLabel getLblNewLabel_9_1_3() {
+		if (lblNewLabel_9_1_3 == null) {
+			lblNewLabel_9_1_3 = new JLabel("");
+			lblNewLabel_9_1_3.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+			lblNewLabel_9_1_3.setBounds(45, 449, 304, 16);
+		}
+		return lblNewLabel_9_1_3;
+	}
+	private JLabel getLblNewLabel_9_1_4() {
+		if (lblNewLabel_9_1_4 == null) {
+			lblNewLabel_9_1_4 = new JLabel("");
+			lblNewLabel_9_1_4.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+			lblNewLabel_9_1_4.setBounds(45, 494, 304, 16);
+		}
+		return lblNewLabel_9_1_4;
+	}
+	private JLabel getLblNewLabel_9_1_5() {
+		if (lblNewLabel_9_1_5 == null) {
+			lblNewLabel_9_1_5 = new JLabel("");
+			lblNewLabel_9_1_5.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+			lblNewLabel_9_1_5.setBounds(45, 539, 304, 16);
+		}
+		return lblNewLabel_9_1_5;
+	}
+	private JLabel getLblNewLabel_9_1_6() {
+		if (lblNewLabel_9_1_6 == null) {
+			lblNewLabel_9_1_6 = new JLabel("");
+			lblNewLabel_9_1_6.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+			lblNewLabel_9_1_6.setBounds(45, 584, 304, 16);
+		}
+		return lblNewLabel_9_1_6;
+	}
 }
 

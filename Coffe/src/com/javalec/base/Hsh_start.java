@@ -70,7 +70,7 @@ public class Hsh_start extends JFrame {
 					click();
 				}
 			});
-			lblNewLabel.setIcon(new ImageIcon(Lucky1_kwh.class.getResource("/com/javalec/image/firstscreen1.png")));
+			lblNewLabel.setIcon(new ImageIcon(Hsh_start.class.getResource("/com/javalec/image/Group 57.png")));
 		}
 		return lblNewLabel;
 	}
