@@ -461,7 +461,8 @@ public class Join_kwh extends JFrame {
 	private JLabel getLblPassCheck() {
 		if (lblPassCheck == null) {
 			lblPassCheck = new JLabel("");
-			lblPassCheck.setBounds(282, 360, 57, 15);
+			lblPassCheck.setForeground(new Color(251, 7, 0));
+			lblPassCheck.setBounds(282, 390, 57, 15);
 		}
 		return lblPassCheck;
 	}
