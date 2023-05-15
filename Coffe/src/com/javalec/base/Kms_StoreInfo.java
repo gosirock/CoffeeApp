@@ -39,7 +39,7 @@ public class Kms_StoreInfo extends JFrame {
 	private JTextField tfStoreTel;
 	private JTextField tfStoreAddress;
 	private JLabel lblStoreName;
-	private JLabel lblAdminId;
+	private JLabel lblCompanyNo;
 	private JLabel lblOpenTime;
 	private JLabel lblCloseTime;
 	private JLabel lblStoreTel;
@@ -149,7 +149,7 @@ public class Kms_StoreInfo extends JFrame {
 			panel.add(getTfStoreTel());
 			panel.add(getTfStoreAddress());
 			panel.add(getLblStoreName());
-			panel.add(getLblAdminId());
+			panel.add(getLblCompanyNo());
 			panel.add(getLblOpenTime());
 			panel.add(getLblCloseTime());
 			panel.add(getLblStoreTel());
@@ -230,13 +230,13 @@ public class Kms_StoreInfo extends JFrame {
 		}
 		return lblStoreName;
 	}
-	private JLabel getLblAdminId() {
-		if (lblAdminId == null) {
-			lblAdminId = new JLabel("");
-			lblAdminId.setBounds(26, 144, 270, 21);
-			lblAdminId.setIcon(new ImageIcon(Kms_StoreInfo.class.getResource("/com/javalec/image/AdminId.png")));
+	private JLabel getLblCompanyNo() {
+		if (lblCompanyNo == null) {
+			lblCompanyNo = new JLabel("");
+			lblCompanyNo.setBounds(26, 144, 270, 21);
+			lblCompanyNo.setIcon(new ImageIcon(Kms_StoreInfo.class.getResource("/com/javalec/image/companyno.png")));
 		}
-		return lblAdminId;
+		return lblCompanyNo;
 	}
 	private JLabel getLblOpenTime() {
 		if (lblOpenTime == null) {
