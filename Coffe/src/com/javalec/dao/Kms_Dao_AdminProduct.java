@@ -83,7 +83,7 @@ public class Kms_Dao_AdminProduct {
 	public Kms_Dto_AdminProduct tableclick() {
 		Kms_Dto_AdminProduct dto = null;
 		
-		String whereDefault = "select iid, iname, iprice, istock, iimagename, iimage, idescription from cafe_app.item";    // select from 은 이렇게하기
+		String whereDefault = "select iid, iname, iprice, istock, iimagename, idescription,iimage from cafe_app.item";    // select from 은 이렇게하기
 		String whereDefault1 = " where iid = '" + iid + "'";
 		try {  // java가 db에 접근했다.
 			Class.forName("com.mysql.cj.jdbc.Driver");

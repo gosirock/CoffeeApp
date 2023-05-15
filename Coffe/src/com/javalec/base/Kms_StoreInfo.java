@@ -275,7 +275,6 @@ public class Kms_StoreInfo extends JFrame {
 			btnUpdateStore = new JButton("");
 			btnUpdateStore.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					actionpartition();
 					updateAction();
 				}
 			});
@@ -385,16 +384,6 @@ public class Kms_StoreInfo extends JFrame {
 			
 		}
 		
-		private void actionpartition() {
-			int i_chk = insertFieldCheck();
-			if (i_chk == 0) {
-
-			}else {
-				JOptionPane.showMessageDialog(this, "\n"+message+ "입력하세요!", "가게 정보",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			} 
 		
-		}
-		
-	
 
 }
