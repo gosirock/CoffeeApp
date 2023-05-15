@@ -70,7 +70,6 @@ public class Jty_Home extends JFrame {
 			public void run() {
 				try {
 					Jty_Home frame = new Jty_Home();
-					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -112,8 +111,7 @@ public class Jty_Home extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				// setComponentZOrder(Category, 0); // 패널 맨 앞으로
-				Jty_Home frame = new Jty_Home();
-				frame.setLocationRelativeTo(null);
+				setLocationRelativeTo(null);
 				setCategoryPanelToFront();
 				Category.setVisible(false);
 				timer = new Timer(3000, new ActionListener() {
@@ -364,6 +362,17 @@ public class Jty_Home extends JFrame {
 	private JLabel getLblLogout() {
 		if (lblLogout == null) {
 			lblLogout = new JLabel("");
+			lblLogout.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Jty_Logout_Dialog logout_dialog = new Jty_Logout_Dialog();
+					Jty_Home frame = new Jty_Home();
+					frame.dispose();
+					frame.setVisible(false);
+					logout_dialog.setVisible(true);
+					
+				}
+			});
 			lblLogout.setIcon(new ImageIcon(Jty_Home.class.getResource("/com/javalec/image/C_Logout.png")));
 			lblLogout.setBounds(0, 89, 178, 45);
 		}
