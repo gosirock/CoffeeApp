@@ -61,10 +61,11 @@ public class Lucky1_kwh extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
 				btnGet.setText("Click!");
 			}
 		});
-		setBounds(100, 100, 471, 420);		
+		setBounds(100, 100, 390, 390);		
 		setTitle("It's for YOU !!!");
 
 		getContentPane().setLayout(null);
@@ -96,6 +97,7 @@ public class Lucky1_kwh extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					btnGet.setText("Get!");
 					insertAction();
+					
 					
 					if (couponDisplayThread == null || !couponDisplayThread.isAlive()) {
 	                    couponDisplayThread = new CouponDisplayThread(lblDiscount, couponNames);
@@ -168,6 +170,7 @@ public class Lucky1_kwh extends JDialog {
 	    
 	    public void run() {
 	        int i = 0;
+	        
 	        while (!stopFlag) {
 	            int couponName = couponNames[i];     // couponName이 int라서 이거 받으시면 될 것 같습니다.
 	            lblDiscount.setText(Integer.toString(couponName));
@@ -201,13 +204,20 @@ public class Lucky1_kwh extends JDialog {
 			java.util.Date now = new java.util.Date();
 			java.sql.Date cpinsertdate = new java.sql.Date(now.getTime());
 			
+			
+			if(!lblDiscount.getText().equals("")) {
+			
 			DaoCoupon_kwh dao = new DaoCoupon_kwh(discount, customer_cid, cpinsertdate);
 			boolean result = dao.insertAction(); 
 			
 			if (result) {
+				
+				
 				JOptionPane.showMessageDialog(this,  "쿠폰이 등록되었습니다.", "Congratulation!!",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 			}else {
 				JOptionPane.showMessageDialog(this,  "쿠폰 등록이 실패했습니다.", "Error",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}
+			
 			}
 		}
 
