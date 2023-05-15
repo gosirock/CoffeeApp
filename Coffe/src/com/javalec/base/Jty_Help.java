@@ -63,7 +63,6 @@ public class Jty_Help extends JFrame {
 			public void run() {
 				try {
 					Jty_Help frame = new Jty_Help();
-					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -79,8 +78,7 @@ public class Jty_Help extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				Jty_Help frame = new Jty_Help();
-				frame.setLocationRelativeTo(null);
+				setLocationRelativeTo(null);
 				openHelp();
 			}
 		});
@@ -132,6 +130,7 @@ public class Jty_Help extends JFrame {
 			btnBack.setBorder(null); // 버튼의 테두리를 없앰
 			btnBack.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+				
 					backAction();
 				}
 			});

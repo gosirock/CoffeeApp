@@ -13,8 +13,10 @@ import com.javalec.dao.Jty_Dao_Profile;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class Jty_Profile_Dialog extends JDialog {
+public class Jty_UserDelete_Dialog extends JDialog {
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_1_1;
@@ -28,7 +30,7 @@ public class Jty_Profile_Dialog extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Jty_Profile_Dialog dialog = new Jty_Profile_Dialog();
+					Jty_UserDelete_Dialog dialog = new Jty_UserDelete_Dialog();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception e) {
@@ -41,7 +43,13 @@ public class Jty_Profile_Dialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Jty_Profile_Dialog() {
+	public Jty_UserDelete_Dialog() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);
+			}
+		});
 		getContentPane().setBackground(new Color(248, 227, 182));
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblNewLabel());
@@ -93,8 +101,8 @@ public class Jty_Profile_Dialog extends JDialog {
 					Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile();
 					dao_Profile.userDelete();
 					dispose();
-//					Hsh_start hsh_start = new Hsh_start();
-//					hsh_start.setVisible(true);
+					Hsh_start hsh_start = new Hsh_start();
+					hsh_start.setVisible(true);
 				}
 			});
 			btnYes.setBackground(new Color(131, 77, 30));
