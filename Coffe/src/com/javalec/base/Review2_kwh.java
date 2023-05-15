@@ -137,6 +137,7 @@ public class Review2_kwh extends JFrame {
 			btnHome.setBackground(new Color(131, 77, 30));
 			btnHome.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					home();
 				}
 			});
 		}
@@ -148,6 +149,7 @@ public class Review2_kwh extends JFrame {
 			btnMenu.setBackground(new Color(131, 77, 30));
 			btnMenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					menu();
 				}
 			});
 			btnMenu.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/btnMenu.png")));
@@ -159,6 +161,11 @@ public class Review2_kwh extends JFrame {
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
+			btnOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					order();
+				}
+			});
 			btnOrder.setBackground(new Color(131, 77, 30));
 			btnOrder.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
@@ -169,6 +176,11 @@ public class Review2_kwh extends JFrame {
 	private JButton getBtnReview() {
 		if (btnReview == null) {
 			btnReview = new JButton("");
+			btnReview.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					review();
+				}
+			});
 			btnReview.setBackground(new Color(131, 77, 30));
 			btnReview.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/btnReview.png")));
 			btnReview.setFocusPainted(false);
@@ -427,6 +439,30 @@ public class Review2_kwh extends JFrame {
 			}
 		});	 
 	    timer.start();
+	}
+	
+	private void home() {
+		Jty_Home hi = new Jty_Home();
+		hi.setVisible(true);
+		dispose();
+	}
+	
+	private void menu() {
+		Lju_MenuCoffee hi =new Lju_MenuCoffee();
+		hi.setVisible(true);
+		dispose();
+	}
+	
+	private void order() {
+		Lju_PurchaseHistory hi =new Lju_PurchaseHistory();
+		hi.setVisible(true);
+		dispose();
+	}
+	
+	private void review() {
+		Review2_kwh hi = new Review2_kwh();
+		hi.setVisible(true);
+		dispose();
 	}
 	
 }

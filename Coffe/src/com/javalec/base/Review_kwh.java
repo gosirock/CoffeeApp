@@ -130,6 +130,7 @@ public class Review_kwh extends JFrame {
 			btnHome.setBorderPainted(false);
 			btnHome.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					home();
 				}
 			});
 		}
@@ -141,6 +142,7 @@ public class Review_kwh extends JFrame {
 			btnMenu.setBackground(new Color(131, 77, 30));
 			btnMenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					menu();
 				}
 			});
 			btnMenu.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/btnMenu.png")));
@@ -152,6 +154,11 @@ public class Review_kwh extends JFrame {
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
+			btnOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					order();
+				}
+			});
 			btnOrder.setBackground(new Color(131, 77, 30));
 			btnOrder.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
@@ -162,6 +169,11 @@ public class Review_kwh extends JFrame {
 	private JButton getBtnReview() {
 		if (btnReview == null) {
 			btnReview = new JButton("");
+			btnReview.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					review();
+				}
+			});
 			btnReview.setBackground(new Color(131, 77, 30));
 			btnReview.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/btnReview.png")));
 			btnReview.setFocusPainted(false);
@@ -292,123 +304,55 @@ public class Review_kwh extends JFrame {
 	
 
 
-//	// postAction  리뷰등록
-//	private void postAction() {   // insert 
-//		
-//		String item_iid  = ShareVar.testitem;/// sharevar에서 넘어와야함
-//		String customer_cid = ShareVar.testid;
-//		String title = tfTitle.getText();
-//		
-//		if(title.equals("")) {
-//			JOptionPane.showMessageDialog(this, "제목을 입력해주세요.");
-//		}
-//		
-//		String comment = tfComment.getText();
-//		if(comment.equals("")) {
-//			JOptionPane.showMessageDialog(this, "리뷰내용을 입력해주세요.");
-//		}
-//		
-//		String imagename = "image";
-//		
-//		// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
-//		java.util.Date now = new java.util.Date();
-//		java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
-//		
-//
-//		
-//		// Image File
-//		FileInputStream input = null;    // inputstream 은 insert 
-//		
-//	
-//		File file = new File(tfFilePath.getText());   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
-//		try {
-//			input = new FileInputStream(file);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			
-//			
-//		}
-//		
-//		
-//	
-//			
-//		
-//	
-//		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
-//				
-//		boolean result = dao.postAction(); 
-//			if (result) {
-//				JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-//			}else {
-//				JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-//			}
-//		
-//		
-//		
-//			
-//			
-//	}
-//	
-	
+	// postAction  리뷰등록
 	private void postAction() {   // insert 
+	
+		String item_iid  = ShareVar.testitem;/// sharevar에서 넘어와야함
+		String customer_cid = ShareVar.testid;
+		String title = tfTitle.getText();
+		String comment = tfComment.getText();
+		String imagename = "image";
 		
-	    String item_iid  = ShareVar.testitem;/// sharevar에서 넘어와야함
-	    String customer_cid = ShareVar.testid;
-	    String title = tfTitle.getText();
-	    
-	    if (title.equals("")) {
-	        JOptionPane.showMessageDialog(this, "제목을 입력해주세요.");
-	        return; // 제목이 비어있을 경우 메소드 종료
-	    }
-	    
-	    String comment = tfComment.getText();
-	    if (comment.equals("")) {
-	        JOptionPane.showMessageDialog(this, "리뷰내용을 입력해주세요.");
-	        return; // 리뷰 내용이 비어있을 경우 메소드 종료
-	    }
-	    
-	    String imagename = "image";
-	    
-	    // 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
-	    java.util.Date now = new java.util.Date();
-	    java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
-	    
-	    // Image File
-	    FileInputStream input = null;    // inputstream 은 insert 
-	    Image image = null;
-	    
-	    if (lblImage.getIcon() != null) {
-	        // lblImage에서 이미지 가져오기
-	        ImageIcon imageIcon = (ImageIcon) lblImage.getIcon();
-	        image = imageIcon.getImage();
-	        
-	        // Image File
-	        File file = new File(tfFilePath.getText());   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
-	        try {
-	            input = new FileInputStream(file);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            // 예외 처리
-	        }
-	    } else {
-	        // 이미지가 없는 경우에 대한 처리
-	        // 이미지를 등록하지 않고 넘어가는 경우에 대한 로직을 추가하면 됩니다.
-	        // 기본 이미지를 사용하거나, 이미지를 선택하지 않아도 등록 가능하도록 로직을 구현하세요.
-	        // 예시로 기본 이미지를 사용하는 경우:
-	        lblImage.setIcon(new ImageIcon(getClass().getResource("/com/javalec/image/imagelabel.png")));
-	        ImageIcon imageIcon = (ImageIcon) lblImage.getIcon();
-	        image = imageIcon.getImage();
-	    }
-	    
-	    DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input, image);
-	    
-	    boolean result = dao.postAction(); 
-	    if (result) {
-	        JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE);
-	    } else {
-	        JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE);
-	    }
+		// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
+		java.util.Date now = new java.util.Date();
+		java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
+		
+
+		
+		// Image File
+		FileInputStream input = null;    // inputstream 은 insert 
+		
+	
+		File file = new File(tfFilePath.getText());   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
+		try {
+			input = new FileInputStream(file);
+		}catch(Exception e){
+			e.printStackTrace();
+			
+			
+		}
+		
+		boolean check = true;
+		if (title.equals("") || title.equals("") || comment.equals("") || comment.equals("comment")) {
+			check=false;
+		}
+			
+		if(check) {	
+		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
+				
+		boolean result = dao.postAction(); 
+			if (result) {
+				JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}else {
+				JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}
+		}else {
+			JOptionPane.showMessageDialog(this, "리뷰를 작성해주세요.");
+		}
+			
 	}
+	
+	
 
 	
 	
@@ -427,6 +371,7 @@ public class Review_kwh extends JFrame {
 		int ret = chooser.showOpenDialog(null);
 		if(ret != JFileChooser.APPROVE_OPTION) {
 			JOptionPane.showMessageDialog(this, "파일을 선택하지 않았습니다.", "경고",JOptionPane.ERROR_MESSAGE);
+			
 			return;
 		}
 		
@@ -466,6 +411,29 @@ public class Review_kwh extends JFrame {
 	}
 
 	
+	private void home() {
+		Jty_Home hi = new Jty_Home();
+		hi.setVisible(true);
+		dispose();
+	}
+	
+	private void menu() {
+		Lju_MenuCoffee hi =new Lju_MenuCoffee();
+		hi.setVisible(true);
+		dispose();
+	}
+	
+	private void order() {
+		Lju_PurchaseHistory hi =new Lju_PurchaseHistory();
+		hi.setVisible(true);
+		dispose();
+	}
+	
+	private void review() {
+		Review2_kwh hi = new Review2_kwh();
+		hi.setVisible(true);
+		dispose();
+	}
 }
 	
 
