@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.javalec.dao.DaoCoupon_kwh;
 import com.javalec.dao.Hsh_logindao;
 import com.javalec.util.ShareVar;
 
@@ -249,6 +250,8 @@ public class Hsh_login extends JFrame {
 			if(result == true) {
 				ShareVar.loginUserId = uid;
 				JOptionPane.showMessageDialog(this, uid+"님 환영합니다");
+				home();
+				deleteAction();
 				
 //				buy  = new Buy();
 //				buy.setVisible(true);											ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ메인화면으로 연결
@@ -268,6 +271,17 @@ public class Hsh_login extends JFrame {
 	}
 	
 
+	private void home() { // 로그인 버튼 홈으로 이동
+		Jty_Home hi = new Jty_Home();
+		hi.setVisible(true);
+		setVisible(false);
+	}
+	
+	
+	private void deleteAction() { // 이전날짜 쿠폰지우기
+		DaoCoupon_kwh delete = new DaoCoupon_kwh();
+		delete.deleteAction();
+	}
 	
 }
 	
