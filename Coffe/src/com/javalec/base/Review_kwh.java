@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
@@ -34,6 +36,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Date;
+import java.util.Calendar;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -54,6 +57,7 @@ public class Review_kwh extends JFrame {
 	private JButton btnCancel;
 	private JLabel lblImage;
 	private JTextField tfFilePath;
+	private JLabel lblClock;
 
 	/**
 	 * Launch the application.
@@ -102,6 +106,7 @@ public class Review_kwh extends JFrame {
 		contentPane.add(getBtnCancel());
 		contentPane.add(getLblImage());
 		contentPane.add(getTfFilePath());
+		contentPane.add(getLblClock());
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -235,6 +240,7 @@ public class Review_kwh extends JFrame {
 			btnPost.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					postAction();  
+					
 				}
 			});
 			btnPost.setForeground(Color.BLACK);
@@ -259,7 +265,12 @@ public class Review_kwh extends JFrame {
 	private JLabel getLblImage() {
 		if (lblImage == null) {
 			lblImage = new JLabel("");
-			lblImage.setBounds(18, 540, 105, 94);
+			lblImage.setBounds(18, 540, 110, 100);
+			ImageIcon imgicon = new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/imagelabel.png"));  // 라벨에 기본이미지넣어두기
+			Image img = imgicon.getImage();  // 이미지 크기조절
+			Image updateImg = img.getScaledInstance(110,100, Image.SCALE_SMOOTH);
+			ImageIcon upImg = new ImageIcon(updateImg);
+			lblImage.setIcon(upImg);
 		}
 		return lblImage;
 	}
@@ -281,50 +292,124 @@ public class Review_kwh extends JFrame {
 	
 
 
-	// postAction  리뷰등록
-	private void postAction() {   // insert 
-		String item_iid  = ShareVar.testitem;/// sharevar에서 넘어와야함
-		String customer_cid = ShareVar.testid;
-		String title = tfTitle.getText();
-		String comment = tfComment.getText();
-		String imagename = "image";
-		
-		
-		// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
-		java.util.Date now = new java.util.Date();
-		java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
-		
-
-		
-		// Image File
-		FileInputStream input = null;    // inputstream 은 insert 
-		
-		 
-		File file = new File(tfFilePath.getText());   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
-		try {
-			input = new FileInputStream(file);
-		}catch(Exception e){
-			e.printStackTrace();
-			
-			
-		}
-		
-		
-		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
-				
-		boolean result = dao.postAction(); 
-			//if(input == null)
-			//JOptionPane.showMessageDialog(this,"사진이 등록되지 않았습니다.","ERROR",JOptionPane.ERROR_MESSAGE);
-			if (result) {
-				JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			}else {
-				JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			}
-		
-		
-		
-	}
+//	// postAction  리뷰등록
+//	private void postAction() {   // insert 
+//		
+//		String item_iid  = ShareVar.testitem;/// sharevar에서 넘어와야함
+//		String customer_cid = ShareVar.testid;
+//		String title = tfTitle.getText();
+//		
+//		if(title.equals("")) {
+//			JOptionPane.showMessageDialog(this, "제목을 입력해주세요.");
+//		}
+//		
+//		String comment = tfComment.getText();
+//		if(comment.equals("")) {
+//			JOptionPane.showMessageDialog(this, "리뷰내용을 입력해주세요.");
+//		}
+//		
+//		String imagename = "image";
+//		
+//		// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
+//		java.util.Date now = new java.util.Date();
+//		java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
+//		
+//
+//		
+//		// Image File
+//		FileInputStream input = null;    // inputstream 은 insert 
+//		
+//	
+//		File file = new File(tfFilePath.getText());   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
+//		try {
+//			input = new FileInputStream(file);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			
+//			
+//		}
+//		
+//		
+//	
+//			
+//		
+//	
+//		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
+//				
+//		boolean result = dao.postAction(); 
+//			if (result) {
+//				JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+//			}else {
+//				JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+//			}
+//		
+//		
+//		
+//			
+//			
+//	}
+//	
 	
+	private void postAction() {   // insert 
+		
+	    String item_iid  = ShareVar.testitem;/// sharevar에서 넘어와야함
+	    String customer_cid = ShareVar.testid;
+	    String title = tfTitle.getText();
+	    
+	    if (title.equals("")) {
+	        JOptionPane.showMessageDialog(this, "제목을 입력해주세요.");
+	        return; // 제목이 비어있을 경우 메소드 종료
+	    }
+	    
+	    String comment = tfComment.getText();
+	    if (comment.equals("")) {
+	        JOptionPane.showMessageDialog(this, "리뷰내용을 입력해주세요.");
+	        return; // 리뷰 내용이 비어있을 경우 메소드 종료
+	    }
+	    
+	    String imagename = "image";
+	    
+	    // 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
+	    java.util.Date now = new java.util.Date();
+	    java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
+	    
+	    // Image File
+	    FileInputStream input = null;    // inputstream 은 insert 
+	    Image image = null;
+	    
+	    if (lblImage.getIcon() != null) {
+	        // lblImage에서 이미지 가져오기
+	        ImageIcon imageIcon = (ImageIcon) lblImage.getIcon();
+	        image = imageIcon.getImage();
+	        
+	        // Image File
+	        File file = new File(tfFilePath.getText());   // 이미지에서 헤드를 분리하는 작업 헤드 / 데이터
+	        try {
+	            input = new FileInputStream(file);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            // 예외 처리
+	        }
+	    } else {
+	        // 이미지가 없는 경우에 대한 처리
+	        // 이미지를 등록하지 않고 넘어가는 경우에 대한 로직을 추가하면 됩니다.
+	        // 기본 이미지를 사용하거나, 이미지를 선택하지 않아도 등록 가능하도록 로직을 구현하세요.
+	        // 예시로 기본 이미지를 사용하는 경우:
+	        lblImage.setIcon(new ImageIcon(getClass().getResource("/com/javalec/image/imagelabel.png")));
+	        ImageIcon imageIcon = (ImageIcon) lblImage.getIcon();
+	        image = imageIcon.getImage();
+	    }
+	    
+	    DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input, image);
+	    
+	    boolean result = dao.postAction(); 
+	    if (result) {
+	        JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE);
+	    } else {
+	        JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+
 	
 	
 	// 등록취소
@@ -354,12 +439,32 @@ public class Review_kwh extends JFrame {
 		
 		
 	}
+	private JLabel getLblClock() {
+		if (lblClock == null) {
+			lblClock = new JLabel("");
+			lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+			lblClock.setBounds(36, 15, 80, 16);
+			clockRun();
+		}
+		return lblClock;
+	}
+	
+	private void clockRun() {
+	    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Calendar t = Calendar.getInstance();
+				int hour = t.get(Calendar.HOUR);
+	            int min = t.get(Calendar.MINUTE);
+	            int second = t.get(Calendar.SECOND);
+	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            lblClock.setText(clock);
+			}
+		});	 
+	    timer.start();
+	}
 
-	
-	
-		
-	
-	
 	
 }
 	

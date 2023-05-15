@@ -39,6 +39,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.ImageConsumer;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JEditorPane;
@@ -63,6 +64,7 @@ public class Review2_kwh extends JFrame {
 	
 	
 	DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+	private JLabel lblClock;
 	/**
 	 * Launch the application.
 	 */
@@ -90,7 +92,7 @@ public class Review2_kwh extends JFrame {
 				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
 				tableInit();  // 테이블초기화
 				searchAction();  // 데이터불러오기
-				screenPartition(); //  radiobtn 이 눌러진 상태로 textfield 화면표시해주기
+				//screenPartition(); //  radiobtn 이 눌러진 상태로 textfield 화면표시해주기
 			}
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -111,6 +113,7 @@ public class Review2_kwh extends JFrame {
 		contentPane.add(getScrollPane());
 		contentPane.add(getRbRecent_1());
 		contentPane.add(getRbRecommendation_1());
+		contentPane.add(getLblClock());
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -238,6 +241,13 @@ public class Review2_kwh extends JFrame {
 	private JRadioButton getRbRecent_1() {
 		if (rbRecent_1 == null) {
 			rbRecent_1 = new JRadioButton("최신순");
+			rbRecent_1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					tableInit();
+					searchAction();  
+				}
+			});
 			rbRecent_1.setSelected(true);
 			buttonGroup.add(rbRecent_1);
 			buttonGroup.add(rbRecent_1);
@@ -249,6 +259,13 @@ public class Review2_kwh extends JFrame {
 	private JRadioButton getRbRecommendation_1() {
 		if (rbRecommendation_1 == null) {
 			rbRecommendation_1 = new JRadioButton("인기순");
+			rbRecommendation_1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					tableInit();
+					checkAction();  // 인기순 상품명 중 리뷰가 많이 작성된 순으로
+				}
+			});
 			buttonGroup.add(rbRecommendation_1);
 			buttonGroup.add(rbRecommendation_1);
 			rbRecommendation_1.setBounds(77, 111, 65, 23);
@@ -349,7 +366,7 @@ public class Review2_kwh extends JFrame {
 			java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
 			
 			JLabel imageLabel = new JLabel(upImg);
-			Object[] qTxt = {imageLabel,"<html>"+temp+"<br><br>"+dtoList.get(i).getIname()+"<p><p>"+ Integer.toString(dtoList.get(i).getIprice())+"<p><p>"+dtoList.get(i).getTitle()+"<p><p>"+dtoList.get(i).getComment()+"<p><p>"+dtoList.get(i).getRinsertdate()+"<p></html>"};
+			Object[] qTxt = {upImg,"<html>"+temp+"<br><br>"+dtoList.get(i).getIname()+"<p><p>"+ Integer.toString(dtoList.get(i).getIprice())+"<p><p>"+dtoList.get(i).getTitle()+"<p><p>"+dtoList.get(i).getComment()+"<p><p>"+dtoList.get(i).getRinsertdate()+"<p></html>"};
 			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
 		
 		}
@@ -371,40 +388,46 @@ public class Review2_kwh extends JFrame {
 
 
 
-	private void screenPartition() {
-		
-		// 최신순버튼
-		if (rbRecent_1.isSelected()) {//날짜별로 정렬
-			System.out.println("최신");
-			
-			tableInit();
-			searchAction();  // 하면 최신순으로 돌아옴
-		
-		}
-
-		// 인기순버튼
-		
-		if (rbRecommendation_1.isSelected()) {// count정렬
-			System.out.println("인기");
-			tableInit();
-			checkAction();  // 추천순 상품명 중 리뷰가 많이 작성된 순으로
-			
-		
-		}
-		
+	
 		
 		
 
+	
+	
+
+	
+	
+	
+	
+	
+
+
+	
+	private JLabel getLblClock() {
+		if (lblClock == null) {
+			lblClock = new JLabel("");
+			lblClock.setBounds(36, 15, 80, 16);
+			lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+			clockRun();
+		}
+		return lblClock;
 	}
 	
-
-	
-	
-	
-	
-	
-
-
+	private void clockRun() {
+	    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Calendar t = Calendar.getInstance();
+				int hour = t.get(Calendar.HOUR);
+	            int min = t.get(Calendar.MINUTE);
+	            int second = t.get(Calendar.SECOND);
+	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            lblClock.setText(clock);
+			}
+		});	 
+	    timer.start();
+	}
 	
 }
 	
