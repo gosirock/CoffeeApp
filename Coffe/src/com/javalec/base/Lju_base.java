@@ -23,10 +23,14 @@ public class Lju_base extends JFrame {
 	private JButton btnOrder;
 	private JButton btnReview;
 	private JLabel lblNewLabel_1;
+	private JLabel lblPpl;
 
 	/**
 	 * Launch the application.
 	 */
+	
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,6 +58,7 @@ public class Lju_base extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(getPanel());
 		contentPane.add(getLblNewLabel_1());
+		contentPane.add(getLblPpl());
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -122,4 +127,11 @@ public class Lju_base extends JFrame {
 		return lblNewLabel_1;
 	}
 	
+	private JLabel getLblPpl() {
+		if (lblPpl == null) {
+			lblPpl = new JLabel("");
+			lblPpl.setBounds(12, 94, 345, 225);
+		}
+		return lblPpl;
+	}
 }
