@@ -45,6 +45,7 @@ public class Hsh_login extends JFrame {
 	private JButton btnGomenu;
 	private JLabel lblCochoc;
 	private JPasswordField pfCpw;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -88,14 +89,15 @@ public class Hsh_login extends JFrame {
 		contentPane.add(getBtnJoin());
 		contentPane.add(getLblTime());
 		contentPane.add(getLblCochoc());
-		contentPane.add(getLblba());
 		contentPane.add(getLblkong());
 		contentPane.add(getLblCho());
-		contentPane.add(getLblCid());
 		contentPane.add(getTfCid());
+		contentPane.add(getLblCid());
+		contentPane.add(getPfCpw());
 		contentPane.add(getLblCpw());
 		contentPane.add(getBtnGomenu());
-		contentPane.add(getPfCpw());
+		contentPane.add(getLblNewLabel_1());
+		contentPane.add(getLblba());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -123,7 +125,7 @@ public class Hsh_login extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnLogin.setBounds(60, 187, 135, 36);
+			btnLogin.setBounds(59, 207, 135, 36);
 		}
 		return btnLogin;
 	}
@@ -138,7 +140,7 @@ public class Hsh_login extends JFrame {
 					joinAction();
 				}
 			});
-			btnJoin.setBounds(60, 187, 270, 36);
+			btnJoin.setBounds(69, 207, 270, 36);
 		}
 		return btnJoin;
 	}
@@ -162,7 +164,7 @@ public class Hsh_login extends JFrame {
 		if (lblkong == null) {
 			lblkong = new JLabel("");
 			lblkong.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/kong.png")));
-			lblkong.setBounds(0, 648, 234, 168);
+			lblkong.setBounds(0, 676, 234, 168);
 		}
 		return lblkong;
 	}
@@ -170,22 +172,25 @@ public class Hsh_login extends JFrame {
 		if (lblCho == null) {
 			lblCho = new JLabel("");
 			lblCho.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/cho.png")));
-			lblCho.setBounds(173, 630, 217, 186);
+			lblCho.setBounds(183, 658, 217, 186);
 		}
 		return lblCho;
 	}
 	private JLabel getLblCid() {
 		if (lblCid == null) {
 			lblCid = new JLabel("");
+			lblCid.setForeground(new Color(130, 77, 30));
 			lblCid.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/Cid.png")));
-			lblCid.setBounds(60, 272, 270, 21);
+			lblCid.setBounds(69, 292, 270, 21);
 		}
 		return lblCid;
 	}
 	private JTextField getTfCid() {
 		if (tfCid == null) {
 			tfCid = new JTextField();
-			tfCid.setBounds(122, 265, 208, 26);
+			tfCid.setForeground(new Color(130, 77, 30));
+			tfCid.setBackground(new Color(248, 227, 181));
+			tfCid.setBounds(131, 285, 208, 26);
 			tfCid.setColumns(10);
 		}
 		return tfCid;
@@ -193,8 +198,10 @@ public class Hsh_login extends JFrame {
 	private JLabel getLblCpw() {
 		if (lblCpw == null) {
 			lblCpw = new JLabel("");
+			lblCpw.setBackground(new Color(252, 242, 217));
+			lblCpw.setForeground(new Color(130, 77, 30));
 			lblCpw.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/Cpw.png")));
-			lblCpw.setBounds(60, 323, 270, 21);
+			lblCpw.setBounds(69, 343, 270, 21);
 		}
 		return lblCpw;
 	}
@@ -209,15 +216,15 @@ public class Hsh_login extends JFrame {
 			btnGomenu.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/menu.png")));
 			btnGomenu.setFocusPainted(false);
 			btnGomenu.setBorderPainted(false);
-			btnGomenu.setBounds(60, 407, 270, 50);
+			btnGomenu.setBounds(69, 427, 270, 50);
 		}
 		return btnGomenu;
 	}
 	private JLabel getLblCochoc() {
 		if (lblCochoc == null) {
 			lblCochoc = new JLabel("");
-			lblCochoc.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/cochok.png")));
-			lblCochoc.setBounds(105, 73, 181, 38);
+			lblCochoc.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/Group 31.png")));
+			lblCochoc.setBounds(105, 73, 181, 50);
 		}
 		return lblCochoc;
 	}
@@ -265,7 +272,9 @@ public class Hsh_login extends JFrame {
 	private JPasswordField getPfCpw() {
 		if (pfCpw == null) {
 			pfCpw = new JPasswordField();
-			pfCpw.setBounds(122, 318, 208, 26);
+			pfCpw.setForeground(new Color(130, 77, 30));
+			pfCpw.setBackground(new Color(248, 227, 181));
+			pfCpw.setBounds(131, 338, 208, 26);
 		}
 		return pfCpw;
 	}
@@ -283,5 +292,13 @@ public class Hsh_login extends JFrame {
 		delete.deleteAction();
 	}
 	
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/KmsRectangle.png")));
+			lblNewLabel_1.setBounds(38, 167, 336, 497);
+		}
+		return lblNewLabel_1;
+	}
 }
 	
