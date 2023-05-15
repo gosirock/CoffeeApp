@@ -75,7 +75,7 @@ public class Hsh_login extends JFrame {
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel_3());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 390, 844);
+		setBounds(100, 100, 390, 872);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(248, 227, 182));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -228,6 +228,9 @@ public class Hsh_login extends JFrame {
 		hi.setVisible(true);
 		setVisible(false);
 	}	
+	
+	
+	
 	private void login() {
 		String uid = tfCid.getText();
 		String upassword = pfCpw.getText();
