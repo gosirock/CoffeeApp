@@ -24,6 +24,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Calendar;
+
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -65,6 +67,7 @@ public class Join_kwh extends JFrame {
 	private JLabel lblPassCheck;
 	private JPasswordField pfPassword;
 	private JPasswordField pfPassword2;
+	private JLabel lblClock;
 
 	/**
 	 * Launch the application.
@@ -104,7 +107,6 @@ public class Join_kwh extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(getLblNewLabel_1());
 		contentPane.add(getLblCochoc());
-		contentPane.add(getLblBa());
 		contentPane.add(getLblKong());
 		contentPane.add(getLblCho());
 		contentPane.add(getBtnJoin());
@@ -118,6 +120,7 @@ public class Join_kwh extends JFrame {
 		contentPane.add(getLblNewLabel_6());
 		contentPane.add(getLblNewLabel_7());
 		contentPane.add(getBtnCheck());
+		contentPane.add(getLblBa());
 		contentPane.add(getTfName());
 		contentPane.add(getTfID());
 		contentPane.add(getTfPhone());
@@ -131,6 +134,7 @@ public class Join_kwh extends JFrame {
 		contentPane.add(getLblPassCheck());
 		contentPane.add(getPfPassword());
 		contentPane.add(getPfPassword2());
+		contentPane.add(getLblClock());
 	}
 	
 	private JLabel getLblNewLabel_1() {
@@ -148,6 +152,15 @@ public class Join_kwh extends JFrame {
 			lblCochoc.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/cochok.png")));
 		}
 		return lblCochoc;
+	}
+	private JLabel getLblClock() {
+		if (lblClock == null) {
+			lblClock = new JLabel("");
+			lblClock.setBounds(36, 15, 61, 16);
+			lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+			clockRun();
+		}
+		return lblClock;
 	}
 	private JLabel getLblBa() {
 		if (lblBa == null) {
@@ -627,5 +640,24 @@ public class Join_kwh extends JFrame {
 
 
 }	
+	
+	
+	
+	private void clockRun() {
+	    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Calendar t = Calendar.getInstance();
+				int hour = t.get(Calendar.HOUR);
+	            int min = t.get(Calendar.MINUTE);
+	            int second = t.get(Calendar.SECOND);
+	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            lblClock.setText(clock);
+			}
+		});	 
+	    timer.start();
+	}
+
 }
 

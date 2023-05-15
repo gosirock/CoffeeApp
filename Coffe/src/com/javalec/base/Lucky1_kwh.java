@@ -35,6 +35,7 @@ public class Lucky1_kwh extends JDialog {
 	 private JLabel lblMessage;
 	 private JLabel lblPresent;
 	 private JLabel lblFirecracker;
+	 String message = "";
 
 	/**
 	 * Launch the application.
@@ -189,6 +190,14 @@ public class Lucky1_kwh extends JDialog {
 	}
 
 
+		
+	
+	
+	
+	
+	
+	
+	
 		// 쿠폰등록
 		public void insertAction() {
 			String customer_cid = ShareVar.testid;
@@ -211,9 +220,10 @@ public class Lucky1_kwh extends JDialog {
 			boolean result = dao.insertAction(); 
 			
 			if (result) {
+				message = Integer.toString(discount)+"%할인" ;
 				
-				
-				JOptionPane.showMessageDialog(this,  "쿠폰이 등록되었습니다.", "Congratulation!!",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+				dispose();
+				JOptionPane.showMessageDialog(this,  message+"쿠폰이 등록되었습니다.", "Congratulation!!",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 			}else {
 				JOptionPane.showMessageDialog(this,  "쿠폰 등록이 실패했습니다.", "Error",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 			}
