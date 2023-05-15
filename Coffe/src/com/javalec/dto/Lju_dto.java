@@ -65,12 +65,13 @@ public class Lju_dto {
 
 
 
-	public Lju_dto(String pdate, String iname, int pqty, int psaleprice) {
+	public Lju_dto(String pdate, String iname, int pqty, int psaleprice, String iimagename)  {
 		super();
 		this.pdate = pdate;
 		this.iname = iname;
 		this.pqty = pqty;
 		this.psaleprice = psaleprice;
+		this.iimagename = iimagename;
 	}
 
 

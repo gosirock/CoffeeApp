@@ -1,5 +1,8 @@
 package com.javalec.dao;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -48,7 +51,7 @@ public class Lju_Dao_PurchaseHistory {
 	public ArrayList<Lju_dto> History(){
 		ArrayList<Lju_dto> dtoList = new ArrayList<Lju_dto>();
 		
-		String whereDefault = "select p.pdate, sum(p.pqty), sum(p.pqty*p.psaleprice), (select max(i.iname))";
+		String whereDefault = "select p.pdate, sum(p.pqty), sum(p.pqty*p.psaleprice), (select max(i.iname)), (select max(i.iimagename)),(select min(i.iimage))";
 		String whereDefault1 = " from customer c, item i, purchase p";
 		String whereDefault2 = " where c.cid = p.customer_cid and i.iid = p.item_iid and cid = '"+ ShareVar.loginUserId +"'";
 		String whereDefault3 = " group by pdate order by pdate desc";
@@ -64,9 +67,17 @@ public class Lju_Dao_PurchaseHistory {
 				int pqty = rs.getInt(2);
 				int psaleprice = rs.getInt(3);
 				String iname = rs.getString(4);
+				String iimagename = rs.getString(5);
 				
+				File file = new File("./" + iimagename);
+				FileOutputStream output = new FileOutputStream(file);
+				InputStream input = rs.getBinaryStream(6);
 				
-				Lju_dto dto = new Lju_dto(pdate, iname, pqty, psaleprice);
+				byte[] buffer = new byte[1024];
+				while(input.read(buffer) > 0) {
+					output.write(buffer);
+				}
+				Lju_dto dto = new Lju_dto(pdate, iname, pqty, psaleprice, iimagename);
 				dtoList.add(dto);
 			}
 			conn_mysql.close();
@@ -85,6 +96,7 @@ public class Lju_Dao_PurchaseHistory {
 		PreparedStatement psCoupon = null;
 		String coupon = "";
 		String dis;
+		int j = 0;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
@@ -109,6 +121,8 @@ public class Lju_Dao_PurchaseHistory {
 				coupon = "update coupon set cUse = 1 where customer_cid = '"+ShareVar.loginUserId+"'";
 			}else {
 				dis = "1";
+				j = Integer.parseInt(dis);
+				
 			}
 			
 		
@@ -118,10 +132,16 @@ public class Lju_Dao_PurchaseHistory {
 				String q = "delete from basket where customer_cid = '" + ShareVar.loginUserId + "'";
 				ps = conn_mysql.prepareStatement(query + query1 + query2);
 				pss = conn_mysql.prepareStatement(q);
-				psCoupon = conn_mysql.prepareStatement(coupon);
 				ps.executeUpdate();
 				pss.executeUpdate();
-				psCoupon.executeUpdate();
+				
+				if(j == 1) {
+					
+				}else {
+					psCoupon = conn_mysql.prepareStatement(coupon);
+					psCoupon.executeUpdate();
+					
+				}
 				conn_mysql.close();	
 				
 				
