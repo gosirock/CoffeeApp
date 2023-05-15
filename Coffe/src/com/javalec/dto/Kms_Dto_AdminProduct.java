@@ -63,6 +63,21 @@ public class Kms_Dto_AdminProduct {
 
 
 
+	public Kms_Dto_AdminProduct(String iid, String iname, int iprice, int istock, String iimagename,
+			FileInputStream iimage, String idescription) {
+		super();
+		this.iid = iid;
+		this.iname = iname;
+		this.iprice = iprice;
+		this.istock = istock;
+		this.iimagename = iimagename;
+		this.iimage = iimage;
+		this.idescription = idescription;
+	}
+
+
+
+
 	public Kms_Dto_AdminProduct() {
 		// TODO Auto-generated constructor stub
 	}
