@@ -170,33 +170,40 @@ public Jty_Dao_Profile(String cname, String cid, String cpassword, String cphone
 	}
 	
 	public boolean allUpdateAction() {
-		PreparedStatement ps = null ;
+	    PreparedStatement ps = null;
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 
-	        String query = "UPDATE customer SET cid = ?, cpassword = ?, cname = ?, cphone = ?, cemail = ?, caddress = ? ";
-	        String query1 =  "WHERE cid = ?";
-	        
-	        ps = conn_mysql.prepareStatement(query + query1);
-	       // ps.setString(1, ShareVar.loginUserId);
-
+	        // Update customer record
+	        String updateCustomerQuery = "UPDATE customer c " +
+	                                     "JOIN basket b ON c.cid = b.customer_cid " +
+	                                     "JOIN purchase p ON c.cid = p.customer_cid " +
+	                                     "JOIN coupon cp ON c.cid = cp.customer_cid " +
+	                                     "JOIN review r ON c.cid = r.customer_cid " +
+	                                     "SET c.cid = ?, c.cpassword = ?, c.cname = ?, c.cphone = ?, c.cemail = ?, c.caddress = ? " +
+	                                     "WHERE c.cid = ?";
+	        ps = conn_mysql.prepareStatement(updateCustomerQuery);
 	        ps.setString(1, cid.trim());
 	        ps.setString(2, cpassword.trim());
-	        ps.setString(3, cname.trim());   // 물음표 2번
+	        ps.setString(3, cname.trim());
 	        ps.setString(4, cphone.trim());
 	        ps.setString(5, cemail.trim());
-	        ps.setString(6, caddress.trim());   // 물음표 6번
+	        ps.setString(6, caddress.trim());
 	        ps.setString(7, ShareVar.loginUserId);
-
 	        ps.executeUpdate();
-	        conn_mysql.close();
 
+	        conn_mysql.close();
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return false;
 	    }
 	    return true;
 	}
+
+
+
+
+
 	
 }
