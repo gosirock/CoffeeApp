@@ -293,8 +293,8 @@ public class Review2_kwh extends JFrame {
 	
 	private void tableInit() {
 
-		outerTable.addColumn("Picutre");
-		outerTable.addColumn("Contents");
+		outerTable.addColumn("");
+		outerTable.addColumn("");
 		outerTable.setColumnCount(2);
 		
 		int i = outerTable.getRowCount();
@@ -338,7 +338,7 @@ public class Review2_kwh extends JFrame {
 			
 			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getRimagename());
 			Image img = imgicon.getImage();  // 이미지 크기조절
-			Image updateImg = img.getScaledInstance(125, 130, Image.SCALE_SMOOTH);
+			Image updateImg = img.getScaledInstance(110, 100, Image.SCALE_SMOOTH);
 			ImageIcon upImg = new ImageIcon(updateImg);
 			
 			
@@ -369,7 +369,7 @@ public class Review2_kwh extends JFrame {
 			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getRimagename());
 			
 			Image img = imgicon.getImage();  // 이미지 크기조절
-			Image updateImg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+			Image updateImg = img.getScaledInstance(110, 100, Image.SCALE_SMOOTH);
 			ImageIcon upImg = new ImageIcon(updateImg);
 			
 			

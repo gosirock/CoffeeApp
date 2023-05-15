@@ -64,6 +64,8 @@ public class Lucky1_kwh extends JDialog {
 			public void windowOpened(WindowEvent e) {
 				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
 				btnGet.setText("Click!");
+				deleteDate();
+				
 			}
 		});
 		setBounds(100, 100, 390, 390);		
@@ -231,6 +233,11 @@ public class Lucky1_kwh extends JDialog {
 			}
 		}
 
+		
+		private void deleteDate() {
+			DaoCoupon_kwh dao = new DaoCoupon_kwh();
+			dao.deleteAction();
+		}
 
 
 

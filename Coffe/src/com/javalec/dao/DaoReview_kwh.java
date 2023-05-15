@@ -38,7 +38,7 @@ public class DaoReview_kwh {
 			
 			Image image;
 
-			
+			File file;
 			// File
 			FileInputStream rimage;
 			
@@ -47,6 +47,7 @@ public class DaoReview_kwh {
 			}
 			
 			
+
 			
 		
 			
@@ -66,18 +67,7 @@ public class DaoReview_kwh {
 			
 			
 			// 기본사진을 등록하는 생성자
-			public DaoReview_kwh(String item_iid, String customer_cid, String title, String comment, String rimagename, Date rinsertdate,
-					FileInputStream rimage, Image image) {
-				super();
-				this.item_iid = item_iid;
-				this.customer_cid=customer_cid;
-				this.title = title;
-				this.comment = comment;
-				this.rimagename = rimagename;
-				this.rinsertdate = rinsertdate;
-				this.rimage = rimage;
-				this.image = image;
-			}
+			
 			
 			
 			
@@ -133,6 +123,13 @@ public class DaoReview_kwh {
 			
 			//데이터들 불러와서 한줄에넣기
 			
+			
+
+
+
+
+
+
 			public ArrayList<DtoReview_kwh> selectList(){
 
 				ArrayList<DtoReview_kwh> dtoList = new ArrayList<DtoReview_kwh>(); 
