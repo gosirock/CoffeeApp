@@ -319,39 +319,7 @@ public class Review_kwh extends JFrame {
 		java.util.Date now = new java.util.Date();
 		java.sql.Date rinsertdate = new java.sql.Date(now.getTime());
 		
-
-		// 이미지를 등록하지 않으면 기본이미지를 다오에 넘겨줘야함
-		if (tfFilePath.getText().equals("")) {
-			FileInputStream input1 = null;    // inputstream 은 insert  input1은 lblImage에 기본이미지
-			
-			
-			// lblImage에 있는 기본이미지를 데이터베이스에 갖다주기 위한 작업
-			String filePath = Review_kwh.class.getResource("/com/javalec/image/imagelabel.png").getFile();
-			filePath = URLDecoder.decode(filePath, StandardCharsets.UTF_8);
-			File file1 = new File(filePath);
-			
-			// 이미지 파일 경로
-			try {
-			    input1 = new FileInputStream(file1);  // 이미지 파일을 FileInputStream으로 읽어옴
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}	
-			
-			DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input1);
-			boolean result = dao.postAction();
-			
-			
-			if (result) {
-				JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			}else {
-				JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			}
-		}else {	
-		
-			
-			
-			
-			// Image File
+		// Image File
 		FileInputStream input = null;    // inputstream 은 insert 
 		
 	
@@ -360,12 +328,34 @@ public class Review_kwh extends JFrame {
 			input = new FileInputStream(file);
 		}catch(Exception e){
 			e.printStackTrace();
-			
-			
 		}
 		
-		
-		
+		// filePath(); 를 통해 받은 값이 tfFilePath에 없다
+		//if(tfFilePath.getText().equals("")){
+				
+			
+			//	input = null;
+			//	String filePath = Review_kwh.class.getResource("/com/javalec/image/imagelabel.png").getFile();
+			//	filePath = URLDecoder.decode(filePath, StandardCharsets.UTF_8);
+			//	file = new File(tfFilePath.getText());
+			//	try {
+			////		input = new FileInputStream(file);
+			//	}catch(Exception e){
+			//		e.printStackTrace();
+			//	}
+				
+				
+			//	DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
+			//	boolean result = dao.postAction();
+				
+			//	
+			//	if (result) {
+			//		JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			//	}else {
+			//		JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			//	}
+			
+	//	}
 		
 		
 		boolean check = true;
@@ -374,7 +364,6 @@ public class Review_kwh extends JFrame {
 		}
 			
 		if(check) {	
-			imagename = tfFilePath.getText();
 		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
 				
 		boolean result = dao.postAction(); 
@@ -387,7 +376,7 @@ public class Review_kwh extends JFrame {
 			JOptionPane.showMessageDialog(this, "리뷰를 작성해주세요.");
 		}
 		}	
-	}
+	
 	
 	
 
