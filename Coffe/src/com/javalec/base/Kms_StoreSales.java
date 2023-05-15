@@ -237,20 +237,20 @@ public class Kms_StoreSales extends JFrame {
 	
 	}
 	
-	private void searchAction() {
-		Kms_Dao_StoreSales dao = new Kms_Dao_StoreSales();
-		//dao.selectList();   // Dao 에서 return 을 준다  받아야함
-		ArrayList<Kms_Dto_StoreSales> dtoList = dao.selectList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
-		int listCount = dtoList.size();
-		
-		for( int i = 0; i < listCount ; i++) {
-			String[] qTxt = {Integer.toString(dtoList.get(i).getSeqno()), dtoList.get(i).getDate(), Integer.toString(dtoList.get(i).getPrice())};
-			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
-			
-		}
-		//tfCount.setText(Integer.toString(listCount));
-		
-	}
+//	private void searchAction() {
+//		Kms_Dao_StoreSales dao = new Kms_Dao_StoreSales();
+//		//dao.selectList();   // Dao 에서 return 을 준다  받아야함
+//		ArrayList<Kms_Dto_StoreSales> dtoList = dao.selectList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
+//		int listCount = dtoList.size();
+//		
+//		for( int i = 0; i < listCount ; i++) {
+//			String[] qTxt = {Integer.toString(dtoList.get(i).getSeqno()), dtoList.get(i).getDate(), Integer.toString(dtoList.get(i).getPrice())};
+//			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
+//			
+//		}
+//		//tfCount.setText(Integer.toString(listCount));
+//		
+//	}
 
 		private void backAction() {
 			Kms_AdminMain adminMain = new Kms_AdminMain();

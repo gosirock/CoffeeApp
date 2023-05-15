@@ -7,12 +7,19 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.javalec.dao.Kms_Dao_StoreInfo;
+import com.javalec.dto.Kms_Dto_StoreInfo;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Kms_StoreInfo extends JFrame {
 	
@@ -26,7 +33,7 @@ public class Kms_StoreInfo extends JFrame {
 	private JPanel panel;
 	private JLabel storeInfo;
 	private JTextField tfStoreName;
-	private JTextField tfAdminId;
+	private JTextField tfScompanyno;
 	private JTextField tfOpenTime;
 	private JTextField tfCloseTime;
 	private JTextField tfStoreTel;
@@ -39,6 +46,7 @@ public class Kms_StoreInfo extends JFrame {
 	private JLabel lblStoreAddress;
 	private JButton btnUpdateStore;
 	private JButton btnBack;
+	String message;
 	/**
 	 * Launch the application.
 	 */
@@ -59,6 +67,12 @@ public class Kms_StoreInfo extends JFrame {
 	 * Create the frame.
 	 */
 	public Kms_StoreInfo() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				storeInfo();
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);
 		contentPane = new JPanel();
@@ -129,7 +143,7 @@ public class Kms_StoreInfo extends JFrame {
 			panel.setBounds(35, 161, 320, 481);
 			panel.setLayout(null);
 			panel.add(getTfStoreName());
-			panel.add(getTfAdminId());
+			panel.add(getTfScompanyno());
 			panel.add(getTfOpenTime());
 			panel.add(getTfCloseTime());
 			panel.add(getTfStoreTel());
@@ -162,14 +176,14 @@ public class Kms_StoreInfo extends JFrame {
 		}
 		return tfStoreName;
 	}
-	private JTextField getTfAdminId() {
-		if (tfAdminId == null) {
-			tfAdminId = new JTextField();
-			tfAdminId.setColumns(10);
-			tfAdminId.setBounds(126, 139, 130, 26);
-			tfAdminId.setBackground(new Color(252, 242, 217));	
+	private JTextField getTfScompanyno() {
+		if (tfScompanyno == null) {
+			tfScompanyno = new JTextField();
+			tfScompanyno.setColumns(10);
+			tfScompanyno.setBounds(126, 139, 130, 26);
+			tfScompanyno.setBackground(new Color(252, 242, 217));	
 		}
-		return tfAdminId;
+		return tfScompanyno;
 	}
 	private JTextField getTfOpenTime() {
 		if (tfOpenTime == null) {
@@ -259,6 +273,12 @@ public class Kms_StoreInfo extends JFrame {
 	private JButton getBtnUpdateStore() {
 		if (btnUpdateStore == null) {
 			btnUpdateStore = new JButton("");
+			btnUpdateStore.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+//					actionpartition();
+					updateAction();
+				}
+			});
 			btnUpdateStore.setBounds(25, 411, 270, 41);
 			btnUpdateStore.setIcon(new ImageIcon(Kms_StoreInfo.class.getResource("/com/javalec/image/update.png")));
 		}
@@ -287,4 +307,94 @@ public class Kms_StoreInfo extends JFrame {
 		adminMain.setVisible(true);
 		dispose();
 	}
+	
+	private void storeInfo() {
+		Kms_Dao_StoreInfo dao_storeinfo = new Kms_Dao_StoreInfo();
+		Kms_Dto_StoreInfo dto_storeinfo = dao_storeinfo.StoreInfo();
+
+		if (dto_storeinfo != null) {
+			tfStoreName.setText(dto_storeinfo.getSname());
+			tfScompanyno.setText(dto_storeinfo.getCnum());
+			tfOpenTime.setText(dto_storeinfo.getOpentime());
+			tfCloseTime.setText(dto_storeinfo.getClosetime());
+			tfStoreTel.setText(dto_storeinfo.getTelno());
+			tfStoreAddress.setText(dto_storeinfo.getAddress());
+		}
+	}
+	
+	private void updateAction() {
+		String storename = tfStoreName.getText();
+		String scnum = tfScompanyno.getText();
+		String opentime = tfOpenTime.getText();
+		String closetime = tfCloseTime.getText();
+		String storetel = tfStoreTel.getText();
+		String storeaddress = tfStoreAddress.getText();
+		
+		Kms_Dao_StoreInfo dao = new Kms_Dao_StoreInfo(storename, scnum, opentime, closetime, storetel, storeaddress);
+		boolean result = dao.updateAction();
+		
+		if (result) {
+			int i_chk = insertFieldCheck();
+			if (i_chk == 0) {
+				JOptionPane.showMessageDialog(this, "가게 정보 수정\n"+tfStoreName.getText()+ " 정보가 수정었습니다."); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}else {
+				JOptionPane.showMessageDialog(this, "\n"+message+ "입력하세요!", "가게 정보",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			} 
+			
+		}else {
+			JOptionPane.showMessageDialog(this, "가게 정보 수정\n"+ "수정 중 문제가 발생했습니다."); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+		}
+	}
+	
+	
+		private int insertFieldCheck() {
+			int i = 0;
+			
+			
+			if(tfStoreName.getText().trim().length() == 0) {
+				i++;
+				message = "StoreName을 ";
+				tfStoreName.requestFocus();  // 어디 자리가 비었는지 커서로 보여
+			}
+			if(tfScompanyno.getText().trim().length() == 0) {
+				i++;
+				message = "Scompanyno를 ";
+				tfScompanyno.requestFocus();
+			}
+			if(tfOpenTime.getText().trim().length() == 0) {
+				i++;
+				message = "OpenTime을 ";
+				tfOpenTime.requestFocus();
+			}
+			if(tfCloseTime.getText().trim().length() == 0) {
+				i++;
+				message = "CloseTime을 ";
+				tfCloseTime.requestFocus();
+			}
+			if(tfStoreTel.getText().trim().length() == 0) {
+				i++;
+				message = "StoreTel을 ";
+				tfStoreTel.requestFocus();
+			}
+			if(tfStoreAddress.getText().trim().length() == 0) {
+				i++;
+				message = "StoreAddress을 ";
+				tfStoreAddress.requestFocus();
+			}
+			return i;
+			
+		}
+		
+		private void actionpartition() {
+			int i_chk = insertFieldCheck();
+			if (i_chk == 0) {
+
+			}else {
+				JOptionPane.showMessageDialog(this, "\n"+message+ "입력하세요!", "가게 정보",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			} 
+		
+		}
+		
+	
+
 }
