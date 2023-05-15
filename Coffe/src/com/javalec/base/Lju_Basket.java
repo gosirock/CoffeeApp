@@ -564,7 +564,7 @@ public class Lju_Basket extends JFrame {
 			btnPay.setIcon(new ImageIcon(Lju_Basket.class.getResource("/com/javalec/image/Grou 55.png")));
 			btnPay.setFocusPainted(false);
 			btnPay.setBorderPainted(false);
-			btnPay.setBounds(60, 680, 270, 50);
+			btnPay.setBounds(60, 660, 270, 50);
 		}
 		return btnPay;
 	}

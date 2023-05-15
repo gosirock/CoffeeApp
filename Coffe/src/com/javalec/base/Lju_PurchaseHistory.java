@@ -436,7 +436,13 @@ private void closeingAction() {	//사진지우기
 	
 	private JTable getInnerTable() {
 		if (innerTable == null) {
-			innerTable = new JTable();
+			innerTable = new JTable() {
+				public Class getColumnClass(int Column) {					// 컬럼에 오브젝트 이미지 넣을거야
+				return (Column == 0) ? Icon.class : Object.class;
+			}
+				
+			};
+			innerTable.setAutoCreateRowSorter(true);
 			innerTable.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -457,7 +463,7 @@ private void closeingAction() {	//사진지우기
 			innerTable.setForeground(new Color(130, 77, 30));
 			innerTable.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 			innerTable.setModel(outerTable); 	//<<<<< 추가
-			innerTable.setRowHeight(60);  		//<<<<< 높이조절
+			innerTable.setRowHeight(130);  		//<<<<< 높이조절
 			innerTable.setFillsViewportHeight(true);
 
 			tableInit();
@@ -510,19 +516,27 @@ private void closeingAction() {	//사진지우기
 			
 			for(int i = 0; i< listCount; i++) {
 				
+				ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
+				Image img = imgicon.getImage();
+				
+				Image updateImg = img.getScaledInstance(100, 130, Image.SCALE_SMOOTH);
+				ImageIcon upImg = new ImageIcon(updateImg);
+				
 				
 				String pdate = dtoList.get(i).getPdate();
 				String iname = dtoList.get(i).getIname();
 				int qty = dtoList.get(i).getPqty();
 				int price = dtoList.get(i).getPsaleprice();
 				
-				String[] qTxt = {pdate, iname,"<html>외 "+(qty-1)+"개<br> "+price+"원</html>"};
+				Object[] qTxt = {upImg, "<html>"+ iname + "<br><font size = 3>"+pdate+"</font><br>" ,"<html>외 "+(qty-1)+"개<br> "+price+"원</html>"};
 				outerTable.addRow(qTxt);
 				
 				
 				
 				}
+			closeingAction();
 			}
-	
+		
+		
 	
 }

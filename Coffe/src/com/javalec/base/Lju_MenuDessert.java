@@ -217,7 +217,6 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// ì—”í„
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
-			btnOrder.setOpaque(true);
 			btnOrder.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Lju_PurchaseHistory history = new Lju_PurchaseHistory();
