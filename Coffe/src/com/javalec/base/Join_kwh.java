@@ -9,10 +9,14 @@ import javax.swing.border.EmptyBorder;
 import com.javalec.dao.DaoJoin_kwh;
 
 import java.awt.Color;
+import java.awt.Container;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -103,8 +107,8 @@ public class Join_kwh extends JFrame {
 		contentPane.add(getLblBa());
 		contentPane.add(getLblKong());
 		contentPane.add(getLblCho());
-		contentPane.add(getBtnLogin());
 		contentPane.add(getBtnJoin());
+		contentPane.add(getBtnLogin());
 		contentPane.add(getLblName());
 		contentPane.add(getLblNewLabel());
 		contentPane.add(getLblNewLabel_2());
@@ -141,22 +145,22 @@ public class Join_kwh extends JFrame {
 		if (lblCochoc == null) {
 			lblCochoc = new JLabel("");
 			lblCochoc.setBounds(105, 73, 181, 38);
-			lblCochoc.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/cochok.png")));
+			lblCochoc.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/cochok.png")));
 		}
 		return lblCochoc;
 	}
 	private JLabel getLblBa() {
 		if (lblBa == null) {
 			lblBa = new JLabel("");
-			lblBa.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/배경화면.png")));
-			lblBa.setBounds(0, 0, 390, 223);
+			lblBa.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/배경화면.png")));
+			lblBa.setBounds(0, -50, 390, 223);
 		}
 		return lblBa;
 	}
 	private JLabel getLblKong() {
 		if (lblKong == null) {
 			lblKong = new JLabel("");
-			lblKong.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/kong.png")));
+			lblKong.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/kong.png")));
 			lblKong.setBounds(0, 648, 234, 203);
 		}
 		return lblKong;
@@ -164,7 +168,7 @@ public class Join_kwh extends JFrame {
 	private JLabel getLblCho() {
 		if (lblCho == null) {
 			lblCho = new JLabel("");
-			lblCho.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/cho.png")));
+			lblCho.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/cho.png")));
 			lblCho.setBounds(173, 630, 217, 186);
 		}
 		return lblCho;
@@ -172,7 +176,12 @@ public class Join_kwh extends JFrame {
 	private JButton getBtnLogin() {
 		if (btnLogin == null) {
 			btnLogin = new JButton("");
-			btnLogin.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/joinlog.png")));
+			btnLogin.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					log();
+				}
+			});
+			btnLogin.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/joinlog.png")));
 			btnLogin.setBounds(60, 187, 270, 36);
 		}
 		return btnLogin;
@@ -180,7 +189,7 @@ public class Join_kwh extends JFrame {
 	private JButton getBtnJoin() {
 		if (btnJoin == null) {
 			btnJoin = new JButton("");
-			btnJoin.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/logjoin.png")));
+			btnJoin.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/회원가입.png")));
 			btnJoin.setBounds(195, 187, 135, 36);
 		}
 		return btnJoin;
@@ -244,6 +253,11 @@ public class Join_kwh extends JFrame {
 	private JButton getBtnCheck() {
 		if (btnCheck == null) {
 			btnCheck = new JButton("Check");
+//			ImageIcon icon =new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/btnCheck.png"));
+//			Image img = icon.getImage();  // 이미지 크기조절
+//			Image updateImg = img.getScaledInstance(60, 21, Image.SCALE_SMOOTH);
+//			ImageIcon upImg = new ImageIcon(updateImg);
+//			btnCheck.setIcon(upImg);
 			btnCheck.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dupCheck();
@@ -301,6 +315,11 @@ public class Join_kwh extends JFrame {
 	private JButton getBtnRegister() {
 		if (btnRegister == null) {
 			btnRegister = new JButton("등록");
+//			ImageIcon icon1 =new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/btnRegister.png"));
+//			Image img1 = icon1.getImage();  // 이미지 크기조절
+//			Image updateImg1 = img1.getScaledInstance(60, 21, Image.SCALE_SMOOTH);
+//			ImageIcon upImg = new ImageIcon(updateImg1);
+//			btnCheck.setIcon(upImg);
 			btnRegister.setEnabled(false);
 			btnRegister.setFont(new Font("굴림", Font.BOLD, 10));
 			btnRegister.setBounds(289, 495, 60, 21);
@@ -313,6 +332,7 @@ public class Join_kwh extends JFrame {
 			btnBack.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					back();
+					log();
 				}
 			});
 			btnBack.setEnabled(false);
@@ -419,6 +439,13 @@ public class Join_kwh extends JFrame {
 
 
 // function
+	
+	
+	private void log() { // 로그인 버튼누르면 로그인창
+		Hsh_login hi = new Hsh_login();
+		hi.setVisible(true);
+		setVisible(false);
+	}
 
 	private void login() {
 		Hsh_login hsh_login = new Hsh_login();
@@ -430,6 +457,15 @@ public class Join_kwh extends JFrame {
 	private void dupCheck() {
 		String cid = tfID.getText();
 		
+	
+		
+		boolean blank = true;   // 중복체가 맞는지 체크 맞으면 true 틀리면 false
+		if(cid.equals("")) { 
+			JOptionPane.showMessageDialog(this,"ID를 입력하세요.");
+			blank = false;
+		    
+		}
+		if(blank){
 		DaoJoin_kwh dao = new DaoJoin_kwh(cid);
 		boolean result = dao.dupCheck();
 		if(result) {// true 중복
@@ -449,12 +485,9 @@ public class Join_kwh extends JFrame {
 			btnRegister.setEnabled(true);
 			btnBack.setEnabled(true);
 			
-			
-			
-			
 		}
-		
-	}	
+	}
+}
 	// 입력되지 않은 공간 찾아주기
 		private int insertFieldCheck() {
 			int i = 0;
@@ -470,12 +503,12 @@ public class Join_kwh extends JFrame {
 				message = "ID를 ";
 				tfID.requestFocus();
 			}
-			if(pfPassword.getText().trim().length() == 0) {
+			if(pfPassword.getPassword().length == 0) {
 				i++;
 				message = "비밀번호를 ";
 				pfPassword.requestFocus();
 			}
-			if(pfPassword2.getText().trim().length() == 0) {
+			if(pfPassword2.getPassword().length == 0) {
 				i++;
 				message = "비밀번호확인을 ";
 				pfPassword2.requestFocus();
