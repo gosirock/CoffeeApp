@@ -191,6 +191,10 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 			btnHome.setBorderPainted(false);
 			btnHome.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Jty_Home jty_Home = new Jty_Home();
+					jty_Home.setLocationRelativeTo(null);
+					jty_Home.setVisible(true);
+					dispose();
 				}
 			});
 		}
@@ -233,6 +237,10 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 			btnReview = new JButton("");
 			btnReview.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Review2_kwh review2_kwh = new Review2_kwh();
+					review2_kwh.setLocationRelativeTo(null);
+					review2_kwh.setVisible(true);
+					dispose();
 				}
 			});
 			btnReview.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
