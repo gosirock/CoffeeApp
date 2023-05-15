@@ -213,6 +213,15 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
+			btnOrder.setOpaque(true);
+			btnOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Lju_PurchaseHistory history = new Lju_PurchaseHistory();
+					history.setLocationRelativeTo(null);
+					history.setVisible(true);
+					dispose();
+				}
+			});
 			btnOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnOrder.setIcon(new ImageIcon(Lju_MenuDessert.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
@@ -413,7 +422,8 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 			innerTable.setFont(new Font("Nanum Myeongjo", Font.PLAIN, 15));
 			innerTable.setBackground(new Color(252, 242, 217));
 			innerTable.setModel(outerTable); 	//<<<<< 추가
-			innerTable.setRowHeight(130);  		//<<<<< 높이조절
+			innerTable.setRowHeight(140);  		//<<<<< 높이조절
+			innerTable.setFillsViewportHeight(true);
 			tableInit();
 			searchAction();
 			panel_1.setVisible(false);
@@ -506,11 +516,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					//결제페이지로 이동하기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-					Lju_Payment lju_payment = new Lju_Payment();
-					lju_payment.setLocationRelativeTo(null);
-					lju_payment.setVisible(true);
-					
-					dispose();
+					 purchaseGo();
 				}
 			});
 			lblBuy.setIcon(new ImageIcon(Lju_MenuDessert.class.getResource("/com/javalec/image/selectbar.png")));
@@ -901,6 +907,20 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 			lblCountNum.setText(Integer.toString(count));
 		}
 		
+	}
+private void purchaseGo(){
+		
+		String iid = lblIid.getText();
+		String qty = lblQty.getText();
+		
+		Lju_Dao_BasketAction dao = new Lju_Dao_BasketAction(iid, qty);
+		boolean result = dao.basketAction();
+		
+		Lju_Payment lju_Payment = new Lju_Payment();
+		lju_Payment.setLocationRelativeTo(null);
+		lju_Payment.setVisible(true);
+		
+		dispose();
 	}
 	
 

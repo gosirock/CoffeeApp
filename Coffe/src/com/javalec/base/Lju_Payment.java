@@ -11,8 +11,10 @@ import javax.swing.table.TableColumn;
 
 import com.javalec.dao.Lju_BasketEmpty;
 import com.javalec.dao.Lju_Dao_BasketAction;
+import com.javalec.dao.Lju_Dao_CouponCheck;
 import com.javalec.dao.Lju_Dao_Menu_Coffee;
 import com.javalec.dao.Lju_Dao_Menu_Drink;
+import com.javalec.dao.Lju_Dao_PurchaseHistory;
 import com.javalec.dao.Lju_Dao_selectTable;
 import com.javalec.dto.Lju_dto;
 import com.javalec.util.ShareVar;
@@ -72,6 +74,8 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 public class Lju_Payment extends JFrame {	
 
 	private JPanel contentPane;
@@ -99,7 +103,7 @@ public class Lju_Payment extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_2_1;
 	private JLabel lblNewLabel_2_1_1;
-	private JCheckBox chckbxNewCheckBox;
+	private JCheckBox chckbxcoupon;
 	private JLabel lblNewLabel_2_1_1_1;
 	private JLabel lblNewLabel_2_1_1_1_1;
 	private JTextField textField;
@@ -113,10 +117,14 @@ public class Lju_Payment extends JFrame {
 	
 	int payprice;
 	int payqty;
+	int pay;
 	int paytotal;
 	private JLabel lblTotal;
-	private JLabel lblTotal_1;
-	private JLabel lblTotal_1_1;
+	private JLabel lblDiscount;
+	private JLabel lblTotalPay;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_3_1;
+	private JLabel lblNewLabel_3_2;
 //	"<html>안녕<br>안녀엉<p>세번</html>" 라벨 줄바꾸기
 	/**
 	 * Launch the application.
@@ -148,6 +156,12 @@ public class Lju_Payment extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				closeingAction();//사진지우기
 			}
+			@Override
+			public void windowOpened(WindowEvent e) {
+				basketCount();
+				totalPay();
+				couponCheck();
+			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);							// 백그라운드 프레임 패널 사이즈
@@ -169,7 +183,7 @@ public class Lju_Payment extends JFrame {
 		contentPane.add(getLblNewLabel_2());
 		contentPane.add(getLblNewLabel_2_1());
 		contentPane.add(getLblNewLabel_2_1_1());
-		contentPane.add(getChckbxNewCheckBox());
+		contentPane.add(getChckbxcoupon());
 		contentPane.add(getLblNewLabel_2_1_1_1());
 		contentPane.add(getLblNewLabel_2_1_1_1_1());
 		contentPane.add(getTextField());
@@ -179,8 +193,11 @@ public class Lju_Payment extends JFrame {
 		contentPane.add(getRadioButton_2());
 		contentPane.add(getRadioButton_2_1());
 		contentPane.add(getLblTotal());
-		contentPane.add(getLblTotal_1());
-		contentPane.add(getLblTotal_1_1());
+		contentPane.add(getLblDiscount());
+		contentPane.add(getLblTotalPay());
+		contentPane.add(getLblNewLabel_3());
+		contentPane.add(getLblNewLabel_3_1());
+		contentPane.add(getLblNewLabel_3_2());
 	}
 	
 	
@@ -234,6 +251,15 @@ public class Lju_Payment extends JFrame {
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
+			btnOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					Lju_PurchaseHistory history = new Lju_PurchaseHistory();
+					history.setLocationRelativeTo(null);
+					history.setVisible(true);
+					dispose();
+				}
+			});
 			btnOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnOrder.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
@@ -255,15 +281,6 @@ public class Lju_Payment extends JFrame {
 		}
 		return btnReview;
 	}
-	
-	
-	
-		
-	
-	
-	
-	
-	
 	
 	
 	private JLabel getLblNewLabel() {
@@ -306,7 +323,6 @@ public class Lju_Payment extends JFrame {
 			innerTable = new JTable();
 			innerTable.setEnabled(false);
 			innerTable.setRowSelectionAllowed(false);
-			innerTable.setOpaque(false);
 			innerTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			innerTable.setGridColor(new Color(252, 242, 217));
 			innerTable.setSelectionForeground(new Color(248, 227, 182));
@@ -319,6 +335,7 @@ public class Lju_Payment extends JFrame {
 			innerTable.setBackground(new Color(252, 242, 217));
 			innerTable.setModel(outerTable); 	//<<<<< 추가
 			innerTable.setRowHeight(40);  		//<<<<< 높이조절
+			innerTable.setFillsViewportHeight(true);
 			tableInit();
 			searchAction();
 			
@@ -326,6 +343,285 @@ public class Lju_Payment extends JFrame {
 		return innerTable;
 	}
 
+
+	
+	
+
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnNewButton.addMouseListener(new MouseAdapter() {
+			
+				
+				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Lju_Basket lju_Payment = new Lju_Basket();
+					lju_Payment.setLocationRelativeTo(null);
+					lju_Payment.setVisible(true);
+					dispose();
+				}
+			});
+			btnNewButton.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/icon _cart_.png")));
+			btnNewButton.setFocusPainted(false);
+			btnNewButton.setBorderPainted(false);
+			btnNewButton.setBounds(303, 50, 70, 40);
+		
+		}
+		return btnNewButton;
+	}
+	
+	private JLabel getLblCount() {
+		if (lblCount == null) {
+			lblCount = new JLabel("");
+			lblCount.setForeground(new Color(255, 255, 255));
+			lblCount.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/Ellipse 7.png")));
+			lblCount.setBounds(345, 40, 25, 22);
+			lblCount.setVisible(false);
+		}
+		return lblCount;
+	}
+	private JLabel getLblCountNum() {
+		if (lblCountNum == null) {
+			lblCountNum = new JLabel("");
+			lblCountNum.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCountNum.setForeground(new Color(255, 255, 255));
+			lblCountNum.setBounds(345, 43, 24, 16);
+			lblCountNum.setVisible(false);
+		}
+		return lblCountNum;
+ 	}
+	
+	
+	private JButton getBtnPay() {
+		if (btnPay == null) {
+			btnPay = new JButton("");
+			btnPay.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					purchaseAction();
+				}
+			});
+			btnPay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnPay.setHorizontalTextPosition(SwingConstants.CENTER);
+			btnPay.setIcon(new ImageIcon(Lju_Payment.class.getResource("/com/javalec/image/buttons (1).png")));
+			btnPay.setFocusPainted(false);
+			btnPay.setBorderPainted(false);
+			btnPay.setBounds(61, 695, 270, 50);
+		}
+		return btnPay;
+	}
+	
+	
+	
+	
+	private JLabel getLblNewLabel_2() {
+		if (lblNewLabel_2 == null) {
+			lblNewLabel_2 = new JLabel("결제금액 :");
+			lblNewLabel_2.setForeground(new Color(130, 77, 30));
+			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_2.setBounds(27, 652, 80, 20);
+		}
+		return lblNewLabel_2;
+	}
+	private JLabel getLblNewLabel_2_1() {
+		if (lblNewLabel_2_1 == null) {
+			lblNewLabel_2_1 = new JLabel("할인금액 :");
+			lblNewLabel_2_1.setForeground(new Color(130, 77, 30));
+			lblNewLabel_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_2_1.setBounds(27, 615, 80, 20);
+		}
+		return lblNewLabel_2_1;
+	}
+	private JLabel getLblNewLabel_2_1_1() {
+		if (lblNewLabel_2_1_1 == null) {
+			lblNewLabel_2_1_1 = new JLabel("상품금액 :");
+			lblNewLabel_2_1_1.setForeground(new Color(130, 77, 30));
+			lblNewLabel_2_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_2_1_1.setBounds(27, 580, 80, 20);
+		}
+		return lblNewLabel_2_1_1;
+	}
+	private JCheckBox getChckbxcoupon() {
+		if (chckbxcoupon == null) {
+			chckbxcoupon = new JCheckBox("사용 가능한 쿠폰이 없습니다.");
+			chckbxcoupon.addChangeListener(new ChangeListener() {
+				public void stateChanged(ChangeEvent e) {
+					totalPay();
+				}
+			});
+			chckbxcoupon.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					discount();
+					totalPay();
+				}
+			});
+			chckbxcoupon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			chckbxcoupon.setForeground(new Color(130, 77, 30));
+			chckbxcoupon.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			chckbxcoupon.setBounds(28, 527, 218, 40);
+		
+		}
+		return chckbxcoupon;
+	}
+	private JLabel getLblNewLabel_2_1_1_1() {
+		if (lblNewLabel_2_1_1_1 == null) {
+			lblNewLabel_2_1_1_1 = new JLabel("쿠폰적용");
+			lblNewLabel_2_1_1_1.setForeground(new Color(130, 77, 30));
+			lblNewLabel_2_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_2_1_1_1.setBounds(28, 507, 80, 20);
+		}
+		return lblNewLabel_2_1_1_1;
+	}
+	private JLabel getLblNewLabel_2_1_1_1_1() {
+		if (lblNewLabel_2_1_1_1_1 == null) {
+			lblNewLabel_2_1_1_1_1 = new JLabel("요청사항");
+			lblNewLabel_2_1_1_1_1.setForeground(new Color(130, 77, 30));
+			lblNewLabel_2_1_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_2_1_1_1_1.setBounds(27, 287, 80, 20);
+		}
+		return lblNewLabel_2_1_1_1_1;
+	}
+	private JTextField getTextField() {
+		if (textField == null) {
+			textField = new JTextField();
+			textField.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				 textField.setText(null);
+				}
+			});
+			textField.setForeground(new Color(61, 60, 69));
+			textField.setBackground(new Color(252, 242, 217));
+			textField.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			textField.setText("  매장 요청사항이 있으면 적어주세요.");
+			textField.setBounds(16, 319, 352, 39);
+			textField.setColumns(10);
+		}
+		return textField;
+	}
+	private JLabel getLblNewLabel_2_1_1_1_1_1() {
+		if (lblNewLabel_2_1_1_1_1_1 == null) {
+			lblNewLabel_2_1_1_1_1_1 = new JLabel("결제수단");
+			lblNewLabel_2_1_1_1_1_1.setForeground(new Color(130, 77, 30));
+			lblNewLabel_2_1_1_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_2_1_1_1_1_1.setBounds(27, 388, 80, 20);
+		}
+		return lblNewLabel_2_1_1_1_1_1;
+	}
+	private JRadioButton getRadioButton() {
+		if (radioButton == null) {
+			radioButton = new JRadioButton(" 신용카드");
+			radioButton.setSelected(true);
+			radioButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			buttonGroup.add(radioButton);
+			radioButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			radioButton.setForeground(new Color(61, 60, 69));
+			radioButton.setBounds(37, 420, 141, 23);
+		}
+		return radioButton;
+	}
+	private JRadioButton getRadioButton_1() {
+		if (radioButton_1 == null) {
+			radioButton_1 = new JRadioButton(" 간편카드결제");
+			radioButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			buttonGroup.add(radioButton_1);
+			radioButton_1.setForeground(new Color(61, 60, 69));
+			radioButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			radioButton_1.setBounds(190, 420, 141, 23);
+		}
+		return radioButton_1;
+	}
+	private JRadioButton getRadioButton_2() {
+		if (radioButton_2 == null) {
+			radioButton_2 = new JRadioButton(" 네이버페이");
+			radioButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			buttonGroup.add(radioButton_2);
+			radioButton_2.setForeground(new Color(61, 60, 69));
+			radioButton_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			radioButton_2.setBounds(37, 455, 141, 23);
+		}
+		return radioButton_2;
+	}
+	private JRadioButton getRadioButton_2_1() {
+		if (radioButton_2_1 == null) {
+			radioButton_2_1 = new JRadioButton(" 카카오페이");
+			radioButton_2_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			buttonGroup.add(radioButton_2_1);
+			radioButton_2_1.setForeground(new Color(61, 60, 69));
+			radioButton_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			radioButton_2_1.setBounds(190, 456, 141, 23);
+		}
+		return radioButton_2_1;
+	}
+	private JLabel getLblTotal() {
+		if (lblTotal == null) {
+			lblTotal = new JLabel((Integer.toString(pay)));
+			lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblTotal.setForeground(new Color(130, 77, 30));
+			lblTotal.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblTotal.setBounds(129, 580, 180, 20);
+		}
+		return lblTotal;
+	}
+	private JLabel getLblDiscount() {
+		if (lblDiscount == null) {
+			lblDiscount = new JLabel("0");
+			lblDiscount.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblDiscount.setForeground(new Color(130, 77, 30));
+			lblDiscount.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblDiscount.setBounds(129, 615, 180, 20);
+		}
+		return lblDiscount;
+	}
+	private JLabel getLblTotalPay() {
+		if (lblTotalPay == null) {
+			lblTotalPay = new JLabel("0");
+			lblTotalPay.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblTotalPay.setForeground(new Color(130, 77, 30));
+			lblTotalPay.setFont(new Font("Lucida Grande", Font.BOLD, 21));
+			lblTotalPay.setBounds(129, 652, 180, 20);
+		}
+		return lblTotalPay;
+	}
+	
+	
+	
+	
+	private JLabel getLblNewLabel_3() {
+		if (lblNewLabel_3 == null) {
+			lblNewLabel_3 = new JLabel("원");
+			lblNewLabel_3.setForeground(new Color(130, 77, 30));
+			lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_3.setBounds(307, 580, 24, 20);
+		}
+		return lblNewLabel_3;
+	}
+	private JLabel getLblNewLabel_3_1() {
+		if (lblNewLabel_3_1 == null) {
+			lblNewLabel_3_1 = new JLabel("원");
+			lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel_3_1.setForeground(new Color(130, 77, 30));
+			lblNewLabel_3_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_3_1.setBounds(307, 615, 24, 20);
+		}
+		return lblNewLabel_3_1;
+	}
+	private JLabel getLblNewLabel_3_2() {
+		if (lblNewLabel_3_2 == null) {
+			lblNewLabel_3_2 = new JLabel("원");
+			lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel_3_2.setForeground(new Color(130, 77, 30));
+			lblNewLabel_3_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblNewLabel_3_2.setBounds(307, 652, 24, 20);
+		}
+		return lblNewLabel_3_2;
+	}
 	
 	
 	
@@ -389,7 +685,7 @@ public class Lju_Payment extends JFrame {
 			int bqty = dtoList.get(i).getBqty();
 			payqty = bqty;
 			payprice = dtoList.get(i).getIprice();
-			paytotal += bqty * payprice;
+			pay += bqty * payprice;
 			ImageIcon imgicon = new ImageIcon("./" + dtoList.get(i).getIimagename());
 			Image img = imgicon.getImage();
 			
@@ -407,7 +703,6 @@ public class Lju_Payment extends JFrame {
 	
 	
 	
-	
 	// 불러온 사진 지우기
 	private void closeingAction() {	//사진지우기
 		for(int i=0; i <dtoList.size(); i++) {
@@ -416,8 +711,6 @@ public class Lju_Payment extends JFrame {
 		}
 				
 	}
-	
-	
 	
 	 
 
@@ -451,56 +744,7 @@ public class Lju_Payment extends JFrame {
 		}
 
 
-
-	
-	
-
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("");
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
-			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnNewButton.addMouseListener(new MouseAdapter() {
-			
-				
-				 //장바구니로 이동 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-				@Override
-				public void mouseClicked(MouseEvent e) {
-				}
-			});
-			btnNewButton.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/icon _cart_.png")));
-			btnNewButton.setFocusPainted(false);
-			btnNewButton.setBorderPainted(false);
-			btnNewButton.setBounds(303, 50, 70, 40);
-			basketCount();
-		}
-		return btnNewButton;
-	}
-	
-	private JLabel getLblCount() {
-		if (lblCount == null) {
-			lblCount = new JLabel("");
-			lblCount.setForeground(new Color(255, 255, 255));
-			lblCount.setIcon(new ImageIcon(Lju_MenuCoffee.class.getResource("/com/javalec/image/Ellipse 7.png")));
-			lblCount.setBounds(345, 40, 25, 22);
-			lblCount.setVisible(false);
-		}
-		return lblCount;
-	}
-	private JLabel getLblCountNum() {
-		if (lblCountNum == null) {
-			lblCountNum = new JLabel("");
-			lblCountNum.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCountNum.setForeground(new Color(255, 255, 255));
-			lblCountNum.setBounds(345, 43, 24, 16);
-			lblCountNum.setVisible(false);
-		}
-		return lblCountNum;
- 	}
-	
+	 //장바구니 버튼에 숫자넣기
 	private void basketCount() {
 		
 		Lju_Dao_BasketAction lju_Dao_BasketAction = new Lju_Dao_BasketAction();
@@ -511,178 +755,100 @@ public class Lju_Payment extends JFrame {
 			lblCountNum.setVisible(true);
 			lblCountNum.setText(Integer.toString(count));
 		}
+
+	}
+	//쿠폰 체크박스 쿠폰유무 및 종류 체크
+	private void couponCheck() {
+			
+			Lju_Dao_CouponCheck lju_Dao_CouponCheck = new Lju_Dao_CouponCheck();
+			int coupon = lju_Dao_CouponCheck.couponCheck();
+			if(coupon == 1) {
+				chckbxcoupon.setText("사용가능한 쿠폰이 없습니다.");
+				chckbxcoupon.setEnabled(false);
+			}else if(coupon == 5) {
+				chckbxcoupon.setText("5% 할인 쿠폰");
+			
+			}else if(coupon == 6) {
+				chckbxcoupon.setText("6% 할인 쿠폰");
+			}else if(coupon == 7) {
+				chckbxcoupon.setText("7% 할인 쿠폰");
+			}else if(coupon == 8) {
+				chckbxcoupon.setText("8% 할인 쿠폰");
+			}else if(coupon == 9) {
+				chckbxcoupon.setText("9% 할인 쿠폰");
+			}else if(coupon == 10) {
+				chckbxcoupon.setText("10% 할인 쿠폰");
+			}else {
+				chckbxcoupon.setText("관리자에게 문의하세요");
+			}
+			
+		}
+		// 		상품 할인가격 표시/ 뺄숫자
+		private void discount() {
+			String dis = chckbxcoupon.getText();
+			int i = 0;
+			if(chckbxcoupon.isSelected() && dis.equals("10% 할인 쿠폰")) {
+				i = (int) (pay * 0.10);
+				lblDiscount.setText(Integer.toString(i));
+			}else if(chckbxcoupon.isSelected() && dis.equals("9% 할인 쿠폰")) {
+				i = (int) (pay * 0.09);
+				lblDiscount.setText(Integer.toString(i));
+			}else if(chckbxcoupon.isSelected() && dis.equals("8% 할인 쿠폰")) {
+				i = (int) (pay * 0.08);
+				lblDiscount.setText(Integer.toString(i));
+			}else if(chckbxcoupon.isSelected() && dis.equals("7% 할인 쿠폰")) {
+				i = (int) (pay * 0.07);
+				lblDiscount.setText(Integer.toString(i));
+			}else if(chckbxcoupon.isSelected() && dis.equals("6% 할인 쿠폰")) {
+				i = (int) (pay * 0.06);
+				lblDiscount.setText(Integer.toString(i));
+			}else if(chckbxcoupon.isSelected() && dis.equals("5% 할인 쿠폰")) {
+				i = (int) (pay * 0.05);
+				lblDiscount.setText(Integer.toString(i));
+			}else {
+				lblDiscount.setText("0");
+				
+			}
+			
+		}
 		
-	}
-	private JButton getBtnPay() {
-		if (btnPay == null) {
-			btnPay = new JButton("");
-			btnPay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnPay.setHorizontalTextPosition(SwingConstants.CENTER);
-			btnPay.setIcon(new ImageIcon(Lju_Payment.class.getResource("/com/javalec/image/buttons (1).png")));
-			btnPay.setFocusPainted(false);
-			btnPay.setBorderPainted(false);
-			btnPay.setBounds(61, 695, 270, 50);
+		// 할인된 총 가격 표시하기
+		private void totalPay() {
+			
+			paytotal = pay - Integer.parseInt(lblDiscount.getText());
+			
+			lblTotalPay.setText(Integer.toString(paytotal));
+			
 		}
-		return btnPay;
-	}
-	
-	
-	
-	
-	private JLabel getLblNewLabel_2() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("결제금액 :");
-			lblNewLabel_2.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2.setBounds(27, 652, 80, 20);
-		}
-		return lblNewLabel_2;
-	}
-	private JLabel getLblNewLabel_2_1() {
-		if (lblNewLabel_2_1 == null) {
-			lblNewLabel_2_1 = new JLabel("할인금액 :");
-			lblNewLabel_2_1.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2_1.setBounds(27, 615, 80, 20);
-		}
-		return lblNewLabel_2_1;
-	}
-	private JLabel getLblNewLabel_2_1_1() {
-		if (lblNewLabel_2_1_1 == null) {
-			lblNewLabel_2_1_1 = new JLabel("상품금액 :");
-			lblNewLabel_2_1_1.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2_1_1.setBounds(27, 580, 80, 20);
-		}
-		return lblNewLabel_2_1_1;
-	}
-	private JCheckBox getChckbxNewCheckBox() {
-		if (chckbxNewCheckBox == null) {
-			chckbxNewCheckBox = new JCheckBox("사용 가능한 쿠폰이 없습니다.");
-			chckbxNewCheckBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			chckbxNewCheckBox.setForeground(new Color(130, 77, 30));
-			chckbxNewCheckBox.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			chckbxNewCheckBox.setBounds(28, 527, 218, 40);
-		}
-		return chckbxNewCheckBox;
-	}
-	private JLabel getLblNewLabel_2_1_1_1() {
-		if (lblNewLabel_2_1_1_1 == null) {
-			lblNewLabel_2_1_1_1 = new JLabel("쿠폰적용");
-			lblNewLabel_2_1_1_1.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2_1_1_1.setBounds(28, 507, 80, 20);
-		}
-		return lblNewLabel_2_1_1_1;
-	}
-	private JLabel getLblNewLabel_2_1_1_1_1() {
-		if (lblNewLabel_2_1_1_1_1 == null) {
-			lblNewLabel_2_1_1_1_1 = new JLabel("요청사항");
-			lblNewLabel_2_1_1_1_1.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2_1_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2_1_1_1_1.setBounds(27, 287, 80, 20);
-		}
-		return lblNewLabel_2_1_1_1_1;
-	}
-	private JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-				 textField.setText(null);
+		
+		
+		private void purchaseAction() {
+			String i = lblTotalPay.getText();
+			if(i.equals("0")) {
+				Lju_Purchase_Dialog2 dialog2 = new Lju_Purchase_Dialog2();
+				dialog2.setLocationRelativeTo(null);
+				dialog2.setVisible(true);
+			
+			}else {
+				String buydis = "";
+				if(chckbxcoupon.isSelected()) {
+					buydis = chckbxcoupon.getText();
 				}
-			});
-			textField.setForeground(new Color(61, 60, 69));
-			textField.setBackground(new Color(252, 242, 217));
-			textField.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			textField.setText("  매장 요청사항이 있으면 적어주세요.");
-			textField.setBounds(16, 319, 352, 39);
-			textField.setColumns(10);
+				Lju_Dao_PurchaseHistory dao_PurchaseHistory = new Lju_Dao_PurchaseHistory(buydis);
+				dao_PurchaseHistory.purchaseAciont();
+				
+				Lju_Purchase_Dialog dialog = new Lju_Purchase_Dialog();
+				dialog.setLocationRelativeTo(null);
+				dialog.setVisible(true);
+				Lju_PurchaseHistory history = new Lju_PurchaseHistory();
+				history.setLocationRelativeTo(null);
+				history.setVisible(true);
+				
+				dispose();
+			}
+			
+			
 		}
-		return textField;
-	}
-	private JLabel getLblNewLabel_2_1_1_1_1_1() {
-		if (lblNewLabel_2_1_1_1_1_1 == null) {
-			lblNewLabel_2_1_1_1_1_1 = new JLabel("결제수단");
-			lblNewLabel_2_1_1_1_1_1.setForeground(new Color(130, 77, 30));
-			lblNewLabel_2_1_1_1_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblNewLabel_2_1_1_1_1_1.setBounds(27, 388, 80, 20);
-		}
-		return lblNewLabel_2_1_1_1_1_1;
-	}
-	private JRadioButton getRadioButton() {
-		if (radioButton == null) {
-			radioButton = new JRadioButton(" 신용카드");
-			radioButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			buttonGroup.add(radioButton);
-			radioButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			radioButton.setForeground(new Color(61, 60, 69));
-			radioButton.setBounds(37, 420, 141, 23);
-		}
-		return radioButton;
-	}
-	private JRadioButton getRadioButton_1() {
-		if (radioButton_1 == null) {
-			radioButton_1 = new JRadioButton(" 간편카드결제");
-			radioButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			buttonGroup.add(radioButton_1);
-			radioButton_1.setForeground(new Color(61, 60, 69));
-			radioButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			radioButton_1.setBounds(190, 420, 141, 23);
-		}
-		return radioButton_1;
-	}
-	private JRadioButton getRadioButton_2() {
-		if (radioButton_2 == null) {
-			radioButton_2 = new JRadioButton(" 네이버페이");
-			radioButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			buttonGroup.add(radioButton_2);
-			radioButton_2.setForeground(new Color(61, 60, 69));
-			radioButton_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			radioButton_2.setBounds(37, 455, 141, 23);
-		}
-		return radioButton_2;
-	}
-	private JRadioButton getRadioButton_2_1() {
-		if (radioButton_2_1 == null) {
-			radioButton_2_1 = new JRadioButton(" 카카오페이");
-			radioButton_2_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			buttonGroup.add(radioButton_2_1);
-			radioButton_2_1.setForeground(new Color(61, 60, 69));
-			radioButton_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			radioButton_2_1.setBounds(190, 456, 141, 23);
-		}
-		return radioButton_2_1;
-	}
-	private JLabel getLblTotal() {
-		if (lblTotal == null) {
-			lblTotal = new JLabel((Integer.toString(paytotal))+" 원");
-			lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblTotal.setForeground(new Color(130, 77, 30));
-			lblTotal.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblTotal.setBounds(129, 580, 200, 20);
-		}
-		return lblTotal;
-	}
-	private JLabel getLblTotal_1() {
-		if (lblTotal_1 == null) {
-			lblTotal_1 = new JLabel("-");
-			lblTotal_1.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblTotal_1.setForeground(new Color(130, 77, 30));
-			lblTotal_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblTotal_1.setBounds(129, 615, 200, 20);
-		}
-		return lblTotal_1;
-	}
-	private JLabel getLblTotal_1_1() {
-		if (lblTotal_1_1 == null) {
-			lblTotal_1_1 = new JLabel("");
-			lblTotal_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblTotal_1_1.setForeground(new Color(130, 77, 30));
-			lblTotal_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblTotal_1_1.setBounds(119, 652, 200, 20);
-		}
-		return lblTotal_1_1;
-	}
+		
+		
 	}

@@ -95,7 +95,7 @@ public class Lju_Basket extends JFrame {
 	private JLabel lblCountNum;
 	private JButton btnPay;
 	private JButton btnBasketAlldel;
-	
+	int count = 0;
 //	"<html>안녕<br>안녀엉<p>세번</html>" 라벨 줄바꾸기
 	/**
 	 * Launch the application.
@@ -198,6 +198,14 @@ public class Lju_Basket extends JFrame {
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
+			btnOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Lju_PurchaseHistory history = new Lju_PurchaseHistory();
+					history.setLocationRelativeTo(null);
+					history.setVisible(true);
+					dispose();
+				}
+			});
 			btnOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			btnOrder.setIcon(new ImageIcon(Lju_MenuDrink.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
@@ -277,25 +285,28 @@ public class Lju_Basket extends JFrame {
 				}
 				
 			};
+			innerTable.setShowVerticalLines(false);
+			innerTable.setShowHorizontalLines(false);
+			innerTable.setShowGrid(false);
 			innerTable.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					tableClick();
 				}
 			});
-			innerTable.setOpaque(false);
 			innerTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			innerTable.setGridColor(new Color(252, 242, 217));
 			innerTable.setSelectionForeground(new Color(248, 227, 182));
 			innerTable.setSelectionBackground(new Color(130, 77, 30));
 			innerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			innerTable.setRequestFocusEnabled(false);
 			innerTable.setFocusTraversalKeysEnabled(false);
 			innerTable.setForeground(new Color(131, 77, 30));
 			innerTable.setFont(new Font("Nanum Gothic", Font.PLAIN, 17));
 			innerTable.setBackground(new Color(252, 242, 217));
 			innerTable.setModel(outerTable); 	//<<<<< 추가
 			innerTable.setRowHeight(130);  		//<<<<< 높이조절
+			innerTable.setFillsViewportHeight(true);
+
 			tableInit();
 			searchAction();
 			
@@ -447,7 +458,7 @@ public class Lju_Basket extends JFrame {
 		
 		tableInit();
 		searchAction();
-		
+		basketCount();
 		
 	}
 
@@ -502,14 +513,17 @@ public class Lju_Basket extends JFrame {
  	}
 	
 	private void basketCount() {
-		
+		count = 0;
 		Lju_Dao_BasketAction lju_Dao_BasketAction = new Lju_Dao_BasketAction();
-		int count = lju_Dao_BasketAction.basketCount();
+		count = lju_Dao_BasketAction.basketCount();
 		
 		if(count>0) {
 			lblCount.setVisible(true);
 			lblCountNum.setVisible(true);
 			lblCountNum.setText(Integer.toString(count));
+		}else {
+			lblCount.setVisible(false);
+			lblCountNum.setVisible(false);
 		}
 		
 	}
@@ -519,12 +533,21 @@ public class Lju_Basket extends JFrame {
 			btnPay.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+						
 					
-					Lju_Payment lju_payment = new Lju_Payment();
-					lju_payment.setLocationRelativeTo(null);
-					lju_payment.setVisible(true);
-					
-					dispose();
+					if(count==0) {
+						Lju_Purchase_Dialog2 dialog2 = new Lju_Purchase_Dialog2();
+						dialog2.setLocationRelativeTo(null);
+						dialog2.setVisible(true);
+						
+					}else {
+						
+						Lju_Payment lju_payment = new Lju_Payment();
+						lju_payment.setLocationRelativeTo(null);
+						lju_payment.setVisible(true);
+						
+						dispose();
+					}
 				}
 			});
 			btnPay.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
