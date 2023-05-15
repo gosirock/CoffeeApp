@@ -107,7 +107,6 @@ public class Jty_Home extends JFrame {
 		});
 		addWindowListener(new WindowAdapter() {
 			@Override
-
 			public void windowOpened(WindowEvent e) {
 				// setComponentZOrder(Category, 0); // 패널 맨 앞으로
 				Jty_Home frame = new Jty_Home();
@@ -383,4 +382,5 @@ public class Jty_Home extends JFrame {
 		});
 		timer.start();
 	}
+
 }

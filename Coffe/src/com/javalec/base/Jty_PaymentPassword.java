@@ -365,13 +365,13 @@ public class Jty_PaymentPassword extends JFrame {
 		return pfnum4;
 	}
 	
-	private void insertPassword() { 
-		public void actionPerformed(ActionEvent e) {
-		textField = new JTextField();
-		if(btn1.isSelected()) {
-			textField.setText("1");
-		}
-	};
+//	private void insertPassword() { 
+//		public void actionPerformed(ActionEvent e) {
+//		textField = new JTextField();
+//		if(btn1.isSelected()) {
+//			textField.setText("1");
+//		}}
+//	};
 	private JPasswordField getPfAllpassword() {
 		if (pfAllpassword == null) {
 			pfAllpassword = new JPasswordField();

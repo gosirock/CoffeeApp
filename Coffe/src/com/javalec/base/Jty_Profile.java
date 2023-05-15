@@ -348,7 +348,7 @@ public class Jty_Profile extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 //					Jty_Profile_Dialog profile_dialog = new Jty_Profile_Dialog();
 //					profile_dialog.setVisible(true);
-					deleteUser();
+					userDelete();
 				}
 			});
 			lblDeleteUSer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -623,7 +623,7 @@ public class Jty_Profile extends JFrame {
 		}
 	}
 
-	public void deleteUser() {
+	public void userDelete() {
 		Jty_Profile_Dialog jty_Profile_Dialog = new Jty_Profile_Dialog();
 		//Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile();
 		jty_Profile_Dialog.setVisible(true);
@@ -650,25 +650,15 @@ public class Jty_Profile extends JFrame {
 
 	private void allUpdateAction() {
 
-//		String cid = tfUserid.getText();
-//		String cpassword = tfPassword.getText();
-//		String confirmCpassword = tfConfirmPassword.getText();
-//		String cname = tfName.getText(); 
-//		String cphone = tfPhone.getText();
-//		String cemail = tfEmail.getText();
-//		String caddress = tfAddress.getText();   cid, cpassword, confirmCpassword, cname, cphone, cemail, caddress
-		Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile();
-		Jty_Dto_Profile dto_Profile = dao_Profile.openProfile();
+		String cid = tfUserid.getText();
+		String cpassword = tfPassword.getText();
+		String confirmCpassword = tfConfirmPassword.getText();
+		String cname = tfName.getText(); 
+		String cphone = tfPhone.getText();
+		String cemail = tfEmail.getText();
+		String caddress = tfAddress.getText();   
 		
-		if (dto_Profile != null) {
-			tfUserid.setText(dto_Profile.getCid());
-			tfPassword.setText(dto_Profile.getCpassword());
-			tfConfirmPassword.setText(dto_Profile.getCpassword());
-			tfName.setText(dto_Profile.getCname());
-			tfPhone.setText(dto_Profile.getCphone());
-			tfEmail.setText(dto_Profile.getCemail());
-			tfAddress.setText(dto_Profile.getCaddress());
-		}
+		Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile(cid, cpassword, confirmCpassword, cname, cphone, cemail, caddress);
 
 		boolean result = dao_Profile.allUpdateAction();
 		if (result) {
