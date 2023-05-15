@@ -48,7 +48,7 @@ public class Lju_Dao_PurchaseHistory {
 	public ArrayList<Lju_dto> History(){
 		ArrayList<Lju_dto> dtoList = new ArrayList<Lju_dto>();
 		
-		String whereDefault = "select p.pdate, sum(p.pqty), sum(p.psaleprice), (select max(i.iname))";
+		String whereDefault = "select p.pdate, sum(p.pqty), sum(p.pqty*p.psaleprice), (select max(i.iname))";
 		String whereDefault1 = " from customer c, item i, purchase p";
 		String whereDefault2 = " where c.cid = p.customer_cid and i.iid = p.item_iid and cid = '"+ ShareVar.loginUserId +"'";
 		String whereDefault3 = " group by pdate order by pdate desc";
@@ -82,6 +82,8 @@ public class Lju_Dao_PurchaseHistory {
 	public boolean purchaseAciont() {
 		PreparedStatement ps = null;
 		PreparedStatement pss = null;
+		PreparedStatement psCoupon = null;
+		String coupon = "";
 		String dis;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -89,16 +91,22 @@ public class Lju_Dao_PurchaseHistory {
 			Statement stmt_mysql = conn_mysql.createStatement();
 			if(discount.equals("10% 할인 쿠폰")) {
 				dis = "0.90";
+				coupon = "update coupon set cUse = 1 where customer_cid = '"+ShareVar.loginUserId+"'";
 			}else if(discount.equals("9% 할인 쿠폰")) {
 				dis = "0.91";
+				coupon = "update coupon set cUse = 1 where customer_cid = '"+ShareVar.loginUserId+"'";
 			}else if(discount.equals("8% 할인 쿠폰")) {
 				dis = "0.92";
+				coupon = "update coupon set cUse = 1 where customer_cid = '"+ShareVar.loginUserId+"'";
 			}else if(discount.equals("7% 할인 쿠폰")) {
 				dis = "0.93";
+				coupon = "update coupon set cUse = 1 where customer_cid = '"+ShareVar.loginUserId+"'";
 			}else if(discount.equals("6% 할인 쿠폰")) {
 				dis = "0.94";
+				coupon = "update coupon set cUse = 1 where customer_cid = '"+ShareVar.loginUserId+"'";
 			}else if(discount.equals("5% 할인 쿠폰")) {
 				dis = "0.95";
+				coupon = "update coupon set cUse = 1 where customer_cid = '"+ShareVar.loginUserId+"'";
 			}else {
 				dis = "1";
 			}
@@ -110,8 +118,10 @@ public class Lju_Dao_PurchaseHistory {
 				String q = "delete from basket where customer_cid = '" + ShareVar.loginUserId + "'";
 				ps = conn_mysql.prepareStatement(query + query1 + query2);
 				pss = conn_mysql.prepareStatement(q);
+				psCoupon = conn_mysql.prepareStatement(coupon);
 				ps.executeUpdate();
 				pss.executeUpdate();
+				psCoupon.executeUpdate();
 				conn_mysql.close();	
 				
 				
