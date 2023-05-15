@@ -164,8 +164,8 @@ public class Join_kwh extends JFrame {
 	private JLabel getLblCochoc() {
 		if (lblCochoc == null) {
 			lblCochoc = new JLabel("");
-			lblCochoc.setBounds(105, 73, 181, 38);
-			lblCochoc.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/cochok.png")));
+			lblCochoc.setBounds(105, 73, 188, 54);
+			lblCochoc.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Group 31.png")));
 		}
 		return lblCochoc;
 	}
@@ -190,7 +190,7 @@ public class Join_kwh extends JFrame {
 		if (lblKong == null) {
 			lblKong = new JLabel("");
 			lblKong.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/kong.png")));
-			lblKong.setBounds(0, 648, 234, 203);
+			lblKong.setBounds(0, 665, 234, 203);
 		}
 		return lblKong;
 	}
@@ -198,7 +198,7 @@ public class Join_kwh extends JFrame {
 		if (lblCho == null) {
 			lblCho = new JLabel("");
 			lblCho.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/cho.png")));
-			lblCho.setBounds(173, 630, 217, 186);
+			lblCho.setBounds(184, 665, 217, 186);
 		}
 		return lblCho;
 	}

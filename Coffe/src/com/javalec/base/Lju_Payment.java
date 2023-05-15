@@ -845,12 +845,12 @@ public class Lju_Payment extends JFrame {
 				Lju_Dao_PurchaseHistory dao_PurchaseHistory = new Lju_Dao_PurchaseHistory(buydis);
 				dao_PurchaseHistory.purchaseAciont();
 				
-				Lju_Purchase_Dialog dialog = new Lju_Purchase_Dialog();
-				dialog.setLocationRelativeTo(null);
-				dialog.setVisible(true);
 				Lju_PurchaseHistory history = new Lju_PurchaseHistory();
 				history.setLocationRelativeTo(null);
 				history.setVisible(true);
+				Lju_Purchase_Dialog dialog = new Lju_Purchase_Dialog();
+				dialog.setLocationRelativeTo(null);
+				dialog.setVisible(true);
 				
 				dispose();
 			}
