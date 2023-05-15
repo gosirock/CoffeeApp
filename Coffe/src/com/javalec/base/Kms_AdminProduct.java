@@ -198,6 +198,7 @@ public class Kms_AdminProduct extends JFrame {
 			rbInsert = new JRadioButton("입력");
 			rbInsert.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					clearColumn();
 					screenPartition();
 				}
 			});
@@ -688,9 +689,10 @@ private void tableClick() {  //
 		String name = tfProductName.getText();
 		int price = Integer.parseInt(tfProductPrice.getText());
 		int stock = Integer.parseInt(tfProductQty.getText());
+		String filepath = tfFileName.getText();
 		String description = tfDescription.getText();
 		
-		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct(id, name,price,stock,description);
+		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct(id);
 		boolean result = dao.deleteAction();
 		
 		if (result) {
@@ -706,9 +708,10 @@ private void tableClick() {  //
 		String name = tfProductName.getText();
 		int price = Integer.parseInt(tfProductPrice.getText());
 		int stock = Integer.parseInt(tfProductQty.getText());
+		String filepath = tfFileName.getText();
 		String description = tfDescription.getText();
 		
-		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct(id, name, stock, price, description);
+		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct(id, name, stock, price, filepath,description);
 		boolean result = dao.updateAction();
 		
 		if (result) {
@@ -800,7 +803,7 @@ private void filePath() {   // file loading method
 		}
 		
 		
-		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct(id, name, price, stock, description, input, description);
+		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct(id, name, price, stock, imagename, input, description);
 		boolean result = dao.insertAction(); 
 		
 		if (result) {
