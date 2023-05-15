@@ -1,11 +1,13 @@
 package com.javalec.base;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -38,6 +40,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ListSelectionModel;
@@ -73,7 +76,9 @@ public class Kms_AdminProduct extends JFrame {
 	private JButton btnOK;
 	private JLabel lblImage;
 	String message = "";
-
+	private JLabel lblClock;
+	
+	DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
 	DefaultTableModel model = new DefaultTableModel();
 	JTable table = new JTable(model);
 	private JButton btnFilePath;
@@ -85,6 +90,7 @@ public class Kms_AdminProduct extends JFrame {
 			public void run() {
 				try {
 					Kms_AdminProduct frame = new Kms_AdminProduct();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -116,6 +122,7 @@ public class Kms_AdminProduct extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getLblClock());
 		contentPane.add(getLblNewLabel_1());
 		contentPane.add(getLblAdminProduct());
 		contentPane.add(getRbSearch());
@@ -401,6 +408,33 @@ public class Kms_AdminProduct extends JFrame {
 	}
 	
 	// ----- function ------
+	
+	private JLabel getLblClock() {
+		if (lblClock == null) {
+			lblClock = new JLabel();
+			lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+			lblClock.setBounds(36, 15, 61, 16);
+			clockRun();
+			
+		}
+		return lblClock;
+	}
+ 
+ // 시간표시 메소드
+ private void clockRun() {
+	    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Calendar t = Calendar.getInstance();
+	            int hour = t.get(Calendar.HOUR);
+	            int min = t.get(Calendar.MINUTE);
+	            String clock = String.format("%02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            lblClock.setText(clock);
+			}
+		});	 
+	    timer.start();
+	}
 	
 private void tableClick() {  //
 		
