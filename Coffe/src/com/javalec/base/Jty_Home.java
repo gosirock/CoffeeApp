@@ -2,6 +2,7 @@ package com.javalec.base;
 
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.RenderingHints;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -26,6 +28,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class Jty_Home extends JFrame {
 
@@ -233,11 +236,25 @@ public class Jty_Home extends JFrame {
 	private JLabel getLblPpl() {
 		if (lblPpl == null) {
 			lblPpl = new JLabel("");
-			lblPpl.setIcon(new ImageIcon(Jty_Home.class.getResource("/com/javalec/image/coffee광고.png")));
-			lblPpl.setBounds(25, 120, 321, 180);
+			
+			
+			// 이미지를 직접 생성하고, BufferedImage로 변환하여 선명도 개선
+            ImageIcon icon = new ImageIcon(Jty_Home.class.getResource("/com/javalec/image/coffee광고.png"));
+            Image image = icon.getImage();
+            BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            g2d.drawImage(image, 0, 0, null);
+            g2d.dispose();
+
+            // 수정된 BufferedImage로 ImageIcon 생성하여 라벨에 설정
+            lblPpl.setIcon(new ImageIcon(bufferedImage));
+
+            lblPpl.setBounds(25, 120, 321, 180);
 		}
 		return lblPpl;
 	}
+	
 
 	private JButton getBtnCategory() {
 		if (btnCategory == null) {
