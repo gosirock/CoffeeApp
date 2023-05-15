@@ -171,6 +171,10 @@ public class Lju_PurchaseHistory extends JFrame{
 			btnHome.setBorderPainted(false);
 			btnHome.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Jty_Home jty_Home = new Jty_Home();
+					jty_Home.setLocationRelativeTo(null);
+					jty_Home.setVisible(true);
+					dispose();
 				}
 			});
 		}
@@ -211,6 +215,10 @@ public class Lju_PurchaseHistory extends JFrame{
 			btnReview = new JButton("");
 			btnReview.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Review2_kwh review2_kwh = new Review2_kwh();
+					review2_kwh.setLocationRelativeTo(null);
+					review2_kwh.setVisible(true);
+					dispose();
 				}
 			});
 			btnReview.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -429,6 +437,15 @@ private void closeingAction() {	//사진지우기
 	private JTable getInnerTable() {
 		if (innerTable == null) {
 			innerTable = new JTable();
+			innerTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Review_kwh review_kwh = new Review_kwh();
+					review_kwh.setLocationRelativeTo(null);
+					review_kwh.setVisible(true);
+					dispose();
+				}
+			});
 			innerTable.setFocusTraversalKeysEnabled(false);
 			innerTable.setGridColor(new Color(252, 242, 217));
 			innerTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
