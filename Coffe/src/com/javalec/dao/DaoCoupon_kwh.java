@@ -13,7 +13,7 @@ public class DaoCoupon_kwh {
 				private final String url_mysql = ShareVar.DBName;
 				private final String id_mysql = ShareVar.DBUser;
 				private final String pw_mysql = ShareVar.DBPass;
-
+				
 	
 	
 	int discount;

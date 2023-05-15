@@ -11,6 +11,10 @@ public class Lju_dto {
 	String iimagename;
 	String idescription;
 	int bqty;
+	String pdate;
+	int pqty;
+	int psaleprice;
+	int pSeq;
 	
 	
 
@@ -55,6 +59,82 @@ public class Lju_dto {
 		this.iprice = iprice;
 		this.iimagename = iimagename;
 		this.bqty = bqty;
+	}
+
+
+
+
+
+	public Lju_dto(String pdate, String iname, int pqty, int psaleprice) {
+		super();
+		this.pdate = pdate;
+		this.iname = iname;
+		this.pqty = pqty;
+		this.psaleprice = psaleprice;
+	}
+
+
+
+
+
+	public String getPdate() {
+		return pdate;
+	}
+
+
+
+
+
+	public void setPdate(String pdate) {
+		this.pdate = pdate;
+	}
+
+
+
+
+
+	public int getPqty() {
+		return pqty;
+	}
+
+
+
+
+
+	public void setPqty(int pqty) {
+		this.pqty = pqty;
+	}
+
+
+
+
+
+	public int getPsaleprice() {
+		return psaleprice;
+	}
+
+
+
+
+
+	public void setPsaleprice(int psaleprice) {
+		this.psaleprice = psaleprice;
+	}
+
+
+
+
+
+	public int getpSeq() {
+		return pSeq;
+	}
+
+
+
+
+
+	public void setpSeq(int pSeq) {
+		this.pSeq = pSeq;
 	}
 
 
