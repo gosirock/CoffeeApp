@@ -73,11 +73,17 @@ public class Kms_Dao_AdminProduct {
 		this.istock = istock;
 		this.idescription = idescription;
 	}
+	
+	
 
+	public Kms_Dao_AdminProduct(String iid) {
+		super();
+		this.iid = iid;
+	}
 	public Kms_Dto_AdminProduct tableclick() {
 		Kms_Dto_AdminProduct dto = null;
 		
-		String whereDefault = "select iid, iname, iprice, istock, iimagename, iimage, idescription from item";    // select from 은 이렇게하기
+		String whereDefault = "select iid, iname, iprice, istock, iimagename, iimage, idescription from cafe_app.item";    // select from 은 이렇게하기
 		String whereDefault1 = " where iid = '" + iid + "'";
 		try {  // java가 db에 접근했다.
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -92,12 +98,12 @@ public class Kms_Dao_AdminProduct {
 				int wkIprice = rs.getInt(3);
 				int wkIstock = rs.getInt(4);
 				String wkIimagename = rs.getString(5);
-				String wkIdescription = rs.getString(7);
+				String wkIdescription = rs.getString(6);
 				
 				// File 불러오기
 				File file = new File("./" + wkIimagename);
 				FileOutputStream output = new FileOutputStream(file);   // fileoutputstream은 file만드는 클래스
-				InputStream input = rs.getBinaryStream(6);  // db에서 image를 가져오는 것
+				InputStream input = rs.getBinaryStream(7);  // db에서 image를 가져오는 것
 				byte[] buffer = new byte[1024];  // 1024는 한번에 불러오는 파일의 크기 버퍼가 바이트배열로 만들어지는데 그림의 일부분(정해준 크기)만큼씩 블록으로 생성하여 배열로 들어옴
 				while(input.read(buffer)>0) {
 					output.write(buffer);
@@ -123,7 +129,7 @@ public class Kms_Dao_AdminProduct {
 	
 	public ArrayList<Kms_Dto_AdminProduct> selectList(){
 		ArrayList<Kms_Dto_AdminProduct> dtoList = new ArrayList<Kms_Dto_AdminProduct>(); 
-			String whereDefault = "select iid, iname, istock, iprice, idescription from item";    // select from 은 이렇게하기
+			String whereDefault = "select iid, iname, istock, iprice, idescription from cafe_app.item";    // select from 은 이렇게하기
 			try {  // java가 db에 접근했다.
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
@@ -162,7 +168,7 @@ public class Kms_Dao_AdminProduct {
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			String query = "insert into item (iid,iname,istock,iprice,iimagename,iimage,idescription)";
+			String query = "insert into cafe_app.item (iid,iname,istock,iprice,iimagename,iimage,idescription)";
 			String query1 = " values (?,?,?,?,?,?,?,?)";
 			
 			ps = conn_mysql.prepareStatement(query + query1);
@@ -248,7 +254,7 @@ public class Kms_Dao_AdminProduct {
 	public ArrayList<Kms_Dto_AdminProduct> conditionList(){
 		ArrayList<Kms_Dto_AdminProduct> dtoList = new ArrayList<Kms_Dto_AdminProduct>();
 		
-		String whereDefault = "select iid, iname, iprice, istock from item";
+		String whereDefault = "select iid, iname, iprice, istock from cafe_app.item";
 		String whereDefault1 = " where " + conname + " like '%" + condata + "%'";
 		
 		try {
@@ -259,12 +265,12 @@ public class Kms_Dao_AdminProduct {
 			ResultSet rs = stmt_mysql.executeQuery(whereDefault + whereDefault1);
 			
 			while(rs.next()) {
-				String pid = rs.getString(1);
-				String pname = rs.getString(2);
-				int pprice = rs.getInt(3);
-				int pstock = rs.getInt(4);
+				String iid = rs.getString(1);
+				String iname = rs.getString(2);
+				int iprice = rs.getInt(3);
+				int istock = rs.getInt(4);
 				
-				Kms_Dto_AdminProduct dto = new Kms_Dto_AdminProduct(pid, pname, pprice, pstock);
+				Kms_Dto_AdminProduct dto = new Kms_Dto_AdminProduct(iid, iname, iprice, istock);
 				dtoList.add(dto);
 			}
 

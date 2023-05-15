@@ -74,6 +74,9 @@ public class Kms_AdminProduct extends JFrame {
 	private JLabel lblImage;
 	String message = "";
 
+	DefaultTableModel model = new DefaultTableModel();
+	JTable table = new JTable(model);
+	private JButton btnFilePath;
 	/**
 	 * Launch the application.
 	 */
@@ -108,6 +111,8 @@ public class Kms_AdminProduct extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(248, 227, 182));	// 백그라운드 프레임 패널 색
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -120,7 +125,7 @@ public class Kms_AdminProduct extends JFrame {
 		contentPane.add(getTfSelection());
 		contentPane.add(getBtnNewButton());
 		contentPane.add(getCbSelection());
-		contentPane.add(getScrollPane());
+//		contentPane.add(getScrollPane());
 		contentPane.add(getLblProductId());
 		contentPane.add(getLblProductName());
 		contentPane.add(getLblProductPrice());
@@ -136,6 +141,23 @@ public class Kms_AdminProduct extends JFrame {
 		contentPane.add(getBtnOK());
 		contentPane.add(getLblImage());
 		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		scrollPane.setBounds(18, 141, 354, 251);
+		contentPane.add(scrollPane);
+		
+		innerTable = new JTable();
+		innerTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnOK.setEnabled(true);  // 테이블누를때 클릭실행가능
+				tableClick();
+			}
+		});
+		scrollPane.setViewportView(innerTable);
+		innerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		innerTable.setModel(outerTable);
+		contentPane.add(getBtnFilePath());
 		
 	}
 	
@@ -221,6 +243,11 @@ public class Kms_AdminProduct extends JFrame {
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("검색");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					conditionQuery();
+				}
+			});
 			btnNewButton.setBounds(280, 101, 88, 29);
 		}
 		return btnNewButton;
@@ -233,28 +260,7 @@ public class Kms_AdminProduct extends JFrame {
 		}
 		return cbSelection;
 	}
-	private JScrollPane getScrollPane() {
-		if (scrollPane == null) {
-			scrollPane = new JScrollPane();
-			scrollPane.setBounds(18, 141, 354, 251);
-			scrollPane.setViewportView(getInnerTable());
-		}
-		return scrollPane;
-	}
-	private JTable getInnerTable() {
-		if (innerTable == null) {
-			innerTable = new JTable();
-			innerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			innerTable.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					btnOK.setEnabled(true);
-					tableClick();
-				}
-			});
-		}
-		return innerTable;
-	}
+
 	private JLabel getLblProductId() {
 		if (lblProductId == null) {
 			lblProductId = new JLabel("");
@@ -363,6 +369,7 @@ public class Kms_AdminProduct extends JFrame {
 			btnOK = new JButton("");
 			btnOK.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					actionPartition();
 				}
 			});
 			btnOK.setBounds(251, 791, 117, 29);
@@ -379,6 +386,18 @@ public class Kms_AdminProduct extends JFrame {
 		}
 		return lblImage;
 	}
+	private JButton getBtnFilePath() {
+		if (btnFilePath == null) {
+			btnFilePath = new JButton("load");
+			btnFilePath.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					filePath();
+				}
+			});
+			btnFilePath.setBounds(280, 617, 88, 29);
+		}
+		return btnFilePath;
+	}
 	
 	// ----- function ------
 	
@@ -386,47 +405,44 @@ private void tableClick() {  //
 		
 		if(rbUpdate.isSelected()) {
 			tfProductId.setEditable(false);
-			//tfBrand.setEditable(true);
 			tfProductName.setEditable(true);
 			tfProductPrice.setEditable(true);
 			tfProductQty.setEditable(true);
 			tfFileName.setEditable(false);
 			btnOK.setVisible(true);
 			btnOK.setEnabled(true);
-			//btnFilePath.setVisible(true);
+			btnFilePath.setVisible(true);
 		}
 		
 		
 		if(rbDelete.isSelected()) {
 			tfProductId.setEditable(false);
-			//tfBrand.setEditable(false);
 			tfProductName.setEditable(false);
 			tfProductPrice.setEditable(false);
 			tfProductQty.setEditable(false);
 			tfFileName.setEditable(false);
 			btnOK.setVisible(true);
 			btnOK.setEnabled(true);
-			//btnFilePath.setVisible(true);
+			btnFilePath.setVisible(true);
 		}
 		
 		if (rbInsert.isSelected()) {
 			tfProductId.setEditable(true);
-			//tfBrand.setEditable(true);
 			tfProductName.setEditable(true);
 			tfProductPrice.setEditable(true);
 			tfProductQty.setEditable(true);
 			tfFileName.setEditable(false);
 			btnOK.setVisible(true);
 			btnOK.setEnabled(true);
-			//btnFilePath.setVisible(true);
+			btnFilePath.setVisible(true);
 		}
 		
 		int i = innerTable.getSelectedRow();
 		String wkSequence = (String) innerTable.getValueAt(i, 0);
-		int wkSeqno = Integer.parseInt(wkSequence);
+//		int wkSeqno = Integer.parseInt(wkSequence);
 		
 		// Dao 에 의뢰한다.
-		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct();
+		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct(wkSequence);
 		Kms_Dto_AdminProduct dto = dao.tableclick();
 		
 		tfProductId.setText(dto.getIid());
@@ -476,27 +492,27 @@ private void tableClick() {  //
 		
 		int vColIndex = 0;
 		TableColumn col = innerTable.getColumnModel().getColumn(vColIndex);
-		int width = 10;
+		int width = 40;
 		col.setPreferredWidth(width);
 		
 		vColIndex = 1;
 		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 10;
+		width = 50;
 		col.setPreferredWidth(width);
 		
 		vColIndex = 2;
 		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 20;
+		width = 40;
 		col.setPreferredWidth(width);
 		
 		vColIndex = 3;
 		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 30;
+		width = 40;
 		col.setPreferredWidth(width);
 		
 		vColIndex = 4;
 		col = innerTable.getColumnModel().getColumn(vColIndex);
-		width = 40;
+		width = 200;
 		col.setPreferredWidth(width);
 	}
 	
@@ -512,7 +528,6 @@ private void tableClick() {  //
 			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
 			
 		}
-		//tfCount.setText(Integer.toString(listCount));
 		
 	}
 	private void screenPartition() {
@@ -527,7 +542,7 @@ private void tableClick() {  //
 			tfDescription.setEditable(false);
 			btnOK.setVisible(false);
 			btnOK.setEnabled(false);
-			// btnFilePath.setVisible(false);
+			btnFilePath.setVisible(false);
 		}
 
 		// 입력의 경우
@@ -541,7 +556,7 @@ private void tableClick() {  //
 			tfDescription.setEditable(true);
 			btnOK.setVisible(true);
 			btnOK.setEnabled(true);
-			//btnFilePath.setVisible(true);
+			btnFilePath.setVisible(true);
 			
 		}
 		
@@ -555,7 +570,7 @@ private void tableClick() {  //
 			tfDescription.setEditable(false);
 			btnOK.setVisible(true);
 			btnOK.setEnabled(false);
-			// btnFilePath.setVisible(false);
+			btnFilePath.setVisible(false);
 		}
 		
 		// 삭제의 경우
@@ -568,7 +583,7 @@ private void tableClick() {  //
 			tfDescription.setEditable(false);
 			btnOK.setVisible(false);
 			btnOK.setEnabled(false);
-			// btnFilePath.setVisible(false);
+			btnFilePath.setVisible(false);
 			
 			
 		}
@@ -675,7 +690,7 @@ private void tableClick() {  //
 		int stock = Integer.parseInt(tfProductQty.getText());
 		String description = tfDescription.getText();
 		
-		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct();
+		Kms_Dao_AdminProduct dao = new Kms_Dao_AdminProduct(id, name,price,stock,description);
 		boolean result = dao.deleteAction();
 		
 		if (result) {
