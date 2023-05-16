@@ -90,7 +90,7 @@ public class DaoReview_kwh {
 					Statement stmt_mysql = conn_mysql.createStatement();
 
 					String query = "insert into review (item_iid,customer_cid,title,reply,rimagename,rimage,rinsertdate)";
-					String query1 = " values (?,?,?,?,?,?,?) where customer_cid = cid and item_iid = iid";
+					String query1 = " values (?,?,?,?,?,?,?)";
 				
 					
 					
@@ -165,7 +165,7 @@ public class DaoReview_kwh {
 							Date wkDate = rs.getDate(8);
 							
 							byte[] buffer = new byte[1024];
-							while(input.read(buffer) >= 0) {
+							while(input.read(buffer) > 0) {
 								output.write(buffer);
 							
 							
@@ -236,7 +236,7 @@ public class DaoReview_kwh {
 						Date wkDate = rs.getDate(8);
 						
 						byte[] buffer = new byte[1024];
-						while(input.read(buffer) >= 0) {
+						while(input.read(buffer) > 0) {
 							output.write(buffer);
 						
 						

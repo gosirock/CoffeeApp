@@ -182,7 +182,7 @@ public class Review2_kwh extends JFrame {
 				}
 			});
 			btnReview.setBackground(new Color(131, 77, 30));
-			btnReview.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/btnReview.png")));
+			btnReview.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/reviewicon.png")));
 			btnReview.setFocusPainted(false);
 			btnReview.setBorderPainted(false);
 		}

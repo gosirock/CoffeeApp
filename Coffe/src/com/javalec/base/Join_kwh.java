@@ -444,12 +444,13 @@ public class Join_kwh extends JFrame {
 					
 				@Override
 				public void keyTyped(KeyEvent e) {
-					if(e.getKeyChar() >= '0' && e.getKeyChar() <= '9') { // 패스워드창 숫자만 입력할 수 있게하기
+					if((e.getKeyChar() >= '0' && e.getKeyChar() <= '9') || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) { // 패스워드창 숫자와 백스페이스 입력할 수 있게하기
 						
 					}else {
 						JOptionPane.showMessageDialog(null,"숫자만 입력하세요", "경고",JOptionPane.ERROR_MESSAGE);
 						pfPayPassword.setText("");
 					}
+					
 				}
 			});
 			pfPayPassword.setEditable(false);
