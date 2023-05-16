@@ -51,8 +51,8 @@ public class Jty_Home extends JFrame {
 	 */
 
 	private ImageIcon[] imageIcons = { new ImageIcon(Jty_Home.class.getResource("/com/javalec/Image/coffee광고.png")),
-			new ImageIcon(Jty_Home.class.getResource("/com/javalec/Image/Mega2.jpg")),
-			new ImageIcon(Jty_Home.class.getResource("/com/javalec/Image/Mega3.jpg")) };
+			new ImageIcon(Jty_Home.class.getResource("/com/javalec/Image/newsuzy.png")),
+			new ImageIcon(Jty_Home.class.getResource("/com/javalec/Image/IU.png")) };
 	private JButton btnCategory;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_2;
@@ -179,6 +179,7 @@ public class Jty_Home extends JFrame {
 			btnHome.setBorderPainted(false);
 			btnHome.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 				}
 			});
 		}
@@ -191,6 +192,12 @@ public class Jty_Home extends JFrame {
 			btnMenu.setBackground(new Color(131, 77, 30));
 			btnMenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					Lju_MenuCoffee lju_MenuCoffee = new Lju_MenuCoffee();
+					lju_MenuCoffee.setLocationRelativeTo(null);
+					lju_MenuCoffee.setVisible(true);
+					dispose();
+					
 				}
 			});
 			btnMenu.setIcon(new ImageIcon(Jty_Home.class.getResource("/com/javalec/image/툴바메뉴.png")));
@@ -203,6 +210,14 @@ public class Jty_Home extends JFrame {
 	private JButton getBtnOrder() {
 		if (btnOrder == null) {
 			btnOrder = new JButton("");
+			btnOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Lju_MenuCoffee menuCoffee = new Lju_MenuCoffee();
+					menuCoffee.setLocationRelativeTo(null);
+					menuCoffee.setVisible(true);
+					dispose();
+				}
+			});
 			btnOrder.setBackground(new Color(131, 77, 30));
 			btnOrder.setIcon(new ImageIcon(Jty_Home.class.getResource("/com/javalec/image/btnOrder.png")));
 			btnOrder.setFocusPainted(false);
@@ -214,6 +229,14 @@ public class Jty_Home extends JFrame {
 	private JButton getBtnReview() {
 		if (btnReview == null) {
 			btnReview = new JButton("");
+			btnReview.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Review2_kwh review2_kwh = new Review2_kwh();
+					review2_kwh.setLocationRelativeTo(null);
+					review2_kwh.setVisible(true);
+					dispose();
+				}
+			});
 			btnReview.setBackground(new Color(131, 77, 30));
 			btnReview.setIcon(new ImageIcon(Jty_Home.class.getResource("/com/javalec/image/btnReview.png")));
 			btnReview.setFocusPainted(false);

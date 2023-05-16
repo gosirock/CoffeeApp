@@ -27,9 +27,8 @@ public class Jty_Dto_Profile {
 	
 	
 	// 프로필 업데이트
-	public Jty_Dto_Profile(String cid, String cpassword, String cname, String cphone, String cemail, String caddress) {
+	public Jty_Dto_Profile(String cpassword, String cname, String cphone, String cemail, String caddress) {
 		super();
-		this.cid = cid;
 		this.cpassword = cpassword;
 		this.cname = cname;
 		this.cphone = cphone;

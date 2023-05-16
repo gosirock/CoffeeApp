@@ -246,20 +246,21 @@ public class Hsh_login extends JFrame {
 			Hsh_logindao hsh_logindao = new Hsh_logindao(uid, upassword);
 			
 			boolean result = hsh_logindao.logincheck();
-			
+			boolean result1 = hsh_logindao.deletecheck();
+			if(result1 == true) {
+				JOptionPane.showMessageDialog(this, "이 계정은 탈퇴된 계정입니다", "로그인", JOptionPane.ERROR_MESSAGE);
+			}
 			if(result == true) {
 				ShareVar.loginUserId = uid;
 				JOptionPane.showMessageDialog(this, uid+"님 환영합니다");
 				home();
 				deleteAction();
 				
-//				buy  = new Buy();
-//				buy.setVisible(true);											ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ메인화면으로 연결
-//				dispose();
-				
 			}else {
 				JOptionPane.showMessageDialog(this, "ID, PassWord를 확인하세요");
 			}
+			
+			
 	}
 	}
 	private JPasswordField getPfCpw() {
