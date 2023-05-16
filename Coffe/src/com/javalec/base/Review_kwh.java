@@ -35,8 +35,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.Calendar;
 import java.awt.event.WindowAdapter;
@@ -147,7 +145,7 @@ public class Review_kwh extends JFrame {
 					menu();
 				}
 			});
-			btnMenu.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/btnMenu.png")));
+			btnMenu.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/Group 7.png")));
 			btnMenu.setFocusPainted(false);
 			btnMenu.setBorderPainted(false);
 		}
@@ -177,7 +175,7 @@ public class Review_kwh extends JFrame {
 				}
 			});
 			btnReview.setBackground(new Color(131, 77, 30));
-			btnReview.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/btnReview.png")));
+			btnReview.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/reviewicon.png")));
 			btnReview.setFocusPainted(false);
 			btnReview.setBorderPainted(false);
 		}
@@ -309,11 +307,17 @@ public class Review_kwh extends JFrame {
 	// postAction  리뷰등록
 		private void postAction() {   // insert 
 			
-		String item_iid  = ShareVar.ItemId;/// sharevar에서 넘어와야함
+		String item_iid  = ShareVar.testitem;/// sharevar에서 넘어와야함
 		String customer_cid = ShareVar.loginUserId;
 		String title = tfTitle.getText();
 		String comment = tfComment.getText();
-		String imagename = "image";
+	
+		
+		Calendar s = Calendar.getInstance();
+		int second = s.get(Calendar.SECOND);
+		String imagename = "image" + Integer.toString(second);
+		
+		
 		
 		// 자바유틸데이트로 현재시각을 받아서 자바sql데이트에 넣어야함
 		java.util.Date now = new java.util.Date();
@@ -349,39 +353,6 @@ public class Review_kwh extends JFrame {
 		}
 		}	
 	
-		
-		// filePath(); 를 통해 받은 값이 tfFilePath에 없다
-		//if(tfFilePath.getText().equals("")){
-				
-			
-			//	input = null;
-			//	String filePath = Review_kwh.class.getResource("/com/javalec/image/imagelabel.png").getFile();
-			//	filePath = URLDecoder.decode(filePath, StandardCharsets.UTF_8);
-			//	file = new File(tfFilePath.getText());
-			//	try {
-			////		input = new FileInputStream(file);
-			//	}catch(Exception e){
-			//		e.printStackTrace();
-			//	}
-				
-				
-			//	DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
-			//	boolean result = dao.postAction();
-				
-			//	
-			//	if (result) {
-			//		JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			//	}else {
-			//		JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			//	}
-			
-	//	}
-		
-		
-	
-	
-	
-
 		
 		
 
