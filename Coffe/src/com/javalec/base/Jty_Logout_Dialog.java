@@ -21,6 +21,12 @@ public class Jty_Logout_Dialog extends JDialog {
 	/**
 	 * Launch the application.
 	 */
+
+	private void diaclose() {
+		this.setVisible(false);
+		this.dispose();
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,6 +60,7 @@ public class Jty_Logout_Dialog extends JDialog {
 		setBounds(120, 500, 352, 279);
 
 	}
+
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("정말로 로그아웃 하시겠습니까?");
@@ -64,16 +71,21 @@ public class Jty_Logout_Dialog extends JDialog {
 		}
 		return lblNewLabel;
 	}
+
 	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("예");
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Hsh_start hsh_start = new Hsh_start();
-					hsh_start.setVisible(true);
-					dispose();
-				}
+	    if (btnNewButton == null) {
+	        btnNewButton = new JButton("예");
+	        btnNewButton.setBorder(null);
+	        btnNewButton.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            	Hsh_start hsh_start = new Hsh_start();
+	                hsh_start.setVisible(true);
+	               // dialog.dispose(); // 다이얼로그 닫기
+	                dispose(); // 프로필 창 닫기
+	            }
+
 			});
+
 			btnNewButton.setForeground(new Color(255, 255, 255));
 			btnNewButton.setBackground(new Color(131, 77, 30));
 			btnNewButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -81,9 +93,16 @@ public class Jty_Logout_Dialog extends JDialog {
 		}
 		return btnNewButton;
 	}
+
 	private JButton getBtnNewButton_1() {
 		if (btnNewButton_1 == null) {
 			btnNewButton_1 = new JButton("아니오");
+			btnNewButton_1.setBorder(null); // 텍스트 필드의 테두리를 없앰
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
 			btnNewButton_1.setForeground(new Color(255, 255, 255));
 			btnNewButton_1.setBackground(new Color(131, 77, 30));
 			btnNewButton_1.setFont(new Font("맑은 고딕", Font.BOLD, 13));

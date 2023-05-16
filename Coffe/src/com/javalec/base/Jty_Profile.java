@@ -23,6 +23,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -53,7 +55,6 @@ public class Jty_Profile extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblFace;
 	private JButton btnPayPasswordUpdate;
-	private JButton btnCuponBox;
 	private JButton btnAllUpdate;
 	private JLabel lblDeleteUSer;
 	private JLabel lblNewLabel_2_1;
@@ -130,7 +131,6 @@ public class Jty_Profile extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(getBtnBack());
 		contentPane.add(getLblNewLabel_1());
-		contentPane.add(getBtnCuponBox());
 		contentPane.add(getBtnAllUpdate());
 		contentPane.add(getLblDeleteUSer());
 		contentPane.add(getLblNewLabel_2_1());
@@ -321,17 +321,6 @@ public class Jty_Profile extends JFrame {
 			btnPayPasswordUpdate.setBackground(new Color(252, 242, 217));
 		}
 		return btnPayPasswordUpdate;
-	}
-
-	private JButton getBtnCuponBox() {
-		if (btnCuponBox == null) {
-			btnCuponBox = new JButton("");
-			btnCuponBox.setBorder(null); // 버튼의 테두리를 없앰
-			btnCuponBox.setIcon(new ImageIcon(Jty_Profile.class.getResource("/com/javalec/image/쿠폰함버튼.png")));
-			btnCuponBox.setBackground(new Color(248, 227, 182));
-			btnCuponBox.setBounds(40, 615, 76, 40);
-		}
-		return btnCuponBox;
 	}
 
 	private JButton getBtnAllUpdate() {
@@ -695,7 +684,7 @@ public class Jty_Profile extends JFrame {
 				Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile(cpassword, cname, cphone, cemailFull, caddress);
 				boolean result = dao_Profile.allUpdateAction();
 				if (result) {
-					JOptionPane.showMessageDialog(this, "회원정보 수정\n" + tfName.getText() + "님의 회원벙보가 수정되었습니다.", "회원정보 수정",
+					JOptionPane.showMessageDialog(this, tfName.getText() + "님의 회원정보가 수정되었습니다.", "회원정보 수정",
 							JOptionPane.INFORMATION_MESSAGE); // this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 				}
 			}
@@ -714,6 +703,7 @@ public class Jty_Profile extends JFrame {
 	private JComboBox getCbEmail() {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
+			
 			cbEmail.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 			cbEmail.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -730,11 +720,28 @@ public class Jty_Profile extends JFrame {
 
 	private void emailAction() {
 		int i = cbEmail.getSelectedIndex();
-		String emailselect = "";
+		//String emailselect = "";
 		switch (i) {
 		case 0:
 			cbEmail.setEditable(true);
-			break;
+		    JTextField editor = (JTextField) cbEmail.getEditor().getEditorComponent();
+		    editor.setText("");
+		    editor.addFocusListener(new FocusAdapter() {
+		        @Override
+		        public void focusGained(FocusEvent e) {
+		            if (editor.getText().equals("직접 입력")) {
+		                editor.setText("");
+		            }
+		        }
+
+		        @Override
+		        public void focusLost(FocusEvent e) {
+		            if (editor.getText().isEmpty()) {
+		                editor.setText("직접 입력");
+		            }
+		        }
+		    });
+		    break;
 		case 1:
 			cbEmail.setEditable(false);
 			break;
@@ -748,6 +755,10 @@ public class Jty_Profile extends JFrame {
 			break;
 
 		}
+	}
+	
+	public void diaclose() {
+		this.dispose();
 	}
 
 }

@@ -16,6 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Jty_PaymentPassword extends JFrame {
 
@@ -83,12 +85,20 @@ public class Jty_PaymentPassword extends JFrame {
 		contentPane.add(getPanel());
 
 		textFields = new JTextField[4];
+		textFields[0] = pfnum1;
+		textFields[1] = pfnum2;
+		textFields[2] = pfnum3;
+		textFields[3] = pfnum4;
 		for (int i = 0; i < textFields.length; i++) {
 			textFields[i] = new JTextField();
 			textFields[i].setBounds(127 + 37 * i, 145, 25, 21);
-			contentPane.add(textFields[i]);
+			
+				
 		}
-	}
+		
+		}
+	
+	
 
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
@@ -134,33 +144,37 @@ public class Jty_PaymentPassword extends JFrame {
 	
 
 	private JButton getBtn1() {
-		if (btn1 == null) {
-			btn1 = new JButton("1");
-			btn1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-					textFields[i].setText("1");
-				}}
-			});
-			btn1.setForeground(new Color(255, 255, 255));
-			btn1.setBackground(new Color(255, 128, 0));
-			btn1.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn1.setBounds(38, 213, 101, 133);
-
-		}
-		return btn1;
+	    if (btn1 == null) {
+	        btn1 = new JButton("1");
+	        btn1.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
+	        btn1.setForeground(new Color(255, 255, 255));
+	        btn1.setBackground(new Color(255, 128, 0));
+	        btn1.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+	        btn1.setBounds(38, 213, 101, 133);
+	    }
+	    return btn1;
 	}
 
 	private JButton getBtn2() {
 		if (btn2 == null) {
 			btn2 = new JButton("2");
 			btn2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-					textFields[i].setText("2");
-					}
-				}
-			});
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
 			btn2.setForeground(new Color(255, 255, 255));
 			btn2.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btn2.setBackground(new Color(255, 128, 0));
@@ -174,11 +188,14 @@ public class Jty_PaymentPassword extends JFrame {
 		if (btn3 == null) {
 			btn3 = new JButton("3");
 			btn3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-					textFields[i].setText("3");
-				}}
-			});
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
 			btn3.setForeground(new Color(255, 255, 255));
 			btn3.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btn3.setBackground(new Color(255, 128, 0));
@@ -192,11 +209,14 @@ public class Jty_PaymentPassword extends JFrame {
 		if (btn4 == null) {
 			btn4 = new JButton("4");
 			btn4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-					textFields[i].setText("4");
-				}}
-			});
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
 			btn4.setForeground(new Color(255, 255, 255));
 			btn4.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btn4.setBackground(new Color(255, 128, 0));
@@ -209,11 +229,14 @@ public class Jty_PaymentPassword extends JFrame {
 		if (btn5 == null) {
 			btn5 = new JButton("5");
 			btn5.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				
-					//textFields[i].setText("5");
-				}
-			});
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
 			btn5.setForeground(new Color(255, 255, 255));
 			btn5.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btn5.setBackground(new Color(255, 128, 0));
@@ -226,11 +249,14 @@ public class Jty_PaymentPassword extends JFrame {
 		if (btn6 == null) {
 			btn6 = new JButton("6");
 			btn6.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-					textFields[i].setText("6");
-					}}
-			});
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
 			btn6.setForeground(new Color(255, 255, 255));
 			btn6.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btn6.setBackground(new Color(255, 128, 0));
@@ -243,11 +269,14 @@ public class Jty_PaymentPassword extends JFrame {
 		if (btn7 == null) {
 			btn7 = new JButton("7");
 			btn7.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-					textFields[i].setText("7");
-				}}
-			});
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
 			btn7.setForeground(new Color(255, 255, 255));
 			btn7.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btn7.setBackground(new Color(255, 128, 0));
@@ -260,11 +289,14 @@ public class Jty_PaymentPassword extends JFrame {
 		if (btn8 == null) {
 			btn8 = new JButton("8");
 			btn8.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-					textFields[i].setText("8");
-				}}
-			});
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
 			btn8.setForeground(new Color(255, 255, 255));
 			btn8.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btn8.setBackground(new Color(255, 128, 0));
@@ -277,11 +309,14 @@ public class Jty_PaymentPassword extends JFrame {
 		if (btn9 == null) {
 			btn9 = new JButton("9");
 			btn9.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-					textFields[i].setText("9");
-				}}
-			});
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	            }
+	        }); // 추가된 중괄호
 			btn9.setForeground(new Color(255, 255, 255));
 			btn9.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btn9.setBackground(new Color(255, 128, 0));
@@ -291,22 +326,24 @@ public class Jty_PaymentPassword extends JFrame {
 	}
 
 	private JButton getBtn0() {
-		if (btn0 == null) {
-			btn0 = new JButton("0");
-			btn0.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i<textFields.length; i++) {
-						textFields[i].setText("0");
-						break;
-					}
-				}
-			});
-			btn0.setForeground(new Color(255, 255, 255));
-			btn0.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn0.setBackground(new Color(255, 128, 0));
-			btn0.setBounds(146, 642, 101, 133);
-		}
-		return btn0;
+	    if (btn0 == null) {
+	        btn0 = new JButton("0");
+	        btn0.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                currentTextFieldIndex++;
+	                if (currentTextFieldIndex >= textFields.length) {
+	                    currentTextFieldIndex = 0;
+	                }
+	                textFields[currentTextFieldIndex].requestFocus();
+	                textFields[currentTextFieldIndex].setText("0"); // "0"을 텍스트 필드에 쓰도록 추가
+	            }
+	        });
+	        btn0.setForeground(new Color(255, 255, 255));
+	        btn0.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+	        btn0.setBackground(new Color(255, 128, 0));
+	        btn0.setBounds(146, 642, 101, 133);
+	    }
+	    return btn0;
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -388,6 +425,11 @@ public class Jty_PaymentPassword extends JFrame {
 	private JPasswordField getPfnum2() {
 		if (pfnum2 == null) {
 			pfnum2 = new JPasswordField();
+			pfnum2.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+				}
+			});
 			pfnum2.setEditable(false);
 			pfnum2.setBounds(164, 145, 25, 21);
 		}
