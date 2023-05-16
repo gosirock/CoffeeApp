@@ -1,6 +1,7 @@
 package com.javalec.base;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -24,6 +25,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Calendar;
+
 import javax.swing.JPasswordField;
 
 public class Hsh_login extends JFrame {
@@ -35,7 +38,6 @@ public class Hsh_login extends JFrame {
 	private JPanel panel_3;
 	private JButton btnLogin;
 	private JButton btnJoin;
-	private JLabel lblTime;
 	private JLabel lblba;
 	private JLabel lblkong;
 	private JLabel lblCho;
@@ -46,6 +48,7 @@ public class Hsh_login extends JFrame {
 	private JLabel lblCochoc;
 	private JPasswordField pfCpw;
 	private JLabel lblNewLabel_1;
+	private JLabel lblClock;
 
 	/**
 	 * Launch the application.
@@ -87,7 +90,6 @@ public class Hsh_login extends JFrame {
 		contentPane.add(getLblNewLabel());
 		contentPane.add(getBtnLogin());
 		contentPane.add(getBtnJoin());
-		contentPane.add(getLblTime());
 		contentPane.add(getLblCochoc());
 		contentPane.add(getLblkong());
 		contentPane.add(getLblCho());
@@ -98,6 +100,7 @@ public class Hsh_login extends JFrame {
 		contentPane.add(getBtnGomenu());
 		contentPane.add(getLblNewLabel_1());
 		contentPane.add(getLblba());
+		contentPane.add(getLblClock());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -143,14 +146,6 @@ public class Hsh_login extends JFrame {
 			btnJoin.setBounds(69, 207, 270, 36);
 		}
 		return btnJoin;
-	}
-	private JLabel getLblTime() {
-		if (lblTime == null) {
-			lblTime = new JLabel("");
-			lblTime.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/time.png")));
-			lblTime.setBounds(32, 13, 32, 21);
-		}
-		return lblTime;
 	}
 	private JLabel getLblba() {
 		if (lblba == null) {
@@ -233,6 +228,7 @@ public class Hsh_login extends JFrame {
 //		hsh_join.setVisible(true);
 //		setVisible(false);
 		Join_kwh hi = new Join_kwh();
+		hi.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hi.setVisible(true);
 		setVisible(false);
 	}	
@@ -283,6 +279,7 @@ public class Hsh_login extends JFrame {
 
 	private void home() { // 로그인 버튼 홈으로 이동
 		Jty_Home hi = new Jty_Home();
+		hi.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hi.setVisible(true);
 		setVisible(false);
 	}
@@ -300,6 +297,30 @@ public class Hsh_login extends JFrame {
 			lblNewLabel_1.setBounds(38, 167, 336, 497);
 		}
 		return lblNewLabel_1;
+	}
+	private JLabel getLblClock() {
+		if (lblClock == null) {
+			lblClock = new JLabel("");
+			lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+			lblClock.setBounds(25, 28, 61, 16);
+			clockRun();
+		}
+		return lblClock;
+	}
+	private void clockRun() {
+	    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Calendar t = Calendar.getInstance();
+				int hour = t.get(Calendar.HOUR);
+	            int min = t.get(Calendar.MINUTE);
+	            int second = t.get(Calendar.SECOND);
+	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            lblClock.setText(clock);
+			}
+		});	 
+	    timer.start();
 	}
 }
 	

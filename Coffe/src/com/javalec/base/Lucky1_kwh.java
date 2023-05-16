@@ -202,7 +202,7 @@ public class Lucky1_kwh extends JDialog {
 	
 		// 쿠폰등록
 		public void insertAction() {
-			String customer_cid = ShareVar.testid;
+			String customer_cid = ShareVar.loginUserId;
 			
 			int discount = 0;
 			try {
