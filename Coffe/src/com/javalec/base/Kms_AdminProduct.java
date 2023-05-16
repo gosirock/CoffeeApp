@@ -91,7 +91,6 @@ public class Kms_AdminProduct extends JFrame {
 			public void run() {
 				try {
 					Kms_AdminProduct frame = new Kms_AdminProduct();
-					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -107,6 +106,7 @@ public class Kms_AdminProduct extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);
 				tableInit();  // 테이블초기화
 				searchAction();  // 데이터불러오기
 				screenPartition(); //  radiobtn 이 눌러진 상태로 textfield 화면표시해주기

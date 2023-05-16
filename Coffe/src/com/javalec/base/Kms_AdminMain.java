@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Kms_AdminMain extends JFrame {
 	
@@ -42,7 +44,6 @@ public class Kms_AdminMain extends JFrame {
 			public void run() {
 				try {
 					Kms_AdminMain frame = new Kms_AdminMain();
-					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,6 +56,12 @@ public class Kms_AdminMain extends JFrame {
 	 * Create the frame.
 	 */
 	public Kms_AdminMain() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);
 		contentPane = new JPanel();

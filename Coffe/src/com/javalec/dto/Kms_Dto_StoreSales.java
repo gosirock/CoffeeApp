@@ -1,9 +1,11 @@
 package com.javalec.dto;
 
+import java.sql.Date;
+
 public class Kms_Dto_StoreSales {
 
 	int seqno;
-	String date;
+	Date date;
 	int price;
 	
 	public Kms_Dto_StoreSales() {
@@ -11,7 +13,7 @@ public class Kms_Dto_StoreSales {
 	}
 
 	
-	public Kms_Dto_StoreSales(int seqno, String date, int price) {
+	public Kms_Dto_StoreSales(int seqno, Date date, int price) {
 		super();
 		this.seqno = seqno;
 		this.date = date;
@@ -27,11 +29,11 @@ public class Kms_Dto_StoreSales {
 		this.seqno = seqno;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

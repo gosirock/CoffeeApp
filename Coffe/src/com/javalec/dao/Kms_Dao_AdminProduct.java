@@ -168,14 +168,14 @@ public class Kms_Dao_AdminProduct {
 			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			String query = "insert into cafe_app.item (iid,iname,istock,iprice,iimagename,iimage,idescription)";
-			String query1 = " values (?,?,?,?,?,?,?,?)";
+			String query = "insert into cafe_app.item (iid,iname,iprice,istock,iimagename,iimage,idescription)";
+			String query1 = " values (?,?,?,?,?,?,?)";
 			
 			ps = conn_mysql.prepareStatement(query + query1);
 			ps.setString(1, iid.trim());
 			ps.setString(2, iname.trim());
-			ps.setInt(3, istock);
-			ps.setInt(4, iprice);
+			ps.setInt(3, iprice);
+			ps.setInt(4, istock);
 			// File 추가
 			ps.setString(5, iimagename);
 			ps.setBinaryStream(6, iimage);

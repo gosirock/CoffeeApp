@@ -1,6 +1,7 @@
 package com.javalec.base;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,6 +31,7 @@ import javax.swing.JTable;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.JTextField;
@@ -51,6 +53,7 @@ public class Kms_StoreSales extends JFrame {
 	private JLabel lblSales;
 	private JTextField tfSales;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JLabel lblClock;
 
 	/**
 	 * Launch the application.
@@ -75,6 +78,7 @@ public class Kms_StoreSales extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);
 				tableInit();  // 테이블초기화
 				daySalesAction();  // 데이터불러오기
 				sumAction();
@@ -88,11 +92,11 @@ public class Kms_StoreSales extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getLblClock());
 		contentPane.add(getWifi());
 		contentPane.add(getLblSalesInfo());
 		contentPane.add(getBtnDaySales());
 		contentPane.add(getBtnDaysSales());
-//		contentPane.add(getScrollPane());
 		contentPane.add(getBtnBack());
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -145,7 +149,7 @@ public class Kms_StoreSales extends JFrame {
 				}
 			});
 			btnDaySales.setBounds(34, 114, 160, 32);
-			btnDaySales.setIcon(new ImageIcon(Kms_StoreSales.class.getResource("/com/javalec/image/daySales.png")));
+			btnDaySales.setIcon(new ImageIcon(Kms_StoreSales.class.getResource("/com/javalec/image/todaySales.png")));
 		}
 		return btnDaySales;
 	}
@@ -162,7 +166,7 @@ public class Kms_StoreSales extends JFrame {
 				}
 			});
 			btnDaysSales.setBounds(195, 114, 160, 32);
-			btnDaysSales.setIcon(new ImageIcon(Kms_StoreSales.class.getResource("/com/javalec/image/daysSales.png")));
+			btnDaysSales.setIcon(new ImageIcon(Kms_StoreSales.class.getResource("/com/javalec/image/yesterdaySales.png")));
 		}
 		return btnDaysSales;
 	}
@@ -200,7 +204,35 @@ public class Kms_StoreSales extends JFrame {
 		return tfSales;
 	}
 	
+	private JLabel getLblClock() {
+		if (lblClock == null) {
+			lblClock = new JLabel();
+			lblClock.setFont(new Font("Malayalam Sangam MN", Font.BOLD, 15));
+			lblClock.setBounds(36, 15, 61, 16);
+			clockRun();
+			
+		}
+		return lblClock;
+	}
+	
 	// ----- function ----
+	
+ 
+ // 시간표시 메소드
+ private void clockRun() {
+	    javax.swing.Timer timer = new javax.swing.Timer(100, new ActionListener() {	//1초마다 갱신
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Calendar t = Calendar.getInstance();
+	            int hour = t.get(Calendar.HOUR);
+	            int min = t.get(Calendar.MINUTE);
+	            String clock = String.format("%02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            lblClock.setText(clock);
+			}
+		});	 
+	    timer.start();
+	}
 	
 	private void tableInit() {
 		outerTable.addColumn("주문번호");
@@ -237,20 +269,6 @@ public class Kms_StoreSales extends JFrame {
 	
 	}
 	
-//	private void searchAction() {
-//		Kms_Dao_StoreSales dao = new Kms_Dao_StoreSales();
-//		//dao.selectList();   // Dao 에서 return 을 준다  받아야함
-//		ArrayList<Kms_Dto_StoreSales> dtoList = dao.selectList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
-//		int listCount = dtoList.size();
-//		
-//		for( int i = 0; i < listCount ; i++) {
-//			String[] qTxt = {Integer.toString(dtoList.get(i).getSeqno()), dtoList.get(i).getDate(), Integer.toString(dtoList.get(i).getPrice())};
-//			outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
-//			
-//		}
-//		//tfCount.setText(Integer.toString(listCount));
-//		
-//	}
 
 		private void backAction() {
 			Kms_AdminMain adminMain = new Kms_AdminMain();
@@ -258,14 +276,26 @@ public class Kms_StoreSales extends JFrame {
 			dispose();
 		}
 		
+		private void selectList() {
+			Kms_Dao_StoreSales dao = new Kms_Dao_StoreSales();
+			ArrayList<Kms_Dto_StoreSales> dtoList = dao.selectList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
+			int listCount = dtoList.size();
+			
+			for( int i = 0; i < listCount ; i++) {
+				Object[] qTxt = {Integer.toString(dtoList.get(i).getSeqno()), dtoList.get(i).getDate(), Integer.toString(dtoList.get(i).getPrice())};
+				outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
+			}
+		
+			
+		}
+		
 		private void daySalesAction() {
 			Kms_Dao_StoreSales dao = new Kms_Dao_StoreSales();
-			//dao.selectList();   // Dao 에서 return 을 준다  받아야함
 			ArrayList<Kms_Dto_StoreSales> dtoList = dao.dayselectList();  // 받아야 하므로 Dto type의 dtoList를 변수로 받는다
 			int listCount = dtoList.size();
 			
 			for( int i = 0; i < listCount ; i++) {
-				String[] qTxt = {Integer.toString(dtoList.get(i).getSeqno()), dtoList.get(i).getDate(), Integer.toString(dtoList.get(i).getPrice())};
+				Object[] qTxt = {Integer.toString(dtoList.get(i).getSeqno()), dtoList.get(i).getDate(), Integer.toString(dtoList.get(i).getPrice())};
 				outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
 			}
 		
@@ -279,11 +309,11 @@ public class Kms_StoreSales extends JFrame {
 			int listCount = dtoList.size();
 			
 			for( int i = 0; i < listCount ; i++) {
-				String[] qTxt = {Integer.toString(dtoList.get(i).getSeqno()), dtoList.get(i).getDate(), Integer.toString(dtoList.get(i).getPrice())};
+				Object[] qTxt = {Integer.toString(dtoList.get(i).getSeqno()), dtoList.get(i).getDate(), Integer.toString(dtoList.get(i).getPrice())};
 				outerTable.addRow(qTxt);  // 화면에 데이터 넣어주기
 				
 			}
-			//tfCount.setText(Integer.toString(listCount));
+			
 			
 		}
 		
