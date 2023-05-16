@@ -20,6 +20,8 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
@@ -73,7 +75,9 @@ public class Hsh_login extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
+
+				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
+				tfCid.requestFocus();
 			}
 		});
 		setTitle("로그인");
@@ -140,6 +144,7 @@ public class Hsh_login extends JFrame {
 			btnJoin.setBorderPainted(false);
 			btnJoin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					joinAction();
 				}
 			});
@@ -185,6 +190,15 @@ public class Hsh_login extends JFrame {
 			tfCid = new JTextField();
 			tfCid.setForeground(new Color(130, 77, 30));
 			tfCid.setBackground(new Color(248, 227, 181));
+			tfCid.addKeyListener(new KeyAdapter() {
+				@Override
+				
+				public void keyPressed(KeyEvent e) {
+					 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+						 delUserlogin();
+				        }
+				}
+			});
 			tfCid.setBounds(131, 285, 208, 26);
 			tfCid.setColumns(10);
 		}
@@ -205,13 +219,7 @@ public class Hsh_login extends JFrame {
 			btnGomenu = new JButton("");
 			btnGomenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					while(true) {
-//						
-//						if(delUserlogin()) {
-//							
-//						}
-//					}
-					login();
+					delUserlogin();
 				}
 			});
 			btnGomenu.setIcon(new ImageIcon(Hsh_login.class.getResource("/com/javalec/image/menu.png")));
@@ -230,9 +238,6 @@ public class Hsh_login extends JFrame {
 		return lblCochoc;
 	}
 	private void joinAction() {
-//		Hsh_join hsh_join = new Hsh_join();
-//		hsh_join.setVisible(true);
-//		setVisible(false);
 		Join_kwh hi = new Join_kwh();
 		hi.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hi.setVisible(true);
@@ -240,7 +245,7 @@ public class Hsh_login extends JFrame {
 	}	
 	
 	
-	
+	// 로그인 체크
 	private void login() {
 		String uid = tfCid.getText();
 		String upassword = pfCpw.getText();
@@ -264,38 +269,33 @@ public class Hsh_login extends JFrame {
 			}else {
 				JOptionPane.showMessageDialog(this, "ID, PassWord를 확인하세요");
 			}
-//			boolean result1 = hsh_logindao.deletecheck();
-//			if(result1 == true) {
-//				ShareVar.loginUserId = uid;
-//				JOptionPane.showMessageDialog(this, "이 계정은 탈퇴된 계정입니다", "로그인", JOptionPane.ERROR_MESSAGE);
-//			}
-			
-		}
-	}
-	
-	private void delUserlogin() {
-		String uid = tfCid.getText();
-		String upassword = pfCpw.getText();
+		}}
 		
-		if(uid.equals("admin") && upassword.equals("1234")) {
-			ShareVar.loginUserId = uid;
-			Kms_AdminMain ksm_adminmain = new Kms_AdminMain();
-			ksm_adminmain.setVisible(true);
-			dispose();
-		}else {
+	// 탈퇴계정 여부 체크 (탈퇴유저가 아니면 login을 실행하게함)
+	public void delUserlogin() {
+	    String uid = tfCid.getText();
+	    String upassword = pfCpw.getText();
+	    boolean isUserDeleted = false; // 사용자 삭제 여부를 저장할 변수 초기화
 
-			Hsh_logindao hsh_logindao = new Hsh_logindao(uid, upassword);
-			
-			boolean result1 = hsh_logindao.deletecheck();
-			if(result1 == true) {
-				ShareVar.loginUserId = uid;
-				JOptionPane.showMessageDialog(this, "이 계정은 탈퇴된 계정입니다", "로그인", JOptionPane.ERROR_MESSAGE);
-			}
-			
-			
-			
-			
-	}
+	    if (uid.equals("admin") && upassword.equals("1234")) {
+	        ShareVar.loginUserId = uid;
+	        Kms_AdminMain ksm_adminmain = new Kms_AdminMain();
+	        ksm_adminmain.setVisible(true);
+	        dispose();
+	    } else {
+	        Hsh_logindao hsh_logindao = new Hsh_logindao(uid, upassword);
+	        boolean result1 = hsh_logindao.deletecheck();
+	        
+	        if (result1 == true) {
+	            isUserDeleted = true; // 사용자가 탈퇴한 경우 true로 설정
+	            ShareVar.loginUserId = uid;
+	            JOptionPane.showMessageDialog(this, "이 계정은 탈퇴된 계정입니다", "로그인", JOptionPane.ERROR_MESSAGE);
+	        }
+	    }
+
+	    if (!isUserDeleted) {
+	        login(); // 사용자 삭제되지 않은 경우에만 login() 메서드 실행
+	    }
 	}
 	
 	private JPasswordField getPfCpw() {
@@ -303,7 +303,17 @@ public class Hsh_login extends JFrame {
 			pfCpw = new JPasswordField();
 			pfCpw.setForeground(new Color(130, 77, 30));
 			pfCpw.setBackground(new Color(248, 227, 181));
+			pfCpw.addKeyListener(new KeyAdapter() {
+				@Override
+				
+				public void keyPressed(KeyEvent e) {
+					 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+						 delUserlogin();
+				        }
+				}
+			});
 			pfCpw.setBounds(131, 338, 208, 26);
+			
 		}
 		return pfCpw;
 	}

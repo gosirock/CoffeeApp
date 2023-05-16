@@ -50,11 +50,9 @@ public class Jty_Profile extends JFrame {
 	private JTextField tfPhone;
 	private JTextField tfEmail;
 	private JTextField tfAddress;
-	private JPasswordField pfPayPassword;
 	private JButton btnBack;
 	private JLabel lblNewLabel_1;
 	private JLabel lblFace;
-	private JButton btnPayPasswordUpdate;
 	private JButton btnAllUpdate;
 	private JLabel lblDeleteUSer;
 	private JLabel lblNewLabel_2_1;
@@ -67,7 +65,6 @@ public class Jty_Profile extends JFrame {
 	private JLabel lblLine_4;
 	private JLabel lblLine_5;
 	private JLabel lblLine_6;
-	private JLabel lblLine_7;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_2_2;
 	private JLabel lblNewLabel_2_3;
@@ -75,7 +72,6 @@ public class Jty_Profile extends JFrame {
 	private JLabel lblNewLabel_2_5;
 	private JLabel lblNewLabel_2_6;
 	private JLabel lblNewLabel_2_7;
-	private JLabel lblNewLabel_2_8;
 
 	private JLabel lblClock;
 	private JLabel lblNewLabel_3;
@@ -260,18 +256,6 @@ public class Jty_Profile extends JFrame {
 		return tfAddress;
 	}
 
-	private JPasswordField getPfPayPassword() {
-		if (pfPayPassword == null) {
-			pfPayPassword = new JPasswordField();
-			pfPayPassword.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			pfPayPassword.setBounds(101, 426, 182, 21);
-			pfPayPassword.setEditable(false);
-			pfPayPassword.setBorder(null); // 테두리 없애기
-			pfPayPassword.setBackground(new Color(252, 242, 217));
-		}
-		return pfPayPassword;
-	}
-
 	private JButton getBtnBack() {
 		if (btnBack == null) {
 			btnBack = new JButton("");
@@ -305,24 +289,6 @@ public class Jty_Profile extends JFrame {
 		return lblFace;
 	}
 
-	private JButton getBtnPayPasswordUpdate() {
-		if (btnPayPasswordUpdate == null) {
-			btnPayPasswordUpdate = new JButton("");
-			btnPayPasswordUpdate.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Jty_PaymentPassword jty_PaymentPassword = new Jty_PaymentPassword();
-
-				}
-			});
-			btnPayPasswordUpdate.setBorder(null); // 버튼의 테두리를 없앰
-			btnPayPasswordUpdate.setBounds(223, 450, 60, 15);
-			btnPayPasswordUpdate
-					.setIcon(new ImageIcon(Jty_Profile.class.getResource("/com/javalec/image/결제비번변경버튼.png")));
-			btnPayPasswordUpdate.setBackground(new Color(252, 242, 217));
-		}
-		return btnPayPasswordUpdate;
-	}
-
 	private JButton getBtnAllUpdate() {
 		if (btnAllUpdate == null) {
 			btnAllUpdate = new JButton("");
@@ -336,7 +302,7 @@ public class Jty_Profile extends JFrame {
 			});
 			btnAllUpdate.setIcon(new ImageIcon(Jty_Profile.class.getResource("/com/javalec/image/수정버튼.png")));
 			btnAllUpdate.setBackground(new Color(248, 227, 182));
-			btnAllUpdate.setBounds(270, 615, 76, 33);
+			btnAllUpdate.setBounds(279, 575, 76, 33);
 		}
 		return btnAllUpdate;
 	}
@@ -384,7 +350,7 @@ public class Jty_Profile extends JFrame {
 		if (panel == null) {
 			panel = new JPanel();
 			panel.setBackground(new Color(252, 242, 217));
-			panel.setBounds(35, 116, 320, 481);
+			panel.setBounds(35, 116, 320, 449);
 			panel.setLayout(null);
 			panel.add(getTfUserid());
 			panel.add(getTfPassword());
@@ -393,8 +359,6 @@ public class Jty_Profile extends JFrame {
 			panel.add(getTfPhone());
 			panel.add(getTfEmail());
 			panel.add(getTfAddress());
-			panel.add(getPfPayPassword());
-			panel.add(getBtnPayPasswordUpdate());
 			panel.add(getLblNewLabel());
 			panel.add(getLblFace());
 			panel.add(getLblLine());
@@ -404,7 +368,6 @@ public class Jty_Profile extends JFrame {
 			panel.add(getLblLine_4());
 			panel.add(getLblLine_5());
 			panel.add(getLblLine_6());
-			panel.add(getLblLine_7());
 			panel.add(getLblNewLabel_2());
 			panel.add(getLblNewLabel_2_2());
 			panel.add(getLblNewLabel_2_3());
@@ -412,7 +375,6 @@ public class Jty_Profile extends JFrame {
 			panel.add(getLblNewLabel_2_5());
 			panel.add(getLblNewLabel_2_6());
 			panel.add(getLblNewLabel_2_7());
-			panel.add(getLblNewLabel_2_8());
 			panel.add(getLblNewLabel_4());
 			panel.add(getCbEmail());
 			panel.add(getLblpasswordCheck());
@@ -491,16 +453,6 @@ public class Jty_Profile extends JFrame {
 		return lblLine_6;
 	}
 
-	private JLabel getLblLine_7() {
-		if (lblLine_7 == null) {
-			lblLine_7 = new JLabel("");
-			lblLine_7.setBounds(12, 447, 270, 1);
-			lblLine_7.setOpaque(true);
-			lblLine_7.setBackground(new Color(131, 77, 30));
-		}
-		return lblLine_7;
-	}
-
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("아이디");
@@ -571,16 +523,6 @@ public class Jty_Profile extends JFrame {
 		return lblNewLabel_2_7;
 	}
 
-	private JLabel getLblNewLabel_2_8() {
-		if (lblNewLabel_2_8 == null) {
-			lblNewLabel_2_8 = new JLabel("결제 비밀번호");
-			lblNewLabel_2_8.setForeground(new Color(131, 77, 30));
-			lblNewLabel_2_8.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-			lblNewLabel_2_8.setBounds(12, 426, 90, 21);
-		}
-		return lblNewLabel_2_8;
-	}
-
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("");
@@ -649,7 +591,7 @@ public class Jty_Profile extends JFrame {
 			tfPhone.setText(dto_Profile.getCphone());
 			tfEmail.setText(dto_Profile.getCemail());
 			tfAddress.setText(dto_Profile.getCaddress());
-			pfPayPassword.setText(dto_Profile.getPaymentPassword());
+			//pfPayPassword.setText(dto_Profile.getPaymentPassword());
 			lblInsertDate.setText(dto_Profile.getCinsertdate());
 		}
 	}
@@ -664,7 +606,7 @@ public class Jty_Profile extends JFrame {
 	private void allUpdateAction() {
 
 		String cpassword = tfPassword.getText();
-		String confirmCpassword = tfConfirmPassword.getText();
+		//String confirmCpassword = tfConfirmPassword.getText();
 		String cname = tfName.getText();
 		String cphone = tfPhone.getText();
 		String cemail = tfEmail.getText();
@@ -677,7 +619,7 @@ public class Jty_Profile extends JFrame {
 		if (!pass1.equals(pass2)) {
 			JOptionPane.showMessageDialog(this, "비밀번호를 일치시켜주세요", "회원정보 수정", JOptionPane.ERROR_MESSAGE);
 		} else {
-			if (cpassword.isEmpty() || confirmCpassword.isEmpty() || cname.isEmpty() || cphone.isEmpty()
+			if (cpassword.isEmpty() || cname.isEmpty() || cphone.isEmpty()
 					|| cemail.isEmpty() || cemailcb.isEmpty() || caddress.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "회원정보를 입력해주세요");
 			} else {
