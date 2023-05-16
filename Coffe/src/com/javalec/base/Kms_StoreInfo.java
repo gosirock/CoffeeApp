@@ -61,7 +61,6 @@ public class Kms_StoreInfo extends JFrame {
 			public void run() {
 				try {
 					Kms_StoreInfo frame = new Kms_StoreInfo();
-					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,6 +76,7 @@ public class Kms_StoreInfo extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				setLocationRelativeTo(null);
 				storeInfo();
 			}
 		});
