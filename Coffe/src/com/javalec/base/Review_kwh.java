@@ -330,6 +330,26 @@ public class Review_kwh extends JFrame {
 			e.printStackTrace();
 		}
 		
+		boolean check = true;
+		if (title.equals("") || title.equals("title") || comment.equals("") || comment.equals("comment")) {
+			check=false;
+		}
+			
+		if(check) {	
+		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
+				
+		boolean result = dao.postAction(); 
+			if (result) {
+				JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}else {
+				JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			}
+		}else {
+			JOptionPane.showMessageDialog(this, "리뷰를 작성해주세요.");
+		}
+		}	
+	
+		
 		// filePath(); 를 통해 받은 값이 tfFilePath에 없다
 		//if(tfFilePath.getText().equals("")){
 				
@@ -358,24 +378,6 @@ public class Review_kwh extends JFrame {
 	//	}
 		
 		
-		boolean check = true;
-		if (title.equals("") || title.equals("title") || comment.equals("") || comment.equals("comment")) {
-			check=false;
-		}
-			
-		if(check) {	
-		DaoReview_kwh dao = new DaoReview_kwh(item_iid, customer_cid, title, comment, imagename, rinsertdate, input);
-				
-		boolean result = dao.postAction(); 
-			if (result) {
-				JOptionPane.showMessageDialog(this,  "리뷰가 등록되었습니다.", "Review",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			}else {
-				JOptionPane.showMessageDialog(this,  "리뷰 등록이 실패했습니다.", "경고",JOptionPane.ERROR_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
-			}
-		}else {
-			JOptionPane.showMessageDialog(this, "리뷰를 작성해주세요.");
-		}
-		}	
 	
 	
 	
