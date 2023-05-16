@@ -95,6 +95,7 @@ public class Kms_AdminReview2 extends JFrame {
 				//closingAction();
 			}
 		});
+		setTitle("관리자모드");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);							// 백그라운드 프레임 패널 사이즈
 		contentPane = new JPanel();
@@ -372,8 +373,7 @@ public class Kms_AdminReview2 extends JFrame {
 				Calendar t = Calendar.getInstance();
 				int hour = t.get(Calendar.HOUR);
 	            int min = t.get(Calendar.MINUTE);
-	            int second = t.get(Calendar.SECOND);
-	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            String clock = String.format("%02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
 	            lblClock.setText(clock);
 			}
 		});	 

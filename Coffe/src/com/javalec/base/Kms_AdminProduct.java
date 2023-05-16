@@ -475,7 +475,7 @@ private void tableClick() {  //
 			tfFileName.setEditable(false);
 			btnOK.setVisible(true);
 			btnOK.setEnabled(true);
-			btnFilePath.setVisible(true);
+			btnFilePath.setVisible(false);
 		}
 		
 		if (rbInsert.isSelected()) {
@@ -654,7 +654,7 @@ private void tableClick() {  //
 				clearColumn();
 				
 			}else {
-				JOptionPane.showMessageDialog(this, "\n"+message+ "입력하세요!", "",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+				JOptionPane.showMessageDialog(this, message+ "입력하세요!", "오류",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 			} 
 		}
 		
@@ -668,7 +668,7 @@ private void tableClick() {  //
 				clearColumn();
 				
 			}else {
-			JOptionPane.showMessageDialog(this, "\n"+message+ "입력하세요!", "",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+			JOptionPane.showMessageDialog(this, message+ "입력하세요!", "오류",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 			} 
 		}
 		// 삭제의 경우 OK 버튼을 눌렀을때
@@ -681,7 +681,7 @@ private void tableClick() {  //
 				clearColumn();
 				
 			}else {
-				JOptionPane.showMessageDialog(this, "\n"+message+ "입력하세요!", "",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+				JOptionPane.showMessageDialog(this, message+ "입력하세요!", "오류",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 			} 
 		}
 		
@@ -839,7 +839,9 @@ private void filePath() {   // file loading method
 		String name = tfProductName.getText();
 		int price = Integer.parseInt(tfProductPrice.getText());
 		int stock = Integer.parseInt(tfProductQty.getText());
-		String imagename = "image";
+		Calendar t = Calendar.getInstance();
+		int second = t.get(Calendar.SECOND);
+		String imagename = "image" + Integer.toString(second);
 		String description = tfDescription.getText();
 		
 		// Image File
