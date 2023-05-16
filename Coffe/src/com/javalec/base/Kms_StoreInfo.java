@@ -80,6 +80,7 @@ public class Kms_StoreInfo extends JFrame {
 				storeInfo();
 			}
 		});
+		setTitle("관리자모드");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);
 		contentPane = new JPanel();
@@ -137,7 +138,7 @@ public class Kms_StoreInfo extends JFrame {
 		if (choc == null) {
 			choc = new JLabel("");
 			choc.setBounds(105, 73, 181, 73);
-			choc.setIcon(new ImageIcon(Kms_StoreInfo.class.getResource("/com/javalec/image/상표.png")));
+			choc.setIcon(new ImageIcon(Kms_StoreInfo.class.getResource("/com/javalec/image/group 31.png")));
 		}
 		return choc;
 	}
@@ -372,7 +373,7 @@ public class Kms_StoreInfo extends JFrame {
 			if (i_chk == 0) {
 				JOptionPane.showMessageDialog(this, "가게 정보 수정\n"+tfStoreName.getText()+ " 정보가 수정었습니다."); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 			}else {
-				JOptionPane.showMessageDialog(this, "\n"+message+ "입력하세요!", "가게 정보",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+				JOptionPane.showMessageDialog(this, message+ "입력하세요!", "가게 정보",JOptionPane.INFORMATION_MESSAGE); //this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
 			} 
 			
 		}else {

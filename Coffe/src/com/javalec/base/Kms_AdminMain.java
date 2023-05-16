@@ -62,6 +62,7 @@ public class Kms_AdminMain extends JFrame {
 				setLocationRelativeTo(null);
 			}
 		});
+		setTitle("관리자모드");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);
 		contentPane = new JPanel();
@@ -119,7 +120,7 @@ public class Kms_AdminMain extends JFrame {
 		if (choc == null) {
 			choc = new JLabel("");
 			choc.setBounds(105, 73, 181, 73);
-			choc.setIcon(new ImageIcon(Kms_AdminMain.class.getResource("/com/javalec/image/상표.png")));
+			choc.setIcon(new ImageIcon(Kms_AdminMain.class.getResource("/com/javalec/image/group 31.png")));
 		}
 		return choc;
 	}
@@ -255,7 +256,7 @@ public class Kms_AdminMain extends JFrame {
 	}
 	
 	private void reviewAction() { // 리뷰게시판 관리 눌렀때(Review2_kwh가 데이터베이스와 연결되었을때 아래 바 지우고 새로운class만들어서 연결할 예정)
-		Kms_AdminReview review = new Kms_AdminReview();
+		Kms_AdminReview2 review = new Kms_AdminReview2();
 		review.setVisible(true);
 		dispose();
 	}

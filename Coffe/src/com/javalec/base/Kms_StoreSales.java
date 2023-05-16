@@ -84,6 +84,7 @@ public class Kms_StoreSales extends JFrame {
 				sumAction();
 			}
 		});
+		setTitle("관리자모드");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);							// 백그라운드 프레임 패널 사이즈
 		contentPane = new JPanel();
