@@ -51,18 +51,18 @@ public class Join_kwh extends JFrame {
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_7;
+	//private JLabel lblNewLabel_7;
 	private JButton btnCheck;
 	private JTextField tfName;
 	private JTextField tfID;
 	private JTextField tfPhone;
 	private JTextField tfEmail;
 	private JTextField tfAddress;
-	private JButton btnRegister;
+	//private JButton btnRegister;
 	private JButton btnBack;
 	private JComboBox cbEmail;
 	private JLabel lblNewLabel_8;
-	private JPasswordField pfPayPassword;
+	//private JPasswordField pfPayPassword;
 	String message = "";
 	private JLabel lblPassCheck;
 	private JPasswordField pfPassword;
@@ -75,7 +75,7 @@ public class Join_kwh extends JFrame {
 	private JLabel lblNewLabel_9_1_3;
 	private JLabel lblNewLabel_9_1_4;
 	private JLabel lblNewLabel_9_1_5;
-	private JLabel lblNewLabel_9_1_6;
+	//private JLabel lblNewLabel_9_1_6;
 
 	/**
 	 * Launch the application.
@@ -126,7 +126,7 @@ public class Join_kwh extends JFrame {
 		contentPane.add(getLblNewLabel_4());
 		contentPane.add(getLblNewLabel_5());
 		contentPane.add(getLblNewLabel_6());
-		contentPane.add(getLblNewLabel_7());
+		//contentPane.add(getLblNewLabel_7());
 		contentPane.add(getBtnCheck());
 		contentPane.add(getLblBa());
 		contentPane.add(getTfName());
@@ -134,11 +134,11 @@ public class Join_kwh extends JFrame {
 		contentPane.add(getTfPhone());
 		contentPane.add(getTfEmail());
 		contentPane.add(getTfAddress());
-		contentPane.add(getBtnRegister());
+		//contentPane.add(getBtnRegister());
 		contentPane.add(getBtnBack());
 		contentPane.add(getCbEmail());
 		contentPane.add(getLblNewLabel_8());
-		contentPane.add(getPfPayPassword());
+		//contentPane.add(getPfPayPassword());
 		contentPane.add(getLblPassCheck());
 		contentPane.add(getPfPassword());
 		contentPane.add(getPfPassword2());
@@ -150,7 +150,7 @@ public class Join_kwh extends JFrame {
 		contentPane.add(getLblNewLabel_9_1_3());
 		contentPane.add(getLblNewLabel_9_1_4());
 		contentPane.add(getLblNewLabel_9_1_5());
-		contentPane.add(getLblNewLabel_9_1_6());
+	//	contentPane.add(getLblNewLabel_9_1_6());
 	}
 	
 	private JLabel getLblNewLabel_1() {
@@ -286,15 +286,15 @@ public class Join_kwh extends JFrame {
 		}
 		return lblNewLabel_6;
 	}
-	private JLabel getLblNewLabel_7() {
-		if (lblNewLabel_7 == null) {
-			lblNewLabel_7 = new JLabel("결제비밀번호 :");
-			lblNewLabel_7.setFont(new Font("Lucida Grande", Font.BOLD, 16));
-			lblNewLabel_7.setForeground(new Color(130, 77, 30));
-			lblNewLabel_7.setBounds(45, 570, 100, 15);
-		}
-		return lblNewLabel_7;
-	}
+//	private JLabel getLblNewLabel_7() {
+//		if (lblNewLabel_7 == null) {
+//			lblNewLabel_7 = new JLabel("결제비밀번호 :");
+//			lblNewLabel_7.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+//			lblNewLabel_7.setForeground(new Color(130, 77, 30));
+//			lblNewLabel_7.setBounds(45, 570, 100, 15);
+//		}
+//		return lblNewLabel_7;
+//	}
 	private JButton getBtnCheck() {
 		if (btnCheck == null) {
 			btnCheck = new JButton("");
@@ -375,20 +375,15 @@ public class Join_kwh extends JFrame {
 		}
 		return tfAddress;
 	}
-	private JButton getBtnRegister() {
-		if (btnRegister == null) {
-			btnRegister = new JButton("등록");
-//			ImageIcon icon1 =new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/btnRegister.png"));
-//			Image img1 = icon1.getImage();  // 이미지 크기조절
-//			Image updateImg1 = img1.getScaledInstance(60, 21, Image.SCALE_SMOOTH);
-//			ImageIcon upImg = new ImageIcon(updateImg1);
-//			btnCheck.setIcon(upImg);
-			btnRegister.setEnabled(false);
-			btnRegister.setFont(new Font("굴림", Font.BOLD, 10));
-			btnRegister.setBounds(303, 570, 60, 21);
-		}
-		return btnRegister;
-	}
+//	private JButton getBtnRegister() {
+//		if (btnRegister == null) {
+//			btnRegister = new JButton("등록");
+//			btnRegister.setEnabled(false);
+//			btnRegister.setFont(new Font("굴림", Font.BOLD, 10));
+//			btnRegister.setBounds(303, 570, 60, 21);
+//		}
+//		return btnRegister;
+//	}
 	private JButton getBtnBack() {
 		if (btnBack == null) {
 			btnBack = new JButton("");
@@ -433,33 +428,33 @@ public class Join_kwh extends JFrame {
 		}
 		return lblNewLabel_8;
 	}
-	private JPasswordField getPfPayPassword() {
-		if (pfPayPassword == null) {
-			pfPayPassword = new JPasswordField();
-			pfPayPassword.setBackground(new Color(251, 242, 215));
-			pfPayPassword.setForeground(new Color(130, 77, 30));
-			pfPayPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			pfPayPassword.addKeyListener(new KeyAdapter() {
-				
-					
-				@Override
-				public void keyTyped(KeyEvent e) {
-					if((e.getKeyChar() >= '0' && e.getKeyChar() <= '9') || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) { // 패스워드창 숫자와 백스페이스 입력할 수 있게하기
-						
-					}else {
-						JOptionPane.showMessageDialog(null,"숫자만 입력하세요", "경고",JOptionPane.ERROR_MESSAGE);
-						pfPayPassword.setText("");
-					}
-					
-				}
-			});
-			pfPayPassword.setEditable(false);
-			pfPayPassword.setBounds(138, 564, 132, 21);
-			
-			
-		}
-		return pfPayPassword;
-	}
+//	private JPasswordField getPfPayPassword() {
+//		if (pfPayPassword == null) {
+//			pfPayPassword = new JPasswordField();
+//			pfPayPassword.setBackground(new Color(251, 242, 215));
+//			pfPayPassword.setForeground(new Color(130, 77, 30));
+//			pfPayPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+//			pfPayPassword.addKeyListener(new KeyAdapter() {
+//				
+//					
+//				@Override
+//				public void keyTyped(KeyEvent e) {
+//					if((e.getKeyChar() >= '0' && e.getKeyChar() <= '9') || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) { // 패스워드창 숫자와 백스페이스 입력할 수 있게하기
+//						
+//					}else {
+//						JOptionPane.showMessageDialog(null,"숫자만 입력하세요", "경고",JOptionPane.ERROR_MESSAGE);
+//						pfPayPassword.setText("");
+//					}
+//					
+//				}
+//			});
+//			pfPayPassword.setEditable(false);
+//			pfPayPassword.setBounds(138, 564, 132, 21);
+//			
+//			
+//		}
+//		return pfPayPassword;
+//	}
 	
 	private JLabel getLblPassCheck() {
 		if (lblPassCheck == null) {
@@ -565,9 +560,9 @@ public class Join_kwh extends JFrame {
 			tfAddress.setEditable(true);
 			btnJoin.setEnabled(true);
 			cbEmail.setEnabled(true);
-			pfPayPassword.setEnabled(true);
-			pfPayPassword.setEditable(true);
-			btnRegister.setEnabled(true);
+			//pfPayPassword.setEnabled(true);
+			//pfPayPassword.setEditable(true);
+			//btnRegister.setEnabled(true);
 			btnBack.setEnabled(true);
 			
 		}
@@ -613,11 +608,11 @@ public class Join_kwh extends JFrame {
 				message = "주소를 ";
 				tfAddress.requestFocus();
 			}
-			if(pfPayPassword.getPassword().length == 0) {
-				i++;
-				message = "결제비밀번호를 ";
-				pfPayPassword.requestFocus();
-			}
+//			if(pfPayPassword.getPassword().length == 0) {
+//				i++;
+//				message = "결제비밀번호를 ";
+//				pfPayPassword.requestFocus();
+//			}
 			return i;
 			
 		}
@@ -655,17 +650,17 @@ public class Join_kwh extends JFrame {
 				java.sql.Date cinsertdate = new java.sql.Date(now.getTime());
 				
 		
-		char[] paypassword = pfPayPassword.getPassword();
-		String passwordStr = new String(paypassword);{
-	
+//		char[] paypassword = pfPayPassword.getPassword();
+//		String passwordStr = new String(paypassword);{
+//	
 			boolean isPasswordMatched = true;   // 비밀번호가 맞는지 체크 맞으면 true 틀리면 false
-			if(!cpassword.equals(cpassword2)) { 
-			    isPasswordMatched = false;
-			    
-			}
-	
+//			if(!cpassword.equals(cpassword2)) { 
+//			    isPasswordMatched = false;
+//			    
+//			}
+//	
 			if(isPasswordMatched) {// true일시 다오실행
-			    DaoJoin_kwh dao = new DaoJoin_kwh(cid, cname, cpassword, cphone, cemail, caddress,cinsertdate,passwordStr);
+			    DaoJoin_kwh dao = new DaoJoin_kwh(cid, cname, cpassword, cphone, cemail, caddress,cinsertdate);
 			    boolean result = dao.joinAction();
 			    if(result) {// true = 쿼리문이 잘 실행되어 db에 저장됌
 			        JOptionPane.showMessageDialog(this, "회원가입이 완료되었습니다!");
@@ -678,9 +673,10 @@ public class Join_kwh extends JFrame {
 	
 	
 	
-		}}
+		//}
+}
 	
-	
+	//sys
 		private void emailAction() {
 			int i = cbEmail.getSelectedIndex();
 			String emailselect = "";
@@ -787,13 +783,13 @@ public class Join_kwh extends JFrame {
 		}
 		return lblNewLabel_9_1_5;
 	}
-	private JLabel getLblNewLabel_9_1_6() {
-		if (lblNewLabel_9_1_6 == null) {
-			lblNewLabel_9_1_6 = new JLabel("");
-			lblNewLabel_9_1_6.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
-			lblNewLabel_9_1_6.setBounds(45, 584, 304, 16);
-		}
-		return lblNewLabel_9_1_6;
-	}
+//	private JLabel getLblNewLabel_9_1_6() {
+//		if (lblNewLabel_9_1_6 == null) {
+//			lblNewLabel_9_1_6 = new JLabel("");
+//			lblNewLabel_9_1_6.setIcon(new ImageIcon(Join_kwh.class.getResource("/com/javalec/image/Line 1.png")));
+//			lblNewLabel_9_1_6.setBounds(45, 584, 304, 16);
+//		}
+//		return lblNewLabel_9_1_6;
+//	}
 }
 

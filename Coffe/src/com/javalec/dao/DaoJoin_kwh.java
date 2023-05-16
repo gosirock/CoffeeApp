@@ -44,8 +44,8 @@ public class DaoJoin_kwh {
 	
 	// function
 	
-	public DaoJoin_kwh(String cid, String cname, String cpassword, String cphone, String cemail, String caddress, Date cinsertdate,
-			String cpaypassword) {
+	public DaoJoin_kwh(String cid, String cname, String cpassword, String cphone, String cemail, String caddress, Date cinsertdate
+			) {
 		super();
 		this.cid = cid;
 		this.cpassword = cpassword;
@@ -54,7 +54,7 @@ public class DaoJoin_kwh {
 		this.cemail = cemail;
 		this.caddress = caddress;
 		this.cinsertdate = cinsertdate;
-		this.cpaypassword = cpaypassword;
+		
 	}
 
 
