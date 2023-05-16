@@ -62,7 +62,7 @@ public Jty_Dao_Profile(String cpassword, String cname, String cphone, String cem
 // SELECT SUBSTRING_INDEX(cemail, '@', 1) from customer; 
 	public Jty_Dto_Profile openProfile() {
 	    Jty_Dto_Profile jtyDtoProfile = null;
-	    String query = "SELECT cid, cpassword, cname, cphone, cemail, caddress, cpayPassword, cinsertdate ";
+	    String query = "SELECT cid, cpassword, cname, cphone, SUBSTRING_INDEX(cemail, '@', 1), caddress, cpayPassword, cinsertdate ";
 	    String query1 = "FROM customer WHERE cid = ?";
 	    
 	    try {
@@ -78,7 +78,7 @@ public Jty_Dao_Profile(String cpassword, String cname, String cphone, String cem
 	            String cpassword = rs.getString("cpassword");
 	            String cname = rs.getString("cname");
 	            String cphone = rs.getString("cphone");
-	            String cemail = rs.getString("cemail");
+	            String cemail = rs.getString("SUBSTRING_INDEX(cemail, '@', 1)");
 	            String caddress = rs.getString("caddress");
 	            String cpayPassword = rs.getString("cpayPassword");
 	            String cinsertdate = rs.getString("cinsertdate");

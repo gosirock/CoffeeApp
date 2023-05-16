@@ -40,6 +40,7 @@ public class Hsh_start extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				
 				setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기 
 			}
 		});

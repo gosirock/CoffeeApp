@@ -203,6 +203,12 @@ public class Hsh_login extends JFrame {
 			btnGomenu = new JButton("");
 			btnGomenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+//					while(true) {
+//						
+//						if(delUserlogin()) {
+//							
+//						}
+//					}
 					login();
 				}
 			});
@@ -246,10 +252,6 @@ public class Hsh_login extends JFrame {
 			Hsh_logindao hsh_logindao = new Hsh_logindao(uid, upassword);
 			
 			boolean result = hsh_logindao.logincheck();
-			boolean result1 = hsh_logindao.deletecheck();
-			if(result1 == true) {
-				JOptionPane.showMessageDialog(this, "이 계정은 탈퇴된 계정입니다", "로그인", JOptionPane.ERROR_MESSAGE);
-			}
 			if(result == true) {
 				ShareVar.loginUserId = uid;
 				JOptionPane.showMessageDialog(this, uid+"님 환영합니다");
@@ -259,10 +261,40 @@ public class Hsh_login extends JFrame {
 			}else {
 				JOptionPane.showMessageDialog(this, "ID, PassWord를 확인하세요");
 			}
+//			boolean result1 = hsh_logindao.deletecheck();
+//			if(result1 == true) {
+//				ShareVar.loginUserId = uid;
+//				JOptionPane.showMessageDialog(this, "이 계정은 탈퇴된 계정입니다", "로그인", JOptionPane.ERROR_MESSAGE);
+//			}
+			
+		}
+	}
+	
+	private void delUserlogin() {
+		String uid = tfCid.getText();
+		String upassword = pfCpw.getText();
+		
+		if(uid.equals("admin") && upassword.equals("1234")) {
+			ShareVar.loginUserId = uid;
+			Kms_AdminMain ksm_adminmain = new Kms_AdminMain();
+			ksm_adminmain.setVisible(true);
+			dispose();
+		}else {
+
+			Hsh_logindao hsh_logindao = new Hsh_logindao(uid, upassword);
+			
+			boolean result1 = hsh_logindao.deletecheck();
+			if(result1 == true) {
+				ShareVar.loginUserId = uid;
+				JOptionPane.showMessageDialog(this, "이 계정은 탈퇴된 계정입니다", "로그인", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			
 			
 			
 	}
 	}
+	
 	private JPasswordField getPfCpw() {
 		if (pfCpw == null) {
 			pfCpw = new JPasswordField();
