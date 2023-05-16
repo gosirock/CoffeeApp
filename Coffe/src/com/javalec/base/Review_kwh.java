@@ -80,6 +80,7 @@ public class Review_kwh extends JFrame {
 	 * Create the frame.
 	 */
 	public Review_kwh() {
+		setTitle("리뷰작성란");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
@@ -185,7 +186,7 @@ public class Review_kwh extends JFrame {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setIcon(new ImageIcon(Lju_base.class.getResource("/com/javalec/image/wifi.png")));
+			lblNewLabel_1.setIcon(new ImageIcon(Review_kwh.class.getResource("/com/javalec/image/wifi.png")));
 			lblNewLabel_1.setBounds(303, 15, 65, 18);
 		}
 		return lblNewLabel_1;

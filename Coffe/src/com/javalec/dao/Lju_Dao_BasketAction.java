@@ -57,7 +57,7 @@ public class Lju_Dao_BasketAction {
 				
 				ps = conn_mysql.prepareStatement(query + query1 + query2);
 				ps.setString(1, iid.trim());
-				ps.setString(2, "gosi");
+				ps.setString(2, ShareVar.loginUserId);
 				ps.setInt(3, Integer.parseInt(qty));
 				ps.setInt(4, Integer.parseInt(qty));
 				

@@ -96,6 +96,7 @@ public class Lju_PurchaseHistory extends JFrame{
 	private JTable table_1;
 	private JScrollPane scrollPane;
 	private JTable innerTable;
+	private JLabel lblNewLabel_2;
 	
 	/**
 	 * Launch the application.
@@ -144,6 +145,7 @@ public class Lju_PurchaseHistory extends JFrame{
 		contentPane.add(getBtnNewButton());
 		contentPane.add(getLblNewLabel_2());
 		contentPane.add(getScrollPane());
+		contentPane.add(getLblNewLabel_2_1());
 	
 	}
 	
@@ -539,4 +541,14 @@ private void closeingAction() {	//사진지우기
 		
 		
 	
+	private JLabel getLblNewLabel_2_1() {
+		if (lblNewLabel_2 == null) {
+			lblNewLabel_2 = new JLabel("주문내역 선택 시 리뷰작성");
+			lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
+			lblNewLabel_2.setForeground(new Color(131, 77, 30));
+			lblNewLabel_2.setFont(new Font("Kailasa", Font.BOLD, 13));
+			lblNewLabel_2.setBounds(27, 105, 170, 39);
+		}
+		return lblNewLabel_2;
+	}
 }

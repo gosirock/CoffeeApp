@@ -91,6 +91,7 @@ public class Hsh_login extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getLblClock());
 		contentPane.add(getLblNewLabel());
 		contentPane.add(getBtnLogin());
 		contentPane.add(getBtnJoin());
@@ -104,7 +105,6 @@ public class Hsh_login extends JFrame {
 		contentPane.add(getBtnGomenu());
 		contentPane.add(getLblNewLabel_1());
 		contentPane.add(getLblba());
-		contentPane.add(getLblClock());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -357,8 +357,7 @@ public class Hsh_login extends JFrame {
 				Calendar t = Calendar.getInstance();
 				int hour = t.get(Calendar.HOUR);
 	            int min = t.get(Calendar.MINUTE);
-	            int second = t.get(Calendar.SECOND);
-	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            String clock = String.format("%02d : %02d " , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
 	            lblClock.setText(clock);
 			}
 		});	 

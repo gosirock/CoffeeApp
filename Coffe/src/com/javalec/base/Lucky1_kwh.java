@@ -86,7 +86,7 @@ public class Lucky1_kwh extends JDialog {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("오늘의 행운 ");
 			lblNewLabel.setFont(new Font("Academy Engraved LET", Font.PLAIN, 40));
-			lblNewLabel.setBounds(95, 6, 260, 75);
+			lblNewLabel.setBounds(70, 6, 260, 75);
 		}
 		return lblNewLabel;
 	}
@@ -110,7 +110,7 @@ public class Lucky1_kwh extends JDialog {
 	                }
 	            }
 	        });
-	        btnGet.setBounds(269, 307, 117, 29);
+	        btnGet.setBounds(269, 307, 80, 29);
 	    }
 	    return btnGet;
 	}
@@ -119,7 +119,7 @@ public class Lucky1_kwh extends JDialog {
 		if (lblPresent == null) {
 			lblPresent = new JLabel("");
 			lblPresent.setIcon(new ImageIcon(Lucky1_kwh.class.getResource("/com/javalec/image/present.png")));
-			lblPresent.setBounds(126, 83, 205, 181);
+			lblPresent.setBounds(98, 81, 216, 181);
 		}
 		return lblPresent;
 	}
@@ -127,7 +127,7 @@ public class Lucky1_kwh extends JDialog {
 		if (lblFirecracker == null) {
 			lblFirecracker = new JLabel("");
 			lblFirecracker.setIcon(new ImageIcon(Lucky1_kwh.class.getResource("/com/javalec/image/firecracker.png")));
-			lblFirecracker.setBounds(315, 6, 60, 55);
+			lblFirecracker.setBounds(290, 6, 60, 55);
 		}
 		return lblFirecracker;
 	}

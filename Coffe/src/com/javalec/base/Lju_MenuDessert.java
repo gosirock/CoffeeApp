@@ -135,7 +135,7 @@ public class Lju_MenuDessert extends JFrame implements ActionListener {	// 엔�
 	
 	
 	public Lju_MenuDessert() {
-		setTitle("커피메뉴");
+		setTitle("디저트메뉴");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

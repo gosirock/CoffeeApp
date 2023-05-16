@@ -135,7 +135,7 @@ public class Lju_MenuDrink extends JFrame implements ActionListener {	// 엔터�
 	
 	
 	public Lju_MenuDrink() {
-		setTitle("커피메뉴");
+		setTitle("음료메뉴");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

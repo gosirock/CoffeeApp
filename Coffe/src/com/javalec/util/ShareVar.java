@@ -14,7 +14,7 @@ public class ShareVar {
 	
 	
 	public static String loginUserId = "";
-	public static String ItemId = "";
+	public static String ItemId = "a001";
 	
 	
 	public static String testid = "wook";

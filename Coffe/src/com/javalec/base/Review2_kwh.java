@@ -86,6 +86,7 @@ public class Review2_kwh extends JFrame {
 	 * Create the frame.
 	 */
 	public Review2_kwh() {
+		setTitle("리뷰게시판");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {

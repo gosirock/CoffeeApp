@@ -174,7 +174,7 @@ public Jty_Dao_Profile(String cpassword, String cname, String cphone, String cem
 	        Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 
 	        // Update customer record
-	        String updateCustomerQuery = "UPDATE customer SET cpassword = ?, cname = ?, cphone = ?, cemail = ?, caddress = ? WHERE cid = '" + "gosi" + "'";
+	        String updateCustomerQuery = "UPDATE customer SET cpassword = ?, cname = ?, cphone = ?, cemail = ?, caddress = ? WHERE cid = '" + ShareVar.loginUserId + "'";
 	        ps = conn_mysql.prepareStatement(updateCustomerQuery);
 	       
 	        ps.setString(1, cpassword.trim());

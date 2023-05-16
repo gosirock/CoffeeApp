@@ -113,6 +113,7 @@ public class Join_kwh extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getLblClock());
 		contentPane.add(getLblNewLabel_1());
 		contentPane.add(getLblCochoc());
 		contentPane.add(getLblKong());
@@ -142,7 +143,6 @@ public class Join_kwh extends JFrame {
 		contentPane.add(getLblPassCheck());
 		contentPane.add(getPfPassword());
 		contentPane.add(getPfPassword2());
-		contentPane.add(getLblClock());
 		contentPane.add(getLblNewLabel_9());
 		contentPane.add(getLblNewLabel_9_1());
 		contentPane.add(getLblNewLabel_9_1_1());
@@ -719,8 +719,7 @@ public class Join_kwh extends JFrame {
 				Calendar t = Calendar.getInstance();
 				int hour = t.get(Calendar.HOUR);
 	            int min = t.get(Calendar.MINUTE);
-	            int second = t.get(Calendar.SECOND);
-	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            String clock = String.format("%02d : %02d " , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
 	            lblClock.setText(clock);
 			}
 		});	 

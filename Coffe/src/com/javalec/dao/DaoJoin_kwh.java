@@ -44,6 +44,9 @@ public class DaoJoin_kwh {
 	
 	// function
 	
+	
+
+
 	public DaoJoin_kwh(String cid, String cname, String cpassword, String cphone, String cemail, String caddress, Date cinsertdate
 			) {
 		super();

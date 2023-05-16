@@ -95,6 +95,8 @@ public class Jty_UserDelete_Dialog extends JDialog {
 	private JButton getBtnYes() {
 		if (btnYes == null) {
 			btnYes = new JButton("예");
+			btnYes.setBorder(null);
+			btnYes.setOpaque(true);
 			btnYes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//Jty_Profile jty_Profile = new Jty_Profile();
@@ -115,12 +117,14 @@ public class Jty_UserDelete_Dialog extends JDialog {
 	private JButton getBtnNo() {
 		if (btnNo == null) {
 			btnNo = new JButton("아니오");
+			btnNo.setOpaque(true);
+			btnNo.setBorder(null);
 			btnNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dispose();
 				}
 			});
-			btnNo.setForeground(Color.WHITE);
+			btnNo.setForeground(new Color(255, 255, 255));
 			btnNo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 			btnNo.setBackground(new Color(131, 77, 30));
 			btnNo.setBounds(213, 177, 91, 23);
