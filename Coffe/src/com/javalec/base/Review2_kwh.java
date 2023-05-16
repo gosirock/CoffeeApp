@@ -110,10 +110,10 @@ public class Review2_kwh extends JFrame {
 		contentPane.add(getPanel());
 		contentPane.add(getLblNewLabel_1());
 		contentPane.add(getLblNewLabel());
+		contentPane.add(getLblClock());
 		contentPane.add(getScrollPane());
 		contentPane.add(getRbRecent_1());
 		contentPane.add(getRbRecommendation_1());
-		contentPane.add(getLblClock());
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -433,8 +433,7 @@ public class Review2_kwh extends JFrame {
 				Calendar t = Calendar.getInstance();
 				int hour = t.get(Calendar.HOUR);
 	            int min = t.get(Calendar.MINUTE);
-	            int second = t.get(Calendar.SECOND);
-	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            String clock = String.format("%02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
 	            lblClock.setText(clock);
 			}
 		});	 
@@ -443,24 +442,28 @@ public class Review2_kwh extends JFrame {
 	
 	private void home() {
 		Jty_Home hi = new Jty_Home();
+		hi.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hi.setVisible(true);
 		dispose();
 	}
 	
 	private void menu() {
 		Lju_MenuCoffee hi =new Lju_MenuCoffee();
+		hi.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hi.setVisible(true);
 		dispose();
 	}
 	
 	private void order() {
 		Lju_PurchaseHistory hi =new Lju_PurchaseHistory();
+		hi.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hi.setVisible(true);
 		dispose();
 	}
 	
 	private void review() {
 		Review2_kwh hi = new Review2_kwh();
+		hi.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hi.setVisible(true);
 		dispose();
 	}

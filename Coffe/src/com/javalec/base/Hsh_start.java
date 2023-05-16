@@ -76,6 +76,7 @@ public class Hsh_start extends JFrame {
 	}
 		private void click() {
 			Hsh_login login_hsh = new Hsh_login();
+			login_hsh.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 			login_hsh.setVisible(true);
 			dispose();	
 			}
@@ -102,8 +103,7 @@ public class Hsh_start extends JFrame {
 				Calendar t = Calendar.getInstance();
 				int hour = t.get(Calendar.HOUR);
 	            int min = t.get(Calendar.MINUTE);
-	            int second = t.get(Calendar.SECOND);
-	            String clock = String.format("%02d : %02d : %02d" , hour, min,second);	// 시간을 01:02로표시 원래 1시:2분 이런식
+	            String clock = String.format("%02d : %02d : %02d" , hour, min);	// 시간을 01:02로표시 원래 1시:2분 이런식
 	            lblClock.setText(clock);
 			}
 		});	 

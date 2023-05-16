@@ -440,8 +440,10 @@ public class Join_kwh extends JFrame {
 			pfPayPassword.setForeground(new Color(130, 77, 30));
 			pfPayPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 			pfPayPassword.addKeyListener(new KeyAdapter() {
+				
+					
 				@Override
-				public void keyPressed(KeyEvent e) {
+				public void keyTyped(KeyEvent e) {
 					if(e.getKeyChar() >= '0' && e.getKeyChar() <= '9') { // 패스워드창 숫자만 입력할 수 있게하기
 						
 					}else {
@@ -523,12 +525,14 @@ public class Join_kwh extends JFrame {
 	
 	private void log() { // 로그인 버튼누르면 로그인창
 		Hsh_login hi = new Hsh_login();
+		hi.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hi.setVisible(true);
 		setVisible(false);
 	}
 
 	private void login() {
 		Hsh_login hsh_login = new Hsh_login();
+		hsh_login.setLocationRelativeTo(null);  // jframe이 화면에 중앙에 위치하도록 하기
 		hsh_login.setVisible(true);
 		dispose();
 	}
