@@ -428,7 +428,7 @@ private void closeingAction() {	//사진지우기
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(0, 88, 390, 668);
+			scrollPane.setBounds(0, 143, 390, 613);
 			scrollPane.setViewportView(getInnerTable());
 		}
 		return scrollPane;
