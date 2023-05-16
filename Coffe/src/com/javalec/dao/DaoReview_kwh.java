@@ -89,8 +89,8 @@ public class DaoReview_kwh {
 					Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 					Statement stmt_mysql = conn_mysql.createStatement();
 
-					String query = "insert into review (item_iid,customer_cid,title,reply,rinsertdate,rimagename,rimage)";
-					String query1 = " values (?,?,?,?,?,?,?)";
+					String query = "insert into review (item_iid,customer_cid,title,reply,rimagename,rimage,rinsertdate)";
+					String query1 = " values (?,?,?,?,?,?,?) where customer_cid = cid and item_iid = iid";
 				
 					
 					
@@ -99,11 +99,11 @@ public class DaoReview_kwh {
 					ps.setString(2, customer_cid.trim());
 					ps.setString(3, title);
 					ps.setString(4, comment);
-					ps.setDate(5, rinsertdate);
-					ps.setString(6, rimagename);
+					ps.setDate(7, rinsertdate);
+					ps.setString(5, rimagename);
 				
 					// File 추가
-					ps.setBinaryStream(7, rimage);
+					ps.setBinaryStream(6, rimage);
 			
 					
 					
@@ -121,14 +121,14 @@ public class DaoReview_kwh {
 				
 			}
 			
+			
+			
+
+
+
+
+
 			//데이터들 불러와서 한줄에넣기
-			
-			
-
-
-
-
-
 
 			public ArrayList<DtoReview_kwh> selectList(){
 

@@ -152,7 +152,7 @@ public class Review2_kwh extends JFrame {
 					menu();
 				}
 			});
-			btnMenu.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/btnMenu.png")));
+			btnMenu.setIcon(new ImageIcon(Review2_kwh.class.getResource("/com/javalec/image/Group 7.png")));
 			btnMenu.setFocusPainted(false);
 			btnMenu.setBorderPainted(false);
 		}
