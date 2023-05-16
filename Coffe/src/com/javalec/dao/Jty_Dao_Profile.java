@@ -47,21 +47,19 @@ public Jty_Dao_Profile(String cid) {
 		this.cid = cid;
 	}
 
-public Jty_Dao_Profile(String cname, String cid, String cpassword, String cphone, String cemail, String caddress,
-		String paymentPassword) {
+public Jty_Dao_Profile(String cpassword, String cname, String cphone, String cemail, String caddress) {
 	super();
-	this.cname = cname;
-	this.cid = cid;
 	this.cpassword = cpassword;
+	this.cname = cname;
 	this.cphone = cphone;
 	this.cemail = cemail;
 	this.caddress = caddress;
-	this.paymentPassword = paymentPassword;
+	//this.paymentPassword = paymentPassword;
 }
 	
 
 
-
+// SELECT SUBSTRING_INDEX(cemail, '@', 1) from customer; 
 	public Jty_Dto_Profile openProfile() {
 	    Jty_Dto_Profile jtyDtoProfile = null;
 	    String query = "SELECT cid, cpassword, cname, cphone, cemail, caddress, cpayPassword, cinsertdate ";
@@ -176,21 +174,16 @@ public Jty_Dao_Profile(String cname, String cid, String cpassword, String cphone
 	        Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 
 	        // Update customer record
-	        String updateCustomerQuery = "UPDATE customer c " +
-	                                     "JOIN basket b ON c.cid = b.customer_cid " +
-	                                     "JOIN purchase p ON c.cid = p.customer_cid " +
-	                                     "JOIN coupon cp ON c.cid = cp.customer_cid " +
-	                                     "JOIN review r ON c.cid = r.customer_cid " +
-	                                     "SET c.cid = ?, c.cpassword = ?, c.cname = ?, c.cphone = ?, c.cemail = ?, c.caddress = ? " +
-	                                     "WHERE c.cid = ?";
+	        String updateCustomerQuery = "UPDATE customer SET cpassword = ?, cname = ?, cphone = ?, cemail = ?, caddress = ? WHERE cid = '" + "gosi" + "'";
 	        ps = conn_mysql.prepareStatement(updateCustomerQuery);
-	        ps.setString(1, cid.trim());
-	        ps.setString(2, cpassword.trim());
-	        ps.setString(3, cname.trim());
-	        ps.setString(4, cphone.trim());
-	        ps.setString(5, cemail.trim());
-	        ps.setString(6, caddress.trim());
-	        ps.setString(7, ShareVar.loginUserId);
+	       
+	        ps.setString(1, cpassword.trim());
+	        ps.setString(2, cname.trim());
+	        ps.setString(3, cphone.trim());
+	        ps.setString(4, cemail.trim());
+	        ps.setString(5, caddress.trim());
+	        
+	        //ps.setString(7, ShareVar.loginUserId);
 	        ps.executeUpdate();
 
 	        conn_mysql.close();

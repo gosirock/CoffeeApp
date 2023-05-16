@@ -43,6 +43,11 @@ public class Jty_PaymentPassword extends JFrame {
 	private JPasswordField pfAllpassword;
 	private JTextField textField;
 
+	private JTextField[] textFields;
+	private JButton button;
+	
+	private int currentTextFieldIndex = 0;
+
 	/**
 	 * Launch the application.
 	 */
@@ -76,6 +81,13 @@ public class Jty_PaymentPassword extends JFrame {
 		contentPane.add(getLblClock());
 		contentPane.add(getLblNewLabel_1());
 		contentPane.add(getPanel());
+
+		textFields = new JTextField[4];
+		for (int i = 0; i < textFields.length; i++) {
+			textFields[i] = new JTextField();
+			textFields[i].setBounds(127 + 37 * i, 145, 25, 21);
+			contentPane.add(textFields[i]);
+		}
 	}
 
 	private JLabel getLblNewLabel_1() {
@@ -115,6 +127,187 @@ public class Jty_PaymentPassword extends JFrame {
 		});
 		timer.start();
 	}
+
+	
+	
+
+	
+
+	private JButton getBtn1() {
+		if (btn1 == null) {
+			btn1 = new JButton("1");
+			btn1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+					textFields[i].setText("1");
+				}}
+			});
+			btn1.setForeground(new Color(255, 255, 255));
+			btn1.setBackground(new Color(255, 128, 0));
+			btn1.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn1.setBounds(38, 213, 101, 133);
+
+		}
+		return btn1;
+	}
+
+	private JButton getBtn2() {
+		if (btn2 == null) {
+			btn2 = new JButton("2");
+			btn2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+					textFields[i].setText("2");
+					}
+				}
+			});
+			btn2.setForeground(new Color(255, 255, 255));
+			btn2.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn2.setBackground(new Color(255, 128, 0));
+			btn2.setBounds(146, 213, 101, 133);
+
+		}
+		return btn2;
+	}
+
+	private JButton getBtn3() {
+		if (btn3 == null) {
+			btn3 = new JButton("3");
+			btn3.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+					textFields[i].setText("3");
+				}}
+			});
+			btn3.setForeground(new Color(255, 255, 255));
+			btn3.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn3.setBackground(new Color(255, 128, 0));
+			btn3.setBounds(254, 213, 101, 133);
+
+		}
+		return btn3;
+	}
+
+	private JButton getBtn4() {
+		if (btn4 == null) {
+			btn4 = new JButton("4");
+			btn4.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+					textFields[i].setText("4");
+				}}
+			});
+			btn4.setForeground(new Color(255, 255, 255));
+			btn4.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn4.setBackground(new Color(255, 128, 0));
+			btn4.setBounds(38, 356, 101, 133);
+		}
+		return btn4;
+	}
+
+	private JButton getBtn5() {
+		if (btn5 == null) {
+			btn5 = new JButton("5");
+			btn5.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				
+					//textFields[i].setText("5");
+				}
+			});
+			btn5.setForeground(new Color(255, 255, 255));
+			btn5.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn5.setBackground(new Color(255, 128, 0));
+			btn5.setBounds(146, 356, 101, 133);
+		}
+		return btn5;
+	}
+
+	private JButton getBtn6() {
+		if (btn6 == null) {
+			btn6 = new JButton("6");
+			btn6.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+					textFields[i].setText("6");
+					}}
+			});
+			btn6.setForeground(new Color(255, 255, 255));
+			btn6.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn6.setBackground(new Color(255, 128, 0));
+			btn6.setBounds(254, 356, 101, 133);
+		}
+		return btn6;
+	}
+
+	private JButton getBtn7() {
+		if (btn7 == null) {
+			btn7 = new JButton("7");
+			btn7.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+					textFields[i].setText("7");
+				}}
+			});
+			btn7.setForeground(new Color(255, 255, 255));
+			btn7.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn7.setBackground(new Color(255, 128, 0));
+			btn7.setBounds(36, 499, 101, 133);
+		}
+		return btn7;
+	}
+
+	private JButton getBtn8() {
+		if (btn8 == null) {
+			btn8 = new JButton("8");
+			btn8.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+					textFields[i].setText("8");
+				}}
+			});
+			btn8.setForeground(new Color(255, 255, 255));
+			btn8.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn8.setBackground(new Color(255, 128, 0));
+			btn8.setBounds(146, 499, 101, 133);
+		}
+		return btn8;
+	}
+
+	private JButton getBtn9() {
+		if (btn9 == null) {
+			btn9 = new JButton("9");
+			btn9.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+					textFields[i].setText("9");
+				}}
+			});
+			btn9.setForeground(new Color(255, 255, 255));
+			btn9.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn9.setBackground(new Color(255, 128, 0));
+			btn9.setBounds(254, 499, 101, 133);
+		}
+		return btn9;
+	}
+
+	private JButton getBtn0() {
+		if (btn0 == null) {
+			btn0 = new JButton("0");
+			btn0.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i<textFields.length; i++) {
+						textFields[i].setText("0");
+						break;
+					}
+				}
+			});
+			btn0.setForeground(new Color(255, 255, 255));
+			btn0.setFont(new Font("맑은 고딕", Font.BOLD, 60));
+			btn0.setBackground(new Color(255, 128, 0));
+			btn0.setBounds(146, 642, 101, 133);
+		}
+		return btn0;
+	}
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
@@ -142,7 +335,9 @@ public class Jty_PaymentPassword extends JFrame {
 			panel.add(getTextField());
 		}
 		return panel;
+
 	}
+
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("결제 비밀번호를 설정해주세요");
@@ -153,171 +348,18 @@ public class Jty_PaymentPassword extends JFrame {
 		}
 		return lblNewLabel;
 	}
+
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("");
 			btnNewButton.setBackground(new Color(255, 128, 0));
-			btnNewButton.setIcon(new ImageIcon(Jty_PaymentPassword.class.getResource("/com/javalec/image/akar-icons_cross.png")));
+			btnNewButton.setIcon(
+					new ImageIcon(Jty_PaymentPassword.class.getResource("/com/javalec/image/akar-icons_cross.png")));
 			btnNewButton.setBounds(36, 30, 25, 25);
 		}
 		return btnNewButton;
 	}
-	private JButton getBtn1() {
-		if (btn1 == null) {
-			btn1 = new JButton("1");
-			btn1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					//pfAllpassword.setText("1");
-				}
-			});
-			btn1.setForeground(new Color(255, 255, 255));
-			btn1.setBackground(new Color(255, 128, 0));
-			btn1.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn1.setBounds(38, 213, 101, 133);
-		}
-		return btn1;
-	}
-	private JButton getBtn2() {
-		if (btn2 == null) {
-			btn2 = new JButton("2");
-			btn2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pfAllpassword.setText("2");
-					
-				}
-			});
-			btn2.setForeground(new Color(255, 255, 255));
-			btn2.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn2.setBackground(new Color(255, 128, 0));
-			btn2.setBounds(146, 213, 101, 133);
-		}
-		return btn2;
-	}
-	private JButton getBtn3() {
-		if (btn3 == null) {
-			btn3 = new JButton("3");
-			btn3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pfAllpassword.setText("3");
-				}
-			});
-			btn3.setForeground(new Color(255, 255, 255));
-			btn3.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn3.setBackground(new Color(255, 128, 0));
-			btn3.setBounds(254, 213, 101, 133);
-		}
-		return btn3;
-	}
-	private JButton getBtn4() {
-		if (btn4 == null) {
-			btn4 = new JButton("4");
-			btn4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pfAllpassword.setText("4");
-				}
-			});
-			btn4.setForeground(new Color(255, 255, 255));
-			btn4.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn4.setBackground(new Color(255, 128, 0));
-			btn4.setBounds(38, 356, 101, 133);
-		}
-		return btn4;
-	}
-	private JButton getBtn5() {
-		if (btn5 == null) {
-			btn5 = new JButton("5");
-			btn5.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pfAllpassword.setText("4");
-				}
-			});
-			btn5.setForeground(new Color(255, 255, 255));
-			btn5.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn5.setBackground(new Color(255, 128, 0));
-			btn5.setBounds(146, 356, 101, 133);
-		}
-		return btn5;
-	}
-	private JButton getBtn6() {
-		if (btn6 == null) {
-			btn6 = new JButton("6");
-			btn6.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pfAllpassword.setText("6");
-				}
-			});
-			btn6.setForeground(new Color(255, 255, 255));
-			btn6.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn6.setBackground(new Color(255, 128, 0));
-			btn6.setBounds(254, 356, 101, 133);
-		}
-		return btn6;
-	}
-	private JButton getBtn7() {
-		if (btn7 == null) {
-			btn7 = new JButton("7");
-			btn7.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pfAllpassword.setText("7");
-				}
-			});
-			btn7.setForeground(new Color(255, 255, 255));
-			btn7.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn7.setBackground(new Color(255, 128, 0));
-			btn7.setBounds(36, 499, 101, 133);
-		}
-		return btn7;
-	}
-	private JButton getBtn8() {
-		if (btn8 == null) {
-			btn8 = new JButton("8");
-			btn8.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pfAllpassword.setText("8");
-				}
-			});
-			btn8.setForeground(new Color(255, 255, 255));
-			btn8.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn8.setBackground(new Color(255, 128, 0));
-			btn8.setBounds(146, 499, 101, 133);
-		}
-		return btn8;
-	}
-	private JButton getBtn9() {
-		if (btn9 == null) {
-			btn9 = new JButton("9");
-			btn9.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					pfAllpassword.setText("9");
-					textField.setText("9");
-				}
-			});
-			btn9.setForeground(new Color(255, 255, 255));
-			btn9.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn9.setBackground(new Color(255, 128, 0));
-			btn9.setBounds(254, 499, 101, 133);
-		}
-		return btn9;
-	}
-	private JButton getBtn0() {
-		if (btn0 == null) {
-			btn0 = new JButton("0");
-			btn0.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					while(true) {
-					pfAllpassword.setText("0");
-					textField.setText("0");
-					break;
-					}
-				}
-			});
-			btn0.setForeground(new Color(255, 255, 255));
-			btn0.setFont(new Font("맑은 고딕", Font.BOLD, 60));
-			btn0.setBackground(new Color(255, 128, 0));
-			btn0.setBounds(146, 642, 101, 133);
-		}
-		return btn0;
-	}
+
 	private JButton getBtnbackspace() {
 		if (btnbackspace == null) {
 			btnbackspace = new JButton("");
@@ -325,13 +367,15 @@ public class Jty_PaymentPassword extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnbackspace.setIcon(new ImageIcon(Jty_PaymentPassword.class.getResource("/com/javalec/image/결제비번지우기.png")));
+			btnbackspace
+					.setIcon(new ImageIcon(Jty_PaymentPassword.class.getResource("/com/javalec/image/결제비번지우기.png")));
 			btnbackspace.setFont(new Font("맑은 고딕", Font.BOLD, 60));
 			btnbackspace.setBackground(new Color(255, 128, 0));
 			btnbackspace.setBounds(254, 642, 101, 133);
 		}
 		return btnbackspace;
 	}
+
 	private JPasswordField getPfnum1() {
 		if (pfnum1 == null) {
 			pfnum1 = new JPasswordField();
@@ -340,6 +384,7 @@ public class Jty_PaymentPassword extends JFrame {
 		}
 		return pfnum1;
 	}
+
 	private JPasswordField getPfnum2() {
 		if (pfnum2 == null) {
 			pfnum2 = new JPasswordField();
@@ -348,6 +393,7 @@ public class Jty_PaymentPassword extends JFrame {
 		}
 		return pfnum2;
 	}
+
 	private JPasswordField getPfnum3() {
 		if (pfnum3 == null) {
 			pfnum3 = new JPasswordField();
@@ -356,6 +402,7 @@ public class Jty_PaymentPassword extends JFrame {
 		}
 		return pfnum3;
 	}
+
 	private JPasswordField getPfnum4() {
 		if (pfnum4 == null) {
 			pfnum4 = new JPasswordField();
@@ -364,7 +411,7 @@ public class Jty_PaymentPassword extends JFrame {
 		}
 		return pfnum4;
 	}
-	
+
 //	private void insertPassword() { 
 //		public void actionPerformed(ActionEvent e) {
 //		textField = new JTextField();
@@ -379,6 +426,7 @@ public class Jty_PaymentPassword extends JFrame {
 		}
 		return pfAllpassword;
 	}
+
 	private JTextField getTextField() {
 		if (textField == null) {
 			textField = new JTextField();

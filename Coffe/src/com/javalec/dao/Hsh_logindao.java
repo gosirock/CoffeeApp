@@ -60,4 +60,29 @@ public class Hsh_logindao {
 			return check;
 	}
 	
+	public boolean deletecheck() {
+		boolean check = false;
+		String query = "select count(cdeletedate) from customer where cid = '" + uid + "' and cpassword = '" + upassword + "'";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(query);
+			
+			rs.next();
+			int countNum = rs.getInt(1); 
+			
+			if (countNum == 1) {
+				check = true;
+			}
+			
+			conn_mysql.close();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+			return check;
+	}
+	
 }

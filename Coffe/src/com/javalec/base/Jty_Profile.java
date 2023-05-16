@@ -38,7 +38,8 @@ public class Jty_Profile extends JFrame {
 
 	private JPanel contentPane;
 
-	//private Image backgroundImage = new ImageIcon(Jty_Profile.class.getResource("/com/javalec/Image/mypagebackground.png")).getImage();
+	// private Image backgroundImage = new
+	// ImageIcon(Jty_Profile.class.getResource("/com/javalec/Image/mypagebackground.png")).getImage();
 	private JLabel lblNewLabel;
 	private JTextField tfName;
 	private JTextField tfUserid;
@@ -51,7 +52,6 @@ public class Jty_Profile extends JFrame {
 	private JButton btnBack;
 	private JLabel lblNewLabel_1;
 	private JLabel lblFace;
-	private JButton btnDobCheck;
 	private JButton btnPayPasswordUpdate;
 	private JButton btnCuponBox;
 	private JButton btnAllUpdate;
@@ -75,7 +75,7 @@ public class Jty_Profile extends JFrame {
 	private JLabel lblNewLabel_2_6;
 	private JLabel lblNewLabel_2_7;
 	private JLabel lblNewLabel_2_8;
-	
+
 	private JLabel lblClock;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
@@ -108,7 +108,7 @@ public class Jty_Profile extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				setLocationRelativeTo(null);
-				passwordConfirmACtion();
+
 				openProfile();
 			}
 		});
@@ -116,7 +116,7 @@ public class Jty_Profile extends JFrame {
 		setBackground(new Color(248, 227, 182));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 390, 872);
-		contentPane = new JPanel(); //{
+		contentPane = new JPanel(); // {
 //			@Override
 //			protected void paintComponent(Graphics g) {
 //				super.paintComponent(g);
@@ -154,7 +154,7 @@ public class Jty_Profile extends JFrame {
 		if (tfName == null) {
 			tfName = new JTextField();
 			tfName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			tfName.setBounds(111, 245, 172, 21);
+			tfName.setBounds(101, 245, 182, 21);
 			tfName.setBackground(new Color(252, 242, 217));
 			tfName.setColumns(10);
 			tfName.setBorder(null); // 텍스트 필드의 테두리를 없앰
@@ -165,9 +165,10 @@ public class Jty_Profile extends JFrame {
 	private JTextField getTfUserid() {
 		if (tfUserid == null) {
 			tfUserid = new JTextField();
+			tfUserid.setEditable(false);
 			tfUserid.setForeground(new Color(0, 0, 0));
 			tfUserid.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			tfUserid.setBounds(111, 109, 172, 21);
+			tfUserid.setBounds(101, 109, 182, 21);
 			tfUserid.setColumns(10);
 			tfUserid.setBorder(null);
 			tfUserid.setBackground(new Color(252, 242, 217));
@@ -178,23 +179,22 @@ public class Jty_Profile extends JFrame {
 	private JTextField getTfPassword() {
 		if (tfPassword == null) {
 			tfPassword = new JTextField();
-			tfPassword.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyTyped(KeyEvent e) {
-					 String pass1 = new String(tfPassword.getText());
-				        String pass2 = new String(tfConfirmPassword.getText());
-				        if (pass1.equals(pass2)) {
-				            lblpasswordCheck.setText("비밀번호가 일치합니다.");
-				        } else {
-				        	lblpasswordCheck.setText("비밀번호가 일치하지 않습니다.");
-				        }
-				}
-			});
 			tfPassword.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			tfPassword.setBounds(111, 154, 172, 21);
+			tfPassword.setBounds(101, 154, 182, 21);
 			tfPassword.setColumns(10);
 			tfPassword.setBorder(null);
 			tfPassword.setBackground(new Color(252, 242, 217));
+			tfPassword.addKeyListener(new KeyAdapter() {
+				public void keyTyped(KeyEvent e) {
+					String pass1 = new String(tfPassword.getText());
+					String pass2 = new String(tfConfirmPassword.getText());
+					if (pass1.equals(pass2)) {
+						lblpasswordCheck.setText("비밀번호가 일치합니다.");
+					} else {
+						lblpasswordCheck.setText("비밀번호가 일치하지 않습니다.");
+					}
+				}
+			});
 		}
 		return tfPassword;
 	}
@@ -202,25 +202,24 @@ public class Jty_Profile extends JFrame {
 	private JTextField getTfConfirmPassword() {
 		if (tfConfirmPassword == null) {
 			tfConfirmPassword = new JTextField();
-			tfConfirmPassword.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyTyped(KeyEvent e) {
-					 String pass1 = new String(tfPassword.getText());
-				        String pass2 = new String(tfConfirmPassword.getText());
-				        if (pass1.equals(pass2)) {
-				            lblpasswordCheck.setText("비밀번호가 일치합니다.");
-				        } else {
-				        	lblpasswordCheck.setText("비밀번호가 일치하지 않습니다.");
-				        }
-				}
-			});
 			tfConfirmPassword.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			tfConfirmPassword.setBounds(111, 199, 172, 21);
+			tfConfirmPassword.setBounds(101, 199, 180, 21);
 			tfConfirmPassword.setColumns(10);
 			tfConfirmPassword.setBorder(null);
 			tfConfirmPassword.setBackground(new Color(252, 242, 217));
-			
-			
+			tfConfirmPassword.addKeyListener(new KeyAdapter() {
+				
+				public void keyTyped(KeyEvent e) {
+					String pass1 = new String(tfPassword.getText());
+					String pass2 = new String(tfConfirmPassword.getText());
+					if (pass1.equals(pass2)) {
+						lblpasswordCheck.setText("비밀번호가 일치합니다.");
+					} else {
+						lblpasswordCheck.setText("비밀번호가 일치하지 않습니다.");
+					}
+				}
+			});
+
 		}
 		return tfConfirmPassword;
 	}
@@ -229,7 +228,7 @@ public class Jty_Profile extends JFrame {
 		if (tfPhone == null) {
 			tfPhone = new JTextField();
 			tfPhone.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			tfPhone.setBounds(111, 289, 172, 21);
+			tfPhone.setBounds(101, 289, 182, 21);
 			tfPhone.setColumns(10);
 			tfPhone.setBorder(null);
 			tfPhone.setBackground(new Color(252, 242, 217));
@@ -241,7 +240,7 @@ public class Jty_Profile extends JFrame {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
 			tfEmail.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			tfEmail.setBounds(111, 336, 84, 21);
+			tfEmail.setBounds(101, 336, 94, 21);
 			tfEmail.setColumns(10);
 			tfEmail.setBorder(null);
 			tfEmail.setBackground(new Color(252, 242, 217));
@@ -253,7 +252,7 @@ public class Jty_Profile extends JFrame {
 		if (tfAddress == null) {
 			tfAddress = new JTextField();
 			tfAddress.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			tfAddress.setBounds(111, 382, 172, 21);
+			tfAddress.setBounds(101, 382, 182, 21);
 			tfAddress.setColumns(10);
 			tfAddress.setBorder(null);
 			tfAddress.setBackground(new Color(252, 242, 217));
@@ -265,7 +264,7 @@ public class Jty_Profile extends JFrame {
 		if (pfPayPassword == null) {
 			pfPayPassword = new JPasswordField();
 			pfPayPassword.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			pfPayPassword.setBounds(111, 426, 172, 21);
+			pfPayPassword.setBounds(101, 426, 182, 21);
 			pfPayPassword.setEditable(false);
 			pfPayPassword.setBorder(null); // 테두리 없애기
 			pfPayPassword.setBackground(new Color(252, 242, 217));
@@ -306,29 +305,13 @@ public class Jty_Profile extends JFrame {
 		return lblFace;
 	}
 
-	private JButton getBtnDobCheck() {
-		if (btnDobCheck == null) {
-			btnDobCheck = new JButton("");
-			btnDobCheck.setBorder(null); // 버튼의 테두리를 없앰
-			btnDobCheck.setBounds(223, 134, 60, 15);
-			btnDobCheck.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					dobCheck();
-				}
-			});
-			btnDobCheck.setIcon(new ImageIcon(Jty_Profile.class.getResource("/com/javalec/image/중복체크버튼.png")));
-			btnDobCheck.setBackground(new Color(252, 242, 217));
-		}
-		return btnDobCheck;
-	}
-
 	private JButton getBtnPayPasswordUpdate() {
 		if (btnPayPasswordUpdate == null) {
 			btnPayPasswordUpdate = new JButton("");
 			btnPayPasswordUpdate.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Jty_PaymentPassword jty_PaymentPassword = new Jty_PaymentPassword();
-					
+
 				}
 			});
 			btnPayPasswordUpdate.setBorder(null); // 버튼의 테두리를 없앰
@@ -357,12 +340,9 @@ public class Jty_Profile extends JFrame {
 			btnAllUpdate.setBorder(null); // 버튼의 테두리를 없앰
 			btnAllUpdate.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(tfPassword.getText().equals(tfConfirmPassword.getText())) {
-						allUpdateAction();
-					}else {
-						JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.", "회원정보수정", JOptionPane.ERROR_MESSAGE);
-					}
-					openProfile();
+
+					allUpdateAction();
+
 				}
 			});
 			btnAllUpdate.setIcon(new ImageIcon(Jty_Profile.class.getResource("/com/javalec/image/수정버튼.png")));
@@ -410,6 +390,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblInsertDate;
 	}
+
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
@@ -425,7 +406,6 @@ public class Jty_Profile extends JFrame {
 			panel.add(getTfAddress());
 			panel.add(getPfPayPassword());
 			panel.add(getBtnPayPasswordUpdate());
-			panel.add(getBtnDobCheck());
 			panel.add(getLblNewLabel());
 			panel.add(getLblFace());
 			panel.add(getLblLine());
@@ -450,16 +430,18 @@ public class Jty_Profile extends JFrame {
 		}
 		return panel;
 	}
+
 	private JLabel getLblLine() {
 		if (lblLine == null) {
 			lblLine = new JLabel("");
 			lblLine.setBounds(12, 131, 270, 1);
-			lblLine.setOpaque(true);  // 불투명성 활성화
+			lblLine.setOpaque(true); // 불투명성 활성화
 			lblLine.setBackground(new Color(131, 77, 30));
 			lblLine.setBackground(new Color(131, 77, 30));
 		}
 		return lblLine;
 	}
+
 	private JLabel getLblLine_1() {
 		if (lblLine_1 == null) {
 			lblLine_1 = new JLabel("");
@@ -469,6 +451,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblLine_1;
 	}
+
 	private JLabel getLblLine_2() {
 		if (lblLine_2 == null) {
 			lblLine_2 = new JLabel("");
@@ -478,6 +461,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblLine_2;
 	}
+
 	private JLabel getLblLine_3() {
 		if (lblLine_3 == null) {
 			lblLine_3 = new JLabel("");
@@ -487,6 +471,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblLine_3;
 	}
+
 	private JLabel getLblLine_4() {
 		if (lblLine_4 == null) {
 			lblLine_4 = new JLabel("");
@@ -496,6 +481,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblLine_4;
 	}
+
 	private JLabel getLblLine_5() {
 		if (lblLine_5 == null) {
 			lblLine_5 = new JLabel("");
@@ -505,6 +491,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblLine_5;
 	}
+
 	private JLabel getLblLine_6() {
 		if (lblLine_6 == null) {
 			lblLine_6 = new JLabel("");
@@ -514,6 +501,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblLine_6;
 	}
+
 	private JLabel getLblLine_7() {
 		if (lblLine_7 == null) {
 			lblLine_7 = new JLabel("");
@@ -523,6 +511,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblLine_7;
 	}
+
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("아이디");
@@ -532,6 +521,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_2;
 	}
+
 	private JLabel getLblNewLabel_2_2() {
 		if (lblNewLabel_2_2 == null) {
 			lblNewLabel_2_2 = new JLabel("비밀번호");
@@ -541,6 +531,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_2_2;
 	}
+
 	private JLabel getLblNewLabel_2_3() {
 		if (lblNewLabel_2_3 == null) {
 			lblNewLabel_2_3 = new JLabel("비밀번호 확인");
@@ -550,6 +541,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_2_3;
 	}
+
 	private JLabel getLblNewLabel_2_4() {
 		if (lblNewLabel_2_4 == null) {
 			lblNewLabel_2_4 = new JLabel("이름");
@@ -559,6 +551,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_2_4;
 	}
+
 	private JLabel getLblNewLabel_2_5() {
 		if (lblNewLabel_2_5 == null) {
 			lblNewLabel_2_5 = new JLabel("전화번호");
@@ -568,6 +561,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_2_5;
 	}
+
 	private JLabel getLblNewLabel_2_6() {
 		if (lblNewLabel_2_6 == null) {
 			lblNewLabel_2_6 = new JLabel("이메일");
@@ -577,6 +571,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_2_6;
 	}
+
 	private JLabel getLblNewLabel_2_7() {
 		if (lblNewLabel_2_7 == null) {
 			lblNewLabel_2_7 = new JLabel("주소");
@@ -586,6 +581,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_2_7;
 	}
+
 	private JLabel getLblNewLabel_2_8() {
 		if (lblNewLabel_2_8 == null) {
 			lblNewLabel_2_8 = new JLabel("결제 비밀번호");
@@ -595,7 +591,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_2_8;
 	}
-	
+
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("");
@@ -605,7 +601,6 @@ public class Jty_Profile extends JFrame {
 		return lblNewLabel_3;
 	}
 
-	
 	// 시계라벨 ( 시계라벨이랑 시계랑 같이 붙여넣으세요)
 	private JLabel getLblClock() {
 		if (lblClock == null) {
@@ -617,15 +612,15 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblClock;
 	}
-	
+
 	private JLabel getLblpasswordCheck() {
 		if (lblpasswordCheck == null) {
 			lblpasswordCheck = new JLabel("");
-			lblpasswordCheck.setEnabled(false);
-			lblpasswordCheck.setVisible(false);
+			lblpasswordCheck.setBackground(new Color(252, 242, 217));
 			lblpasswordCheck.setForeground(new Color(255, 0, 0));
 			lblpasswordCheck.setFont(new Font("맑은 고딕", Font.PLAIN, 11));
-			lblpasswordCheck.setBounds(121, 222, 162, 15);
+			lblpasswordCheck.setBounds(121, 225, 162, 15);
+			lblpasswordCheck.setOpaque(true);	// 라벨 투명풀기
 		}
 		return lblpasswordCheck;
 	}
@@ -646,7 +641,7 @@ public class Jty_Profile extends JFrame {
 		});
 		timer.start();
 	}
-		 
+
 	private void backAction() {
 		Jty_Home jty_Home = new Jty_Home();
 		jty_Home.setVisible(true);
@@ -672,61 +667,41 @@ public class Jty_Profile extends JFrame {
 
 	public void userDelete() {
 		Jty_UserDelete_Dialog jty_Profile_Dialog = new Jty_UserDelete_Dialog();
-		//Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile();
+		jty_Profile_Dialog.setLocationRelativeTo(null);
 		jty_Profile_Dialog.setVisible(true);
-		
-		
-	}
 
-	public void dobCheck() {
-		String cid = tfUserid.getText();
-		if (cid.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "아이디를 입력해주세요.");
-		} else {
-			Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile(cid);
-			boolean result = dao_Profile.dobCheck();
-			if (result) {
-				JOptionPane.showMessageDialog(this, "중복된 아이디 입니다.");
-				btnAllUpdate.setEnabled(false);
-			} else {
-				JOptionPane.showMessageDialog(this, "사용가능한 아이디 입니다.");
-				btnAllUpdate.setEnabled(true);
-			}
-		}
 	}
 
 	private void allUpdateAction() {
 
-		String cid = tfUserid.getText();
 		String cpassword = tfPassword.getText();
 		String confirmCpassword = tfConfirmPassword.getText();
-		String cname = tfName.getText(); 
+		String cname = tfName.getText();
 		String cphone = tfPhone.getText();
 		String cemail = tfEmail.getText();
 		String cemailcb = cbEmail.getSelectedItem().toString();
-		String caddress = tfAddress.getText();   
-		
-		
-		if(cid.isEmpty() || cpassword.isEmpty() || confirmCpassword.isEmpty() || cname.isEmpty() || cphone.isEmpty() || cemail.isEmpty()
-				|| cemailcb.isEmpty() || caddress.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "회원정보를 입력해주세요");
+		String cemailFull = cemail + "@" + cemailcb;
+		String caddress = tfAddress.getText();
 
-			Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile(cid, cpassword, confirmCpassword, cname, cphone, cemail+"@+"+cemailcb, caddress);
-		boolean result = dao_Profile.allUpdateAction();
-		if (result) {
-			JOptionPane.showMessageDialog(this, "회원정보 수정\n" + tfName.getText() + "님의 회원벙보가 수정되었습니다.", "회원정보 수정",
-					JOptionPane.INFORMATION_MESSAGE); // this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+		String pass1 = new String(tfPassword.getText());
+		String pass2 = new String(tfConfirmPassword.getText());
+		if (!pass1.equals(pass2)) {
+			JOptionPane.showMessageDialog(this, "비밀번호를 일치시켜주세요", "회원정보 수정", JOptionPane.ERROR_MESSAGE);
 		} else {
-			System.out.println("dddd");
+			if (cpassword.isEmpty() || confirmCpassword.isEmpty() || cname.isEmpty() || cphone.isEmpty()
+					|| cemail.isEmpty() || cemailcb.isEmpty() || caddress.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "회원정보를 입력해주세요");
+			} else {
+				Jty_Dao_Profile dao_Profile = new Jty_Dao_Profile(cpassword, cname, cphone, cemailFull, caddress);
+				boolean result = dao_Profile.allUpdateAction();
+				if (result) {
+					JOptionPane.showMessageDialog(this, "회원정보 수정\n" + tfName.getText() + "님의 회원벙보가 수정되었습니다.", "회원정보 수정",
+							JOptionPane.INFORMATION_MESSAGE); // this 는 active 창에 띄우고 null은 화면아무데나 중앙에 띄워라
+				}
+			}
 		}
-		}
-	}
-	
-	private void confirmPassword() {
-		
 	}
 
-	
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("@");
@@ -735,6 +710,7 @@ public class Jty_Profile extends JFrame {
 		}
 		return lblNewLabel_4;
 	}
+
 	private JComboBox getCbEmail() {
 		if (cbEmail == null) {
 			cbEmail = new JComboBox();
@@ -745,17 +721,19 @@ public class Jty_Profile extends JFrame {
 				}
 			});
 			cbEmail.setBackground(new Color(252, 242, 217));
-			cbEmail.setModel(new DefaultComboBoxModel(new String[] {"직접 입력", "naver.com", "daum.net", "nate.com", "gmail.com"}));
+			cbEmail.setModel(new DefaultComboBoxModel(
+					new String[] { "직접 입력", "naver.com", "daum.net", "nate.com", "gmail.com" }));
 			cbEmail.setBounds(213, 336, 95, 23);
 		}
 		return cbEmail;
 	}
+
 	private void emailAction() {
 		int i = cbEmail.getSelectedIndex();
 		String emailselect = "";
-		switch(i) {
+		switch (i) {
 		case 0:
-			cbEmail.setEditable(false);
+			cbEmail.setEditable(true);
 			break;
 		case 1:
 			cbEmail.setEditable(false);
@@ -764,20 +742,12 @@ public class Jty_Profile extends JFrame {
 			cbEmail.setEditable(false);
 			break;
 		case 3:
-			cbEmail.setEditable(true);
+			cbEmail.setEditable(false);
 			break;
 		default:
 			break;
-		
+
+		}
 	}
+
 }
-	private void passwordConfirmACtion() {
-	if(tfPassword.getText().equals(tfConfirmPassword.getText())) {
-		lblpasswordCheck.setVisible(false);
-	}else {
-		lblpasswordCheck.setVisible(true);
-	}
-	
-	}
-	
-	}
