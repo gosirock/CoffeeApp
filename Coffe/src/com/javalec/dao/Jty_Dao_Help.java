@@ -40,7 +40,7 @@ public class Jty_Dao_Help {
 	
 	public Jty_Dto_Help openHelp() {
 	    Jty_Dto_Help dto_help = null;
-	    String query = "select slocation, stelno, sopentime, sclosetime, sbusinessname, scompanyno from store";
+	    String query = "select slocation, stelno, TIME_FORMAT(`sopentime`, '%H:%i') AS formatted_time, TIME_FORMAT(`sclosetime`, '%H:%i') AS formatted_time, sbusinessname, scompanyno from store";
 
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");

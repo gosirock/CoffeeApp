@@ -10,6 +10,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+
+import com.javalec.dao.Lju_Dao_PurchaseHistory;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -64,6 +67,7 @@ public class Jty_Home extends JFrame {
 	private JLabel lblHelp;
 	private JLabel lblLogout;
 	private JLabel lblClock;
+	private JLabel lblNewLabel_6;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -146,6 +150,7 @@ public class Jty_Home extends JFrame {
 		contentPane.add(getLblNewLabel_5());
 		contentPane.add(getCategory());
 		contentPane.add(getLblClock());
+		contentPane.add(getLblNewLabel_6());
 	}
 
 	private void setLabelIcon(ImageIcon icon) {
@@ -212,9 +217,9 @@ public class Jty_Home extends JFrame {
 			btnOrder = new JButton("");
 			btnOrder.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Lju_MenuCoffee menuCoffee = new Lju_MenuCoffee();
-					menuCoffee.setLocationRelativeTo(null);
-					menuCoffee.setVisible(true);
+					Lju_PurchaseHistory history = new Lju_PurchaseHistory();
+					history.setLocationRelativeTo(null);
+					history.setVisible(true);
 					dispose();
 				}
 			});
@@ -332,7 +337,7 @@ public class Jty_Home extends JFrame {
 				}
 			});
 			lblNewLabel_4.setIcon(new ImageIcon(Jty_Home.class.getResource("/com/javalec/image/이달의 이벤트.png")));
-			lblNewLabel_4.setBounds(25, 380, 321, 180);
+			lblNewLabel_4.setBounds(25, 365, 321, 180);
 		}
 		return lblNewLabel_4;
 	}
@@ -342,7 +347,7 @@ public class Jty_Home extends JFrame {
 			lblNewLabel_5 = new JLabel("클릭시 이벤트 페이지로 넘어갑니다.");
 			lblNewLabel_5.setForeground(new Color(131, 77, 30));
 			lblNewLabel_5.setFont(new Font("맑은 고딕", Font.PLAIN, 11));
-			lblNewLabel_5.setBounds(164, 555, 182, 15);
+			lblNewLabel_5.setBounds(164, 538, 182, 15);
 		}
 		return lblNewLabel_5;
 	}
@@ -431,5 +436,12 @@ public class Jty_Home extends JFrame {
 		});
 		timer.start();
 	}
-
+	private JLabel getLblNewLabel_6() {
+		if (lblNewLabel_6 == null) {
+			lblNewLabel_6 = new JLabel("");
+			lblNewLabel_6.setIcon(new ImageIcon(Jty_Home.class.getResource("/com/javalec/image/event1.png")));
+			lblNewLabel_6.setBounds(25, 565, 321, 180);
+		}
+		return lblNewLabel_6;
+	}
 }
